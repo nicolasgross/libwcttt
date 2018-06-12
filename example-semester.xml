@@ -1,21 +1,171 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE instance SYSTEM "http://tabu.diegm.uniud.it/ctt/cb_ctt.dtd">
-<instance name="Toy">
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Based on the Toy instance found on the CB-CTT website:
+	http://satt.diegm.uniud.it/ctt/index.php?page=format#
+-->
+<semester name="WIAI-Toy">
 	<descriptor>
 		<days value="5"/>
 		<periods_per_day value="4"/>
 		<daily_lectures min="2" max="3"/>
 	</descriptor>
+	<teachers>
+		<teacher id="Ocra"/>
+		<teacher id="Indaco"/>
+		<teacher id="Rosa"/>
+		<teacher id="Scarlatti"/>
+	</teachers>
+	<room-holders>
+		<room-holder id="WIAI"/>
+		<room-holder id="SWT"/>
+	</room-holders>
 	<courses>
-		<course id="SceCosC" teacher="Ocra" lectures="3" min_days="3" students="30" double_lectures="yes"/>
-		<course id="ArcTec" teacher="Indaco" lectures="3" min_days="2" students="42" double_lectures="no"/>
-		<course id="TecCos" teacher="Rosa" lectures="5" min_days="4" students="40" double_lectures="yes"/>
-		<course id="Geotec" teacher="Scarlatti" lectures="5" min_days="4" students="18" double_lectures="yes"/>
+		<course id="SceCosC" min_days="3" students="30">
+			<lectures>
+				<lecture id="SceCosC-L1" double_period="true">
+					<course ref="SceCosC"/> <!-- TODO - Not sure if required -->
+					<teacher ref="Ocra"/>
+				</lecture>
+				<lecture id="SceCosC-L2" double_period="true">
+					<course ref="SceCosC"/>
+					<teacher ref="Ocra"/>
+				</lecture>
+				<lecture id="SceCosC-L3" double_period="false">
+					<course ref="SceCosC"/>
+					<teacher ref="Ocra"/>
+				</lecture>
+			</lectures>
+			<practicals>
+				<practical id="SceCosC-P1" double_period="false">
+					<course ref="SceCosC"/>
+					<teacher ref="Ocra"/>
+				</practical>
+				<practical id="SceCosC-P2" double_period="false">
+					<course ref="SceCosC"/>
+					<teacher ref="Ocra"/>
+				</practical>
+			</practicals>
+		</course>
+		<course id="ArcTec" min_days="2" students="42">
+			<lectures>
+				<lecture id="ArcTec-L1" double_period="false">
+					<course ref="ArcTec"/>
+					<teacher ref="Indaco"/>
+				</lecture>
+				<lecture id="ArcTec-L2" double_period="true">
+					<course ref="ArcTec"/>
+					<teacher ref="Indaco"/>
+				</lecture>
+				<lecture id="ArcTec-L3" double_period="false">
+					<course ref="ArcTec"/>
+					<teacher ref="Indaco"/>
+				</lecture>
+			</lectures>
+			<practicals>
+				<practical id="ArcTec-P1" double_period="false">
+					<course ref="ArcTec"/>
+					<teacher ref="Indaco"/>
+				</practical>
+				<practical id="ArcTec-P2" double_period="false">
+					<course ref="ArcTec"/>
+					<teacher ref="Indaco"/>
+				</practical>
+				<practical id="ArcTec-P3" double_period="false">
+					<course ref="ArcTec"/>
+					<teacher ref="Indaco"/>
+				</practical>
+			</practicals>
+		</course>
+		<course id="TecCos" min_days="4" students="40">
+			<lectures>
+				<lecture id="TecCos-L1" double_period="false">
+					<course ref="TecCos"/>
+					<teacher ref="Rosa"/>
+				</lecture>
+				<lecture id="TecCos-L2" double_period="false">
+					<course ref="TecCos"/>
+					<teacher ref="Rosa"/>
+				</lecture>
+				<lecture id="TecCos-L3" double_period="false">
+					<course ref="TecCos"/>
+					<teacher ref="Rosa"/>
+				</lecture>
+				<lecture id="TecCos-L4" double_period="false">
+					<course ref="TecCos"/>
+					<teacher ref="Rosa"/>
+				</lecture>
+				<lecture id="TecCos-L5" double_period="false">
+					<course ref="TecCos"/>
+					<teacher ref="Rosa"/>
+				</lecture>
+			</lectures>
+			<practicals>
+				<practical id="TecCos-P1" double_period="false">
+					<course ref="TecCos"/>
+					<teacher ref="Rosa"/>
+				</practical>
+				<practical id="TecCos-P2" double_period="false">
+					<course ref="TecCos"/>
+					<teacher ref="Rosa"/>
+				</practical>
+				<practical id="TecCos-P3" double_period="false">
+					<course ref="TecCos"/>
+					<teacher ref="Rosa"/>
+				</practical>
+			</practicals>
+		</course>
+		<course id="Geotec" min_days="4" students="18">
+			<lectures>
+				<lecture id="Geotec-L1" double_period="false">
+					<course ref="Geotec"/>
+					<teacher ref="Scarlatti"/>
+				</lecture>
+				<lecture id="Geotec-L2" double_period="false">
+					<course ref="Geotec"/>
+					<teacher ref="Scarlatti"/>
+				</lecture>
+				<lecture id="Geotec-L3" double_period="false">
+					<course ref="Geotec"/>
+					<teacher ref="Scarlatti"/>
+				</lecture>
+				<lecture id="Geotec-L4" double_period="false">
+					<course ref="Geotec"/>
+					<teacher ref="Scarlatti"/>
+				</lecture>
+				<lecture id="Geotec-L5" double_period="false">
+					<course ref="Geotec"/>
+					<teacher ref="Scarlatti"/>
+				</lecture>
+			</lectures>
+			<practicals>
+				<practical id="Geotec-P1" double_period="false">
+					<course ref="Geotec"/>
+					<teacher ref="Scarlatti"/>
+				</practical>
+				<practical id="Geotec-P2" double_period="false">
+					<course ref="Geotec"/>
+					<teacher ref="Scarlatti"/>
+				</practical>
+				<practical id="Geotec-P3" double_period="false">
+					<course ref="Geotec"/>
+					<teacher ref="Scarlatti"/>
+				</practical>
+			</practicals>
+		</course>
 	</courses>
 	<rooms>
-		<room id="rA" size="32" building="1"/>
-		<room id="rB" size="50" building="0"/>
-		<room id="rC" size="40" building="0"/>
+		<room id="rA" capacity="32" projectors="1" pcpool="false">
+			<room-holder ref="WIAI"/>
+		</room>
+		<room id="rB" capacity="50" projectors="2" pcpool="false">
+			<room-holder ref="WIAI"/>
+		</room>
+		<room id="rC" capacity="40" projectors="1" pcpool="false">
+			<room-holder ref="WIAI"/>
+		</room>
+		<room id="rD" capacity="30" projectors="1" pcpool="false">
+			<room-holder ref="SWT"/>
+		</room>
 	</rooms>
 	<curricula>
 		<curriculum id="Cur1">
@@ -51,4 +201,8 @@
 			<room ref="rC"/>
 		</constraint>
 	</constraints>
-</instance>
+<!--
+	<timetables>
+	</timetables>
+-->
+</semester>
