@@ -2,7 +2,7 @@ package de.nicolasgross.wcttt.model;
 
 import java.util.Optional;
 
-public abstract class Session {
+public class Session {
 
 	private int id;
 	private String name;

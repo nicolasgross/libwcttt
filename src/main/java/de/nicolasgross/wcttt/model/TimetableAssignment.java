@@ -1,8 +1,8 @@
 package de.nicolasgross.wcttt.model;
 
-public class Assignment {
+public class TimetableAssignment {
 
-	private Period period;
+	private TimetablePeriod period;
 	private Session session;
 	private Room room;
 
