@@ -1,4 +1,4 @@
-package de.nicolasgross.wcttt.model;
+package de.nicolasgross.wcttt.intern.model;
 
 import javax.xml.bind.annotation.*;
 import java.util.LinkedList;
@@ -7,7 +7,7 @@ import java.util.List;
 @XmlType(propOrder = {"id", "name", "chair", "minNumberOfDays", "lectures", "practicals"})
 public class Course {
 
-	private int id;
+	private String id;
 	private String name = "";
 	private Chair chair = new Chair();
 	private int minNumberOfDays;
@@ -16,11 +16,11 @@ public class Course {
 
 	@XmlAttribute(required = true)
 	@XmlID
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

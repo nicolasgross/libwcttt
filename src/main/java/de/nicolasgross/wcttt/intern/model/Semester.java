@@ -1,4 +1,4 @@
-package de.nicolasgross.wcttt.model;
+package de.nicolasgross.wcttt.intern.model;
 
 import javax.xml.bind.annotation.*;
 import java.util.LinkedList;
@@ -66,7 +66,7 @@ public class Semester {
 		this.maxDailyLecturesPerCur = maxDailyLecturesPerCur;
 	}
 
-	@XmlIDREF
+	@XmlElement(required = true)
 	public List<Teacher> getTeachers() {
 		return teachers;
 	}
@@ -76,7 +76,6 @@ public class Semester {
 	}
 
 	@XmlElement(required = true)
-	@XmlIDREF
 	public List<Room> getRooms() {
 		return rooms;
 	}
@@ -86,7 +85,6 @@ public class Semester {
 	}
 
 	@XmlElement(required = true)
-	@XmlIDREF
 	public List<Course> getCourses() {
 		return courses;
 	}
@@ -96,7 +94,6 @@ public class Semester {
 	}
 
 	@XmlElement(required = true)
-	@XmlIDREF
 	public List<Curriculum> getCurricula() {
 		return curricula;
 	}
@@ -106,7 +103,6 @@ public class Semester {
 	}
 
 	@XmlElement(required = true)
-	@XmlIDREF
 	public List<Timetable> getTimetables() {
 		return timetables;
 	}

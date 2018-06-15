@@ -1,4 +1,4 @@
-package de.nicolasgross.wcttt.model;
+package de.nicolasgross.wcttt.intern.model;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlID;
@@ -7,16 +7,16 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(propOrder = {"id", "name"})
 public class Chair {
 
-	private int id;
+	private String id;
 	private String name = "";
 
 	@XmlAttribute(required = true)
 	@XmlID
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

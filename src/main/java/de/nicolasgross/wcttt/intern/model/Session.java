@@ -1,13 +1,12 @@
-package de.nicolasgross.wcttt.model;
+package de.nicolasgross.wcttt.intern.model;
 
 import javax.xml.bind.annotation.*;
-import java.util.Optional;
 
 @XmlType(propOrder = {"id", "name", "course", "teacher", "students", "external", "doubleSession",
 		"preAssignment", "roomRequirements"})
 public class Session {
 
-	private int id;
+	private String id;
 	private String name = "";
 	private Course course = new Course();
 	private Teacher teacher = new Teacher();
@@ -19,11 +18,11 @@ public class Session {
 
 	@XmlAttribute(required = true)
 	@XmlID
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -83,11 +82,11 @@ public class Session {
 		this.doubleSession = doubleSession;
 	}
 
-	public Optional<Period> getPreAssignment() {
-		return Optional.ofNullable(preAssignment);
+	@XmlElement(required = false)
+	public Period getPreAssignment() { // TODO optional
+		return preAssignment;
 	}
 
-	@XmlElement(required = false)
 	public void setPreAssignment(Period preAssignment) {
 		this.preAssignment = preAssignment;
 	}

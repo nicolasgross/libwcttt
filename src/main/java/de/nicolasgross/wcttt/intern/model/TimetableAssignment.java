@@ -1,7 +1,6 @@
-package de.nicolasgross.wcttt.model;
+package de.nicolasgross.wcttt.intern.model;
 
 import javax.xml.bind.annotation.*;
-import java.util.Optional;
 
 @XmlType(propOrder = {"session", "room"})
 public class TimetableAssignment {
@@ -19,12 +18,12 @@ public class TimetableAssignment {
 		this.session = session;
 	}
 
-	public Optional<Room> getRoom() {
-		return Optional.ofNullable(room);
-	}
-
 	@XmlElement(required = false)
 	@XmlIDREF
+	public Room getRoom() { // TODO optional
+		return room;
+	}
+
 	public void setRoom(Room room) {
 		this.room = room;
 	}

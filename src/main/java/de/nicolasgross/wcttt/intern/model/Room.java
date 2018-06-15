@@ -1,12 +1,11 @@
-package de.nicolasgross.wcttt.model;
+package de.nicolasgross.wcttt.intern.model;
 
 import javax.xml.bind.annotation.*;
-import java.util.Optional;
 
 @XmlType(propOrder = {"id", "name", "capacity", "holder", "features"})
 public class Room {
 
-	private int id;
+	private String id;
 	private String name = "";
 	private int capacity;
 	private Chair holder = new Chair();
@@ -14,11 +13,11 @@ public class Room {
 
 	@XmlAttribute(required = true)
 	@XmlID
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -40,11 +39,11 @@ public class Room {
 		this.capacity = capacity;
 	}
 
-	public Optional<Chair> getHolder() {
-		return Optional.ofNullable(holder);
+	@XmlElement(required = false)
+	public Chair getHolder() { // TODO optional
+		return holder;
 	}
 
-	@XmlAttribute(required = false)
 	public void setHolder(Chair holder) {
 		this.holder = holder;
 	}

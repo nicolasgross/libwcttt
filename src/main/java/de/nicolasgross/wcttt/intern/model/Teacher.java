@@ -1,4 +1,4 @@
-package de.nicolasgross.wcttt.model;
+package de.nicolasgross.wcttt.intern.model;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
@@ -10,18 +10,18 @@ import java.util.List;
 @XmlType(propOrder = {"id", "name", "unfavorablePeriods", "unavailablePeriods"})
 public class Teacher {
 
-	private int id;
+	private String id;
 	private String name = "";
 	private List<Period> unfavorablePeriods = new LinkedList<>();
 	private List<Period> unavailablePeriods = new LinkedList<>();
 
 	@XmlAttribute(required = true)
 	@XmlID
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

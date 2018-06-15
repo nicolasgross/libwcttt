@@ -1,4 +1,4 @@
-package de.nicolasgross.wcttt.model;
+package de.nicolasgross.wcttt.intern.model;
 
 import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
@@ -20,7 +20,6 @@ public class TimetableDay {
 	}
 
 	@XmlElement(required = true)
-	@XmlIDREF
 	public List<TimetablePeriod> getPeriods() {
 		return periods;
 	}

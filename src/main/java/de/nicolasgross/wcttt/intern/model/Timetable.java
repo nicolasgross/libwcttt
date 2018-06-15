@@ -1,26 +1,15 @@
-package de.nicolasgross.wcttt.model;
+package de.nicolasgross.wcttt.intern.model;
 
 import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@XmlType(propOrder = {"id", "name", "softConstraintViolations", "days"})
+@XmlType(propOrder = {"name", "softConstraintViolations", "days"})
 public class Timetable {
 
-	private int id;
 	private int name;
 	private double softConstraintViolations;
 	private List<TimetableDay> days = new ArrayList<>();
-
-	@XmlAttribute(required = true)
-	@XmlID
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
 
 	@XmlAttribute(required = true)
 	public int getName() {
@@ -41,7 +30,6 @@ public class Timetable {
 	}
 
 	@XmlElement(required = true)
-	@XmlIDREF
 	public List<TimetableDay> getDays() {
 		return days;
 	}
