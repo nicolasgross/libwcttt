@@ -26,24 +26,44 @@ public class Semester {
 		return name;
 	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	@XmlAttribute(required = true)
 	public int getDaysPerWeek() {
 		return daysPerWeek;
 	}
 
-	@XmlAttribute(name = "timeSlotsPerDay", required = true) // TODO remove name if works
+	public void setDaysPerWeek(int daysPerWeek) throws WctttModelException {
+		this.daysPerWeek = daysPerWeek;
+	}
+
+	@XmlAttribute(required = true)
 	public int getTimeSlotsPerDay() {
 		return timeSlotsPerDay;
 	}
 
-	@XmlAttribute(name = "minDailyLecturesPerCur", required = true)
+	public void setTimeSlotsPerDay(int timeSlotsPerDay) throws WctttModelException {
+		this.timeSlotsPerDay = timeSlotsPerDay;
+	}
+
+	@XmlAttribute(required = true)
 	public int getMinDailyLecturesPerCur() {
 		return minDailyLecturesPerCur;
 	}
 
-	@XmlAttribute(name = "maxDailyLecturesPerCur", required = true)
+	public void setMinDailyLecturesPerCur(int minDailyLecturesPerCur) {
+		this.minDailyLecturesPerCur = minDailyLecturesPerCur;
+	}
+
+	@XmlAttribute(required = true)
 	public int getMaxDailyLecturesPerCur() {
 		return maxDailyLecturesPerCur;
+	}
+
+	public void setMaxDailyLecturesPerCur(int maxDailyLecturesPerCur) {
+		this.maxDailyLecturesPerCur = maxDailyLecturesPerCur;
 	}
 
 	@XmlIDREF
@@ -51,60 +71,48 @@ public class Semester {
 		return teachers;
 	}
 
+	public void setTeachers(List<Teacher> teachers) {
+		this.teachers = teachers;
+	}
+
+	@XmlElement(required = true)
 	@XmlIDREF
 	public List<Room> getRooms() {
 		return rooms;
-	}
-
-	@XmlIDREF
-	public List<Course> getCourses() {
-		return courses;
-	}
-
-	@XmlIDREF
-	public List<Curriculum> getCurricula() {
-		return curricula;
-	}
-
-	@XmlIDREF
-	public List<Timetable> getTimetables() {
-		return timetables;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public void setDaysPerWeek(int daysPerWeek) throws WctttModelException {
-		this.daysPerWeek = daysPerWeek;
-	}
-
-	public void setTimeSlotsPerDay(int timeSlotsPerDay) throws WctttModelException {
-		this.timeSlotsPerDay = timeSlotsPerDay;
-	}
-
-	public void setMinDailyLecturesPerCur(int minDailyLecturesPerCur) {
-		this.minDailyLecturesPerCur = minDailyLecturesPerCur;
-	}
-
-	public void setMaxDailyLecturesPerCur(int maxDailyLecturesPerCur) {
-		this.maxDailyLecturesPerCur = maxDailyLecturesPerCur;
-	}
-
-	public void setTeachers(List<Teacher> teachers) {
-		this.teachers = teachers;
 	}
 
 	public void setRooms(List<Room> rooms) {
 		this.rooms = rooms;
 	}
 
+	@XmlElement(required = true)
+	@XmlIDREF
+	public List<Course> getCourses() {
+		return courses;
+	}
+
 	public void setCourses(List<Course> courses) {
 		this.courses = courses;
 	}
 
+	@XmlElement(required = true)
+	@XmlIDREF
+	public List<Curriculum> getCurricula() {
+		return curricula;
+	}
+
 	public void setCurricula(List<Curriculum> curricula) {
 		this.curricula = curricula;
+	}
+
+	@XmlElement(required = true)
+	@XmlIDREF
+	public List<Timetable> getTimetables() {
+		return timetables;
+	}
+
+	public void setTimetables(List<Timetable> timetables) {
+		this.timetables = timetables;
 	}
 
 }

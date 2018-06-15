@@ -1,9 +1,7 @@
 package de.nicolasgross.wcttt.model;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlID;
-import javax.xml.bind.annotation.XmlIDREF;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @XmlType(propOrder = {"id", "name", "softConstraintViolations", "days"})
@@ -12,9 +10,9 @@ public class Timetable {
 	private int id;
 	private int name;
 	private double softConstraintViolations;
-	private List<TimetableDay> days;
+	private List<TimetableDay> days = new ArrayList<>();
 
-	@XmlAttribute
+	@XmlAttribute(required = true)
 	@XmlID
 	public int getId() {
 		return id;
@@ -42,6 +40,7 @@ public class Timetable {
 		this.softConstraintViolations = softConstraintViolations;
 	}
 
+	@XmlElement(required = true)
 	@XmlIDREF
 	public List<TimetableDay> getDays() {
 		return days;

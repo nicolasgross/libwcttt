@@ -8,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 public class Chair {
 
 	private int id;
-	private String name;
+	private String name = "";
 
-	@XmlAttribute
+	@XmlAttribute(required = true)
 	@XmlID
 	public int getId() {
 		return id;

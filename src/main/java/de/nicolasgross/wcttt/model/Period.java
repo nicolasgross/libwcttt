@@ -1,19 +1,18 @@
 package de.nicolasgross.wcttt.model;
 
+
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.xml.bind.annotation.XmlType;
+
+@XmlSeeAlso(TimetablePeriod.class)
+@XmlType(propOrder = {"day", "timeSlot"})
 public class Period {
 
-	private int id;
 	private int day;
 	private int timeSlot;
 
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
+	@XmlAttribute(required = true)
 	public int getDay() {
 		return day;
 	}
@@ -22,6 +21,7 @@ public class Period {
 		this.day = day;
 	}
 
+	@XmlAttribute(required = true)
 	public int getTimeSlot() {
 		return timeSlot;
 	}
@@ -35,4 +35,5 @@ public class Period {
 		// TODO
 		return false;
 	}
+
 }

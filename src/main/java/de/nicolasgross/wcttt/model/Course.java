@@ -1,22 +1,20 @@
 package de.nicolasgross.wcttt.model;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlID;
-import javax.xml.bind.annotation.XmlIDREF;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
+import java.util.LinkedList;
 import java.util.List;
 
 @XmlType(propOrder = {"id", "name", "chair", "minNumberOfDays", "lectures", "practicals"})
 public class Course {
 
 	private int id;
-	private String name;
-	private Chair chair;
+	private String name = "";
+	private Chair chair = new Chair();
 	private int minNumberOfDays;
-	private List<Session> lectures;
-	private List<Session> practicals;
+	private List<Session> lectures = new LinkedList<>();
+	private List<Session> practicals = new LinkedList<>();
 
-	@XmlAttribute(required = true) //TODO required?? test
+	@XmlAttribute(required = true)
 	@XmlID
 	public int getId() {
 		return id;
@@ -35,7 +33,7 @@ public class Course {
 		this.name = name;
 	}
 
-	@XmlAttribute(required = false)
+	@XmlElement(required = true)
 	@XmlIDREF
 	public Chair getChair() {
 		return chair;
@@ -54,6 +52,7 @@ public class Course {
 		this.minNumberOfDays = minNumberOfDays;
 	}
 
+	@XmlElement(required = true)
 	@XmlIDREF
 	public List<Session> getLectures() {
 		return lectures;
@@ -63,6 +62,7 @@ public class Course {
 		this.lectures = lectures;
 	}
 
+	@XmlElement(required = true)
 	@XmlIDREF
 	public List<Session> getPracticals() {
 		return practicals;
