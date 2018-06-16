@@ -32,8 +32,18 @@ public class Period {
 
 	@Override
 	public boolean equals(Object obj) {
-		// TODO
-		return false;
+		if (!(obj instanceof Period)) {
+			return false;
+		} else if (obj == this) {
+			return true;
+		}
+
+		Period other = (Period) obj;
+		if (!(this.day == other.day && this.timeSlot == other.timeSlot)) {
+			return false;
+		}
+
+		return true;
 	}
 
 }
