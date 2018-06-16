@@ -6,8 +6,10 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class WctttBinderTest {
 
@@ -22,7 +24,7 @@ class WctttBinderTest {
 
 		Semester semesterRead = binder.parse();
 		assertEquals(semesterWrite, semesterRead);
-		//Files.delete(Paths.get(path));
+		Files.delete(Paths.get(path));
 	}
 
 	@Test
@@ -58,6 +60,21 @@ class WctttBinderTest {
 		//Files.delete(Paths.get(path));
 	}
 
+	@Test
+	void tinyWiaiOutputEqualsInput() throws WctttParserException, IOException {
+		String inPath = "src/test/resources/tiny-wiai.xml";
+		WctttBinder binderRead = new WctttBinder(inPath);
+		Semester tinyWiaiSem = binderRead.parse();
+
+		String outPath = "tiny-wiai-out.xml";
+		WctttBinder binderWrite = new WctttBinder(outPath);
+		binderWrite.write(tinyWiaiSem);
+
+		byte[] input = Files.readAllBytes(Paths.get(inPath));
+		byte[] output = Files.readAllBytes(Paths.get(outPath));
+		assertTrue(Arrays.equals(input, output));
+		Files.delete(Paths.get(outPath));
+	}
 
 
 }
