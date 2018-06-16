@@ -37,4 +37,6 @@ public class TimetableAssignment {
 		this.roomBinding = room;
 	}
 
+	// TODO equals achtung room null
+
 }

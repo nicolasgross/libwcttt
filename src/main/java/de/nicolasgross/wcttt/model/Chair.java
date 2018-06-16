@@ -39,4 +39,6 @@ public class Chair {
 		this.name = name;
 	}
 
+	// TODO equals
+
 }

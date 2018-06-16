@@ -30,11 +30,11 @@ public class Room {
 	/**
 	 * Creates a new room.
 	 *
-	 * @param id the id of the room, must not be null.
-	 * @param name the name of the room, must not be null.
+	 * @param id       the id of the room, must not be null.
+	 * @param name     the name of the room, must not be null.
 	 * @param capacity the capacity of the room, must be larger 0.
-	 * @param holder the holder of the room, null is allowed and indicates
-	 *                  that the room has no holder.
+	 * @param holder   the holder of the room, null is allowed and indicates
+	 *                 that the room has no holder.
 	 * @param features the features of the room, must not be null.
 	 */
 	public Room(String id, String name, int capacity, Chair holder,
@@ -160,7 +160,7 @@ public class Room {
 	 * Setter for the holder of a room.
 	 *
 	 * @param holder the new holder of the room, can be null if there is no
-	 *                  holder.
+	 *               holder.
 	 */
 	public void setHolder(Chair holder) {
 		this.holderBinding = holder;
@@ -188,6 +188,29 @@ public class Room {
 					" be null");
 		}
 		this.features = features;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof Room)) {
+			return false;
+		} else if (obj == this) {
+			return true;
+		}
+		Room other = (Room) obj;
+		if (!(this.id.equals(other.id) && this.name.equals(other.name) &&
+				this.capacity == other.capacity &&
+				this.features.equals(other.features))) {
+			return false;
+		}
+
+		if (!((this.holderBinding == null && other.holderBinding == null) ||
+				(this.holderBinding != null && other.holderBinding != null &&
+				this.holderBinding.equals(other.holderBinding)))) {
+			return false;
+		}
+
+		return true;
 	}
 
 }

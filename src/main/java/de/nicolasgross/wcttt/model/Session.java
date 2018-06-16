@@ -110,4 +110,6 @@ public class Session {
 		this.roomRequirements = roomRequirements;
 	}
 
+	// TODO equals achtung preassignment null
+
 }

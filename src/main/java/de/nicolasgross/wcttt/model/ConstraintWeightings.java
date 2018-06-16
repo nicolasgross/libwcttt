@@ -113,4 +113,21 @@ public class ConstraintWeightings {
 		this.s8 = s8;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof ConstraintWeightings)) {
+			return false;
+		} else if (obj == this) {
+			return true;
+		}
+		ConstraintWeightings other = (ConstraintWeightings) obj;
+		if (!(this.s1 == other.s1 && this.s2 == other.s2 &&
+				this.s3 == other.s3 && this.s4 == other.s4 &&
+				this.s5 == other.s5 && this.s6 == other.s6 &&
+				this.s7 == other.s7 && this.s8 == other.s8)) {
+			return false;
+		}
+		return true;
+	}
+
 }

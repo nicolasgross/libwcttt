@@ -18,7 +18,7 @@ public class Semester {
 	private int timeSlotsPerDay;
 	private int minDailyLecturesPerCur;
 	private int maxDailyLecturesPerCur;
-	private ConstraintWeightings constrWeightings;
+	private ConstraintWeightings constrWeightings; // TODO recalc timetable scores on change
 	private List<Chair> chairs = new LinkedList<>();
 	private List<Teacher> teachers = new LinkedList<>();
 	private List<Room> rooms = new LinkedList<>();
@@ -28,8 +28,9 @@ public class Semester {
 
 	/**
 	 * Creates a semester with an empty name, 1 days per week, 1 time slots
-	 * per day, 0 min daily lectures per curriculum and 1 max daily lecture
-	 * per curriculum.
+	 * per day, 0 min daily lectures per curriculum , 1 max daily lecture
+	 * per curriculum and default constraint weightings (see
+	 * {@link ConstraintWeightings#ConstraintWeightings()}).
 	 */
 	public Semester() {
 		this.name = "";
@@ -172,11 +173,12 @@ public class Semester {
 				this.daysPerWeek == other.daysPerWeek &&
 				this.timeSlotsPerDay == other.timeSlotsPerDay &&
 				this.minDailyLecturesPerCur == other.minDailyLecturesPerCur &&
-				this.maxDailyLecturesPerCur == other.maxDailyLecturesPerCur)) {
+				this.maxDailyLecturesPerCur == other.maxDailyLecturesPerCur &&
+				this.constrWeightings.equals(other.constrWeightings))) {
 			return false;
 		}
 
-		//TODO check content of lists
+		//TODO also check content of lists
 		if (this.chairs.size() != other.chairs.size()) {
 			return false;
 		}

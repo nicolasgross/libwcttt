@@ -37,4 +37,7 @@ public class RoomFeatures implements Comparable<RoomFeatures> {
 		// TODO
 		return 0;
 	}
+
+	// TODO equals
+
 }
