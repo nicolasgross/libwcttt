@@ -1,9 +1,6 @@
 package de.nicolasgross.wcttt.model;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlID;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -34,7 +31,8 @@ public class Teacher {
 		this.name = name;
 	}
 
-	@XmlElement(required = true)
+	@XmlElementWrapper
+	@XmlElement(name = "unfavorable", required = true)
 	public List<Period> getUnfavorablePeriods() {
 		return unfavorablePeriods;
 	}
@@ -43,7 +41,8 @@ public class Teacher {
 		this.unfavorablePeriods = unafavorablePeriods;
 	}
 
-	@XmlElement(required = true)
+	@XmlElementWrapper
+	@XmlElement(name = "unavailable", required = true)
 	public List<Period> getUnavailablePeriods() {
 		return unavailablePeriods;
 	}

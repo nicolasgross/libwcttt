@@ -29,7 +29,8 @@ public class Timetable {
 		this.softConstraintViolations = softConstraintViolations;
 	}
 
-	@XmlElement(required = true)
+	@XmlElementWrapper
+	@XmlElement(name = "timetableDay", required = true)
 	public List<TimetableDay> getDays() {
 		return days;
 	}

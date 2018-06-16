@@ -30,7 +30,8 @@ public class Curriculum {
 		this.name = name;
 	}
 
-	@XmlElement(required = true)
+	@XmlElementWrapper
+	@XmlElement(name = "course", required = true)
 	@XmlIDREF
 	public List<Course> getCourses() {
 		return courses;

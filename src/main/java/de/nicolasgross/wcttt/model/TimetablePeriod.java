@@ -1,6 +1,7 @@
 package de.nicolasgross.wcttt.model;
 
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlType;
 import java.util.LinkedList;
 import java.util.List;
@@ -10,7 +11,8 @@ public class TimetablePeriod extends Period {
 
 	private List<TimetableAssignment> assignments = new LinkedList<>();
 
-	@XmlElement(required = true)
+	@XmlElementWrapper
+	@XmlElement(name = "assignment", required = true)
 	public List<TimetableAssignment> getAssignments() {
 		return assignments;
 	}
