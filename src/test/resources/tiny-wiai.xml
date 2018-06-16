@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<semester name="tiny-wiai" daysPerWeek="5" timeSlotsPerDay="6" minDailyLecturesPerCur="0" maxDailyLecturesPerCur="4">
+    <constrWeightings s1="1.0" s2="2.0" s3="2.5" s4="1.5" s5="3.0" s6="2.0" s7="1.3" s8="2.8"/>
+    <chairs>
+        <chair id="swt" name=" Lehrstuhl Softwaretechnik &amp; Programmiersprachen"/>
+        <chair id="dsg" name=" Lehrstuhl für Praktische Informatik"/>
+    </chairs>
+    <teachers/>
+    <rooms/>
+    <courses/>
+    <curricula/>
+    <timetables/>
+</semester>
