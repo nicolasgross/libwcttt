@@ -7,12 +7,12 @@ import java.util.Optional;
 public class TimetableAssignment {
 
 	private Session session = new Session();
-	private Room roomBinding = new Room();
+	private Room room = new Room();
 
 	@XmlElement(required = false)
 	@XmlIDREF
 	private Room getRoomBinding() {
-		return roomBinding;
+		return room;
 	}
 
 	private void setRoomBinding(Room room) {
@@ -30,11 +30,11 @@ public class TimetableAssignment {
 	}
 
 	public Optional<Room> getRoom() {
-		return Optional.ofNullable(roomBinding);
+		return Optional.ofNullable(room);
 	}
 
 	public void setRoom(Room room) {
-		this.roomBinding = room;
+		this.room = room;
 	}
 
 	// TODO equals achtung room null

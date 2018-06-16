@@ -16,11 +16,11 @@ public class Session {
 	private boolean external;
 	private boolean doubleSession;
 	private RoomFeatures roomRequirements = new RoomFeatures();
-	private Period preAssignmentBinding = new Period();
+	private Period preAssignment = new Period();
 
 	@XmlElement(required = false)
 	private Period getPreAssignmentBinding() {
-		return preAssignmentBinding;
+		return preAssignment;
 	}
 
 	private void setPreAssignmentBinding(Period preAssignment) {
@@ -94,11 +94,11 @@ public class Session {
 	}
 
 	public Optional<Period> getPreAssignment() {
-		return Optional.ofNullable(preAssignmentBinding);
+		return Optional.ofNullable(preAssignment);
 	}
 
 	public void setPreAssignment(Period preAssignment) {
-		this.preAssignmentBinding = preAssignment;
+		this.preAssignment = preAssignment;
 	}
 
 	@XmlElement(required = true)

@@ -12,7 +12,7 @@ public class Room {
 	private String id;
 	private String name;
 	private int capacity;
-	private Chair holderBinding;
+	private Chair holder;
 	private RoomFeatures features;
 
 	/**
@@ -23,7 +23,7 @@ public class Room {
 		this.id = "";
 		this.name = "";
 		this.capacity = 1;
-		this.holderBinding = null;
+		this.holder = null;
 		this.features = new RoomFeatures();
 	}
 
@@ -34,7 +34,7 @@ public class Room {
 	 * @param name     the name of the room, must not be null.
 	 * @param capacity the capacity of the room, must be larger 0.
 	 * @param holder   the holder of the room, null is allowed and indicates
-	 *                 that the room has no holder.
+	 *                    that the room has no holder.
 	 * @param features the features of the room, must not be null.
 	 */
 	public Room(String id, String name, int capacity, Chair holder,
@@ -49,26 +49,28 @@ public class Room {
 		this.id = id;
 		this.name = name;
 		this.capacity = capacity;
-		this.holderBinding = holder;
+		this.holder = holder;
 		this.features = features;
 	}
 
 	/**
-	 * Getter for the holder of a room. Only used for JAXB bindings.
+	 * Getter for the holder of a room. Only used for JAXB bindings, such
+	 * that another getter can return Optional.
 	 *
 	 * @return the holder, null if the room has no holder.
 	 */
 	@XmlElement(name = "holder", required = false)
 	@XmlIDREF
 	private Chair getHolderBinding() {
-		return holderBinding;
+		return holder;
 	}
 
 	/**
-	 * Setter for the holder of a room. Only used for JAXB bindings.
+	 * Setter for the holder of a room. Only used for JAXB bindings, such
+	 * that another getter can return Optional.
 	 *
-	 * @param holder the new holder of the room, null is allowed and indicates
-	 *               that the room has no holder.
+	 * @param holder the new holder of the room, null is allowed and
+	 *                  indicates that the room has no holder.
 	 */
 	private void setHolderBinding(Chair holder) {
 		setHolder(holder);
@@ -116,7 +118,7 @@ public class Room {
 	 */
 	public void setName(String name) {
 		if (name == null) {
-			throw new IllegalArgumentException("Parameter 'name' must not be" +
+			throw new IllegalArgumentException("Parameter 'name' must not be " +
 					"null");
 		}
 		this.name = name;
@@ -153,7 +155,7 @@ public class Room {
 	 * if there is no holder.
 	 */
 	public Optional<Chair> getHolder() {
-		return Optional.ofNullable(holderBinding);
+		return Optional.ofNullable(holder);
 	}
 
 	/**
@@ -163,7 +165,7 @@ public class Room {
 	 *               holder.
 	 */
 	public void setHolder(Chair holder) {
-		this.holderBinding = holder;
+		this.holder = holder;
 	}
 
 	/**
@@ -204,9 +206,9 @@ public class Room {
 			return false;
 		}
 
-		if (!((this.holderBinding == null && other.holderBinding == null) ||
-				(this.holderBinding != null && other.holderBinding != null &&
-				this.holderBinding.equals(other.holderBinding)))) {
+		if (!((this.holder == null && other.holder == null) ||
+				(this.holder != null && other.holder != null &&
+				this.holder.equals(other.holder)))) {
 			return false;
 		}
 
