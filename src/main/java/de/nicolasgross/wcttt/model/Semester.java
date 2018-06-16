@@ -5,8 +5,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 @XmlRootElement(name = "semester")
-@XmlType(propOrder = {"name", "daysPerWeek", "timeSlotsPerDay", "minDailyLecturesPerCur",
-		"maxDailyLecturesPerCur", "teachers", "rooms", "courses", "curricula", "timetables"})
+@XmlType(propOrder = {"name", "daysPerWeek", "timeSlotsPerDay",
+		"minDailyLecturesPerCur", "maxDailyLecturesPerCur", "chairs",
+		"teachers", "rooms", "courses", "curricula", "timetables"})
 public class Semester {
 
 	private String name = "";
@@ -14,6 +15,7 @@ public class Semester {
 	private int timeSlotsPerDay;
 	private int minDailyLecturesPerCur;
 	private int maxDailyLecturesPerCur;
+	private List<Chair> chairs = new LinkedList<>();
 	private List<Teacher> teachers = new LinkedList<>();
 	private List<Room> rooms = new LinkedList<>();
 	private List<Course> courses = new LinkedList<>();
@@ -64,6 +66,15 @@ public class Semester {
 
 	public void setMaxDailyLecturesPerCur(int maxDailyLecturesPerCur) {
 		this.maxDailyLecturesPerCur = maxDailyLecturesPerCur;
+	}
+
+	@XmlElement(required = true)
+	public List<Chair> getChairs() {
+		return chairs;
+	}
+
+	public void setChairs(List<Chair> chairs) {
+		this.chairs = chairs;
 	}
 
 	@XmlElement(required = true)

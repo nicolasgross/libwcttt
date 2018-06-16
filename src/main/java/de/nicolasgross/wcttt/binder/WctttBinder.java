@@ -15,7 +15,8 @@ public class WctttBinder {
 
 	public WctttBinder(String path) throws WctttParserException {
 		if (path == null) {
-			throw new IllegalArgumentException("Parameter path must not be null");
+			throw new IllegalArgumentException("Parameter path must not be " +
+					"null");
 		}
 		this.path = path;
 		try {
@@ -27,6 +28,7 @@ public class WctttBinder {
 
 	public Semester parse() throws WctttParserException {
 		try {
+			// TODO use schema
 			Unmarshaller um = context.createUnmarshaller();
 			return (Semester) um.unmarshal(new File(path));
 		} catch (JAXBException e) {
@@ -36,9 +38,11 @@ public class WctttBinder {
 
 	public void write(Semester semester) throws WctttParserException {
 		if (semester == null) {
-			throw new IllegalArgumentException("Parameter semester must no be null");
+			throw new IllegalArgumentException("Parameter semester must no be" +
+					"null");
 		}
 		try {
+			// TODO use schema
 			Marshaller ms = context.createMarshaller();
 			ms.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 			ms.marshal(semester, new File(path));

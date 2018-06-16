@@ -16,7 +16,7 @@ class WctttBinderTest {
 		WctttBinder binder = new WctttBinder(path);
 		binder.write(semesterWrite);
 		Semester semesterRead = binder.parse();
-		Files.delete(Paths.get(path));
+		//Files.delete(Paths.get(path));
 	}
 
 }

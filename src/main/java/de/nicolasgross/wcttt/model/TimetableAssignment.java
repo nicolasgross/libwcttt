@@ -3,11 +3,21 @@ package de.nicolasgross.wcttt.model;
 import javax.xml.bind.annotation.*;
 import java.util.Optional;
 
-@XmlType(propOrder = {"session", "room"})
+@XmlType(propOrder = {"session", "roomBinding"})
 public class TimetableAssignment {
 
 	private Session session = new Session();
-	private Room room = new Room();
+	private Room roomBinding = new Room();
+
+	@XmlElement(required = false)
+	@XmlIDREF
+	private Room getRoomBinding() {
+		return roomBinding;
+	}
+
+	private void setRoomBinding(Room room) {
+		setRoom(room);
+	}
 
 	@XmlElement(required = true)
 	@XmlIDREF
@@ -19,14 +29,12 @@ public class TimetableAssignment {
 		this.session = session;
 	}
 
-	@XmlElement(required = false)
-	@XmlIDREF
-	public Room getRoom() { // TODO optional
-		return room;
+	public Optional<Room> getRoom() {
+		return Optional.ofNullable(roomBinding);
 	}
 
 	public void setRoom(Room room) {
-		this.room = room;
+		this.roomBinding = room;
 	}
 
 }

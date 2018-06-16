@@ -3,8 +3,9 @@ package de.nicolasgross.wcttt.model;
 import javax.xml.bind.annotation.*;
 import java.util.Optional;
 
-@XmlType(propOrder = {"id", "name", "course", "teacher", "students", "external", "doubleSession",
-		"preAssignment", "roomRequirements"})
+@XmlType(propOrder = {"id", "name", "course", "teacher", "students",
+		"external", "doubleSession", "preAssignmentBinding",
+		"roomRequirements"})
 public class Session {
 
 	private String id = "";
@@ -15,7 +16,16 @@ public class Session {
 	private boolean external;
 	private boolean doubleSession;
 	private RoomFeatures roomRequirements = new RoomFeatures();
-	private Period preAssignment = new Period();
+	private Period preAssignmentBinding = new Period();
+
+	@XmlElement(required = false)
+	private Period getPreAssignmentBinding() {
+		return preAssignmentBinding;
+	}
+
+	private void setPreAssignmentBinding(Period preAssignment) {
+		setPreAssignment(preAssignment);
+	}
 
 	@XmlAttribute(required = true)
 	@XmlID
@@ -83,13 +93,12 @@ public class Session {
 		this.doubleSession = doubleSession;
 	}
 
-	@XmlElement(required = false) // Getter returns Optional, annotation must be here
-	public Period getPreAssignment() { // TODO optional
-		return preAssignment;
+	public Optional<Period> getPreAssignment() {
+		return Optional.ofNullable(preAssignmentBinding);
 	}
 
 	public void setPreAssignment(Period preAssignment) {
-		this.preAssignment = preAssignment;
+		this.preAssignmentBinding = preAssignment;
 	}
 
 	@XmlElement(required = true)
