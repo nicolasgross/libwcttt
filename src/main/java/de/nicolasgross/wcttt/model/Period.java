@@ -5,12 +5,27 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
 
+import static de.nicolasgross.wcttt.model.ValidationHelper.validateDay;
+import static de.nicolasgross.wcttt.model.ValidationHelper.validateTimeSlot;
+
 @XmlSeeAlso(TimetablePeriod.class)
 @XmlType(propOrder = {"day", "timeSlot"})
 public class Period {
 
 	private int day;
 	private int timeSlot;
+
+	public Period() {
+		this.day = 1;
+		this.timeSlot = 1;
+	}
+
+	public Period(int day, int timeSlot) throws WctttModelException {
+		validateDay(day);
+		validateTimeSlot(day);
+		this.day = day;
+		this.timeSlot = timeSlot;
+	}
 
 	@XmlAttribute(required = true)
 	public int getDay() {

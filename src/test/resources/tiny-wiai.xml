@@ -1,11 +1,57 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<semester name="tiny-wiai" daysPerWeek="5" timeSlotsPerDay="6" minDailyLecturesPerCur="0" maxDailyLecturesPerCur="4">
+<semester name="tiny-wiai" daysPerWeek="5" timeSlotsPerDay="6"
+          minDailyLecturesPerCur="0" maxDailyLecturesPerCur="4">
     <constrWeightings s1="1.0" s2="2.0" s3="2.5" s4="1.5" s5="3.0" s6="2.0" s7="1.3" s8="2.8"/>
     <chairs>
-        <chair id="swt" name=" Lehrstuhl Softwaretechnik &amp; Programmiersprachen"/>
-        <chair id="dsg" name=" Lehrstuhl für Praktische Informatik"/>
+        <chair id="swt" name="Lehrstuhl Softwaretechnik und Programmiersprachen"/>
+        <chair id="dsg" name="Lehrstuhl für Praktische Informatik"/>
+        <chair id="gdi" name="Professur für Grundlagen der Informatik"/>
+        <chair id="ktr" name="Professur für Informatik, insbesondere Kommunikationsdienste, Telekommunikationssysteme und Rechnernetze"/>
     </chairs>
-    <teachers/>
+    <teachers>
+        <teacher id="lüttgen" name="Prof. Dr. Gerald Lüttgen">
+            <unfavorablePeriods>
+                <unfavorable day="1" timeSlot="1"/>
+                <unfavorable day="1" timeSlot="2"/>
+                <unfavorable day="1" timeSlot="3"/>
+            </unfavorablePeriods>
+            <unavailablePeriods>
+                <unavailable day="2" timeSlot="4"/>
+                <unavailable day="2" timeSlot="5"/>
+                <unavailable day="2" timeSlot="6"/>
+            </unavailablePeriods>
+        </teacher>
+        <teacher id="wirtz" name="Prof. Dr. Guido Wirtz">
+            <unfavorablePeriods>
+                <unfavorable day="1" timeSlot="3"/>
+                <unfavorable day="1" timeSlot="4"/>
+                <unfavorable day="1" timeSlot="5"/>
+            </unfavorablePeriods>
+            <unavailablePeriods/>
+        </teacher>
+        <teacher id="mendler" name="Prof. Michael Mendler, PhD">
+            <unfavorablePeriods/>
+            <unavailablePeriods>
+                <unavailable day="5" timeSlot="1"/>
+                <unavailable day="5" timeSlot="2"/>
+                <unavailable day="5" timeSlot="3"/>
+                <unavailable day="5" timeSlot="4"/>
+                <unavailable day="5" timeSlot="5"/>
+                <unavailable day="5" timeSlot="6"/>
+            </unavailablePeriods>
+        </teacher>
+        <teacher id="krieger" name="Prof. Dr. Udo R. Krieger">
+            <unfavorablePeriods/>
+            <unavailablePeriods>
+                <unavailable day="4" timeSlot="1"/>
+                <unavailable day="4" timeSlot="2"/>
+                <unavailable day="4" timeSlot="3"/>
+                <unavailable day="4" timeSlot="4"/>
+                <unavailable day="4" timeSlot="5"/>
+                <unavailable day="4" timeSlot="6"/>
+            </unavailablePeriods>
+        </teacher>
+    </teachers>
     <rooms/>
     <courses/>
     <curricula/>

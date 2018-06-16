@@ -2,32 +2,35 @@ package de.nicolasgross.wcttt.model;
 
 class ValidationHelper {
 
+	private static final int DAYS_PER_WEEK_MIN = 1;
+	private static final int TIME_SLOTS_PER_DAY_MIN = 1;
+	private static final int MIN_DAILY_LECTURES_PER_CUR_MIN = 0;
+	private static final int ROOM_CAPACITY_MIN = 1;
+
 	// Semester
 
 	static void validateDaysPerWeek(int daysPerWeek) throws
 			WctttModelException {
-		int limit = 1;
-		if (daysPerWeek < limit) {
+		if (daysPerWeek < DAYS_PER_WEEK_MIN) {
 			throw new WctttModelException("Parameter 'daysPerWeek' must " +
-					"be >= " + limit);
+					"be >= " + DAYS_PER_WEEK_MIN);
 		}
 	}
 
 	static void validateTimeSlotsPerDay(int timeSlotsPerDay) throws
 			WctttModelException {
-		int limit = 1;
-		if (timeSlotsPerDay < limit) {
+		if (timeSlotsPerDay < TIME_SLOTS_PER_DAY_MIN) {
 			throw new WctttModelException("Parameter 'timeSlotsPerDay' " +
-					"must be >= " + limit);
+					"must be >= " + TIME_SLOTS_PER_DAY_MIN);
 		}
 	}
 
 	static void validateMinDailyLecturesPerCur(int minLectures) throws
 			WctttModelException {
-		int limit = 0;
-		if (minLectures < limit) {
+		if (minLectures < MIN_DAILY_LECTURES_PER_CUR_MIN) {
 			throw new WctttModelException("Parameter " +
-					"'minDailyLecturesPerCur' must be >= " + limit);
+					"'minDailyLecturesPerCur' must be >= "
+					+ MIN_DAILY_LECTURES_PER_CUR_MIN);
 		}
 	}
 
@@ -43,10 +46,26 @@ class ValidationHelper {
 	// Room
 
 	static void validateRoomCapacity(int capacity) throws WctttModelException {
-		int limit = 1;
-		if (capacity < limit) {
-			throw new WctttModelException("Parameter 'capacity' must be " +
-					"larger " + (limit - 1));
+		if (capacity < ROOM_CAPACITY_MIN) {
+			throw new WctttModelException("Parameter 'capacity' must be >= "
+					+ ROOM_CAPACITY_MIN);
+		}
+	}
+
+
+	// Period
+
+	static void validateDay(int day) throws WctttModelException {
+		if (day < DAYS_PER_WEEK_MIN) {
+			throw new WctttModelException("Parameter 'day' must be >= "
+					+ DAYS_PER_WEEK_MIN);
+		}
+	}
+
+	static void validateTimeSlot(int timeSlot) throws WctttModelException {
+		if (timeSlot < TIME_SLOTS_PER_DAY_MIN) {
+			throw new WctttModelException("Parameter 'timeSlot' must be >= "
+					+ TIME_SLOTS_PER_DAY_MIN);
 		}
 	}
 

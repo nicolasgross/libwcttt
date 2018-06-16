@@ -7,10 +7,24 @@ import java.util.List;
 @XmlType(propOrder = {"id", "name", "unfavorablePeriods", "unavailablePeriods"})
 public class Teacher {
 
-	private String id = "";
-	private String name = "";
+	private String id;
+	private String name;
 	private List<Period> unfavorablePeriods = new LinkedList<>();
 	private List<Period> unavailablePeriods = new LinkedList<>();
+
+	public Teacher() {
+		this.id = "";
+		this.name = "";
+	}
+
+	public Teacher(String id, String name) {
+		if (id == null || name == null) {
+			throw new IllegalArgumentException("Parameters 'id' and 'name'" +
+					"must not be null");
+		}
+		this.id = id;
+		this.name = name;
+	}
 
 	@XmlAttribute(required = true)
 	@XmlID
@@ -37,8 +51,8 @@ public class Teacher {
 		return unfavorablePeriods;
 	}
 
-	public void setUnfavorablePeriods(List<Period> unafavorablePeriods) {
-		this.unfavorablePeriods = unafavorablePeriods;
+	public void setUnfavorablePeriods(List<Period> unfavorablePeriods) {
+		this.unfavorablePeriods = unfavorablePeriods;
 	}
 
 	@XmlElementWrapper

@@ -1,9 +1,6 @@
 package de.nicolasgross.wcttt.binder;
 
-import de.nicolasgross.wcttt.model.Chair;
-import de.nicolasgross.wcttt.model.ConstraintWeightings;
-import de.nicolasgross.wcttt.model.Semester;
-import de.nicolasgross.wcttt.model.WctttModelException;
+import de.nicolasgross.wcttt.model.*;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -42,14 +39,25 @@ class WctttBinderTest {
 		semesterWrite.setMaxDailyLecturesPerCur(4);
 		semesterWrite.setConstrWeightings(new ConstraintWeightings(1.0, 2,
 				3.4, 4.1, 5.8, 6.2, 7.9, 8.5));
-		Chair chair = new Chair("swt", " Lehrstuhl Softwaretechnik & " +
+
+		Chair chair = new Chair("swt", "Lehrstuhl Softwaretechnik und " +
 				"Programmiersprachen");
 		semesterWrite.getChairs().add(chair);
+
+		Teacher teacher1 = new Teacher("lüttgen", "Prof. Dr. Gerald Lüttgen");
+		teacher1.getUnavailablePeriods().add(new Period(2, 4));
+		teacher1.getUnfavorablePeriods().add(new Period(1, 3));
+		semesterWrite.getTeachers().add(teacher1);
+
+
+
 		binder.write(semesterWrite);
 
 		Semester semesterRead = binder.parse();
 		assertEquals(semesterWrite, semesterRead);
 		//Files.delete(Paths.get(path));
 	}
+
+
 
 }
