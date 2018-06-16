@@ -4,17 +4,21 @@ import javax.xml.bind.annotation.*;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Represents a semester.
+ */
 @XmlRootElement(name = "semester")
 @XmlType(propOrder = {"name", "daysPerWeek", "timeSlotsPerDay",
-		"minDailyLecturesPerCur", "maxDailyLecturesPerCur", "chairs",
-		"teachers", "rooms", "courses", "curricula", "timetables"})
+		"minDailyLecturesPerCur", "maxDailyLecturesPerCur", "constrWeightings",
+		"chairs", "teachers", "rooms", "courses", "curricula", "timetables"})
 public class Semester {
 
-	private String name = "";
+	private String name;
 	private int daysPerWeek;
 	private int timeSlotsPerDay;
 	private int minDailyLecturesPerCur;
 	private int maxDailyLecturesPerCur;
+	private ConstraintWeightings constrWeightings;
 	private List<Chair> chairs = new LinkedList<>();
 	private List<Teacher> teachers = new LinkedList<>();
 	private List<Room> rooms = new LinkedList<>();
@@ -22,6 +26,31 @@ public class Semester {
 	private List<Curriculum> curricula = new LinkedList<>();
 	private List<Timetable> timetables = new LinkedList<>(); // TODO must be empty before changes of semester data
 
+	/**
+	 * Creates a semester with an empty name, 1 days per week, 1 time slots
+	 * per day, 0 min daily lectures per curriculum and 1 max daily lecture
+	 * per curriculum.
+	 */
+	public Semester() {
+		this.name = "";
+		this.daysPerWeek = 1;
+		this.timeSlotsPerDay = 1;
+		this.minDailyLecturesPerCur = 0;
+		this.maxDailyLecturesPerCur = 1;
+		this.constrWeightings = new ConstraintWeightings();
+	}
+
+	public Semester(String name, int daysPerWeek, int timeSlotsPerDay,
+	                int minDailyLecturesPerCur, int maxDailyLecturesPerCur,
+	                ConstraintWeightings constrWeightings) {
+		this();
+		this.name = name;
+		this.daysPerWeek = daysPerWeek;
+		this.timeSlotsPerDay = timeSlotsPerDay;
+		this.minDailyLecturesPerCur = minDailyLecturesPerCur;
+		this.maxDailyLecturesPerCur = maxDailyLecturesPerCur;
+		this.constrWeightings = constrWeightings;
+	}
 
 	@XmlAttribute(required = true)
 	public String getName() {
@@ -69,11 +98,20 @@ public class Semester {
 	}
 
 	@XmlElement(required = true)
+	public ConstraintWeightings getConstrWeightings() {
+		return constrWeightings;
+	}
+
+	public void setConstrWeightings(ConstraintWeightings constrWeightings) {
+		this.constrWeightings = constrWeightings;
+	}
+
+	@XmlElement(required = true)
 	public List<Chair> getChairs() {
 		return chairs;
 	}
 
-	public void setChairs(List<Chair> chairs) {
+	private void setChairs(List<Chair> chairs) {
 		this.chairs = chairs;
 	}
 
@@ -82,7 +120,7 @@ public class Semester {
 		return teachers;
 	}
 
-	public void setTeachers(List<Teacher> teachers) {
+	private void setTeachers(List<Teacher> teachers) {
 		this.teachers = teachers;
 	}
 
@@ -91,7 +129,7 @@ public class Semester {
 		return rooms;
 	}
 
-	public void setRooms(List<Room> rooms) {
+	private void setRooms(List<Room> rooms) {
 		this.rooms = rooms;
 	}
 
@@ -100,7 +138,7 @@ public class Semester {
 		return courses;
 	}
 
-	public void setCourses(List<Course> courses) {
+	private void setCourses(List<Course> courses) {
 		this.courses = courses;
 	}
 
@@ -109,7 +147,7 @@ public class Semester {
 		return curricula;
 	}
 
-	public void setCurricula(List<Curriculum> curricula) {
+	private void setCurricula(List<Curriculum> curricula) {
 		this.curricula = curricula;
 	}
 
@@ -118,8 +156,52 @@ public class Semester {
 		return timetables;
 	}
 
-	public void setTimetables(List<Timetable> timetables) {
+	private void setTimetables(List<Timetable> timetables) {
 		this.timetables = timetables;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof Semester)) {
+			return false;
+		} else if (obj == this) {
+			return true;
+		}
+		Semester other = (Semester) obj;
+		if (!(this.name.equals(other.name) &&
+				this.daysPerWeek == other.daysPerWeek &&
+				this.timeSlotsPerDay == other.timeSlotsPerDay &&
+				this.minDailyLecturesPerCur == other.minDailyLecturesPerCur &&
+				this.maxDailyLecturesPerCur == other.maxDailyLecturesPerCur)) {
+			return false;
+		}
+
+		//TODO check content of lists
+		if (this.chairs.size() != other.chairs.size()) {
+			return false;
+		}
+
+		if (this.teachers.size() != other.teachers.size()) {
+			return false;
+		}
+
+		if (this.rooms.size() != other.rooms.size()) {
+			return false;
+		}
+
+		if (this.courses.size() != other.courses.size()) {
+			return false;
+		}
+
+		if (this.curricula.size() != other.curricula.size()) {
+			return false;
+		}
+
+		if (this.timetables.size() != other.timetables.size()) {
+			return false;
+		}
+
+		return true;
 	}
 
 }

@@ -16,8 +16,8 @@ public class Room {
 	private RoomFeatures features;
 
 	/**
-	 * Creates a room with empty name, capacity of 1, no holder and
-	 * default features (see {@link RoomFeatures#RoomFeatures()}).
+	 * Creates a room with an empty name, capacity of 1, no holder and default
+	 * features (see {@link RoomFeatures#RoomFeatures()}).
 	 */
 	public Room() {
 		this.id = "";
