@@ -1,6 +1,7 @@
-package de.nicolasgross.wcttt.intern.model;
+package de.nicolasgross.wcttt.model;
 
 import javax.xml.bind.annotation.*;
+import java.util.Optional;
 
 @XmlType(propOrder = {"session", "room"})
 public class TimetableAssignment {

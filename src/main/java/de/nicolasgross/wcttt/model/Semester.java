@@ -1,4 +1,4 @@
-package de.nicolasgross.wcttt.intern.model;
+package de.nicolasgross.wcttt.model;
 
 import javax.xml.bind.annotation.*;
 import java.util.LinkedList;

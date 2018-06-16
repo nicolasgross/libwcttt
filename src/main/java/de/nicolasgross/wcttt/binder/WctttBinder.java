@@ -1,6 +1,6 @@
 package de.nicolasgross.wcttt.binder;
 
-import de.nicolasgross.wcttt.intern.model.Semester;
+import de.nicolasgross.wcttt.model.Semester;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;

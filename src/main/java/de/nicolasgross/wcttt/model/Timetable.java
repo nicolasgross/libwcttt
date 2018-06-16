@@ -1,4 +1,4 @@
-package de.nicolasgross.wcttt.intern.model;
+package de.nicolasgross.wcttt.model;
 
 import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
@@ -7,16 +7,16 @@ import java.util.List;
 @XmlType(propOrder = {"name", "softConstraintViolations", "days"})
 public class Timetable {
 
-	private int name;
+	private String name = "";
 	private double softConstraintViolations;
 	private List<TimetableDay> days = new ArrayList<>();
 
 	@XmlAttribute(required = true)
-	public int getName() {
+	public String getName() {
 		return name;
 	}
 
-	public void setName(int name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 

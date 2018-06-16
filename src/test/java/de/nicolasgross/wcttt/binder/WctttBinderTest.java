@@ -1,6 +1,6 @@
 package de.nicolasgross.wcttt.binder;
 
-import de.nicolasgross.wcttt.intern.model.Semester;
+import de.nicolasgross.wcttt.model.Semester;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;

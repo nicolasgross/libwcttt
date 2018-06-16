@@ -23,7 +23,7 @@
 		<course id="SceCosC" min_days="3" students="30">
 			<lectures>
 				<lecture id="SceCosC-L1" double_period="true">
-					<course ref="SceCosC"/> <!-- TODO - Not sure if required -->
+					<course ref="SceCosC"/>
 					<teacher ref="Ocra"/>
 				</lecture>
 				<lecture id="SceCosC-L2" double_period="true">

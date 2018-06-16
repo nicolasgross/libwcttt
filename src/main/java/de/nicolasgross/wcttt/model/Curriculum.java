@@ -1,4 +1,4 @@
-package de.nicolasgross.wcttt.intern.model;
+package de.nicolasgross.wcttt.model;
 
 import javax.xml.bind.annotation.*;
 import java.util.LinkedList;
@@ -7,7 +7,7 @@ import java.util.List;
 @XmlType(propOrder = {"id", "name", "courses"})
 public class Curriculum {
 
-	private String id;
+	private String id = "";
 	private String name = "";
 	private List<Course> courses = new LinkedList<>();
 

@@ -1,15 +1,16 @@
-package de.nicolasgross.wcttt.intern.model;
+package de.nicolasgross.wcttt.model;
 
 import javax.xml.bind.annotation.*;
+import java.util.Optional;
 
 @XmlType(propOrder = {"id", "name", "capacity", "holder", "features"})
 public class Room {
 
-	private String id;
+	private String id = "";
 	private String name = "";
 	private int capacity;
-	private Chair holder = new Chair();
 	private RoomFeatures features = new RoomFeatures();
+	private Chair holder = new Chair();
 
 	@XmlAttribute(required = true)
 	@XmlID
@@ -39,12 +40,17 @@ public class Room {
 		this.capacity = capacity;
 	}
 
-	@XmlElement(required = false)
-	public Chair getHolder() { // TODO optional
+	@XmlElement(required = false) // Getter returns Optional, annotation must be here
+	@XmlIDREF
+	private Chair getHolder() { // TODO optional
 		return holder;
 	}
 
-	public void setHolder(Chair holder) {
+	public Optional<Chair> getHolderSafe() {
+		return Optional.ofNullable(holder);
+	}
+
+	private void setHolder(Chair holder) {
 		this.holder = holder;
 	}
 
