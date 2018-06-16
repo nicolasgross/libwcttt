@@ -48,7 +48,8 @@ public class Semester {
 	 *
 	 * @param name                   the name of the semester, must not be null.
 	 * @param daysPerWeek            the number of days in a week, must be > 0.
-	 * @param timeSlotsPerDay        the number of time slots in a day, must be > 0.
+	 * @param timeSlotsPerDay        the number of time slots in a day, must
+	 *                                  be > 0.
 	 * @param minDailyLecturesPerCur the minimum number of daily lectures per
 	 *                               curriculum, must >= 0.
 	 * @param maxDailyLecturesPerCur the maximum number of daily lectures per
@@ -226,9 +227,10 @@ public class Semester {
 	}
 
 	/**
+	 * Getter for the chairs of a semester. Do not manipulate the returned
+	 * references.
 	 *
-	 *
-	 * @return
+	 * @return the list of the chairs of the semester.
 	 */
 	@XmlElementWrapper
 	@XmlElement(name = "chair", required = true)
@@ -236,30 +238,60 @@ public class Semester {
 		return chairs;
 	}
 
+	/**
+	 * Getter for the teachers of a semester. Do not manipulate the returned
+	 * references.
+	 *
+	 * @return the list of the teachers of the semester.
+	 */
 	@XmlElementWrapper
 	@XmlElement(name = "teacher", required = true)
 	public List<Teacher> getTeachers() {
 		return teachers;
 	}
 
+	/**
+	 * Getter for the rooms of a semester. Do not manipulate the returned
+	 * references.
+	 *
+	 * @return the list of the rooms of the semester.
+	 */
 	@XmlElementWrapper
 	@XmlElement(name = "room", required = true)
 	public List<Room> getRooms() {
 		return rooms;
 	}
 
+	/**
+	 * Getter for the courses of a semester. Do not manipulate the returned
+	 * references.
+	 *
+	 * @return the list of the courses of the semester.
+	 */
 	@XmlElementWrapper
 	@XmlElement(name = "course", required = true)
 	public List<Course> getCourses() {
 		return courses;
 	}
 
+	/**
+	 * Getter for the curricula of a semester. Do not manipulate the returned
+	 * references.
+	 *
+	 * @return the list of the curricula of the semester.
+	 */
 	@XmlElementWrapper
 	@XmlElement(name = "curriculum", required = true)
 	public List<Curriculum> getCurricula() {
 		return curricula;
 	}
 
+	/**
+	 * Getter for the timetables of a semester. Do not manipulate the returned
+	 * references.
+	 *
+	 * @return the list of the timetables of the semester.
+	 */
 	@XmlElementWrapper
 	@XmlElement(name = "timetable", required = true)
 	public List<Timetable> getTimetables() {
