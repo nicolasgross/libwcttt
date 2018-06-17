@@ -1,6 +1,7 @@
 package de.nicolasgross.wcttt.model;
 
 import javax.xml.bind.annotation.*;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -12,7 +13,7 @@ import static de.nicolasgross.wcttt.model.ValidationHelper.*;
 @XmlRootElement(name = "semester")
 @XmlType(propOrder = {"name", "daysPerWeek", "timeSlotsPerDay",
 		"minDailyLecturesPerCur", "maxDailyLecturesPerCur", "constrWeightings",
-		"chairs", "teachers", "rooms", "courses", "curricula", "timetables"})
+		"chairs", "rooms", "courses", "curricula", "timetables"})
 public class Semester {
 
 	private String name;
@@ -22,7 +23,6 @@ public class Semester {
 	private int maxDailyLecturesPerCur;
 	private ConstraintWeightings constrWeightings;
 	private List<Chair> chairs = new LinkedList<>();
-	private List<Teacher> teachers = new LinkedList<>();
 	private List<Room> rooms = new LinkedList<>();
 	private List<Course> courses = new LinkedList<>();
 	private List<Curriculum> curricula = new LinkedList<>();
@@ -239,18 +239,6 @@ public class Semester {
 	}
 
 	/**
-	 * Getter for the teachers of a semester. Do not manipulate the returned
-	 * references.
-	 *
-	 * @return the list of the teachers of the semester.
-	 */
-	@XmlElementWrapper
-	@XmlElement(name = "teacher", required = true)
-	public List<Teacher> getTeachers() {
-		return teachers;
-	}
-
-	/**
 	 * Getter for the rooms of a semester. Do not manipulate the returned
 	 * references.
 	 *
@@ -311,38 +299,53 @@ public class Semester {
 		}
 
 		Semester other = (Semester) obj;
-		if (!(this.name.equals(other.name) &&
-				this.daysPerWeek == other.daysPerWeek &&
-				this.timeSlotsPerDay == other.timeSlotsPerDay &&
-				this.minDailyLecturesPerCur == other.minDailyLecturesPerCur &&
-				this.maxDailyLecturesPerCur == other.maxDailyLecturesPerCur &&
-				this.constrWeightings.equals(other.constrWeightings))) {
+		if (!this.name.equals(other.name) ||
+				this.daysPerWeek != other.daysPerWeek ||
+				this.timeSlotsPerDay != other.timeSlotsPerDay ||
+				this.minDailyLecturesPerCur != other.minDailyLecturesPerCur ||
+				this.maxDailyLecturesPerCur != other.maxDailyLecturesPerCur ||
+				!this.constrWeightings.equals(other.constrWeightings)) {
 			return false;
 		}
 
-		//TODO also check content of lists
 		if (this.chairs.size() != other.chairs.size()) {
 			return false;
-		}
-
-		if (this.teachers.size() != other.teachers.size()) {
-			return false;
+		} else if (this.chairs != other.chairs) {
+			if (!(this.chairs.containsAll(other.chairs))) {
+				return false;
+			}
 		}
 
 		if (this.rooms.size() != other.rooms.size()) {
 			return false;
+		} else if (this.rooms != other.rooms) {
+			if (!(this.rooms.containsAll(other.rooms))) {
+				return false;
+			}
 		}
 
 		if (this.courses.size() != other.courses.size()) {
 			return false;
+		} else if (this.courses != other.courses) {
+			if (!(this.courses.containsAll(other.courses))) {
+				return false;
+			}
 		}
 
 		if (this.curricula.size() != other.curricula.size()) {
 			return false;
+		} else if (this.curricula != other.curricula) {
+			if (!(this.curricula.containsAll(other.curricula))) {
+				return false;
+			}
 		}
 
 		if (this.timetables.size() != other.timetables.size()) {
 			return false;
+		} else if (this.timetables != other.timetables) {
+			if (!(this.timetables.containsAll(other.timetables))) {
+				return false;
+			}
 		}
 
 		return true;

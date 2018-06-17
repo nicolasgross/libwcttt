@@ -1,37 +1,61 @@
 package de.nicolasgross.wcttt.binder;
 
 import de.nicolasgross.wcttt.model.Semester;
+import org.xml.sax.SAXException;
 
+import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.transform.stream.StreamSource;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
+import javax.xml.validation.Validator;
 import java.io.File;
+import java.io.IOException;
 
 public class WctttBinder {
 
-	private String path;
+	private static final File SCHEMA_FILE =
+			new File("src/main/resources/schema.xsd");
+
+	private File xmlFile;
 	private JAXBContext context;
+	private Validator validator;
 
 	public WctttBinder(String path) throws WctttParserException {
 		if (path == null) {
 			throw new IllegalArgumentException("Parameter path must not be " +
 					"null");
 		}
-		this.path = path;
+		this.xmlFile = new File(path);
 		try {
 			this.context = JAXBContext.newInstance(Semester.class);
+			SchemaFactory sf = SchemaFactory.newInstance(
+					XMLConstants.W3C_XML_SCHEMA_NS_URI);
+			Schema schema = sf.newSchema(SCHEMA_FILE);
+			this.validator = schema.newValidator();
 		} catch (JAXBException e) {
+			throw new WctttParserException(e);
+		} catch (SAXException e) {
+			// TODO runtime exception?
 			throw new WctttParserException(e);
 		}
 	}
 
 	public Semester parse() throws WctttParserException {
 		try {
-			// TODO use schema
+			validator.validate(new StreamSource(xmlFile));
 			Unmarshaller um = context.createUnmarshaller();
-			return (Semester) um.unmarshal(new File(path));
+			return (Semester) um.unmarshal(xmlFile);
 		} catch (JAXBException e) {
+			throw new WctttParserException(e);
+		} catch (SAXException e) {
+			// TODO
+			throw new WctttParserException(e);
+		} catch (IOException e) {
+			// TODO
 			throw new WctttParserException(e);
 		}
 	}
@@ -45,7 +69,7 @@ public class WctttBinder {
 			// TODO use schema
 			Marshaller ms = context.createMarshaller();
 			ms.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-			ms.marshal(semester, new File(path));
+			ms.marshal(semester, xmlFile);
 		} catch (JAXBException e) {
 			throw new WctttParserException(e);
 		}

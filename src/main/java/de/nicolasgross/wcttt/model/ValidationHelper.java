@@ -6,6 +6,7 @@ class ValidationHelper {
 	private static final int TIME_SLOTS_PER_DAY_MIN = 1;
 	private static final int MIN_DAILY_LECTURES_PER_CUR_MIN = 0;
 	private static final int ROOM_CAPACITY_MIN = 1;
+	private static final int PROJECTORS_MIN = 0;
 
 	// Semester
 
@@ -66,6 +67,16 @@ class ValidationHelper {
 		if (timeSlot < TIME_SLOTS_PER_DAY_MIN) {
 			throw new WctttModelException("Parameter 'timeSlot' must be >= "
 					+ TIME_SLOTS_PER_DAY_MIN);
+		}
+	}
+
+
+	// RoomFeatures
+
+	static void validateProjectors(int projectors) throws WctttModelException {
+		if (projectors < PROJECTORS_MIN) {
+			throw new WctttModelException("Parameter 'projectors' must be >= "
+					+ PROJECTORS_MIN);
 		}
 	}
 

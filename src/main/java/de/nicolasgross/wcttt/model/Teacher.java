@@ -65,4 +65,37 @@ public class Teacher {
 		this.unavailablePeriods = unavailablePeriods;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof Teacher)) {
+			return false;
+		} else if (obj == this) {
+			return true;
+		}
+
+		Teacher other = (Teacher) obj;
+		if (!this.id.equals(other.id) || !this.name.equals(other.name)) {
+			return false;
+		}
+
+		if (this.unfavorablePeriods.size() != other.unfavorablePeriods.size()) {
+			return false;
+		} else if (this.unfavorablePeriods != other.unfavorablePeriods) {
+			if (!(this.unfavorablePeriods.containsAll(
+					other.unfavorablePeriods))) {
+				return false;
+			}
+		}
+
+		if (this.unavailablePeriods.size() != other.unavailablePeriods.size()) {
+			return false;
+		} else if (this.unavailablePeriods != other.unavailablePeriods) {
+			if (!(this.unavailablePeriods.containsAll(
+					other.unavailablePeriods))) {
+				return false;
+			}
+		}
+
+		return true;
+	}
 }
