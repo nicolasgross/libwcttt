@@ -17,4 +17,11 @@ public class WctttBinderException extends Exception {
 	public WctttBinderException(Throwable cause) {
 		super(cause);
 	}
+
+	protected WctttBinderException(String message, Throwable cause,
+	                               boolean enableSuppression,
+	                               boolean writableStackTrace) {
+		super(message, cause, enableSuppression, writableStackTrace);
+	}
+
 }
