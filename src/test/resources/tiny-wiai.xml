@@ -16,6 +16,14 @@
                         <unavailable day="2" timeSlot="6"/>
                     </unavailablePeriods>
                 </teacher>
+                <teacher id="yip" name="Dr. Eugene Yip">
+                    <unfavorablePeriods/>
+                    <unavailablePeriods/>
+                </teacher>
+                <teacher id="gareis" name="Johannes Gareis">
+                    <unfavorablePeriods/>
+                    <unavailablePeriods/>
+                </teacher>
             </teachers>
         </chair>
         <chair id="dsg" name="Lehrstuhl für Praktische Informatik">
@@ -26,6 +34,22 @@
                         <unfavorable day="1" timeSlot="4"/>
                         <unfavorable day="1" timeSlot="5"/>
                     </unfavorablePeriods>
+                    <unavailablePeriods/>
+                </teacher>
+                <teacher id="dsg-hiwi1" name="DSG HiWi 1">
+                    <unfavorablePeriods/>
+                    <unavailablePeriods/>
+                </teacher>
+                <teacher id="dsg-hiwi2" name="DSG HiWi 2">
+                    <unfavorablePeriods/>
+                    <unavailablePeriods/>
+                </teacher>
+                <teacher id="dsg-hiwi3" name="DSG HiWi 3">
+                    <unfavorablePeriods/>
+                    <unavailablePeriods/>
+                </teacher>
+                <teacher id="dsg-hiwi4" name="DSG HiWi 4">
+                    <unfavorablePeriods/>
                     <unavailablePeriods/>
                 </teacher>
             </teachers>
@@ -43,6 +67,10 @@
                         <unavailable day="5" timeSlot="6"/>
                     </unavailablePeriods>
                 </teacher>
+                <teacher id="guatto" name="Dr. Adrien Guatto">
+                    <unfavorablePeriods/>
+                    <unavailablePeriods/>
+                </teacher>
             </teachers>
         </chair>
         <chair id="ktr" name="Professur für Informatik, insbesondere Kommunikationsdienste, Telekommunikationssysteme und Rechnernetze">
@@ -57,6 +85,10 @@
                         <unavailable day="4" timeSlot="5"/>
                         <unavailable day="4" timeSlot="6"/>
                     </unavailablePeriods>
+                </teacher>
+                <teacher id="großmann" name="Dr. Marcel Großmann">
+                    <unfavorablePeriods/>
+                    <unavailablePeriods/>
                 </teacher>
             </teachers>
         </chair>
@@ -77,18 +109,123 @@
         </room>
     </rooms>
     <courses>
-        <course id="fse" name="Foundations of Software Engineering" abbreviation="SWT-FSE-B" minNumberOfDays="2">
+        <course id="fse" name="Foundations of Software Engineering" abbreviation="SWT-FSE-B" minNumberOfDays="3">
             <chair>swt</chair>
             <lectures>
-                <lecture id="FSE-L1" name="FSE Lecture 1" students="80" external="false" doubleSession="false">
+                <lecture id="fse-l1" name="FSE Lecture 1" students="80" external="false" doubleSession="false">
+                    <teacher>lüttgen</teacher>
+                    <roomRequirements projectors="1" pcPool="false" docCam="false" teacherPc="false"/>
+                </lecture>
+                <lecture id="fse-l2" name="FSE Lecture 2" students="80" external="false" doubleSession="false">
+                    <teacher>lüttgen</teacher>
+                    <roomRequirements projectors="1" pcPool="false" docCam="false" teacherPc="false"/>
+                </lecture>
+                <lecture id="fse-l3" name="FSE Lecture 3" students="80" external="false" doubleSession="false">
                     <teacher>lüttgen</teacher>
                     <roomRequirements projectors="1" pcPool="false" docCam="false" teacherPc="false"/>
                 </lecture>
             </lectures>
             <practicals>
-                <practical id="FSE-P1" name="FSE Practical 1" students="30" external="false" doubleSession="false">
-                    <teacher>lüttgen</teacher>
+                <practical id="fse-p1" name="FSE Practical 1" students="30" external="false" doubleSession="false">
+                    <teacher>yip</teacher>
                     <roomRequirements projectors="1" pcPool="false" docCam="true" teacherPc="false"/>
+                </practical>
+                <practical id="fse-p2" name="FSE Practical 2" students="30" external="false" doubleSession="false">
+                    <teacher>gareis</teacher>
+                    <roomRequirements projectors="1" pcPool="false" docCam="true" teacherPc="false"/>
+                </practical>
+                <practical id="fse-p3" name="FSE Practical 3" students="30" external="false" doubleSession="false">
+                    <teacher>yip</teacher>
+                    <roomRequirements projectors="1" pcPool="false" docCam="true" teacherPc="false"/>
+                </practical>
+            </practicals>
+        </course>
+        <course id="eiaps" name="Einführung in Algorithmen, Programmierung und Software" abbreviation="DSG-EiAPS-B" minNumberOfDays="2">
+            <chair>dsg</chair>
+            <lectures>
+                <lecture id="eiaps-l1" name="EiAPS Lecture 1" students="240" external="false" doubleSession="false">
+                    <teacher>wirtz</teacher>
+                    <roomRequirements projectors="1" pcPool="false" docCam="false" teacherPc="false"/>
+                </lecture>
+                <lecture id="eiaps-l2" name="EiAPS Lecture 2" students="240" external="false" doubleSession="false">
+                    <teacher>wirtz</teacher>
+                    <roomRequirements projectors="1" pcPool="false" docCam="false" teacherPc="false"/>
+                </lecture>
+            </lectures>
+            <practicals>
+                <practical id="eiaps-p1" name="EiAPS Practical 1" students="35" external="false" doubleSession="false">
+                    <teacher>dsg-hiwi1</teacher>
+                    <roomRequirements projectors="1" pcPool="false" docCam="true" teacherPc="false"/>
+                </practical>
+                <practical id="eisp-p2" name="EiAPS Practical 2" students="35" external="false" doubleSession="false">
+                    <teacher>dsg-hiwi2</teacher>
+                    <roomRequirements projectors="1" pcPool="false" docCam="true" teacherPc="false"/>
+                </practical>
+                <practical id="eisp-p3" name="EiAPS Practical 3" students="35" external="false" doubleSession="false">
+                    <teacher>dsg-hiwi3</teacher>
+                    <roomRequirements projectors="1" pcPool="false" docCam="true" teacherPc="false"/>
+                </practical>
+                <practical id="eisp-p4" name="EiAPS Practical 4" students="35" external="false" doubleSession="false">
+                    <teacher>dsg-hiwi4</teacher>
+                    <roomRequirements projectors="1" pcPool="false" docCam="true" teacherPc="false"/>
+                </practical>
+                <practical id="eisp-p5" name="EiAPS Practical 5" students="35" external="false" doubleSession="false">
+                    <teacher>dsg-hiwi1</teacher>
+                    <roomRequirements projectors="1" pcPool="false" docCam="true" teacherPc="false"/>
+                </practical>
+                <practical id="eisp-p6" name="EiAPS Practical 6" students="35" external="false" doubleSession="false">
+                    <teacher>dsg-hiwi2</teacher>
+                    <roomRequirements projectors="1" pcPool="false" docCam="true" teacherPc="false"/>
+                </practical>
+                <practical id="eisp-p7" name="EiAPS Practical 7" students="35" external="false" doubleSession="false">
+                    <teacher>dsg-hiwi3</teacher>
+                    <roomRequirements projectors="1" pcPool="false" docCam="true" teacherPc="false"/>
+                </practical>
+                <practical id="eisp-p8" name="EiAPS Practical 8" students="35" external="false" doubleSession="false">
+                    <teacher>dsg-hiwi4</teacher>
+                    <roomRequirements projectors="1" pcPool="false" docCam="true" teacherPc="false"/>
+                </practical>
+            </practicals>
+        </course>
+        <course id="mtl" name="Modal and Temporal Logic" abbreviation="GdI-MTL" minNumberOfDays="2">
+            <chair>gdi</chair>
+            <lectures>
+                <lecture id="mtl-l1" name="MTL Lecture 1" students="30" external="false" doubleSession="false">
+                    <teacher>mendler</teacher>
+                    <roomRequirements projectors="1" pcPool="false" docCam="false" teacherPc="false"/>
+                </lecture>
+                <lecture id="mtl-l2" name="MTL Lecture 2" students="30" external="false" doubleSession="false">
+                    <teacher>mendler</teacher>
+                    <roomRequirements projectors="1" pcPool="false" docCam="false" teacherPc="false"/>
+                </lecture>
+            </lectures>
+            <practicals>
+                <practical id="mtl-p1" name="MTL Practical 1" students="20" external="false" doubleSession="false">
+                    <teacher>guatto</teacher>
+                    <roomRequirements projectors="1" pcPool="false" docCam="true" teacherPc="false"/>
+                </practical>
+                <practical id="mtl-p2" name="MTL Practical 2" students="20" external="false" doubleSession="false">
+                    <teacher>guatto</teacher>
+                    <roomRequirements projectors="1" pcPool="false" docCam="true" teacherPc="false"/>
+                </practical>
+            </practicals>
+        </course>
+        <course id="gik" name="Grundbausteine der Internet-Kommunikation" abbreviation="KTR-GIK-M" minNumberOfDays="2">
+            <chair>ktr</chair>
+            <lectures>
+                <lecture id="gik-l1" name="GIK Lecture 1" students="20" external="false" doubleSession="false">
+                    <teacher>krieger</teacher>
+                    <roomRequirements projectors="1" pcPool="false" docCam="false" teacherPc="false"/>
+                </lecture>
+                <lecture id="gik-l2" name="GIK Lecture 2" students="20" external="false" doubleSession="false">
+                    <teacher>krieger</teacher>
+                    <roomRequirements projectors="1" pcPool="false" docCam="false" teacherPc="false"/>
+                </lecture>
+            </lectures>
+            <practicals>
+                <practical id="gik-p1" name="GIK Practical 1" students="20" external="false" doubleSession="false">
+                    <teacher>großmann</teacher>
+                    <roomRequirements projectors="1" pcPool="true" docCam="true" teacherPc="false"/>
                 </practical>
             </practicals>
         </course>
