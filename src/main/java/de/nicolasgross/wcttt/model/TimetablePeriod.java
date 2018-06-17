@@ -11,14 +11,18 @@ public class TimetablePeriod extends Period {
 
 	private List<TimetableAssignment> assignments = new LinkedList<>();
 
+	public TimetablePeriod() {
+		super();
+	}
+
+	public TimetablePeriod(int day, int timeSlot) throws WctttModelException {
+		super(day, timeSlot);
+	}
+
 	@XmlElementWrapper(required = true)
 	@XmlElement(name = "assignment")
 	public List<TimetableAssignment> getAssignments() {
 		return assignments;
-	}
-
-	public void setAssignments(List<TimetableAssignment> assignments) {
-		this.assignments = assignments;
 	}
 
 	@Override

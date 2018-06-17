@@ -51,18 +51,10 @@ public class Teacher {
 		return unfavorablePeriods;
 	}
 
-	public void setUnfavorablePeriods(List<Period> unfavorablePeriods) {
-		this.unfavorablePeriods = unfavorablePeriods;
-	}
-
 	@XmlElementWrapper(required = true)
 	@XmlElement(name = "unavailable")
 	public List<Period> getUnavailablePeriods() {
 		return unavailablePeriods;
-	}
-
-	public void setUnavailablePeriods(List<Period> unavailablePeriods) {
-		this.unavailablePeriods = unavailablePeriods;
 	}
 
 	@Override

@@ -7,9 +7,21 @@ import java.util.List;
 @XmlType(propOrder = {"name", "softConstraintViolations", "days"})
 public class Timetable {
 
-	private String name = "";
-	private double softConstraintViolations;
+	private String name;
+	private double softConstraintViolations = -1;
 	private List<TimetableDay> days = new ArrayList<>();
+
+	public Timetable() {
+		this.name = "";
+	}
+
+	public Timetable(String name) {
+		if (name == null) {
+			throw new IllegalArgumentException("Parameter 'name' must not be " +
+					"null");
+		}
+		this.name = name;
+	}
 
 	@XmlAttribute(required = true)
 	public String getName() {
@@ -17,6 +29,10 @@ public class Timetable {
 	}
 
 	public void setName(String name) {
+		if (name == null) {
+			throw new IllegalArgumentException("Parameter 'name' must not be " +
+					"null");
+		}
 		this.name = name;
 	}
 
@@ -25,7 +41,8 @@ public class Timetable {
 		return softConstraintViolations;
 	}
 
-	public void setSoftConstraintViolations(double softConstraintViolations) {
+	// JAXB only
+	private void setSoftConstraintViolations(double softConstraintViolations) {
 		this.softConstraintViolations = softConstraintViolations;
 	}
 
@@ -33,10 +50,6 @@ public class Timetable {
 	@XmlElement(name = "timetableDay")
 	public List<TimetableDay> getDays() {
 		return days;
-	}
-
-	public void setDays(List<TimetableDay> days) {
-		this.days = days;
 	}
 
 	@Override

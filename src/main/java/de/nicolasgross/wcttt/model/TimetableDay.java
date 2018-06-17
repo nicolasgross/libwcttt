@@ -4,18 +4,30 @@ import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static de.nicolasgross.wcttt.model.ValidationHelper.validateDay;
+
 @XmlType(propOrder = {"day", "periods"})
 public class TimetableDay {
 
 	private int day;
 	private List<TimetablePeriod> periods = new ArrayList<>();
 
+	public TimetableDay() {
+		this.day = 1;
+	}
+
+	public TimetableDay(int day) throws WctttModelException {
+		validateDay(day);
+		this.day = day;
+	}
+
 	@XmlAttribute(required = true)
 	public int getDay() {
 		return day;
 	}
 
-	public void setDay(int day) {
+	public void setDay(int day) throws WctttModelException {
+		validateDay(day);
 		this.day = day;
 	}
 
@@ -23,10 +35,6 @@ public class TimetableDay {
 	@XmlElement(name = "timetablePeriod")
 	public List<TimetablePeriod> getPeriods() {
 		return periods;
-	}
-
-	public void setPeriods(List<TimetablePeriod> periods) {
-		this.periods = periods;
 	}
 
 	@Override

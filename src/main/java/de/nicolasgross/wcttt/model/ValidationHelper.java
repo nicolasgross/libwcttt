@@ -2,11 +2,20 @@ package de.nicolasgross.wcttt.model;
 
 class ValidationHelper {
 
+	/*
+		'Semester:'  -> Following constants/methods are used in class Semester.
+		                This invalidates all previously mentioned classes.
+		' + Period:' -> Following constant/methods are also used in class
+		                Period. This does not invalidate the previously
+		                mentioned classes.
+	 */
+
 	// Semester:
-	private static final int DAYS_PER_WEEK_MIN = 1;
+	private static final int MIN_DAILY_LECTURES_PER_CUR_MIN = 0;
 	// + Period:
 	private static final int TIME_SLOTS_PER_DAY_MIN = 1;
-	private static final int MIN_DAILY_LECTURES_PER_CUR_MIN = 0;
+	// + TimetableDay:
+	private static final int DAYS_PER_WEEK_MIN = 1;
 
 	//Room:
 	private static final int ROOM_CAPACITY_MIN = 1;
@@ -55,7 +64,7 @@ class ValidationHelper {
 	}
 
 
-	// Room
+	// Room:
 
 	static void validateRoomCapacity(int capacity) throws WctttModelException {
 		if (capacity < ROOM_CAPACITY_MIN) {
@@ -65,14 +74,7 @@ class ValidationHelper {
 	}
 
 
-	// Period
-
-	static void validateDay(int day) throws WctttModelException {
-		if (day < DAYS_PER_WEEK_MIN) {
-			throw new WctttModelException("Parameter 'day' must be >= "
-					+ DAYS_PER_WEEK_MIN);
-		}
-	}
+	// Period:
 
 	static void validateTimeSlot(int timeSlot) throws WctttModelException {
 		if (timeSlot < TIME_SLOTS_PER_DAY_MIN) {
@@ -81,8 +83,17 @@ class ValidationHelper {
 		}
 	}
 
+	// + TimetableDay:
 
-	// RoomFeatures
+	static void validateDay(int day) throws WctttModelException {
+		if (day < DAYS_PER_WEEK_MIN) {
+			throw new WctttModelException("Parameter 'day' must be >= "
+					+ DAYS_PER_WEEK_MIN);
+		}
+	}
+
+
+	// RoomFeatures:
 
 	static void validateProjectors(int projectors) throws WctttModelException {
 		if (projectors < PROJECTORS_MIN) {
@@ -92,7 +103,7 @@ class ValidationHelper {
 	}
 
 
-	// Course
+	// Course:
 
 	static void validateMinNumOfDays(int minNumberOfDays) throws
 			WctttModelException {
@@ -103,7 +114,7 @@ class ValidationHelper {
 	}
 
 
-	// Session
+	// Session:
 
 	static void validateStudents(int students) throws
 			WctttModelException {

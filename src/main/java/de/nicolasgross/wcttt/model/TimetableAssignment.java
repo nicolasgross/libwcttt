@@ -7,8 +7,22 @@ import java.util.Optional;
 @XmlType(propOrder = {"session", "roomBinding"})
 public class TimetableAssignment {
 
-	private Session session = new Session();
-	private Room room = new Room();
+	private Session session;
+	private Room room;
+
+	public TimetableAssignment() {
+		this.session = new Session();
+		this.room = new Room();
+	}
+
+	public TimetableAssignment(Session session, Room room) {
+		if (session == null) {
+			throw new IllegalArgumentException("Parameter 'session' must not " +
+					"be null");
+		}
+		this.session = session;
+		this.room = room;
+	}
 
 	@XmlElement(required = false)
 	@XmlIDREF
@@ -27,6 +41,10 @@ public class TimetableAssignment {
 	}
 
 	public void setSession(Session session) {
+		if (session == null) {
+			throw new IllegalArgumentException("Parameter 'session' must not " +
+					"be null");
+		}
 		this.session = session;
 	}
 

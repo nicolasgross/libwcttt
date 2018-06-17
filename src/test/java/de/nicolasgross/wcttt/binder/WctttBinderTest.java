@@ -51,12 +51,12 @@ class WctttBinderTest {
 		chair.getTeachers().add(teacher);
 		semesterWrite.getChairs().add(chair);
 
-		Room room = new Room("r1", "WE5/00.019", 156, chair,
+		Room room1 = new Room("r1", "WE5/00.019", 156, chair,
 				new RoomFeatures(2, false, false, false));
-		Room room1 = new Room("r2", "WE5/00.021", 200, null,
+		Room room2 = new Room("r2", "WE5/00.021", 200, null,
 				new RoomFeatures(2, false, false, false));
-		semesterWrite.getRooms().add(room);
 		semesterWrite.getRooms().add(room1);
+		semesterWrite.getRooms().add(room2);
 
 		Course course = new Course("fse",
 				"Foundations of Software Engineering", "SWT-FSE-B", chair, 2);
@@ -74,6 +74,18 @@ class WctttBinderTest {
 		curriculum.getCourses().add(course);
 		semesterWrite.getCurricula().add(curriculum);
 
+		Timetable timetable = new Timetable("test-timetable");
+		TimetableDay timetableDay = new TimetableDay(1); // TODO add delete usw
+		TimetablePeriod timetablePeriod1 = new TimetablePeriod(1, 1);
+		TimetableAssignment timetableAssignment1 = new TimetableAssignment(lecture, room1); // TODO check add null room only if external
+		timetablePeriod1.getAssignments().add(timetableAssignment1);
+		timetableDay.getPeriods().add(timetablePeriod1);
+		TimetablePeriod timetablePeriod2 = new TimetablePeriod(1, 4);
+		TimetableAssignment timetableAssignment2 = new TimetableAssignment(practical, room2); // TODO check add null room only if external
+		timetablePeriod2.getAssignments().add(timetableAssignment2);
+		timetableDay.getPeriods().add(timetablePeriod2);
+		timetable.getDays().add(timetableDay);
+		semesterWrite.getTimetables().add(timetable);
 
 		binder.write(semesterWrite);
 		Semester semesterRead = binder.parse();
