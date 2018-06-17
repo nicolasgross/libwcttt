@@ -24,7 +24,7 @@ public class WctttBinder {
 	private JAXBContext context;
 	private Validator validator;
 
-	public WctttBinder(String path) throws WctttParserException {
+	public WctttBinder(String path) throws WctttBinderException {
 		if (path == null) {
 			throw new IllegalArgumentException("Parameter path must not be " +
 					"null");
@@ -37,30 +37,30 @@ public class WctttBinder {
 			Schema schema = sf.newSchema(SCHEMA_FILE);
 			this.validator = schema.newValidator();
 		} catch (JAXBException e) {
-			throw new WctttParserException(e);
+			throw new WctttBinderException(e);
 		} catch (SAXException e) {
 			// TODO runtime exception?
-			throw new WctttParserException(e);
+			throw new WctttBinderException(e);
 		}
 	}
 
-	public Semester parse() throws WctttParserException {
+	public Semester parse() throws WctttBinderException {
 		try {
 			validator.validate(new StreamSource(xmlFile));
 			Unmarshaller um = context.createUnmarshaller();
 			return (Semester) um.unmarshal(xmlFile);
 		} catch (JAXBException e) {
-			throw new WctttParserException(e);
+			throw new WctttBinderException(e);
 		} catch (SAXException e) {
 			// TODO
-			throw new WctttParserException(e);
+			throw new WctttBinderException(e);
 		} catch (IOException e) {
 			// TODO
-			throw new WctttParserException(e);
+			throw new WctttBinderException(e);
 		}
 	}
 
-	public void write(Semester semester) throws WctttParserException {
+	public void write(Semester semester) throws WctttBinderException {
 		if (semester == null) {
 			throw new IllegalArgumentException("Parameter semester must no be" +
 					"null");
@@ -71,7 +71,7 @@ public class WctttBinder {
 			ms.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 			ms.marshal(semester, xmlFile);
 		} catch (JAXBException e) {
-			throw new WctttParserException(e);
+			throw new WctttBinderException(e);
 		}
 	}
 

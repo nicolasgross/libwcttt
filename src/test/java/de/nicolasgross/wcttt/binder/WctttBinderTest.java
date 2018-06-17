@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class WctttBinderTest {
 
 	@Test
-	void emptySemesterWritesAndParses() throws WctttParserException,
+	void emptySemesterWritesAndParses() throws WctttBinderException,
 			IOException {
 		String path = "test-empty-semester.xml";
 		WctttBinder binder = new WctttBinder(path);
@@ -28,7 +28,7 @@ class WctttBinderTest {
 	}
 
 	@Test
-	void fullComplexitySemesterWritesAndParses() throws WctttParserException,
+	void fullComplexitySemesterWritesAndParses() throws WctttBinderException,
 			WctttModelException {
 		String path = "test-complex-semester.xml";
 		WctttBinder binder = new WctttBinder(path);
@@ -65,7 +65,7 @@ class WctttBinderTest {
 	}
 
 	@Test
-	void tinyWiaiOutputEqualsInput() throws WctttParserException, IOException {
+	void tinyWiaiOutputEqualsInput() throws WctttBinderException, IOException {
 		String inPath = "src/test/resources/tiny-wiai.xml";
 		WctttBinder binderRead = new WctttBinder(inPath);
 		Semester tinyWiaiSem = binderRead.parse();

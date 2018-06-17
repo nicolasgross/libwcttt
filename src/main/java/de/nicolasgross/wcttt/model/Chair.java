@@ -50,8 +50,8 @@ public class Chair {
 	 *
 	 * @return the list of the teachers of the chair.
 	 */
-	@XmlElementWrapper
-	@XmlElement(name = "teacher", required = true)
+	@XmlElementWrapper(required = true)
+	@XmlElement(name = "teacher")
 	public List<Teacher> getTeachers() {
 		return teachers;
 	}

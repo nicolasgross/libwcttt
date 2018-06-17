@@ -11,8 +11,8 @@ public class TimetablePeriod extends Period {
 
 	private List<TimetableAssignment> assignments = new LinkedList<>();
 
-	@XmlElementWrapper
-	@XmlElement(name = "assignment", required = true)
+	@XmlElementWrapper(required = true)
+	@XmlElement(name = "assignment")
 	public List<TimetableAssignment> getAssignments() {
 		return assignments;
 	}

@@ -19,8 +19,8 @@ public class TimetableDay {
 		this.day = day;
 	}
 
-	@XmlElementWrapper
-	@XmlElement(name = "timetablePeriod", required = true)
+	@XmlElementWrapper(required = true)
+	@XmlElement(name = "timetablePeriod")
 	public List<TimetablePeriod> getPeriods() {
 		return periods;
 	}

@@ -232,8 +232,8 @@ public class Semester {
 	 *
 	 * @return the list of the chairs of the semester.
 	 */
-	@XmlElementWrapper
-	@XmlElement(name = "chair", required = true)
+	@XmlElementWrapper(required = true)
+	@XmlElement(name = "chair")
 	public List<Chair> getChairs() {
 		return chairs;
 	}
@@ -244,8 +244,8 @@ public class Semester {
 	 *
 	 * @return the list of the rooms of the semester.
 	 */
-	@XmlElementWrapper
-	@XmlElement(name = "room", required = true)
+	@XmlElementWrapper(required = true)
+	@XmlElement(name = "room")
 	public List<Room> getRooms() {
 		return rooms;
 	}
@@ -256,8 +256,8 @@ public class Semester {
 	 *
 	 * @return the list of the courses of the semester.
 	 */
-	@XmlElementWrapper
-	@XmlElement(name = "course", required = true)
+	@XmlElementWrapper(required = true)
+	@XmlElement(name = "course")
 	public List<Course> getCourses() {
 		return courses;
 	}
@@ -268,8 +268,8 @@ public class Semester {
 	 *
 	 * @return the list of the curricula of the semester.
 	 */
-	@XmlElementWrapper
-	@XmlElement(name = "curriculum", required = true)
+	@XmlElementWrapper(required = true)
+	@XmlElement(name = "curriculum")
 	public List<Curriculum> getCurricula() {
 		return curricula;
 	}
@@ -280,8 +280,8 @@ public class Semester {
 	 *
 	 * @return the list of the timetables of the semester.
 	 */
-	@XmlElementWrapper
-	@XmlElement(name = "timetable", required = true)
+	@XmlElementWrapper(required = true)
+	@XmlElement(name = "timetable")
 	public List<Timetable> getTimetables() {
 		return timetables;
 	}

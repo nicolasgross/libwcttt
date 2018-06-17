@@ -52,8 +52,8 @@ public class Course {
 		this.minNumberOfDays = minNumberOfDays;
 	}
 
-	@XmlElementWrapper
-	@XmlElement(name = "lecture", required = true)
+	@XmlElementWrapper(required = true)
+	@XmlElement(name = "lecture")
 	@XmlIDREF
 	public List<Session> getLectures() {
 		return lectures;
@@ -63,8 +63,8 @@ public class Course {
 		this.lectures = lectures;
 	}
 
-	@XmlElementWrapper
-	@XmlElement(name = "practical", required = true)
+	@XmlElementWrapper(required = true)
+	@XmlElement(name = "practical")
 	@XmlIDREF
 	public List<Session> getPracticals() {
 		return practicals;

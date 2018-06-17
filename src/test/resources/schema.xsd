@@ -6,10 +6,10 @@
   <xs:complexType name="semester">
     <xs:sequence>
       <xs:element name="constrWeightings" type="constraintWeightings"/>
-      <xs:element name="chairs">
+      <xs:element name="chairs" minOccurs="0">
         <xs:complexType>
           <xs:sequence>
-            <xs:element name="chair" type="chair" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="chairs" type="chair" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -20,24 +20,24 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
-      <xs:element name="courses">
+      <xs:element name="courses" minOccurs="0">
         <xs:complexType>
           <xs:sequence>
-            <xs:element name="course" type="course" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="course" type="course" maxOccurs="unbounded"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
-      <xs:element name="curricula">
+      <xs:element name="curricula" minOccurs="0">
         <xs:complexType>
           <xs:sequence>
-            <xs:element name="curriculum" type="curriculum" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="curriculum" type="curriculum" maxOccurs="unbounded"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
-      <xs:element name="timetables">
+      <xs:element name="timetables" minOccurs="0">
         <xs:complexType>
           <xs:sequence>
-            <xs:element name="timetable" type="timetable" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="timetable" type="timetable" maxOccurs="unbounded"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -63,10 +63,10 @@
 
   <xs:complexType name="chair">
     <xs:sequence>
-      <xs:element name="teachers">
+      <xs:element name="teachers" minOccurs="0">
         <xs:complexType>
           <xs:sequence>
-            <xs:element name="teacher" type="teacher" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="teacher" type="teacher" maxOccurs="unbounded"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -77,17 +77,17 @@
 
   <xs:complexType name="teacher">
     <xs:sequence>
-      <xs:element name="unfavorablePeriods">
+      <xs:element name="unfavorablePeriods" minOccurs="0">
         <xs:complexType>
           <xs:sequence>
-            <xs:element name="unfavorable" type="period" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="unfavorable" type="period" maxOccurs="unbounded"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
-      <xs:element name="unavailablePeriods">
+      <xs:element name="unavailablePeriods" minOccurs="0">
         <xs:complexType>
           <xs:sequence>
-            <xs:element name="unavailable" type="period" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="unavailable" type="period" maxOccurs="unbounded"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -106,10 +106,10 @@
     <xs:complexContent>
       <xs:extension base="period">
         <xs:sequence>
-          <xs:element name="assignments">
+          <xs:element name="assignments" minOccurs="0">
             <xs:complexType>
               <xs:sequence>
-                <xs:element name="assignment" type="timetableAssignment" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="assignment" type="timetableAssignment" maxOccurs="unbounded"/>
               </xs:sequence>
             </xs:complexType>
           </xs:element>
@@ -142,17 +142,17 @@
   <xs:complexType name="course">
     <xs:sequence>
       <xs:element name="chair" type="xs:IDREF"/>
-      <xs:element name="lectures">
+      <xs:element name="lectures" minOccurs="0">
         <xs:complexType>
           <xs:sequence>
-            <xs:element name="lecture" type="xs:IDREF" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="lecture" type="xs:IDREF" maxOccurs="unbounded"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
-      <xs:element name="practicals">
+      <xs:element name="practicals" minOccurs="0">
         <xs:complexType>
           <xs:sequence>
-            <xs:element name="practical" type="xs:IDREF" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="practical" type="xs:IDREF" maxOccurs="unbounded"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -182,10 +182,10 @@
 
   <xs:complexType name="curriculum">
     <xs:sequence>
-      <xs:element name="courses">
+      <xs:element name="courses" minOccurs="0">
         <xs:complexType>
           <xs:sequence>
-            <xs:element name="course" type="xs:IDREF" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="course" type="xs:IDREF" maxOccurs="unbounded"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -196,10 +196,10 @@
 
   <xs:complexType name="timetable">
     <xs:sequence>
-      <xs:element name="days">
+      <xs:element name="days" minOccurs="0">
         <xs:complexType>
           <xs:sequence>
-            <xs:element name="timetableDay" type="timetableDay" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="timetableDay" type="timetableDay" maxOccurs="unbounded"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -210,10 +210,10 @@
 
   <xs:complexType name="timetableDay">
     <xs:sequence>
-      <xs:element name="periods">
+      <xs:element name="periods" minOccurs="0">
         <xs:complexType>
           <xs:sequence>
-            <xs:element name="timetablePeriod" type="timetablePeriod" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="timetablePeriod" type="timetablePeriod" maxOccurs="unbounded"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>

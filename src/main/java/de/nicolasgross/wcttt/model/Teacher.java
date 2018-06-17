@@ -45,8 +45,8 @@ public class Teacher {
 		this.name = name;
 	}
 
-	@XmlElementWrapper
-	@XmlElement(name = "unfavorable", required = true)
+	@XmlElementWrapper(required = true)
+	@XmlElement(name = "unfavorable")
 	public List<Period> getUnfavorablePeriods() {
 		return unfavorablePeriods;
 	}
@@ -55,8 +55,8 @@ public class Teacher {
 		this.unfavorablePeriods = unfavorablePeriods;
 	}
 
-	@XmlElementWrapper
-	@XmlElement(name = "unavailable", required = true)
+	@XmlElementWrapper(required = true)
+	@XmlElement(name = "unavailable")
 	public List<Period> getUnavailablePeriods() {
 		return unavailablePeriods;
 	}
