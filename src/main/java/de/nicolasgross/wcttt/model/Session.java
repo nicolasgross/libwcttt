@@ -4,20 +4,51 @@ import javax.xml.bind.annotation.*;
 import java.util.Objects;
 import java.util.Optional;
 
-@XmlType(propOrder = {"id", "name", "course", "teacher", "students",
+import static de.nicolasgross.wcttt.model.ValidationHelper.validateStudents;
+
+@XmlType(propOrder = {"id", "name", "teacher", "students",
 		"external", "doubleSession", "preAssignmentBinding",
 		"roomRequirements"})
 public class Session {
 
-	private String id = "";
-	private String name = "";
-	private Course course = new Course();
-	private Teacher teacher = new Teacher();
+	private String id;
+	private String name;
+	private Teacher teacher;
 	private int students;
 	private boolean external;
 	private boolean doubleSession;
-	private RoomFeatures roomRequirements = new RoomFeatures();
-	private Period preAssignment = new Period();
+	private RoomFeatures roomRequirements;
+	private Period preAssignment;
+
+	public Session() {
+		this.id = "";
+		this.name = "";
+		this.teacher = new Teacher();
+		this.students = 1;
+		this.external = false;
+		this.doubleSession = false;
+		this.roomRequirements = new RoomFeatures();
+	}
+
+	public Session(String id, String name, Teacher teacher, int students,
+	               boolean external, boolean doubleSession,
+	               RoomFeatures roomRequirements, Period preAssignment) throws
+			WctttModelException {
+		if (id == null || name == null || teacher == null ||
+				roomRequirements == null) {
+			throw new IllegalArgumentException("Parameters 'id', 'name', " +
+					"'teacher' and 'roomRequirements' must not be null");
+		}
+		validateStudents(students);
+		this.id = id;
+		this.name = name;
+		this.teacher = teacher;
+		this.students = students;
+		this.external = external;
+		this.doubleSession = doubleSession;
+		this.roomRequirements = roomRequirements;
+		this.preAssignment = preAssignment;
+	}
 
 	@XmlElement(required = false)
 	private Period getPreAssignmentBinding() {
@@ -45,16 +76,6 @@ public class Session {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	@XmlElement(required = true)
-	@XmlIDREF
-	public Course getCourse() {
-		return course;
-	}
-
-	public void setCourse(Course course) {
-		this.course = course;
 	}
 
 	@XmlElement(required = true)
@@ -121,17 +142,16 @@ public class Session {
 
 		Session other = (Session) obj;
 		if (!this.id.equals(other.id) || !this.name.equals(other.name) ||
-				this.course.equals(other.course) ||
-				this.teacher.equals(other.teacher) ||
-				this.students == other.students ||
-				this.external == other.external ||
-				this.doubleSession == other.doubleSession ||
-				this.roomRequirements.equals(other.roomRequirements) ||
-				Objects.equals(this.preAssignment, other.preAssignment)) {
+				!this.teacher.equals(other.teacher) ||
+				this.students != other.students ||
+				this.external != other.external ||
+				this.doubleSession != other.doubleSession ||
+				!this.roomRequirements.equals(other.roomRequirements) ||
+				!Objects.equals(this.preAssignment, other.preAssignment)) {
 			return false;
 		}
 
-		return super.equals(obj);
+		return true;
 	}
 
 }

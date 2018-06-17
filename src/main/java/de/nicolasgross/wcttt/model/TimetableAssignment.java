@@ -48,7 +48,7 @@ public class TimetableAssignment {
 
 		TimetableAssignment other = (TimetableAssignment) obj;
 		if (!this.session.equals(other.session) ||
-				Objects.equals(this.room, other.room)) {
+				!Objects.equals(this.room, other.room)) {
 			return false;
 		}
 

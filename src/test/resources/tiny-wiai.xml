@@ -72,11 +72,27 @@
             <features projectors="2" pcPool="true" docCam="false" teacherPc="false"/>
         </room>
         <room id="r4" name="WE5/03.087" capacity="12">
-            <holder>swt</holder>
             <features projectors="1" pcPool="true" docCam="false" teacherPc="false"/>
+            <holder>swt</holder>
         </room>
     </rooms>
-    <courses/>
+    <courses>
+        <course id="fse" name="Foundations of Software Engineering" abbreviation="SWT-FSE-B" minNumberOfDays="2">
+            <chair>swt</chair>
+            <lectures>
+                <lecture id="FSE-L1" name="FSE Lecture 1" students="80" external="false" doubleSession="false">
+                    <teacher>lüttgen</teacher>
+                    <roomRequirements projectors="1" pcPool="false" docCam="false" teacherPc="false"/>
+                </lecture>
+            </lectures>
+            <practicals>
+                <practical id="FSE-P1" name="FSE Practical 1" students="30" external="false" doubleSession="false">
+                    <teacher>lüttgen</teacher>
+                    <roomRequirements projectors="1" pcPool="false" docCam="true" teacherPc="false"/>
+                </practical>
+            </practicals>
+        </course>
+    </courses>
     <curricula/>
     <timetables/>
 </semester>

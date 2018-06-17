@@ -9,14 +9,14 @@ import static de.nicolasgross.wcttt.model.ValidationHelper.validateRoomCapacity;
 /**
  * Represents a room.
  */
-@XmlType(propOrder = {"id", "name", "capacity", "holderBinding", "features"})
+@XmlType(propOrder = {"id", "name", "capacity", "features", "holderBinding"})
 public class Room {
 
 	private String id;
 	private String name;
 	private int capacity;
-	private Chair holder;
 	private RoomFeatures features;
+	private Chair holder;
 
 	/**
 	 * Creates a new room with an empty name, capacity of 1, no holder and
@@ -57,29 +57,6 @@ public class Room {
 	}
 
 	/**
-	 * Getter for the holder of a room. Only used for JAXB bindings, such
-	 * that another getter can return Optional.
-	 *
-	 * @return the holder, null if the room has no holder.
-	 */
-	@XmlElement(name = "holder", required = false)
-	@XmlIDREF
-	private Chair getHolderBinding() {
-		return holder;
-	}
-
-	/**
-	 * Setter for the holder of a room. Only used for JAXB bindings, such
-	 * that another getter can return Optional.
-	 *
-	 * @param holder the new holder of the room, null is allowed and
-	 *                  indicates that the room has no holder.
-	 */
-	private void setHolderBinding(Chair holder) {
-		setHolder(holder);
-	}
-
-	/**
 	 * Getter for the id of a room. Do not manipulate the returned reference.
 	 *
 	 * @return the id of the room.
@@ -101,6 +78,29 @@ public class Room {
 					"null");
 		}
 		this.id = id;
+	}
+
+	/**
+	 * Getter for the holder of a room. Only used for JAXB bindings, such
+	 * that another getter can return Optional.
+	 *
+	 * @return the holder, null if the room has no holder.
+	 */
+	@XmlElement(name = "holder", required = false)
+	@XmlIDREF
+	private Chair getHolderBinding() {
+		return holder;
+	}
+
+	/**
+	 * Setter for the holder of a room. Only used for JAXB bindings, such
+	 * that another getter can return Optional.
+	 *
+	 * @param holder the new holder of the room, null is allowed and
+	 *                  indicates that the room has no holder.
+	 */
+	private void setHolderBinding(Chair holder) {
+		setHolder(holder);
 	}
 
 	/**
@@ -205,7 +205,7 @@ public class Room {
 		if (!this.id.equals(other.id) || !this.name.equals(other.name) ||
 				this.capacity != other.capacity ||
 				!this.features.equals(other.features) ||
-				Objects.equals(this.holder, other.holder)) {
+				!Objects.equals(this.holder, other.holder)) {
 			return false;
 		}
 

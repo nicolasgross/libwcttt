@@ -127,7 +127,6 @@
 
   <xs:complexType name="session">
     <xs:sequence>
-      <xs:element name="course" type="xs:IDREF"/>
       <xs:element name="teacher" type="xs:IDREF"/>
       <xs:element name="preAssignmentBinding" type="period" minOccurs="0"/>
       <xs:element name="roomRequirements" type="roomFeatures"/>
@@ -137,29 +136,6 @@
     <xs:attribute name="students" type="xs:int" use="required"/>
     <xs:attribute name="external" type="xs:boolean" use="required"/>
     <xs:attribute name="doubleSession" type="xs:boolean" use="required"/>
-  </xs:complexType>
-
-  <xs:complexType name="course">
-    <xs:sequence>
-      <xs:element name="chair" type="xs:IDREF"/>
-      <xs:element name="lectures">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element name="lecture" type="xs:IDREF" minOccurs="0" maxOccurs="unbounded"/>
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="practicals">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element name="practical" type="xs:IDREF" minOccurs="0" maxOccurs="unbounded"/>
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-    </xs:sequence>
-    <xs:attribute name="id" type="xs:ID" use="required"/>
-    <xs:attribute name="name" type="xs:string" use="required"/>
-    <xs:attribute name="minNumberOfDays" type="xs:int" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="roomFeatures">
@@ -172,12 +148,36 @@
 
   <xs:complexType name="room">
     <xs:sequence>
-      <xs:element name="holder" type="xs:IDREF" minOccurs="0"/>
       <xs:element name="features" type="roomFeatures"/>
+      <xs:element name="holder" type="xs:IDREF" minOccurs="0"/>
     </xs:sequence>
     <xs:attribute name="id" type="xs:ID" use="required"/>
     <xs:attribute name="name" type="xs:string" use="required"/>
     <xs:attribute name="capacity" type="xs:int" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="course">
+    <xs:sequence>
+      <xs:element name="chair" type="xs:IDREF"/>
+      <xs:element name="lectures">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="lecture" type="session" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="practicals">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="practical" type="session" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:ID" use="required"/>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <xs:attribute name="abbreviation" type="xs:string" use="required"/>
+    <xs:attribute name="minNumberOfDays" type="xs:int" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="curriculum">

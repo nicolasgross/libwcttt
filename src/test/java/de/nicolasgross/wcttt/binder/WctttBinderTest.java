@@ -45,10 +45,10 @@ class WctttBinderTest {
 
 		Chair chair = new Chair("swt", "Lehrstuhl Softwaretechnik und " +
 				"Programmiersprachen");
-		Teacher teacher1 = new Teacher("lüttgen", "Prof. Dr. Gerald Lüttgen");
-		teacher1.getUnavailablePeriods().add(new Period(2, 4));
-		teacher1.getUnfavorablePeriods().add(new Period(1, 3));
-		chair.getTeachers().add(teacher1);
+		Teacher teacher = new Teacher("lüttgen", "Prof. Dr. Gerald Lüttgen");
+		teacher.getUnavailablePeriods().add(new Period(2, 4));
+		teacher.getUnfavorablePeriods().add(new Period(1, 3));
+		chair.getTeachers().add(teacher);
 		semesterWrite.getChairs().add(chair);
 
 		Room room = new Room("r1", "WE5/00.019", 156, chair,
@@ -57,6 +57,17 @@ class WctttBinderTest {
 				new RoomFeatures(2, false, false, false));
 		semesterWrite.getRooms().add(room);
 		semesterWrite.getRooms().add(room1);
+
+		Course course = new Course("fse",
+				"Foundations of Software Engineering", "SWT-FSE-B", chair, 2);
+		Session lecture = new Session("FSE-L1", "FSE Lecture 1", teacher, 80,
+				false, false, new RoomFeatures(1, false, false, false), null);
+		Session practical = new Session("FSE-P1", "FSE Practical 1", teacher,
+				30, false, false, new RoomFeatures(1, false, false, true),
+				null);
+		course.getLectures().add(lecture);
+		course.getPracticals().add(practical);
+		semesterWrite.getCourses().add(course);
 
 		binder.write(semesterWrite);
 

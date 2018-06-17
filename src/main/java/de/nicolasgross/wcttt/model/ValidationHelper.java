@@ -2,13 +2,24 @@ package de.nicolasgross.wcttt.model;
 
 class ValidationHelper {
 
+	// Semester:
 	private static final int DAYS_PER_WEEK_MIN = 1;
+	// + Period:
 	private static final int TIME_SLOTS_PER_DAY_MIN = 1;
 	private static final int MIN_DAILY_LECTURES_PER_CUR_MIN = 0;
+
+	//Room:
 	private static final int ROOM_CAPACITY_MIN = 1;
 	private static final int PROJECTORS_MIN = 0;
 
-	// Semester
+	// Course:
+	private static final int MIN_NUM_OF_DAYS_MIN = 0;
+
+	// Session:
+	private static final int STUDENTS_MIN = 1;
+
+
+	// Semester:
 
 	static void validateDaysPerWeek(int daysPerWeek) throws
 			WctttModelException {
@@ -79,5 +90,28 @@ class ValidationHelper {
 					+ PROJECTORS_MIN);
 		}
 	}
+
+
+	// Course
+
+	static void validateMinNumOfDays(int minNumberOfDays) throws
+			WctttModelException {
+		if (minNumberOfDays < MIN_NUM_OF_DAYS_MIN) {
+			throw new WctttModelException("Parameter 'minNumberOfDays' must " +
+					"be >= " + MIN_NUM_OF_DAYS_MIN);
+		}
+	}
+
+
+	// Session
+
+	static void validateStudents(int students) throws
+			WctttModelException {
+		if (students < STUDENTS_MIN) {
+			throw new WctttModelException("Parameter 'students' must be >= "
+					+ STUDENTS_MIN);
+		}
+	}
+
 
 }

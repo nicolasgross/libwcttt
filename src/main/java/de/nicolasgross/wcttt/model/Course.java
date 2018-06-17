@@ -4,16 +4,42 @@ import javax.xml.bind.annotation.*;
 import java.util.LinkedList;
 import java.util.List;
 
-@XmlType(propOrder = {"id", "name", "chair", "minNumberOfDays", "lectures",
-		"practicals"})
+import static de.nicolasgross.wcttt.model.ValidationHelper.validateMinNumOfDays;
+
+@XmlType(propOrder = {"id", "name", "abbreviation", "chair", "minNumberOfDays",
+		"lectures", "practicals"})
 public class Course {
 
-	private String id = "";
-	private String name = "";
-	private Chair chair = new Chair();
+	private String id;
+	private String name;
+	private String abbreviation;
+	private Chair chair;
 	private int minNumberOfDays;
 	private List<Session> lectures = new LinkedList<>();
 	private List<Session> practicals = new LinkedList<>();
+
+	public Course() {
+		this.id = "";
+		this.name = "";
+		this.abbreviation = "";
+		this.chair = new Chair();
+		this.minNumberOfDays = 1;
+	}
+
+	public Course(String id, String name, String abbreviation, Chair chair,
+	              int minNumberOfDays) throws WctttModelException {
+		if (id == null || name == null || abbreviation == null ||
+				chair == null) {
+			throw new IllegalArgumentException("Parameters 'id', 'name', " +
+					"'abbreviation' and 'chair' must not be null");
+		}
+		validateMinNumOfDays(minNumberOfDays);
+		this.id = id;
+		this.name = name;
+		this.abbreviation = abbreviation;
+		this.chair = chair;
+		this.minNumberOfDays = minNumberOfDays;
+	}
 
 	@XmlAttribute(required = true)
 	@XmlID
@@ -22,6 +48,10 @@ public class Course {
 	}
 
 	public void setId(String id) {
+		if (id == null) {
+			throw new IllegalArgumentException("Parameters 'id' must not be " +
+					"null");
+		}
 		this.id = id;
 	}
 
@@ -31,7 +61,24 @@ public class Course {
 	}
 
 	public void setName(String name) {
+		if (name == null) {
+			throw new IllegalArgumentException("Parameter 'name' must not " +
+					"be null");
+		}
 		this.name = name;
+	}
+
+	@XmlAttribute(required = true)
+	public String getAbbreviation() {
+		if (abbreviation == null) {
+			throw new IllegalArgumentException("Parameter 'abbreviation' must" +
+					" not be null");
+		}
+		return abbreviation;
+	}
+
+	public void setAbbreviation(String abbreviation) {
+		this.abbreviation = abbreviation;
 	}
 
 	@XmlElement(required = true)
@@ -41,6 +88,10 @@ public class Course {
 	}
 
 	public void setChair(Chair chair) {
+		if (chair == null) {
+			throw new IllegalArgumentException("Parameter 'chair' must not " +
+					"be null");
+		}
 		this.chair = chair;
 	}
 
@@ -49,20 +100,20 @@ public class Course {
 		return minNumberOfDays;
 	}
 
-	public void setMinNumberOfDays(int minNumberOfDays) {
+	public void setMinNumberOfDays(int minNumberOfDays) throws
+			WctttModelException {
+		validateMinNumOfDays(minNumberOfDays);
 		this.minNumberOfDays = minNumberOfDays;
 	}
 
 	@XmlElementWrapper(required = true)
 	@XmlElement(name = "lecture")
-	@XmlIDREF
 	public List<Session> getLectures() {
 		return lectures;
 	}
 
 	@XmlElementWrapper(required = true)
 	@XmlElement(name = "practical")
-	@XmlIDREF
 	public List<Session> getPracticals() {
 		return practicals;
 	}

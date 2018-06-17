@@ -32,7 +32,8 @@ public class Period {
 		return day;
 	}
 
-	public void setDay(int day) {
+	public void setDay(int day) throws WctttModelException {
+		validateDay(day);
 		this.day = day;
 	}
 
@@ -41,7 +42,8 @@ public class Period {
 		return timeSlot;
 	}
 
-	public void setTimeSlot(int timeslot) {
+	public void setTimeSlot(int timeslot) throws WctttModelException {
+		validateTimeSlot(day);
 		this.timeSlot = timeslot;
 	}
 
