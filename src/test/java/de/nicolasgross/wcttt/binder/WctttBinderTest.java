@@ -74,8 +74,8 @@ class WctttBinderTest {
 		curriculum.getCourses().add(course);
 		semesterWrite.getCurricula().add(curriculum);
 
-		binder.write(semesterWrite);
 
+		binder.write(semesterWrite);
 		Semester semesterRead = binder.parse();
 		assertEquals(semesterWrite, semesterRead);
 		//Files.delete(Paths.get(path)); TODO

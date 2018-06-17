@@ -34,8 +34,12 @@ public class WctttBinder {
 			this.context = JAXBContext.newInstance(
 					de.nicolasgross.wcttt.model.Semester.class);
 		} catch (JAXBException e) {
-			throw new WctttBinderFatalException("Fatal problem, error in the" +
-					" implementation of XML mappings", e);
+			// According to doc, thrown if there are problems with the mappings
+			// -> decision for RuntimeException because there must be a serious
+			// problem in the implementation
+			throw new WctttBinderFatalException("Fatal problem, error in the " +
+					"implementation of XML mappings, please contact the " +
+					"developers", e);
 		} catch (SAXException e) {
 			throw new WctttBinderException("Error while parsing a XML file", e);
 		}
