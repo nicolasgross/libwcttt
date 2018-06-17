@@ -2,7 +2,6 @@ package de.nicolasgross.wcttt.binder;
 
 import de.nicolasgross.wcttt.model.*;
 import org.junit.jupiter.api.Test;
-import org.xml.sax.SAXException;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -16,7 +15,7 @@ class WctttBinderTest {
 
 	@Test
 	void emptySemesterWritesAndParses() throws WctttBinderException,
-			IOException, SAXException {
+			IOException {
 		String path = "test-empty-semester.xml";
 		WctttBinder binder = new WctttBinder(path);
 
@@ -30,7 +29,7 @@ class WctttBinderTest {
 
 	@Test
 	void fullComplexitySemesterWritesAndParses() throws WctttBinderException,
-			WctttModelException {
+			WctttModelException, IOException {
 		String path = "test-complex-semester.xml";
 		WctttBinder binder = new WctttBinder(path);
 
@@ -90,7 +89,7 @@ class WctttBinderTest {
 		binder.write(semesterWrite);
 		Semester semesterRead = binder.parse();
 		assertEquals(semesterWrite, semesterRead);
-		//Files.delete(Paths.get(path)); TODO
+		Files.delete(Paths.get(path));
 	}
 
 	@Test
