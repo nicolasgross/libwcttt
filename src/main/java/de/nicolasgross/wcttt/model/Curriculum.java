@@ -7,9 +7,23 @@ import java.util.List;
 @XmlType(propOrder = {"id", "name", "courses"})
 public class Curriculum {
 
-	private String id = "";
-	private String name = "";
+	private String id;
+	private String name;
 	private List<Course> courses = new LinkedList<>();
+
+	public Curriculum() {
+		this.id = "";
+		this.name = "";
+	}
+
+	public Curriculum(String id, String name) {
+		if (id == null || name == null) {
+			throw new IllegalArgumentException("Parameters 'id' and 'name' " +
+					"must not be null");
+		}
+		this.id = id;
+		this.name = name;
+	}
 
 	@XmlAttribute(required = true)
 	@XmlID
@@ -18,6 +32,10 @@ public class Curriculum {
 	}
 
 	public void setId(String id) {
+		if (id == null) {
+			throw new IllegalArgumentException("Parameter 'id' must not be " +
+					"null");
+		}
 		this.id = id;
 	}
 
@@ -27,6 +45,10 @@ public class Curriculum {
 	}
 
 	public void setName(String name) {
+		if (name == null) {
+			throw new IllegalArgumentException("Parameter 'name' must not be " +
+					"null");
+		}
 		this.name = name;
 	}
 
