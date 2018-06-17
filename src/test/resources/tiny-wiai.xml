@@ -230,6 +230,19 @@
             </practicals>
         </course>
     </courses>
-    <curricula/>
+    <curricula>
+        <curriculum id="sosysc-mandatory" name="Software Systems Science - mandatory courses">
+            <courses>
+                <course>fse</course>
+                <course>eiaps</course>
+            </courses>
+        </curriculum>
+        <curriculum id="isosysc-elective" name="International Software Systems Science - elective courses">
+            <courses>
+                <course>mtl</course>
+                <course>gik</course>
+            </courses>
+        </curriculum>
+    </curricula>
     <timetables/>
 </semester>

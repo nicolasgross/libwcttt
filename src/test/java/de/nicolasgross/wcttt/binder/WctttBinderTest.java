@@ -69,6 +69,11 @@ class WctttBinderTest {
 		course.getPracticals().add(practical);
 		semesterWrite.getCourses().add(course);
 
+		Curriculum curriculum = new Curriculum("sosysc-mand",
+				"Software Systems Science - Mandatory");
+		curriculum.getCourses().add(course);
+		semesterWrite.getCurricula().add(curriculum);
+
 		binder.write(semesterWrite);
 
 		Semester semesterRead = binder.parse();
