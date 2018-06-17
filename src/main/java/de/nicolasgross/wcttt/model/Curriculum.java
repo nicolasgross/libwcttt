@@ -37,8 +37,30 @@ public class Curriculum {
 		return courses;
 	}
 
-	public void setCourses(List<Course> courses) {
-		this.courses = courses;
+	// TODO add, delete, update courses
+
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof Curriculum)) {
+			return false;
+		} else if (obj == this) {
+			return true;
+		}
+
+		Curriculum other = (Curriculum) obj;
+		if (!this.id.equals(other.id) || !this.name.equals(other.name)) {
+			return false;
+		}
+
+		if (this.courses.size() != other.courses.size()) {
+			return false;
+		} else if (this.courses != other.courses) {
+			if (!(this.courses.containsAll(other.courses))) {
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 }

@@ -1,6 +1,7 @@
 package de.nicolasgross.wcttt.model;
 
 import javax.xml.bind.annotation.*;
+import java.util.Objects;
 import java.util.Optional;
 
 @XmlType(propOrder = {"id", "name", "course", "teacher", "students",
@@ -110,6 +111,27 @@ public class Session {
 		this.roomRequirements = roomRequirements;
 	}
 
-	// TODO equals achtung preassignment null
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof Session)) {
+			return false;
+		} else if (obj == this) {
+			return true;
+		}
+
+		Session other = (Session) obj;
+		if (!this.id.equals(other.id) || !this.name.equals(other.name) ||
+				this.course.equals(other.course) ||
+				this.teacher.equals(other.teacher) ||
+				this.students == other.students ||
+				this.external == other.external ||
+				this.doubleSession == other.doubleSession ||
+				this.roomRequirements.equals(other.roomRequirements) ||
+				Objects.equals(this.preAssignment, other.preAssignment)) {
+			return false;
+		}
+
+		return super.equals(obj);
+	}
 
 }

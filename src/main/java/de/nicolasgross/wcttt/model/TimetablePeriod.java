@@ -21,4 +21,30 @@ public class TimetablePeriod extends Period {
 		this.assignments = assignments;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof TimetablePeriod)) {
+			return false;
+		} else if (obj == this) {
+			return true;
+		}
+
+		TimetablePeriod other = (TimetablePeriod) obj;
+
+		if (this.getDay() != other.getDay() ||
+				this.getTimeSlot() != other.getTimeSlot()) {
+			return false;
+		}
+
+		if (this.assignments.size() != other.assignments.size()) {
+			return false;
+		} else if (this.assignments != other.assignments) {
+			if (!(this.assignments.containsAll(other.assignments))) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
 }

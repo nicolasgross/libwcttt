@@ -1,6 +1,7 @@
 package de.nicolasgross.wcttt.model;
 
 import javax.xml.bind.annotation.*;
+import java.util.Objects;
 import java.util.Optional;
 
 @XmlType(propOrder = {"session", "roomBinding"})
@@ -37,6 +38,21 @@ public class TimetableAssignment {
 		this.room = room;
 	}
 
-	// TODO equals achtung room null
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof TimetableAssignment)) {
+			return false;
+		} else if (obj == this) {
+			return true;
+		}
+
+		TimetableAssignment other = (TimetableAssignment) obj;
+		if (!this.session.equals(other.session) ||
+				Objects.equals(this.room, other.room)) {
+			return false;
+		}
+
+		return true;
+	}
 
 }

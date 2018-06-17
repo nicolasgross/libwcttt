@@ -39,4 +39,30 @@ public class Timetable {
 		this.days = days;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof Timetable)) {
+			return false;
+		} else if (obj == this) {
+			return true;
+		}
+
+		Timetable other = (Timetable) obj;
+		if (!this.name.equals(other.name) ||
+				this.softConstraintViolations !=
+						other.softConstraintViolations) {
+			return false;
+		}
+
+		if (this.days.size() != other.days.size()) {
+			return false;
+		} else if (this.days != other.days) {
+			if (!(this.days.containsAll(other.days))) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
 }

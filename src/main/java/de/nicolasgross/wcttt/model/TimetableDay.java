@@ -29,4 +29,28 @@ public class TimetableDay {
 		this.periods = periods;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof TimetableDay)) {
+			return false;
+		} else if (obj == this) {
+			return true;
+		}
+
+		TimetableDay other = (TimetableDay) obj;
+		if (this.day != other.day) {
+			return false;
+		}
+
+		if (this.periods.size() != other.periods.size()) {
+			return false;
+		} else if (this.periods != other.periods) {
+			if (!(this.periods.containsAll(other.periods))) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
 }

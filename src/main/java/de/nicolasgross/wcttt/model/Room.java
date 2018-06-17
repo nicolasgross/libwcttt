@@ -1,6 +1,7 @@
 package de.nicolasgross.wcttt.model;
 
 import javax.xml.bind.annotation.*;
+import java.util.Objects;
 import java.util.Optional;
 
 import static de.nicolasgross.wcttt.model.ValidationHelper.validateRoomCapacity;
@@ -203,13 +204,8 @@ public class Room {
 		Room other = (Room) obj;
 		if (!this.id.equals(other.id) || !this.name.equals(other.name) ||
 				this.capacity != other.capacity ||
-				!this.features.equals(other.features)) {
-			return false;
-		}
-
-		if (!(this.holder == null && other.holder == null) &&
-				!(this.holder != null && other.holder != null &&
-				this.holder.equals(other.holder))) {
+				!this.features.equals(other.features) ||
+				Objects.equals(this.holder, other.holder)) {
 			return false;
 		}
 

@@ -30,7 +30,7 @@ class WctttBinderTest {
 
 	@Test
 	void fullComplexitySemesterWritesAndParses() throws WctttBinderException,
-			WctttModelException, SAXException {
+			WctttModelException {
 		String path = "test-complex-semester.xml";
 		WctttBinder binder = new WctttBinder(path);
 
@@ -62,12 +62,11 @@ class WctttBinderTest {
 
 		Semester semesterRead = binder.parse();
 		assertEquals(semesterWrite, semesterRead);
-		//Files.delete(Paths.get(path));
+		//Files.delete(Paths.get(path)); TODO
 	}
 
 	@Test
-	void tinyWiaiOutputEqualsInput() throws WctttBinderException, IOException,
-			SAXException {
+	void tinyWiaiOutputEqualsInput() throws WctttBinderException, IOException {
 		String inPath = "src/test/resources/tiny-wiai.xml";
 		WctttBinder binderRead = new WctttBinder(inPath);
 		Semester tinyWiaiSem = binderRead.parse();
@@ -81,6 +80,5 @@ class WctttBinderTest {
 		assertTrue(Arrays.equals(input, output));
 		Files.delete(Paths.get(outPath));
 	}
-
 
 }

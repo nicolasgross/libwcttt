@@ -56,6 +56,8 @@ public class Chair {
 		return teachers;
 	}
 
+	// TODO add, delete, update teachers
+
 	@Override
 	public boolean equals(Object obj) {
 		if (!(obj instanceof Chair)) {

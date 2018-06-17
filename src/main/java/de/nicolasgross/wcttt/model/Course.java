@@ -4,7 +4,8 @@ import javax.xml.bind.annotation.*;
 import java.util.LinkedList;
 import java.util.List;
 
-@XmlType(propOrder = {"id", "name", "chair", "minNumberOfDays", "lectures", "practicals"})
+@XmlType(propOrder = {"id", "name", "chair", "minNumberOfDays", "lectures",
+		"practicals"})
 public class Course {
 
 	private String id = "";
@@ -59,10 +60,6 @@ public class Course {
 		return lectures;
 	}
 
-	public void setLectures(List<Session> lectures) {
-		this.lectures = lectures;
-	}
-
 	@XmlElementWrapper(required = true)
 	@XmlElement(name = "practical")
 	@XmlIDREF
@@ -70,8 +67,40 @@ public class Course {
 		return practicals;
 	}
 
-	public void setPracticals(List<Session> practicals) {
-		this.practicals = practicals;
+	// TODO add, delete, update lecture/practical
+
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof Course)) {
+			return false;
+		} else if (obj == this) {
+			return true;
+		}
+
+		Course other = (Course) obj;
+		if (!this.id.equals(other.id) || !this.name.equals(other.name) ||
+				!this.chair.equals(other.chair) ||
+				this.minNumberOfDays != other.minNumberOfDays) {
+			return false;
+		}
+
+		if (this.lectures.size() != other.lectures.size()) {
+			return false;
+		} else if (this.lectures != other.lectures) {
+			if (!(this.lectures.containsAll(other.lectures))) {
+				return false;
+			}
+		}
+
+		if (this.practicals.size() != other.practicals.size()) {
+			return false;
+		} else if (this.practicals != other.practicals) {
+			if (!(this.practicals.containsAll(other.practicals))) {
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 }
