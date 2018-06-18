@@ -25,15 +25,6 @@ public class Chair {
 		this.name = name;
 	}
 
-	private boolean teacherIdExists(String id) {
-		for (Teacher existingTeacher : teachers) {
-			if (id.equals(existingTeacher.getId())) {
-				return true;
-			}
-		}
-		return false;
-	}
-
 	@XmlAttribute(required = true)
 	@XmlID
 	public String getId() {
@@ -71,6 +62,15 @@ public class Chair {
 	@XmlElement(name = "teacher")
 	public List<Teacher> getTeachers() {
 		return teachers;
+	}
+
+	private boolean teacherIdExists(String id) {
+		for (Teacher existingTeacher : teachers) {
+			if (id.equals(existingTeacher.getId())) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public void addTeacher(Teacher teacher) throws WctttModelException {
