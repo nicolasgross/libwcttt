@@ -18,11 +18,20 @@ public class Chair {
 
 	public Chair(String id, String name) {
 		if (id == null || name == null) {
-			throw new IllegalArgumentException("Parameters must not be null");
+			throw new IllegalArgumentException("Parameters 'id' and 'name' " +
+					"must not be null");
 		}
 		this.id = id;
-		this.name = "";
 		this.name = name;
+	}
+
+	private boolean teacherIdExists(String id) {
+		for (Teacher existingTeacher : teachers) {
+			if (id.equals(existingTeacher.getId())) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	@XmlAttribute(required = true)
@@ -31,7 +40,14 @@ public class Chair {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(String id) throws WctttModelException {
+		if (id == null) {
+			throw new IllegalArgumentException("Parameter 'id' must not be " +
+					"null");
+		} else if (teacherIdExists(id)) {
+			throw new WctttModelException("Id '" + id + "' is already " +
+					"assigned to another teacher at the chair.");
+		}
 		this.id = id;
 	}
 
@@ -41,6 +57,10 @@ public class Chair {
 	}
 
 	public void setName(String name) {
+		if (name == null) {
+			throw new IllegalArgumentException("Parameter 'name' must not be " +
+					"null");
+		}
 		this.name = name;
 	}
 
@@ -54,6 +74,21 @@ public class Chair {
 	@XmlElement(name = "teacher")
 	public List<Teacher> getTeachers() {
 		return teachers;
+	}
+
+	public void addTeacher(Teacher teacher) throws WctttModelException {
+		if (teacher == null) {
+			throw new IllegalArgumentException("Parameter 'teacher' must not " +
+					"be null");
+		} else if (teacherIdExists(teacher.getId())) {
+			throw new WctttModelException("Id '" + teacher.getId() + "' is " +
+					"already assigned to another teacher at the chair.");
+		}
+		teachers.add(teacher);
+	}
+
+	public boolean removeTeacher(Teacher teacher) {
+		return teachers.remove(teacher);
 	}
 
 	@Override

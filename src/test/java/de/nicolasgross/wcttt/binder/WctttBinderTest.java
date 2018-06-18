@@ -47,7 +47,7 @@ class WctttBinderTest {
 		Teacher teacher = new Teacher("lüttgen", "Prof. Dr. Gerald Lüttgen");
 		teacher.getUnavailablePeriods().add(new Period(2, 4));
 		teacher.getUnfavorablePeriods().add(new Period(1, 3));
-		chair.getTeachers().add(teacher);
+		chair.addTeacher(teacher);
 		semesterWrite.getChairs().add(chair);
 
 		Room room1 = new Room("r1", "WE5/00.019", 156, chair,
