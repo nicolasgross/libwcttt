@@ -115,12 +115,18 @@ public class Semester {
 	}
 
 	/**
-	 * Setter for the number of days per week of a semester.
+	 * Setter for the number of days per week of a semester. The list of
+	 * timetables must be empty to avoid inconsistencies.
 	 *
 	 * @param daysPerWeek the new number of days per week, must be >= 1.
-	 * @throws WctttModelException if {@code daysPerWeek} is < 1.
+	 * @throws WctttModelException if timetable list is not empty or {@code
+	 * daysPerWeek} is < 1.
 	 */
 	public void setDaysPerWeek(int daysPerWeek) throws WctttModelException {
+		if (!timetables.isEmpty()) {
+			throw new WctttModelException("The timetable list must be empty " +
+					"before changes can be made on the semester data");
+		}
 		validateDaysPerWeek(daysPerWeek);
 		this.daysPerWeek = daysPerWeek;
 	}
@@ -136,14 +142,20 @@ public class Semester {
 	}
 
 	/**
-	 * Setter for the number of time slots per day of a semester.
+	 * Setter for the number of time slots per day of a semester. The list of
+	 * timetables must be empty to avoid inconsistencies.
 	 *
 	 * @param timeSlotsPerDay the new number of time slots per day, must be
 	 *                        >= 1.
-	 * @throws WctttModelException if {@code timeSlotsPerDay} is < 1.
+	 * @throws WctttModelException if timetable list is not empty or {@code
+	 * timeSlotsPerDay} is < 1.
 	 */
 	public void setTimeSlotsPerDay(int timeSlotsPerDay) throws
 			WctttModelException {
+		if (!timetables.isEmpty()) {
+			throw new WctttModelException("The timetable list must be empty " +
+					"before changes can be made on the semester data");
+		}
 		validateTimeSlotsPerDay(timeSlotsPerDay);
 		this.timeSlotsPerDay = timeSlotsPerDay;
 	}
@@ -161,14 +173,19 @@ public class Semester {
 
 	/**
 	 * Setter for the minimum number of daily lectures per curriculum of a
-	 * semester.
+	 * semester. The list of timetables must be empty to avoid inconsistencies.
 	 *
 	 * @param minDailyLecturesPerCur the new minimum number of daily lectures
 	 *                               per curriculum, must be >= 0.
-	 * @throws WctttModelException if {@code minDailyLecturesPerCur} is < 0.
+	 * @throws WctttModelException if timetable list is not empty or {@code
+	 * minDailyLecturesPerCur} is < 0.
 	 */
 	public void setMinDailyLecturesPerCur(int minDailyLecturesPerCur) throws
 			WctttModelException {
+		if (!timetables.isEmpty()) {
+			throw new WctttModelException("The timetable list must be empty " +
+					"before changes can be made on the semester data");
+		}
 		validateMinDailyLecturesPerCur(minDailyLecturesPerCur);
 		this.minDailyLecturesPerCur = minDailyLecturesPerCur;
 	}
@@ -186,16 +203,20 @@ public class Semester {
 
 	/**
 	 * Setter for the maximum number of daily lectures per curriculum of a
-	 * semester.
+	 * semester. The list of timetables must be empty to avoid inconsistencies.
 	 *
 	 * @param maxDailyLecturesPerCur the new maximum number of daily lectures
 	 *                               per curriculum, must be >= {@code
 	 *                               minDailyLecturesPerCur}.
-	 * @throws WctttModelException if {@code maxDailyLecturesPerCur} is <
-	 *                             {@code minDailyLecturesPerCur}.
+	 * @throws WctttModelException if timetable list is not empty or {@code
+	 * maxDailyLecturesPerCur} is < {@code minDailyLecturesPerCur}.
 	 */
 	public void setMaxDailyLecturesPerCur(int maxDailyLecturesPerCur) throws
 			WctttModelException {
+		if (!timetables.isEmpty()) {
+			throw new WctttModelException("The timetable list must be empty " +
+					"before changes can be made on the semester data");
+		}
 		validateMaxDailyLecturesPerCur(maxDailyLecturesPerCur,
 				minDailyLecturesPerCur);
 		this.maxDailyLecturesPerCur = maxDailyLecturesPerCur;
@@ -223,6 +244,9 @@ public class Semester {
 					"must not be null");
 		}
 		this.constrWeightings = constrWeightings;
+		for (Timetable timetable : timetables) {
+			timetable.calcConstraintViolations();
+		}
 	}
 
 	/**
@@ -285,7 +309,7 @@ public class Semester {
 		return timetables;
 	}
 
-	// TODO add, delete, update
+	// TODO add, delete, update, removeAllTimetables
 	// TODO timetable list must be empty before changes of semester data?
 
 	@Override
