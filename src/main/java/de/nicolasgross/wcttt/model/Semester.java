@@ -286,7 +286,6 @@ public class Semester {
 	}
 
 	// TODO add, delete, update
-	// TODO recalc timetable scores on change
 	// TODO timetable list must be empty before changes of semester data?
 
 	@Override

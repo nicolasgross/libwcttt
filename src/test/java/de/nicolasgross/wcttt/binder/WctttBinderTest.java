@@ -74,13 +74,15 @@ class WctttBinderTest {
 		semesterWrite.getCurricula().add(curriculum);
 
 		Timetable timetable = new Timetable("test-timetable");
-		TimetableDay timetableDay = new TimetableDay(1); // TODO add delete usw
+		TimetableDay timetableDay = new TimetableDay(1);
 		TimetablePeriod timetablePeriod1 = new TimetablePeriod(1, 1);
-		TimetableAssignment timetableAssignment1 = new TimetableAssignment(lecture, room1); // TODO check add null room only if external
+		TimetableAssignment timetableAssignment1 = new
+				TimetableAssignment(lecture, room1); // TODO check add null room only if external
 		timetablePeriod1.getAssignments().add(timetableAssignment1);
 		timetableDay.getPeriods().add(timetablePeriod1);
 		TimetablePeriod timetablePeriod2 = new TimetablePeriod(1, 4);
-		TimetableAssignment timetableAssignment2 = new TimetableAssignment(practical, room2); // TODO check add null room only if external
+		TimetableAssignment timetableAssignment2 = new
+				TimetableAssignment(practical, room2); // TODO check add null room only if external
 		timetablePeriod2.getAssignments().add(timetableAssignment2);
 		timetableDay.getPeriods().add(timetablePeriod2);
 		timetable.getDays().add(timetableDay);

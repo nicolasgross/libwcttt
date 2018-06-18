@@ -205,7 +205,8 @@
       </xs:element>
     </xs:sequence>
     <xs:attribute name="name" type="xs:string" use="required"/>
-    <xs:attribute name="softConstraintViolations" type="xs:double" use="required"/>
+    <xs:attribute name="violatedHardConstraints" type="xs:int" use="required"/>
+    <xs:attribute name="softConstraintsPenalty" type="xs:double" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="timetableDay">

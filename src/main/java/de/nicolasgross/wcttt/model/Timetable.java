@@ -4,11 +4,13 @@ import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@XmlType(propOrder = {"name", "softConstraintViolations", "days"})
+@XmlType(propOrder = {"name", "violatedHardConstraints",
+		"softConstraintsPenalty", "days"})
 public class Timetable {
 
 	private String name;
-	private double softConstraintViolations = -1;
+	private int violatedHardConstraints = -1;
+	private double softConstraintsPenalty = -1;
 	private List<TimetableDay> days = new ArrayList<>();
 
 	public Timetable() {
@@ -21,6 +23,16 @@ public class Timetable {
 					"null");
 		}
 		this.name = name;
+	}
+
+	@XmlAttribute(required = true)
+	public int getViolatedHardConstraints() {
+		return violatedHardConstraints;
+	}
+
+	// JAXB only
+	private void setViolatedHardConstraints(int violatedHardConstraints) {
+		this.violatedHardConstraints = violatedHardConstraints;
 	}
 
 	@XmlAttribute(required = true)
@@ -37,19 +49,23 @@ public class Timetable {
 	}
 
 	@XmlAttribute(required = true)
-	public double getSoftConstraintViolations() {
-		return softConstraintViolations;
+	public double getSoftConstraintsPenalty() {
+		return softConstraintsPenalty;
 	}
 
 	// JAXB only
-	private void setSoftConstraintViolations(double softConstraintViolations) {
-		this.softConstraintViolations = softConstraintViolations;
+	private void setSoftConstraintsPenalty(double softConstraintsPenalty) {
+		this.softConstraintsPenalty = softConstraintsPenalty;
 	}
 
 	@XmlElementWrapper(required = true)
 	@XmlElement(name = "timetableDay")
 	public List<TimetableDay> getDays() {
 		return days;
+	}
+
+	public void calcConstraintViolations() {
+		// TODO
 	}
 
 	@Override
@@ -62,8 +78,8 @@ public class Timetable {
 
 		Timetable other = (Timetable) obj;
 		if (!this.name.equals(other.name) ||
-				this.softConstraintViolations !=
-						other.softConstraintViolations) {
+				this.softConstraintsPenalty !=
+						other.softConstraintsPenalty) {
 			return false;
 		}
 
