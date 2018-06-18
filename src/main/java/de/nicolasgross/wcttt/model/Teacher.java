@@ -90,10 +90,10 @@ public class Teacher {
 					"be null");
 		} else if (unfavorPeriodExists(period)) {
 			throw new WctttModelException("Period '" + period + "' is " +
-					"already in unfavorable periods");
+					"already included in unfavorable periods");
 		} else if (unavailPeriodExists(period)) {
 			throw new WctttModelException("Period '" + period + "' is " +
-					"already in unavailable periods");
+					"already included in unavailable periods");
 		}
 		if (isUnfavorable) {
 			unfavorablePeriods.add(period);

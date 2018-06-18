@@ -64,10 +64,32 @@ public class Timetable {
 		return days;
 	}
 
-	// TODO add, delete, update courses
+	private boolean dayExists(TimetableDay day) {
+		for (TimetableDay existingDay : days) {
+			if (day.getDay() == existingDay.getDay()) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public void addDay(TimetableDay day) throws WctttModelException {
+		if (day == null) {
+			throw new IllegalArgumentException("Parameter 'day' must not " +
+					"be null");
+		} else if (dayExists(day)) {
+			throw new WctttModelException("Day '" + day + "' is already " +
+					"included in the timetable");
+		}
+		days.add(day);
+	}
+
+	public boolean removeDay(Timetable day) {
+		return days.remove(day);
+	}
 
 	public void calcConstraintViolations() {
-		// TODO
+		// TODO after checker package
 	}
 
 	@Override

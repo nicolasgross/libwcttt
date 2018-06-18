@@ -85,7 +85,7 @@ class WctttBinderTest {
 				TimetableAssignment(practical, room2);
 		timetablePeriod2.getAssignments().add(timetableAssignment2);
 		timetableDay.getPeriods().add(timetablePeriod2);
-		timetable.getDays().add(timetableDay);
+		timetable.addDay(timetableDay);
 		semesterWrite.getTimetables().add(timetable);
 
 		binder.write(semesterWrite);
