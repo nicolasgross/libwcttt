@@ -15,10 +15,14 @@ public class TimetableAssignment {
 		this.room = new Room();
 	}
 
-	public TimetableAssignment(Session session, Room room) {
+	public TimetableAssignment(Session session, Room room) throws
+			WctttModelException {
 		if (session == null) {
 			throw new IllegalArgumentException("Parameter 'session' must not " +
 					"be null");
+		} else if (room == null && !session.isExternal()) {
+			throw new WctttModelException("Parameter 'room' can only be null " +
+					"if 'session' is external");
 		}
 		this.session = session;
 		this.room = room;
@@ -30,7 +34,7 @@ public class TimetableAssignment {
 		return room;
 	}
 
-	private void setRoomBinding(Room room) {
+	private void setRoomBinding(Room room) throws WctttModelException {
 		setRoom(room);
 	}
 
@@ -52,7 +56,11 @@ public class TimetableAssignment {
 		return Optional.ofNullable(room);
 	}
 
-	public void setRoom(Room room) {
+	public void setRoom(Room room) throws WctttModelException {
+		if (room == null && !session.isExternal()) {
+			throw new WctttModelException("Parameter 'room' can only be null " +
+					"if 'session' is external");
+		}
 		this.room = room;
 	}
 
