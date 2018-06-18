@@ -65,6 +65,59 @@ public class Teacher {
 		return unavailablePeriods;
 	}
 
+	private boolean unavailPeriodExists(Period period) {
+		for (Period unavailable : unavailablePeriods) {
+			if (period.equals(unavailable)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private boolean unfavorPeriodExists(Period period) {
+		for (Period unfavorable : unfavorablePeriods) {
+			if (period.equals(unfavorable)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private void addPeriod(Period period, boolean isUnfavorable) throws
+			WctttModelException {
+		if (period == null) {
+			throw new IllegalArgumentException("Parameter 'period' must not " +
+					"be null");
+		} else if (unfavorPeriodExists(period)) {
+			throw new WctttModelException("Period '" + period + "' is " +
+					"already in unfavorable periods");
+		} else if (unavailPeriodExists(period)) {
+			throw new WctttModelException("Period '" + period + "' is " +
+					"already in unavailable periods");
+		}
+		if (isUnfavorable) {
+			unfavorablePeriods.add(period);
+		} else {
+			unavailablePeriods.add(period);
+		}
+	}
+
+	public void addUnfavorablePeriod(Period period) throws WctttModelException {
+		addPeriod(period, true);
+	}
+
+	public void addUnavailablePeriod(Period period) throws WctttModelException {
+		addPeriod(period, false);
+	}
+
+	public boolean removeUnfavorablePeriod(Period period) {
+		return unfavorablePeriods.remove(period);
+	}
+
+	public boolean removeUnavailablePeriod(Period period) {
+		return unavailablePeriods.remove(period);
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (!(obj instanceof Teacher)) {

@@ -59,8 +59,6 @@ public class Curriculum {
 		return courses;
 	}
 
-	// TODO add, delete, update courses
-
 	private boolean courseIdExists(String id) {
 		for (Course course : courses) {
 			if (id.equals(course.getId())) {

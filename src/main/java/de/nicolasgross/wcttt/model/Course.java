@@ -118,12 +118,16 @@ public class Course {
 		return practicals;
 	}
 
-	private boolean sessionIdExists(String id) {
+	private boolean lectureIdExists(String id) {
 		for (Session lecture : lectures) {
 			if (id.equals(lecture.getId())) {
 				return true;
 			}
 		}
+		return false;
+	}
+
+	private boolean practicalIdExists(String id) {
 		for (Session practical : practicals) {
 			if (id.equals(practical.getId())) {
 				return true;
@@ -132,14 +136,21 @@ public class Course {
 		return false;
 	}
 
+	private boolean sessionIdExists(String id) {
+		return lectureIdExists(id) || practicalIdExists(id);
+	}
+
 	private void addSession(Session session, boolean isLecture) throws
 			WctttModelException {
 		if (session == null) {
 			throw new IllegalArgumentException("Parameter 'session' must not " +
 					"be null");
-		} else if (sessionIdExists(session.getId())) {
+		} else if (lectureIdExists(session.getId())) {
 			throw new WctttModelException("Id '" + session.getId() + "' is " +
-					"already assigned to another session of the course");
+					"already assigned to another lecture of the course");
+		} else if (practicalIdExists(session.getId())) {
+			throw new WctttModelException("Id '" + session.getId() + "' is " +
+					"already assigned to another practical of the course");
 		}
 		if (isLecture) {
 			lectures.add(session);
@@ -172,9 +183,12 @@ public class Course {
 		} else if (!sessionIdExists(session.getId())) {
 			throw new WctttModelException("Session '" + id + "' is not " +
 					"assigned to the course");
-		} else if (sessionIdExists(id)) {
+		} else if (lectureIdExists(id)) {
 			throw new WctttModelException("Id '" + id + "' is already " +
-					"assigned to another session of the course");
+					"assigned to another lecture of the course");
+		} else if (practicalIdExists(id)) {
+			throw new WctttModelException("Id '" + id + "' is already " +
+					"assigned to another practical of the course");
 		}
 		session.setId(id);
 	}

@@ -25,6 +25,8 @@ public class TimetablePeriod extends Period {
 		return assignments;
 	}
 
+	// TODO add, delete, update courses
+
 	@Override
 	public boolean equals(Object obj) {
 		if (!(obj instanceof TimetablePeriod)) {

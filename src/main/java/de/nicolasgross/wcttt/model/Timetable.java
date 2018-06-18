@@ -64,6 +64,8 @@ public class Timetable {
 		return days;
 	}
 
+	// TODO add, delete, update courses
+
 	public void calcConstraintViolations() {
 		// TODO
 	}

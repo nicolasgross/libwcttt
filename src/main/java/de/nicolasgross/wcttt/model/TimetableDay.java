@@ -37,6 +37,8 @@ public class TimetableDay {
 		return periods;
 	}
 
+	// TODO add, delete, update courses
+
 	@Override
 	public boolean equals(Object obj) {
 		if (!(obj instanceof TimetableDay)) {

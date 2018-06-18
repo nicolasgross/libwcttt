@@ -45,8 +45,8 @@ class WctttBinderTest {
 		Chair chair = new Chair("swt", "Lehrstuhl Softwaretechnik und " +
 				"Programmiersprachen");
 		Teacher teacher = new Teacher("lüttgen", "Prof. Dr. Gerald Lüttgen");
-		teacher.getUnavailablePeriods().add(new Period(2, 4));
-		teacher.getUnfavorablePeriods().add(new Period(1, 3));
+		teacher.addUnfavorablePeriod(new Period(1, 3));
+		teacher.addUnavailablePeriod(new Period(2, 4));
 		chair.addTeacher(teacher);
 		semesterWrite.getChairs().add(chair);
 
