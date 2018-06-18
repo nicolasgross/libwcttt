@@ -55,7 +55,8 @@ public class Session {
 		return preAssignment;
 	}
 
-	private void setPreAssignmentBinding(Period preAssignment) {
+	private void setPreAssignmentBinding(Period preAssignment) throws
+			WctttModelException {
 		setPreAssignment(preAssignment);
 	}
 
@@ -84,7 +85,16 @@ public class Session {
 		return teacher;
 	}
 
-	public void setTeacher(Teacher teacher) {
+	public void setTeacher(Teacher teacher) throws WctttModelException {
+		if (preAssignment != null) {
+			for (Period unavailable : teacher.getUnavailablePeriods()) {
+				if (preAssignment.equals(unavailable)) {
+					throw new WctttModelException("The pre-assignment " +
+							preAssignment + " of this session is within the " +
+							"unavailable periods of teacher " + teacher);
+				}
+			}
+		}
 		this.teacher = teacher;
 	}
 
@@ -119,7 +129,17 @@ public class Session {
 		return Optional.ofNullable(preAssignment);
 	}
 
-	public void setPreAssignment(Period preAssignment) {
+	public void setPreAssignment(Period preAssignment) throws
+			WctttModelException {
+		if (preAssignment != null) {
+			for (Period unavailable : teacher.getUnavailablePeriods()) {
+				if (preAssignment.equals(unavailable)) {
+					throw new WctttModelException("Teacher " + teacher + " of" +
+							" this session is not available at the " +
+							"pre-assignment period " + preAssignment);
+				}
+			}
+		}
 		this.preAssignment = preAssignment;
 	}
 

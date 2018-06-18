@@ -127,4 +127,6 @@ public class Chair {
 		return true;
 	}
 
+	// TODO tostring
+
 }
