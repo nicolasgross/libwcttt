@@ -118,8 +118,6 @@ public class Course {
 		return practicals;
 	}
 
-	// TODO add, delete, update lecture/practical
-
 	private boolean sessionIdExists(String id) {
 		for (Session lecture : lectures) {
 			if (id.equals(lecture.getId())) {

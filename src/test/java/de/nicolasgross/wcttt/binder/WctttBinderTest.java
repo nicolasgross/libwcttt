@@ -64,13 +64,13 @@ class WctttBinderTest {
 		Session practical = new Session("FSE-P1", "FSE Practical 1", teacher,
 				30, false, false, new RoomFeatures(1, false, false, true),
 				null);
-		course.getLectures().add(lecture);
-		course.getPracticals().add(practical);
+		course.addLecture(lecture);
+		course.addPractical(practical);
 		semesterWrite.getCourses().add(course);
 
 		Curriculum curriculum = new Curriculum("sosysc-mand",
 				"Software Systems Science - Mandatory");
-		curriculum.getCourses().add(course);
+		curriculum.addCourse(course);
 		semesterWrite.getCurricula().add(curriculum);
 
 		Timetable timetable = new Timetable("test-timetable");

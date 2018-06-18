@@ -61,6 +61,45 @@ public class Curriculum {
 
 	// TODO add, delete, update courses
 
+	private boolean courseIdExists(String id) {
+		for (Course course : courses) {
+			if (id.equals(course.getId())) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public void addCourse(Course course) throws WctttModelException {
+		if (course == null) {
+			throw new IllegalArgumentException("Parameter 'course' must not " +
+					"be null");
+		} else if (courseIdExists(course.getId())) {
+			throw new WctttModelException("Id '" + course.getId() + "' is " +
+					"already assigned to another course of the curriculum");
+		}
+		courses.add(course);
+	}
+
+	public boolean removeCourse(Course course) {
+		return courses.remove(course);
+	}
+
+	public void updateCourseId(Course course, String id) throws
+			WctttModelException {
+		if (course == null || id == null) {
+			throw new IllegalArgumentException("Parameters 'course' and 'id' " +
+					"must not be null");
+		} else if (!courseIdExists(course.getId())) {
+			throw new WctttModelException("Course '" + id + "' is not " +
+					"assigned to the curriculum");
+		} else if (courseIdExists(id)) {
+			throw new WctttModelException("Id '" + id + "' is already " +
+					"assigned to another course of the curriculum");
+		}
+		course.setId(id);
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (!(obj instanceof Curriculum)) {
