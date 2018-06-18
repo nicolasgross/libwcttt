@@ -126,4 +126,6 @@ public class Curriculum {
 		return true;
 	}
 
+	// TODO toString
+
 }

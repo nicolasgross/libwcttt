@@ -63,4 +63,6 @@ public class Period {
 		return true;
 	}
 
+	// TODO toString
+
 }

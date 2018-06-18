@@ -80,4 +80,6 @@ public class TimetablePeriod extends Period {
 		return true;
 	}
 
+	// TODO toString
+
 }

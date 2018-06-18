@@ -212,4 +212,6 @@ public class Room {
 		return true;
 	}
 
+	// TODO toString
+
 }
