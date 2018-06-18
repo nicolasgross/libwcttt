@@ -27,6 +27,9 @@ class ValidationHelper {
 	// Session:
 	private static final int STUDENTS_MIN = 1;
 
+	//ConstraintWeightings:
+	private static final double CONSTRAINT_WEIGHTING_MIN = 0.0;
+
 
 	// Semester:
 
@@ -116,13 +119,22 @@ class ValidationHelper {
 
 	// Session:
 
-	static void validateStudents(int students) throws
-			WctttModelException {
+	static void validateStudents(int students) throws WctttModelException {
 		if (students < STUDENTS_MIN) {
 			throw new WctttModelException("Parameter 'students' must be >= "
 					+ STUDENTS_MIN);
 		}
 	}
 
+
+	// ConstraintWeightings:
+
+	static void validateConstraintWeighting(double weighting) throws
+			WctttModelException {
+		if (weighting < CONSTRAINT_WEIGHTING_MIN) {
+			throw new WctttModelException("Constraint weighting must be >= "
+					+ CONSTRAINT_WEIGHTING_MIN);
+		}
+	}
 
 }

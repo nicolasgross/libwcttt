@@ -10,7 +10,7 @@ public class Timetable {
 
 	private String name;
 	private int violatedHardConstraints = -1;
-	private double softConstraintsPenalty = -1;
+	private double softConstraintsPenalty = -1.0;
 	private List<TimetableDay> days = new ArrayList<>();
 
 	public Timetable() {
