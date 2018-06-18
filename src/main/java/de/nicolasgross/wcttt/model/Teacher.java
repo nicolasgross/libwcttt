@@ -33,6 +33,10 @@ public class Teacher {
 	}
 
 	public void setId(String id) {
+		if (id == null) {
+			throw new IllegalArgumentException("Parameter 'id' must not be " +
+					"null");
+		}
 		this.id = id;
 	}
 
@@ -42,6 +46,10 @@ public class Teacher {
 	}
 
 	public void setName(String name) {
+		if (name == null) {
+			throw new IllegalArgumentException("Parameter 'name' must not be " +
+					"null");
+		}
 		this.name = name;
 	}
 

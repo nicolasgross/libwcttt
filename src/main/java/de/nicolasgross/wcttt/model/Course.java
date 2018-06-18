@@ -70,14 +70,14 @@ public class Course {
 
 	@XmlAttribute(required = true)
 	public String getAbbreviation() {
-		if (abbreviation == null) {
-			throw new IllegalArgumentException("Parameter 'abbreviation' must" +
-					" not be null");
-		}
 		return abbreviation;
 	}
 
 	public void setAbbreviation(String abbreviation) {
+		if (abbreviation == null) {
+			throw new IllegalArgumentException("Parameter 'abbreviation' must" +
+					" not be null");
+		}
 		this.abbreviation = abbreviation;
 	}
 

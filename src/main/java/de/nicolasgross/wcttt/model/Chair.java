@@ -44,9 +44,6 @@ public class Chair {
 		if (id == null) {
 			throw new IllegalArgumentException("Parameter 'id' must not be " +
 					"null");
-		} else if (teacherIdExists(id)) {
-			throw new WctttModelException("Id '" + id + "' is already " +
-					"assigned to another teacher at the chair.");
 		}
 		this.id = id;
 	}
@@ -82,13 +79,28 @@ public class Chair {
 					"be null");
 		} else if (teacherIdExists(teacher.getId())) {
 			throw new WctttModelException("Id '" + teacher.getId() + "' is " +
-					"already assigned to another teacher at the chair.");
+					"already assigned to another teacher at the chair");
 		}
 		teachers.add(teacher);
 	}
 
 	public boolean removeTeacher(Teacher teacher) {
 		return teachers.remove(teacher);
+	}
+
+	public void updateTeacherId(Teacher teacher, String id) throws
+			WctttModelException {
+		if (teacher == null || id == null) {
+			throw new IllegalArgumentException("Parameters 'teacher' and 'id'" +
+					" must not be null");
+		} else if (!teacherIdExists(teacher.getId())) {
+			throw new WctttModelException("Teacher '" + id + "' is not " +
+					"assigned to the chair");
+		} else if (teacherIdExists(id)) {
+			throw new WctttModelException("Id '" + id + "' is already " +
+					"assigned to another teacher at the chair");
+		}
+		teacher.setId(id);
 	}
 
 	@Override
