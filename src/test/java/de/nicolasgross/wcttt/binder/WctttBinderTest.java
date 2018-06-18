@@ -16,7 +16,7 @@ class WctttBinderTest {
 	@Test
 	void emptySemesterWritesAndParses() throws WctttBinderException,
 			IOException {
-		String path = "test-empty-semester.xml";
+		String path = "libwcttt-test-empty-semester.xml";
 		WctttBinder binder = new WctttBinder(path);
 
 		Semester semesterWrite = new Semester();
@@ -30,7 +30,7 @@ class WctttBinderTest {
 	@Test
 	void fullComplexitySemesterWritesAndParses() throws WctttBinderException,
 			WctttModelException, IOException {
-		String path = "test-complex-semester.xml";
+		String path = "libwcttt-test-complex-semester.xml";
 		WctttBinder binder = new WctttBinder(path);
 
 		Semester semesterWrite = new Semester();
@@ -98,7 +98,7 @@ class WctttBinderTest {
 		WctttBinder binderRead = new WctttBinder(inPath);
 		Semester tinyWiaiSem = binderRead.parse();
 
-		String outPath = "tiny-wiai-out.xml";
+		String outPath = "libwcttt-test-tiny-wiai-out.xml";
 		WctttBinder binderWrite = new WctttBinder(outPath);
 		binderWrite.write(tinyWiaiSem);
 
