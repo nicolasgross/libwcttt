@@ -85,6 +85,10 @@ public class Timetable {
 	}
 
 	public boolean removeDay(Timetable day) {
+		if (day == null) {
+			throw new IllegalArgumentException("Parameter 'day' must not " +
+					"be null");
+		}
 		return days.remove(day);
 	}
 

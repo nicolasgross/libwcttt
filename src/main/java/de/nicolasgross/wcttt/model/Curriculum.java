@@ -80,6 +80,10 @@ public class Curriculum {
 	}
 
 	public boolean removeCourse(Course course) {
+		if (course == null) {
+			throw new IllegalArgumentException("Parameter 'course' must not " +
+					"be null");
+		}
 		return courses.remove(course);
 	}
 

@@ -25,7 +25,34 @@ public class TimetablePeriod extends Period {
 		return assignments;
 	}
 
-	// TODO add, delete, update courses
+	private boolean assignmentExists(TimetableAssignment assignment) {
+		for (TimetableAssignment existingAss : assignments) {
+			if (assignment.equals(existingAss)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public void addAssignment(TimetableAssignment assignment) throws
+			WctttModelException {
+		if (assignment == null) {
+			throw new IllegalArgumentException("Parameter 'assignment' must " +
+					"not be null");
+		} else if (assignmentExists(assignment)) {
+			throw new WctttModelException("Assignment '" + assignment + "' is" +
+					"already included in this period");
+		}
+		assignments.add(assignment);
+	}
+
+	public boolean removeAssignment(TimetableAssignment assignment) {
+		if (assignment == null) {
+			throw new IllegalArgumentException("Parameter 'assignment' must " +
+					"not be null");
+		}
+		return assignments.remove(assignment);
+	}
 
 	@Override
 	public boolean equals(Object obj) {

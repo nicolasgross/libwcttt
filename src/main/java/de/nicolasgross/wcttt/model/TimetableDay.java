@@ -37,7 +37,33 @@ public class TimetableDay {
 		return periods;
 	}
 
-	// TODO add, delete, update courses
+	private boolean periodExists(TimetablePeriod period) {
+		for (TimetablePeriod existingPeriod : periods) {
+			if (((Period) period).equals(existingPeriod)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public void addPeriod(TimetablePeriod period) throws WctttModelException {
+		if (period == null) {
+			throw new IllegalArgumentException("Parameter 'period' must not " +
+					"be null");
+		} else if (periodExists(period)) {
+			throw new WctttModelException("Period '" + period + "' is already" +
+					" included in the day");
+		}
+		periods.add(period);
+	}
+
+	public boolean removePeriod(TimetablePeriod period) {
+		if (period == null) {
+			throw new IllegalArgumentException("Parameter 'period' must not " +
+					"be null");
+		}
+		return periods.remove(period);
+	}
 
 	@Override
 	public boolean equals(Object obj) {

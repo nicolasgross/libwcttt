@@ -111,10 +111,18 @@ public class Teacher {
 	}
 
 	public boolean removeUnfavorablePeriod(Period period) {
+		if (period == null) {
+			throw new IllegalArgumentException("Parameter 'period' must not " +
+					"be null");
+		}
 		return unfavorablePeriods.remove(period);
 	}
 
 	public boolean removeUnavailablePeriod(Period period) {
+		if (period == null) {
+			throw new IllegalArgumentException("Parameter 'period' must not " +
+					"be null");
+		}
 		return unavailablePeriods.remove(period);
 	}
 

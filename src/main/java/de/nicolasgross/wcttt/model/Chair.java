@@ -85,6 +85,10 @@ public class Chair {
 	}
 
 	public boolean removeTeacher(Teacher teacher) {
+		if (teacher == null) {
+			throw new IllegalArgumentException("Parameter 'teacher' must not " +
+					"be null");
+		}
 		return teachers.remove(teacher);
 	}
 

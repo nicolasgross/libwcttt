@@ -64,8 +64,6 @@ public class TimetableAssignment {
 		this.room = room;
 	}
 
-	// TODO add, delete, update courses
-
 	@Override
 	public boolean equals(Object obj) {
 		if (!(obj instanceof TimetableAssignment)) {

@@ -167,11 +167,19 @@ public class Course {
 		addSession(practical, false);
 	}
 
-	public boolean deleteLecture(Session lecture) {
+	public boolean removeLecture(Session lecture) {
+		if (lecture == null) {
+			throw new IllegalArgumentException("Parameter 'lecture' must not " +
+					"be null");
+		}
 		return lectures.remove(lecture);
 	}
 
-	public boolean deletePractical(Session practical) {
+	public boolean removePractical(Session practical) {
+		if (practical == null) {
+			throw new IllegalArgumentException("Parameter 'practical' must " +
+					"not be null");
+		}
 		return practicals.remove(practical);
 	}
 
