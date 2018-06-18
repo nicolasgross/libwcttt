@@ -68,8 +68,16 @@ public class RoomFeatures implements Comparable<RoomFeatures> {
 
 	@Override
 	public int compareTo(RoomFeatures roomFeatures) {
-		// TODO
-		return 0;
+		if (this.equals(roomFeatures)) {
+			return 0;
+		} else if (this.projectors >= roomFeatures.projectors &&
+				Boolean.compare(this.pcPool, roomFeatures.pcPool) >= 0 &&
+				Boolean.compare(this.teacherPc, roomFeatures.teacherPc) >= 0 &&
+				Boolean.compare(this.docCam, roomFeatures.docCam) >= 0) {
+			return 1;
+		} else {
+			return -1;
+		}
 	}
 
 	@Override
