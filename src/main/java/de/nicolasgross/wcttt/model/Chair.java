@@ -9,7 +9,7 @@ public class Chair {
 
 	private String id;
 	private String name;
-	private List<Teacher> teachers = new LinkedList<>();
+	private final List<Teacher> teachers = new LinkedList<>();
 
 	public Chair() {
 		this.id = "";

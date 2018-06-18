@@ -9,7 +9,7 @@ public class Curriculum {
 
 	private String id;
 	private String name;
-	private List<Course> courses = new LinkedList<>();
+	private final List<Course> courses = new LinkedList<>();
 
 	public Curriculum() {
 		this.id = "";

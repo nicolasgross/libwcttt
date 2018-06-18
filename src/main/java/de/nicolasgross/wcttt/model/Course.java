@@ -15,8 +15,8 @@ public class Course {
 	private String abbreviation;
 	private Chair chair;
 	private int minNumberOfDays;
-	private List<Session> lectures = new LinkedList<>();
-	private List<Session> practicals = new LinkedList<>();
+	private final List<Session> lectures = new LinkedList<>();
+	private final List<Session> practicals = new LinkedList<>();
 
 	public Course() {
 		this.id = "";

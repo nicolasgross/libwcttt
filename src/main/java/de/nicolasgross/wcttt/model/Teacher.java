@@ -9,8 +9,8 @@ public class Teacher {
 
 	private String id;
 	private String name;
-	private List<Period> unfavorablePeriods = new LinkedList<>();
-	private List<Period> unavailablePeriods = new LinkedList<>();
+	private final List<Period> unfavorablePeriods = new LinkedList<>();
+	private final List<Period> unavailablePeriods = new LinkedList<>();
 
 	public Teacher() {
 		this.id = "";

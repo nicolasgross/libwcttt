@@ -10,7 +10,7 @@ import static de.nicolasgross.wcttt.model.ValidationHelper.validateDay;
 public class TimetableDay {
 
 	private int day;
-	private List<TimetablePeriod> periods = new ArrayList<>();
+	private final List<TimetablePeriod> periods = new ArrayList<>();
 
 	public TimetableDay() {
 		this.day = 1;

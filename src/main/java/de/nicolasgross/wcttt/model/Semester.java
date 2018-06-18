@@ -21,11 +21,11 @@ public class Semester {
 	private int minDailyLecturesPerCur;
 	private int maxDailyLecturesPerCur;
 	private ConstraintWeightings constrWeightings;
-	private List<Chair> chairs = new LinkedList<>();
-	private List<Room> rooms = new LinkedList<>();
-	private List<Course> courses = new LinkedList<>();
-	private List<Curriculum> curricula = new LinkedList<>();
-	private List<Timetable> timetables = new LinkedList<>();
+	private final List<Chair> chairs = new LinkedList<>();
+	private final List<Room> rooms = new LinkedList<>();
+	private final List<Course> courses = new LinkedList<>();
+	private final List<Curriculum> curricula = new LinkedList<>();
+	private final List<Timetable> timetables = new LinkedList<>();
 
 	/**
 	 * Creates a new semester with an empty name, 1 days per week, 1 time

@@ -9,7 +9,7 @@ import java.util.List;
 @XmlType(propOrder = {"assignments"})
 public class TimetablePeriod extends Period {
 
-	private List<TimetableAssignment> assignments = new LinkedList<>();
+	private final List<TimetableAssignment> assignments = new LinkedList<>();
 
 	public TimetablePeriod() {
 		super();
