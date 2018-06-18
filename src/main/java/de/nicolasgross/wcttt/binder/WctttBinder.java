@@ -41,7 +41,8 @@ public class WctttBinder {
 					"implementation of XML mappings, please contact the " +
 					"developers", e);
 		} catch (SAXException e) {
-			throw new WctttBinderException("Error while parsing a XML file", e);
+			throw new WctttBinderException("Error while parsing the schema " +
+					"file", e);
 		}
 	}
 
@@ -51,7 +52,7 @@ public class WctttBinder {
 			um.setSchema(schema);
 			return (Semester) um.unmarshal(xmlFile);
 		} catch (JAXBException e) {
-			throw new WctttBinderException(e);
+			throw new WctttBinderException("Error while parsing a XML file", e);
 		}
 	}
 
