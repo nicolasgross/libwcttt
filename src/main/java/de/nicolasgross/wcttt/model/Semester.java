@@ -289,22 +289,99 @@ public class Semester {
 	}
 
 	private boolean chairIdExists(String id) {
-		for (Chair existingChair : chairs) {
-			if (id.equals(existingChair.getId())) {
+		for (Chair chair : chairs) {
+			if (id.equals(chair.getId())) {
 				return true;
 			}
 		}
 		return false;
 	}
 
+	private boolean teacherIdExists(String id) {
+		for (Chair chair : chairs) {
+			for (Teacher teacher : chair.getTeachers()) {
+				if (id.equals(teacher.getId())) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	private boolean roomIdExists(String id) {
+		for (Room room : rooms) {
+			if (id.equals(room.getId())) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private boolean courseIdExists(String id) {
+		for (Course course : courses) {
+			if (id.equals(course.getId())) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private boolean sessionIdExists(String id) {
+		for (Course course : courses) {
+			for (Session session : course.getLectures()) {
+				if (id.equals(session.getId())) {
+					return true;
+				}
+			}
+			for (Session session : course.getPracticals()) {
+				if (id.equals(session.getId())) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	private boolean curriculumIdExists(String id) {
+		for (Curriculum curriculum : curricula) {
+			if (id.equals(curriculum.getId())) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private void checkIfIdExists(String id) throws WctttModelException {
+		if (chairIdExists(id)) {
+			throw new WctttModelException("Id '" + id + "' is already " +
+					"assigned to a chair of the semester");
+		} else if (teacherIdExists(id)) {
+				throw new WctttModelException("Id '" + id + "' is already " +
+						"assigned to a teacher of the semester");
+		} else if (roomIdExists(id)) {
+			throw new WctttModelException("Id '" + id + "' is already " +
+					"assigned to a room of the semester");
+		} else if (courseIdExists(id)) {
+			throw new WctttModelException("Id '" + id + "' is already " +
+					"assigned to a course of the semester");
+		} else if (sessionIdExists(id)) {
+			throw new WctttModelException("Id '" + id + "' is already " +
+					"assigned to a session of the semester");
+		} else if (curriculumIdExists(id)) {
+			throw new WctttModelException("Id '" + id + "' is already " +
+					"assigned to a curriculum of the semester");
+		}
+	}
+
 	public void addChair(Chair chair) throws WctttModelException {
 		if (chair == null) {
 			throw new WctttModelException("Parameter 'chair' must not be null");
-		} else if (chairIdExists(chair.getId())) {
-			throw new WctttModelException("Id '" + chair.getId() + "' is " +
-					"already assigned to another chair");
 		}
-		// TODO
+		checkIfIdExists(chair.getId());
+		for (Teacher teacher : chair.getTeachers()) {
+			checkIfIdExists(teacher.getId());
+		}
+		this.chairs.add(chair);
 	}
 
 	public void removeChair(Chair chair) {
@@ -394,8 +471,7 @@ public class Semester {
 	}
 
 	public boolean removeTimetable(Timetable timetable) {
-		// TODO
-		return false;
+		return timetables.remove(timetable);
 	}
 
 	public void removeAllTimetables() {
