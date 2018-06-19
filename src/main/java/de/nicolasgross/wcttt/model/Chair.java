@@ -31,13 +31,10 @@ public class Chair {
 		return id;
 	}
 
-	public void setId(String id) throws WctttModelException {
+	public void setId(String id) {
 		if (id == null) {
 			throw new IllegalArgumentException("Parameter 'id' must not be " +
 					"null");
-		} else if (teacherIdExists(id)) {
-			throw new WctttModelException("Id '" + id + "' is already " +
-					"assigned to a teacher of this chair");
 		}
 		this.id = id;
 	}
@@ -80,9 +77,6 @@ public class Chair {
 		if (teacher == null) {
 			throw new IllegalArgumentException("Parameter 'teacher' must not " +
 					"be null");
-		} else if (this.id.equals(teacher.getId())) { // TODO remove?
-			throw new WctttModelException("Id '" + teacher.getId() + "' is " +
-					"already assigned to this chair");
 		} else if (teacherIdExists(teacher.getId())) {
 			throw new WctttModelException("Id '" + teacher.getId() + "' is " +
 					"already assigned to another teacher at the chair");
@@ -103,9 +97,6 @@ public class Chair {
 		if (teacher == null || id == null) {
 			throw new IllegalArgumentException("Parameters 'teacher' and 'id'" +
 					" must not be null");
-		} else if (this.id.equals(id)) {
-			throw new WctttModelException("Id '" + id + "' is already " +
-					"assigned to this chair");
 		} else if (!teacherIdExists(teacher.getId())) {
 			throw new WctttModelException("Teacher '" + id + "' is not " +
 					"assigned to the chair");

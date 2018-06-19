@@ -21,7 +21,7 @@ public class Session {
 	private Period preAssignment;
 
 	public Session() {
-		this.id = "session";
+		this.id = "";
 		this.name = "";
 		this.teacher = new Teacher();
 		this.students = 1;
@@ -66,13 +66,10 @@ public class Session {
 		return id;
 	}
 
-	public void setId(String id) throws WctttModelException {
+	public void setId(String id) {
 		if (id == null) {
 			throw new IllegalArgumentException("Parameter 'id' must not be " +
 					"null");
-		} else if (teacher.getId().equals(id)) {
-			throw new WctttModelException("Id '" + id + "' is already " +
-					"assigned to the teacher of this session");
 		}
 		this.id = id;
 	}
@@ -96,13 +93,10 @@ public class Session {
 		return teacher;
 	}
 
-	public void setTeacher(Teacher teacher) throws WctttModelException {
+	public void setTeacher(Teacher teacher) {
 		if (teacher == null) {
 			throw new IllegalArgumentException("Parameter 'teacher' must not " +
 					"be null");
-		} else if (this.id.equals(teacher.getId())) {
-			throw new WctttModelException("Id '" + teacher.getId() + "' is " +
-					"already assigned to this session");
 		}
 		this.teacher = teacher;
 	}

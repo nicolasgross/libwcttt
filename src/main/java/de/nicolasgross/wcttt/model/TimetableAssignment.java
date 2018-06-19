@@ -44,13 +44,10 @@ public class TimetableAssignment {
 		return session;
 	}
 
-	public void setSession(Session session) throws WctttModelException {
+	public void setSession(Session session) {
 		if (session == null) {
 			throw new IllegalArgumentException("Parameter 'session' must not " +
 					"be null");
-		} else if (room.getId().equals(session.getId())) {
-			throw new WctttModelException("Id '" + session.getId() + "' is " +
-					"already assigned to the room of this assignment");
 		}
 		this.session = session;
 	}
@@ -63,9 +60,6 @@ public class TimetableAssignment {
 		if (room == null && !session.isExternal()) {
 			throw new WctttModelException("Parameter 'room' can only be null " +
 					"if 'session' is external");
-		} else if (room == null && session.getId().equals(room.getId())) {
-			throw new WctttModelException("Id '" + room.getId() + "' is " +
-					"already assigned to the session of this assignment");
 		}
 		this.room = room;
 	}

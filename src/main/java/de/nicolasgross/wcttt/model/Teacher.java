@@ -13,7 +13,7 @@ public class Teacher {
 	private final List<Period> unavailablePeriods = new LinkedList<>();
 
 	public Teacher() {
-		this.id = "teacher";
+		this.id = "";
 		this.name = "";
 	}
 
