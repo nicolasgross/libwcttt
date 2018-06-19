@@ -19,6 +19,7 @@ public class Course {
 	private final List<Session> practicals = new LinkedList<>();
 
 	public Course() {
+		// TODO same id fix
 		this.id = "";
 		this.name = "";
 		this.abbreviation = "";

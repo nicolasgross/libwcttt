@@ -74,7 +74,7 @@ class WctttBinderTest {
 		semesterWrite.getCurricula().add(curriculum);
 
 		Timetable timetable = new Timetable("test-timetable");
-		TimetableDay timetableDay = new TimetableDay(1);
+		TimetableDay timetableDay = new TimetableDay(1, "Monday");
 		TimetablePeriod timetablePeriod1 = new TimetablePeriod(1, 1);
 		TimetableAssignment timetableAssignment1 = new
 				TimetableAssignment(lecture, room1);
