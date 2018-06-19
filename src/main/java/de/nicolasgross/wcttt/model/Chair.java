@@ -12,7 +12,7 @@ public class Chair {
 	private final List<Teacher> teachers = new LinkedList<>();
 
 	public Chair() {
-		this.id = "";
+		this.id = "chair";
 		this.name = "";
 	}
 

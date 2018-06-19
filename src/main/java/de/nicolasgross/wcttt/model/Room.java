@@ -19,11 +19,11 @@ public class Room {
 	private Chair holder;
 
 	/**
-	 * Creates a new room with an empty name, capacity of 1, no holder and
-	 * default features (see {@link RoomFeatures#RoomFeatures()}).
+	 * Creates a new room with id 'room', an empty name, capacity of 1, no
+	 * holder and default features (see {@link RoomFeatures#RoomFeatures()}).
 	 */
 	public Room() {
-		this.id = "";
+		this.id = "room";
 		this.name = "";
 		this.capacity = 1;
 		this.holder = null;
