@@ -31,10 +31,13 @@ public class Curriculum {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(String id) throws WctttModelException {
 		if (id == null) {
 			throw new IllegalArgumentException("Parameter 'id' must not be " +
 					"null");
+		} else if (courseIdExists(id)) {
+			throw new WctttModelException("Id '" + id + "' is already " +
+					"assigned to a course of this curriculum");
 		}
 		this.id = id;
 	}
@@ -95,12 +98,12 @@ public class Curriculum {
 		if (course == null || id == null) {
 			throw new IllegalArgumentException("Parameters 'course' and 'id' " +
 					"must not be null");
-		} else if (this.id.equals(id)) {
-			throw new WctttModelException("Id '" + id + "' is already " +
-					"assigned to this curriculum");
 		} else if (!courseIdExists(course.getId())) {
 			throw new WctttModelException("Course '" + id + "' is not " +
 					"assigned to the curriculum");
+		} else if (this.id.equals(id)) {
+			throw new WctttModelException("Id '" + id + "' is already " +
+					"assigned to this curriculum");
 		} else if (courseIdExists(id)) {
 			throw new WctttModelException("Id '" + id + "' is already " +
 					"assigned to another course of the curriculum");

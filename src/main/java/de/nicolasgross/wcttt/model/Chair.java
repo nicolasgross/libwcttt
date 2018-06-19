@@ -35,7 +35,10 @@ public class Chair {
 		if (id == null) {
 			throw new IllegalArgumentException("Parameter 'id' must not be " +
 					"null");
-		} //TODO
+		} else if (teacherIdExists(id)) {
+			throw new WctttModelException("Id '" + id + "' is already " +
+					"assigned to a teacher of this chair");
+		}
 		this.id = id;
 	}
 

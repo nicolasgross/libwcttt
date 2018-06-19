@@ -78,7 +78,7 @@ public class Room {
 		if (id == null) {
 			throw new IllegalArgumentException("Parameter 'id' must not be" +
 					"null");
-		} else if (id.equals(holder.getId())) {
+		} else if (holder != null && id.equals(holder.getId())) {
 			throw new WctttModelException("Id '" + id + "' is already " +
 					"assigned to the holder of this room");
 		}
@@ -183,6 +183,8 @@ public class Room {
 		}
 		this.holder = holder;
 	}
+
+	// TODO update holder id
 
 	/**
 	 * Getter for the features of a room. Do not manipulate the returned

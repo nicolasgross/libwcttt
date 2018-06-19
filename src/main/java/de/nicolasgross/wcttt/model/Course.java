@@ -47,10 +47,19 @@ public class Course {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(String id) throws WctttModelException {
 		if (id == null) {
 			throw new IllegalArgumentException("Parameter 'id' must not be " +
 					"null");
+		} else if (chair.getId().equals(id)) {
+			throw new WctttModelException("Id '" + id + "' is already " +
+					"assigned to the chair of this course");
+		} else if ((lectureIdExists(id))) {
+			throw new WctttModelException("Id '" + id + "' is already " +
+					"assigned to a lecture of this course");
+		} else if ((practicalIdExists(id))) {
+			throw new WctttModelException("Id '" + id + "' is already " +
+					"assigned to a practical of this course");
 		}
 		this.id = id;
 	}
@@ -87,10 +96,19 @@ public class Course {
 		return chair;
 	}
 
-	public void setChair(Chair chair) {
+	public void setChair(Chair chair) throws WctttModelException {
 		if (chair == null) {
 			throw new IllegalArgumentException("Parameter 'chair' must not " +
 					"be null");
+		} else if (this.id.equals(chair.getId())) {
+			throw new WctttModelException("Id '" + id + "' is already " +
+					"assigned to the this course");
+		} else if (lectureIdExists(chair.getId())) {
+			throw new WctttModelException("Id '" + id + "' is already " +
+					"assigned to a lecture of this course");
+		} else if (practicalIdExists(chair.getId())) {
+			throw new WctttModelException("Id '" + id + "' is already " +
+					"assigned to a practical of this course");
 		}
 		this.chair = chair;
 	}
@@ -148,6 +166,9 @@ public class Course {
 		} else if (this.id.equals(session.getId())) {
 			throw new WctttModelException("Id '" + session.getId() + "' is " +
 					"already assigned to this course");
+		} else if (chair.getId().equals(session.getId())) {
+			throw new WctttModelException("Id '" + session.getId() + "' is " +
+					"already assigned to the chair of this course");
 		} else if (lectureIdExists(session.getId())) {
 			throw new WctttModelException("Id '" + session.getId() + "' is " +
 					"already assigned to another lecture of the course");
@@ -191,12 +212,15 @@ public class Course {
 		if (session == null || id == null) {
 			throw new IllegalArgumentException("Parameters 'session' and 'id'" +
 					" must not be null");
-		} else if (this.id.equals(id)) {
-			throw new WctttModelException("Id '" + id + "' is already " +
-					"assigned to this course");
 		} else if (!sessionIdExists(session.getId())) {
 			throw new WctttModelException("Session '" + id + "' is not " +
 					"assigned to the course");
+		} else if (this.id.equals(id)) {
+			throw new WctttModelException("Id '" + id + "' is already " +
+					"assigned to this course");
+		} else if (chair.getId().equals(id)) {
+			throw new WctttModelException("Id '" + session.getId() + "' is " +
+					"already assigned to the chair of this course");
 		} else if (lectureIdExists(id)) {
 			throw new WctttModelException("Id '" + id + "' is already " +
 					"assigned to another lecture of the course");

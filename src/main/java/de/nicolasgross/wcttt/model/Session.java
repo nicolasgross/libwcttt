@@ -70,7 +70,7 @@ public class Session {
 		if (id == null) {
 			throw new IllegalArgumentException("Parameter 'id' must not be " +
 					"null");
-		} else if (id.equals(teacher.getId())) {
+		} else if (teacher.getId().equals(id)) {
 			throw new WctttModelException("Id '" + id + "' is already " +
 					"assigned to the teacher of this session");
 		}
@@ -97,20 +97,17 @@ public class Session {
 	}
 
 	public void setTeacher(Teacher teacher) throws WctttModelException {
-		if (this.id.equals(teacher.getId())) {
+		if (teacher == null) {
+			throw new IllegalArgumentException("Parameter 'teacher' must not " +
+					"be null");
+		} else if (this.id.equals(teacher.getId())) {
 			throw new WctttModelException("Id '" + teacher.getId() + "' is " +
 					"already assigned to this session");
-		} else if (preAssignment != null) {
-			for (Period unavailable : teacher.getUnavailablePeriods()) {
-				if (preAssignment.equals(unavailable)) {
-					throw new WctttModelException("The pre-assignment " +
-							preAssignment + " of this session is within the " +
-							"unavailable periods of teacher " + teacher);
-				}
-			}
 		}
 		this.teacher = teacher;
 	}
+
+	// TODO update teacher id
 
 	@XmlAttribute(required = true)
 	public int getStudents() {
@@ -145,15 +142,6 @@ public class Session {
 
 	public void setPreAssignment(Period preAssignment) throws
 			WctttModelException {
-		if (preAssignment != null) {
-			for (Period unavailable : teacher.getUnavailablePeriods()) {
-				if (preAssignment.equals(unavailable)) {
-					throw new WctttModelException("Teacher " + teacher + " of" +
-							" this session is not available at the " +
-							"pre-assignment period " + preAssignment);
-				}
-			}
-		}
 		this.preAssignment = preAssignment;
 	}
 

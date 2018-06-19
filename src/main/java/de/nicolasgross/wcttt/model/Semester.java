@@ -399,7 +399,7 @@ public class Semester {
 	}
 
 	public void removeAllTimetables() {
-		// TODO
+		this.timetables.clear();
 	}
 
 	@Override
