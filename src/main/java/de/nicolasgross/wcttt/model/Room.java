@@ -184,8 +184,6 @@ public class Room {
 		this.holder = holder;
 	}
 
-	// TODO update holder id
-
 	/**
 	 * Getter for the features of a room. Do not manipulate the returned
 	 * reference.

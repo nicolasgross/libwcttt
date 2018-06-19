@@ -21,7 +21,7 @@ public class Session {
 	private Period preAssignment;
 
 	public Session() {
-		this.id = "";
+		this.id = "session";
 		this.name = "";
 		this.teacher = new Teacher();
 		this.students = 1;
@@ -106,8 +106,6 @@ public class Session {
 		}
 		this.teacher = teacher;
 	}
-
-	// TODO update teacher id
 
 	@XmlAttribute(required = true)
 	public int getStudents() {

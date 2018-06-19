@@ -80,7 +80,7 @@ public class Chair {
 		if (teacher == null) {
 			throw new IllegalArgumentException("Parameter 'teacher' must not " +
 					"be null");
-		} else if (this.id.equals(teacher.getId())) {
+		} else if (this.id.equals(teacher.getId())) { // TODO remove?
 			throw new WctttModelException("Id '" + teacher.getId() + "' is " +
 					"already assigned to this chair");
 		} else if (teacherIdExists(teacher.getId())) {
