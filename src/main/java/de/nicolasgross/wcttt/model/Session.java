@@ -66,7 +66,14 @@ public class Session {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(String id) throws WctttModelException {
+		if (id == null) {
+			throw new IllegalArgumentException("Parameter 'id' must not be " +
+					"null");
+		} else if (id.equals(teacher.getId())) {
+			throw new WctttModelException("Id '" + id + "' is already " +
+					"assigned to the teacher of this session");
+		}
 		this.id = id;
 	}
 
@@ -76,6 +83,10 @@ public class Session {
 	}
 
 	public void setName(String name) {
+		if (name == null) {
+			throw new IllegalArgumentException("Parameter 'name' must not be " +
+					"null");
+		}
 		this.name = name;
 	}
 
@@ -86,7 +97,10 @@ public class Session {
 	}
 
 	public void setTeacher(Teacher teacher) throws WctttModelException {
-		if (preAssignment != null) {
+		if (this.id.equals(teacher.getId())) {
+			throw new WctttModelException("Id '" + teacher.getId() + "' is " +
+					"already assigned to this session");
+		} else if (preAssignment != null) {
 			for (Period unavailable : teacher.getUnavailablePeriods()) {
 				if (preAssignment.equals(unavailable)) {
 					throw new WctttModelException("The pre-assignment " +
@@ -149,6 +163,10 @@ public class Session {
 	}
 
 	public void setRoomRequirements(RoomFeatures roomRequirements) {
+		if (roomRequirements == null) {
+			throw new IllegalArgumentException("Parameter 'roomRequirements' " +
+					"must not be null");
+		}
 		this.roomRequirements = roomRequirements;
 	}
 

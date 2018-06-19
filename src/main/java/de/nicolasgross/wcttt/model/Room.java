@@ -71,11 +71,16 @@ public class Room {
 	 * Setter for the id of a room.
 	 *
 	 * @param id the new id of the room, must not be null.
+	 * @throws WctttModelException if the new id is the same as the id of the
+	 * holder of this room.
 	 */
-	public void setId(String id) {
+	public void setId(String id) throws WctttModelException {
 		if (id == null) {
 			throw new IllegalArgumentException("Parameter 'id' must not be" +
 					"null");
+		} else if (id.equals(holder.getId())) {
+			throw new WctttModelException("Id '" + id + "' is already " +
+					"assigned to the holder of this room");
 		}
 		this.id = id;
 	}
@@ -98,8 +103,10 @@ public class Room {
 	 *
 	 * @param holder the new holder of the room, null is allowed and
 	 *                  indicates that the room has no holder.
+	 * @throws WctttModelException if the new holder has the same ID as the
+	 * room.
 	 */
-	private void setHolderBinding(Chair holder) {
+	private void setHolderBinding(Chair holder) throws WctttModelException {
 		setHolder(holder);
 	}
 
@@ -164,8 +171,16 @@ public class Room {
 	 *
 	 * @param holder the new holder of the room, can be null if there is no
 	 *               holder.
+	 * @throws WctttModelException if the new holder has the same id as the
+	 * room.
 	 */
-	public void setHolder(Chair holder) {
+	public void setHolder(Chair holder) throws WctttModelException {
+		if (holder != null) {
+			if (this.id.equals(holder.getId())) {
+				throw new WctttModelException("Id '" + holder.getId() + "' is " +
+						"already assigned to this room");
+			}
+		}
 		this.holder = holder;
 	}
 

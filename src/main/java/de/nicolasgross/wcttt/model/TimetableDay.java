@@ -9,6 +9,7 @@ import static de.nicolasgross.wcttt.model.ValidationHelper.validateDay;
 @XmlType(propOrder = {"day", "periods"})
 public class TimetableDay {
 
+	// TODO name
 	private int day;
 	private final List<TimetablePeriod> periods = new ArrayList<>();
 

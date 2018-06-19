@@ -145,6 +145,9 @@ public class Course {
 		if (session == null) {
 			throw new IllegalArgumentException("Parameter 'session' must not " +
 					"be null");
+		} else if (this.id.equals(session.getId())) {
+			throw new WctttModelException("Id '" + session.getId() + "' is " +
+					"already assigned to this course");
 		} else if (lectureIdExists(session.getId())) {
 			throw new WctttModelException("Id '" + session.getId() + "' is " +
 					"already assigned to another lecture of the course");
@@ -188,6 +191,9 @@ public class Course {
 		if (session == null || id == null) {
 			throw new IllegalArgumentException("Parameters 'session' and 'id'" +
 					" must not be null");
+		} else if (this.id.equals(id)) {
+			throw new WctttModelException("Id '" + id + "' is already " +
+					"assigned to this course");
 		} else if (!sessionIdExists(session.getId())) {
 			throw new WctttModelException("Session '" + id + "' is not " +
 					"assigned to the course");

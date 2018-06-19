@@ -48,7 +48,7 @@ public class Semester {
 	 * @param name                   the name of the semester, must not be null.
 	 * @param daysPerWeek            the number of days in a week, must be > 0.
 	 * @param timeSlotsPerDay        the number of time slots in a day, must
-	 *                                  be > 0.
+	 *                               be > 0.
 	 * @param minDailyLecturesPerCur the minimum number of daily lectures per
 	 *                               curriculum, must >= 0.
 	 * @param maxDailyLecturesPerCur the maximum number of daily lectures per
@@ -57,7 +57,7 @@ public class Semester {
 	 * @param constrWeightings       the soft constraint weightings for the
 	 *                               semester, must not be null.
 	 * @throws WctttModelException if parameters do not adhere to their
-	 * respective value ranges.
+	 *                             respective value ranges.
 	 */
 	public Semester(String name, int daysPerWeek, int timeSlotsPerDay,
 	                int minDailyLecturesPerCur, int maxDailyLecturesPerCur,
@@ -192,7 +192,7 @@ public class Semester {
 	 *                               per curriculum, must be >= {@code
 	 *                               minDailyLecturesPerCur}.
 	 * @throws WctttModelException if {@code maxDailyLecturesPerCur} is < {@code
-	 * minDailyLecturesPerCur}.
+	 *                             minDailyLecturesPerCur}.
 	 */
 	public void setMaxDailyLecturesPerCur(int maxDailyLecturesPerCur) throws
 			WctttModelException {
@@ -215,7 +215,7 @@ public class Semester {
 	 * Setter for the soft constraint weightings of a semester.
 	 *
 	 * @param constrWeightings the new soft constraint weightings for the
-	 *                            semester, must not be null.
+	 *                         semester, must not be null.
 	 */
 	public void setConstrWeightings(ConstraintWeightings constrWeightings) {
 		if (constrWeightings == null) {
@@ -288,7 +288,22 @@ public class Semester {
 		return timetables;
 	}
 
-	public void addChair(Chair chair) {
+	private boolean chairIdExists(String id) {
+		for (Chair existingChair : chairs) {
+			if (id.equals(existingChair.getId())) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public void addChair(Chair chair) throws WctttModelException {
+		if (chair == null) {
+			throw new WctttModelException("Parameter 'chair' must not be null");
+		} else if (chairIdExists(chair.getId())) {
+			throw new WctttModelException("Id '" + chair.getId() + "' is " +
+					"already assigned to another chair");
+		}
 		// TODO
 	}
 

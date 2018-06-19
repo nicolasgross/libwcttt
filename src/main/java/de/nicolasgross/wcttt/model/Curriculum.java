@@ -72,6 +72,9 @@ public class Curriculum {
 		if (course == null) {
 			throw new IllegalArgumentException("Parameter 'course' must not " +
 					"be null");
+		} else if (this.id.equals(course.getId())) {
+			throw new WctttModelException("Id '" + course.getId() + "' is " +
+					"already assigned to this curriculum");
 		} else if (courseIdExists(course.getId())) {
 			throw new WctttModelException("Id '" + course.getId() + "' is " +
 					"already assigned to another course of the curriculum");
@@ -92,6 +95,9 @@ public class Curriculum {
 		if (course == null || id == null) {
 			throw new IllegalArgumentException("Parameters 'course' and 'id' " +
 					"must not be null");
+		} else if (this.id.equals(id)) {
+			throw new WctttModelException("Id '" + id + "' is already " +
+					"assigned to this curriculum");
 		} else if (!courseIdExists(course.getId())) {
 			throw new WctttModelException("Course '" + id + "' is not " +
 					"assigned to the curriculum");
