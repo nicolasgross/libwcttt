@@ -94,7 +94,7 @@ public class TimetableDay {
 		}
 
 		TimetableDay other = (TimetableDay) obj;
-		if (this.day != other.day) {
+		if (this.day != other.day || !this.name.equals(other.name)) {
 			return false;
 		}
 
