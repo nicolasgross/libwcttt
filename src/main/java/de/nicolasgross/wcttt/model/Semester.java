@@ -114,6 +114,7 @@ public class Semester {
 		return daysPerWeek;
 	}
 
+	// TODO setter doc warn timetables should be empty
 	/**
 	 * Setter for the number of days per week of a semester.
 	 *
@@ -224,7 +225,7 @@ public class Semester {
 		}
 		this.constrWeightings = constrWeightings;
 		for (Timetable timetable : timetables) {
-			timetable.calcConstraintViolations();
+			timetable.calcConstraintViolations(this);
 		}
 	}
 
@@ -377,7 +378,8 @@ public class Semester {
 
 	public void addChair(Chair chair) throws WctttModelException {
 		if (chair == null) {
-			throw new WctttModelException("Parameter 'chair' must not be null");
+			throw new IllegalArgumentException("Parameter 'chair' must not be" +
+					" null");
 		}
 		checkIfIdAvailable(chair.getId());
 		for (Teacher teacher : chair.getTeachers()) {
@@ -386,15 +388,35 @@ public class Semester {
 		this.chairs.add(chair);
 	}
 
-	public void removeChair(Chair chair) {
-		// TODO
+	public boolean removeChair(Chair chair) throws WctttModelException {
+		if (chair == null) {
+			throw new IllegalArgumentException("Parameter 'chair' must not be" +
+					" null");
+		} else if (!chair.getTeachers().isEmpty()) {
+			throw new WctttModelException("Chair cannot be removed because it" +
+					" has teachers assigned to it");
+		}
+		for (Course course : courses) {
+			if (chair.equals(course.getChair())) {
+				throw new WctttModelException("Chair cannot be removed " +
+						"because it is responsible for course " + course);
+			}
+		}
+		for (Room room : rooms) {
+			if (room.getHolder().isPresent() &&
+					chair.equals(room.getHolder().get())) {
+				throw new WctttModelException("Chair cannot be removed " +
+						"because it is the holder of room " + room);
+			}
+		}
+		return chairs.remove(chair);
 	}
 
 	public void updateChairId(Chair chair, String id) throws
 			WctttModelException {
 		if (chair == null || id == null) {
-			throw new WctttModelException("Parameters 'chair' and 'id' must " +
-					"not be null");
+			throw new IllegalArgumentException("Parameters 'chair' and 'id' " +
+					"must not be null");
 		} else if (!chairIdExists(chair.getId())) {
 			throw new WctttModelException("Chair " + chair.getId() + " is not" +
 					" assigned to the semester");
@@ -406,8 +428,8 @@ public class Semester {
 	public void addTeacherToChair(Teacher teacher, Chair chair) throws
 			WctttModelException {
 		if (teacher == null || chair == null) {
-			throw new WctttModelException("Parameter 'teacher' and 'chair' " +
-					"must not be null");
+			throw new IllegalArgumentException("Parameter 'teacher' and " +
+					"'chair' must not be null");
 		} else if (!chairIdExists(chair.getId())) {
 			throw new WctttModelException("Chair " + chair.getId() + " is not" +
 					" assigned to the semester");
@@ -416,15 +438,35 @@ public class Semester {
 		chair.addTeacher(teacher);
 	}
 
-	public void removeTeacherFromChair(Teacher teacher, Chair chair) {
-		// TODO
+	public boolean removeTeacherFromChair(Teacher teacher, Chair chair) throws
+			WctttModelException {
+		if (teacher == null || chair == null) {
+			throw new IllegalArgumentException("Parameters 'teacher' and " +
+					"'chair' must not be null");
+		}
+		for (Course course : courses) {
+			for (Session lecture : course.getLectures()) {
+				if (teacher.equals(lecture.getTeacher())) {
+					throw new WctttModelException("Teacher cannot be removed " +
+							"because he/she is assigned to lecture " + lecture);
+				}
+			}
+			for (Session practical : course.getPracticals()) {
+				if (teacher.equals(practical.getTeacher())) {
+					throw new WctttModelException("Teacher cannot be removed " +
+							"because he/she is assigned to practical " +
+							practical);
+				}
+			}
+		}
+		return chair.removeTeacher(teacher);
 	}
 
 	public void updateTeacherId(Teacher teacher, Chair chair, String id) throws
 			WctttModelException {
 		if (teacher == null || chair == null || id == null) {
-			throw new WctttModelException("Parameter 'teacher', 'chair' and " +
-					"'id' must not be null");
+			throw new IllegalArgumentException("Parameter 'teacher', 'chair' " +
+					"and 'id' must not be null");
 		} else if (!teacherIdExists(teacher.getId())) {
 			throw new WctttModelException("Teacher " + teacher.getId() + " is" +
 					" not assigned to the semester");
@@ -438,20 +480,25 @@ public class Semester {
 
 	public void addRoom(Room room) throws WctttModelException {
 		if (room == null) {
-			throw new WctttModelException("Parameter 'room' must not be null");
+			throw new IllegalArgumentException("Parameter 'room' must not be " +
+					"null");
 		}
 		checkIfIdAvailable(room.getId());
 		this.rooms.add(room);
 	}
 
-	public void removeRoom(Room room) {
-		// TODO
+	public boolean removeRoom(Room room) {
+		if (room == null) {
+			throw new IllegalArgumentException("Parameter 'room' must not " +
+					"be null");
+		}
+		return this.rooms.remove(room);
 	}
 
 	public void updateRoomId(Room room, String id) throws WctttModelException {
 		if (room == null || id == null) {
-			throw new WctttModelException("Parameter 'room' and 'id' must not" +
-					" be null");
+			throw new IllegalArgumentException("Parameter 'room' and 'id' " +
+					"must not be null");
 		} else if (!roomIdExists(room.getId())) {
 			throw new WctttModelException("Room " + room.getId() + " is" +
 					" not assigned to the semester");
@@ -462,8 +509,8 @@ public class Semester {
 
 	public void addCourse(Course course) throws WctttModelException {
 		if (course == null) {
-			throw new WctttModelException("Parameter 'course' must not be " +
-					"null");
+			throw new IllegalArgumentException("Parameter 'course' must not " +
+					"be null");
 		}
 		checkIfIdAvailable(course.getId());
 		for (Session lecture : course.getLectures()) {
@@ -475,15 +522,27 @@ public class Semester {
 		this.courses.add(course);
 	}
 
-	public void removeCourse(Course course) {
-		// TODO
+	public boolean removeCourse(Course course) throws WctttModelException {
+		if (course == null) {
+			throw new IllegalArgumentException("Parameter 'course' must not " +
+					"be null");
+		}
+		for (Curriculum curriculum : curricula) {
+			for (Course otherCourse : curriculum.getCourses()) {
+				if (course.equals(otherCourse)) {
+					throw new WctttModelException("Course cannot be removed " +
+							"because it is part of curriculum " + curriculum);
+				}
+			}
+		}
+		return this.courses.remove(course);
 	}
 
 	public void updateCourseId(Course course, String id) throws
 			WctttModelException {
 		if (course == null || id == null) {
-			throw new WctttModelException("Parameters 'course' and 'id' must " +
-					"not be null");
+			throw new IllegalArgumentException("Parameters 'course' and 'id' " +
+					"must not be null");
 		} else if (!courseIdExists(course.getId())) {
 			throw new WctttModelException("Course " + course.getId() + " is " +
 					"not assigned to the semester");
@@ -509,34 +568,51 @@ public class Semester {
 	public void addCourseLecture(Session lecture, Course course) throws
 			WctttModelException {
 		if (course == null || lecture == null) {
-			throw new WctttModelException("Parameter 'course' and 'lecture' " +
-					"must not be null");
+			throw new IllegalArgumentException("Parameter 'course' and " +
+					"'lecture' must not be null");
 		}
 		addCourseSession(lecture, course, true);
 	}
 
-	public void removeCourseLecture(Session lecture, Course course) {
-		// TODO
+	public boolean removeCourseLecture(Session lecture, Course course) throws
+			WctttModelException {
+		if (lecture == null || course == null) {
+			throw new IllegalArgumentException("Parameters 'lecture' and " +
+					"'course' must not be null");
+		} else if (!courseIdExists(course.getId())) {
+			throw new WctttModelException("Course " + course.getId() + " is" +
+					" not assigned to the semester");
+		}
+		return course.removeLecture(lecture);
 	}
 
 	public void addCoursePractical(Session practical, Course course) throws
 			WctttModelException {
 		if (course == null || practical == null) {
-			throw new WctttModelException("Parameter 'course' and 'practical'" +
-					" must not be null");
+			throw new IllegalArgumentException("Parameter 'course' and " +
+					"'practical' must not be null");
 		}
 		addCourseSession(practical, course, false);
 	}
 
-	public void removeCoursePractical(Session practical, Course course) {
-		// TODO
+	// timetables should be empty
+	public boolean removeCoursePractical(Session practical, Course course)
+			throws WctttModelException {
+		if (practical == null || course == null) {
+			throw new IllegalArgumentException("Parameters 'practical' and " +
+					"'course' must not be null");
+		} else if (!courseIdExists(course.getId())) {
+			throw new WctttModelException("Course " + course.getId() + " is" +
+					" not assigned to the semester");
+		}
+		return course.removePractical(practical);
 	}
 
 	public void updateCourseSessionId(Session session, Course course, String id)
 			throws WctttModelException {
 		if (course == null || session == null || id == null) {
-			throw new WctttModelException("Parameter 'session', 'course' and " +
-					"'id' must not be null");
+			throw new IllegalArgumentException("Parameter 'session', 'course'" +
+					" and 'id' must not be null");
 		} else if (!courseIdExists(course.getId())) {
 			throw new WctttModelException("Course " + course.getId() + " is" +
 					" not assigned to the semester");
@@ -548,20 +624,41 @@ public class Semester {
 		course.updateSessionId(session, id);
 	}
 
-	public void addCurriculum(Curriculum curriculum) {
-		// TODO
+	public void addCurriculum(Curriculum curriculum) throws
+			WctttModelException {
+		if (curriculum == null) {
+			throw new IllegalArgumentException("Parameter 'curriculum' must " +
+					"not be null");
+		}
+		checkIfIdAvailable(curriculum.getId());
+		this.curricula.add(curriculum);
 	}
 
-	public void removeCurriculum(Curriculum curriculum) {
-		// TODO
+	// timetables should be empty
+	public boolean removeCurriculum(Curriculum curriculum) {
+		if (curriculum == null) {
+			throw new IllegalArgumentException("Parameter 'curriculum' must " +
+					"not be null");
+		}
+		return this.curricula.remove(curriculum);
 	}
 
-	public void updateCurriculumId(Curriculum curriculum, String id) {
-		// TODO
+	public void updateCurriculumId(Curriculum curriculum, String id) throws
+			WctttModelException {
+		if (curriculum == null || id == null) {
+			throw new IllegalArgumentException("Parameters 'curriculum' and " +
+					"'id' must not be null");
+		} else if (!curriculumIdExists(curriculum.getId())) {
+			throw new WctttModelException("Curriculum " + curriculum.getId() +
+					" is not assigned to the semester");
+		}
+		checkIfIdAvailable(id);
+		curriculum.setId(id);
 	}
 
 	public void addTimetable(Timetable timetable) {
-		// TODO
+		timetable.calcConstraintViolations(this);
+		timetables.add(timetable);
 	}
 
 	public boolean removeTimetable(Timetable timetable) {

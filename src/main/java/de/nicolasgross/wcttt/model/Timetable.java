@@ -92,7 +92,7 @@ public class Timetable {
 		return days.remove(day);
 	}
 
-	public void calcConstraintViolations() {
+	public void calcConstraintViolations(Semester semester) {
 		// TODO after checker package
 	}
 

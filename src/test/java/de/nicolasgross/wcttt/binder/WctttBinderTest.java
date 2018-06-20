@@ -75,8 +75,8 @@ class WctttBinderTest {
 
 		Curriculum curriculum = new Curriculum("sosysc-mand",
 				"Software Systems Science - Mandatory");
+		semesterWrite.addCurriculum(curriculum);
 		curriculum.addCourse(course);
-		semesterWrite.getCurricula().add(curriculum);
 
 		Timetable timetable = new Timetable("test-timetable");
 		TimetableDay timetableDay = new TimetableDay(1, "Monday");
