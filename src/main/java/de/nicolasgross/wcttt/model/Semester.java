@@ -114,7 +114,6 @@ public class Semester {
 		return daysPerWeek;
 	}
 
-	// TODO setter doc warn timetables should be empty
 	/**
 	 * Setter for the number of days per week of a semester.
 	 *
