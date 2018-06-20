@@ -52,23 +52,26 @@ class WctttBinderTest {
 		semesterWrite.addTeacherToChair(teacher, chair);
 		semesterWrite.updateTeacherId(teacher, chair, "lüttgen");
 
-		Room room1 = new Room("r1", "WE5/00.019", 156, chair,
+		Room room1 = new Room("r0", "WE5/00.019", 156, chair,
 				new RoomFeatures(2, false, false, false));
 		Room room2 = new Room("r2", "WE5/00.021", 200, null,
 				new RoomFeatures(2, false, false, false));
-		semesterWrite.getRooms().add(room1);
-		semesterWrite.getRooms().add(room2);
+		semesterWrite.addRoom(room1);
+		semesterWrite.updateRoomId(room1, "r1");
+		semesterWrite.addRoom(room2);
 
-		Course course = new Course("fse",
+		Course course = new Course("",
 				"Foundations of Software Engineering", "SWT-FSE-B", chair, 2);
-		Session lecture = new Session("FSE-L1", "FSE Lecture 1", teacher, 80,
+		semesterWrite.addCourse(course);
+		semesterWrite.updateCourseId(course, "fse");
+		Session lecture = new Session("", "FSE Lecture 1", teacher, 80,
 				false, false, new RoomFeatures(1, false, false, false), null);
+		semesterWrite.addCourseLecture(lecture, course);
+		semesterWrite.updateCourseSessionId(lecture, course, "FSE-L1");
 		Session practical = new Session("FSE-P1", "FSE Practical 1", teacher,
 				30, false, false, new RoomFeatures(1, false, false, true),
 				null);
-		course.addLecture(lecture);
-		course.addPractical(practical);
-		semesterWrite.getCourses().add(course);
+		semesterWrite.addCoursePractical(practical, course);
 
 		Curriculum curriculum = new Curriculum("sosysc-mand",
 				"Software Systems Science - Mandatory");
