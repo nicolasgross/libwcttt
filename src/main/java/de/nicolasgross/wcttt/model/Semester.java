@@ -388,20 +388,50 @@ public class Semester {
 		// TODO
 	}
 
-	public void updateChairId(Chair chair, String id) {
-		// TODO
+	public void updateChairId(Chair chair, String id) throws
+			WctttModelException {
+		if (chair == null || id == null) {
+			throw new WctttModelException("Parameters 'chair' and 'id' must " +
+					"not be null");
+		} else if (!chairIdExists(chair.getId())) {
+			throw new WctttModelException("Chair " + chair.getId() + " is not " +
+					"assigned to the semester");
+		}
+		checkIfIdExists(id);
+		chair.setId(id);
 	}
 
-	public void addTeacherToChair(Teacher teacher, Chair chair) {
-		// TODO
+	public void addTeacherToChair(Teacher teacher, Chair chair) throws
+			WctttModelException {
+		if (teacher == null || chair == null) {
+			throw new WctttModelException("Parameter 'teacher' and 'chair' " +
+					"must not be null");
+		} else if (!chairIdExists(chair.getId())) {
+			throw new WctttModelException("Chair " + chair.getId() + " is not" +
+					" assigned to the semester");
+		}
+		checkIfIdExists(teacher.getId());
+		chair.addTeacher(teacher);
 	}
 
 	public void removeTeacherFromChair(Teacher teacher, Chair chair) {
 		// TODO
 	}
 
-	public void updateTeacherId(Teacher teacher, Chair chair, String id) {
-		// TODO
+	public void updateTeacherId(Teacher teacher, Chair chair, String id) throws
+			WctttModelException {
+		if (teacher == null || chair == null || id == null) {
+			throw new WctttModelException("Parameter 'teacher', 'chair' and " +
+					"'id' must not be null");
+		} else if (!teacherIdExists(teacher.getId())) {
+			throw new WctttModelException("Teacher " + teacher.getId() + " is" +
+					" not assigned to the semester");
+		} else if (!chairIdExists(chair.getId())) {
+			throw new WctttModelException("Chair " + chair.getId() + " is not" +
+					" assigned to the semester");
+		}
+		checkIfIdExists(id);
+		chair.updateTeacherId(teacher, id);
 	}
 
 	public void addRoom(Room room) {

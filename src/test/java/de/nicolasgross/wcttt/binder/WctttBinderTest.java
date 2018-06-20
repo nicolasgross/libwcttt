@@ -42,13 +42,15 @@ class WctttBinderTest {
 		semesterWrite.setConstrWeightings(new ConstraintWeightings(1.0, 2,
 				3.4, 4.1, 5.8, 6.2, 7.9, 8.5));
 
-		Chair chair = new Chair("swt", "Lehrstuhl Softwaretechnik und " +
+		Chair chair = new Chair("", "Lehrstuhl Softwaretechnik und " +
 				"Programmiersprachen");
-		Teacher teacher = new Teacher("lüttgen", "Prof. Dr. Gerald Lüttgen");
+		semesterWrite.addChair(chair);
+		semesterWrite.updateChairId(chair, "swt");
+		Teacher teacher = new Teacher("", "Prof. Dr. Gerald Lüttgen");
 		teacher.addUnfavorablePeriod(new Period(1, 3));
 		teacher.addUnavailablePeriod(new Period(2, 4));
-		chair.addTeacher(teacher);
-		semesterWrite.addChair(chair);
+		semesterWrite.addTeacherToChair(teacher, chair);
+		semesterWrite.updateTeacherId(teacher, chair, "lüttgen");
 
 		Room room1 = new Room("r1", "WE5/00.019", 156, chair,
 				new RoomFeatures(2, false, false, false));
