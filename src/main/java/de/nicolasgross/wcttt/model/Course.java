@@ -6,14 +6,15 @@ import java.util.List;
 
 import static de.nicolasgross.wcttt.model.ValidationHelper.validateMinNumOfDays;
 
-@XmlType(propOrder = {"id", "name", "abbreviation", "chair", "minNumberOfDays",
-		"lectures", "practicals"})
+@XmlType(propOrder = {"id", "name", "abbreviation", "chair", "courseLevel",
+		"minNumberOfDays", "lectures", "practicals"})
 public class Course {
 
 	private String id;
 	private String name;
 	private String abbreviation;
 	private Chair chair;
+	private CourseLevel courseLevel;
 	private int minNumberOfDays;
 	private final List<Session> lectures = new LinkedList<>();
 	private final List<Session> practicals = new LinkedList<>();
@@ -23,11 +24,13 @@ public class Course {
 		this.name = "";
 		this.abbreviation = "";
 		this.chair = new Chair();
+		this.courseLevel = CourseLevel.Bachelor;
 		this.minNumberOfDays = 1;
 	}
 
 	public Course(String id, String name, String abbreviation, Chair chair,
-	              int minNumberOfDays) throws WctttModelException {
+	              CourseLevel courseLevel, int minNumberOfDays) throws
+			WctttModelException {
 		if (id == null || name == null || abbreviation == null ||
 				chair == null) {
 			throw new IllegalArgumentException("Parameters 'id', 'name', " +
@@ -38,6 +41,7 @@ public class Course {
 		this.name = name;
 		this.abbreviation = abbreviation;
 		this.chair = chair;
+		this.courseLevel = courseLevel;
 		this.minNumberOfDays = minNumberOfDays;
 	}
 
@@ -93,6 +97,15 @@ public class Course {
 					"be null");
 		}
 		this.chair = chair;
+	}
+
+	@XmlAttribute(required = true)
+	public CourseLevel getCourseLevel() {
+		return courseLevel;
+	}
+
+	public void setCourseLevel(CourseLevel courseLevel) {
+		this.courseLevel = courseLevel;
 	}
 
 	@XmlAttribute(required = true)

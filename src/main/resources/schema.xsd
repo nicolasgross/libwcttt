@@ -178,6 +178,7 @@
     <xs:attribute name="name" type="xs:string" use="required"/>
     <xs:attribute name="abbreviation" type="xs:string" use="required"/>
     <xs:attribute name="minNumberOfDays" type="xs:int" use="required"/>
+    <xs:attribute name="courseLevel" type="courseLevel" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="curriculum">
@@ -222,5 +223,12 @@
     <xs:attribute name="day" type="xs:int" use="required"/>
     <xs:attribute name="name" type="xs:string" use="required"/>
   </xs:complexType>
+
+  <xs:simpleType name="courseLevel">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Bachelor"/>
+      <xs:enumeration value="Master"/>
+    </xs:restriction>
+  </xs:simpleType>
 </xs:schema>
 

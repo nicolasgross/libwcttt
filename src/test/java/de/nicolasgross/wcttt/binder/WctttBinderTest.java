@@ -61,7 +61,8 @@ class WctttBinderTest {
 		semesterWrite.addRoom(room2);
 
 		Course course = new Course("abc",
-				"Foundations of Software Engineering", "SWT-FSE-B", chair, 2);
+				"Foundations of Software Engineering", "SWT-FSE-B", chair,
+				CourseLevel.Bachelor, 2);
 		semesterWrite.addCourse(course);
 		semesterWrite.updateCourseId(course, "fse");
 		Session lecture = new Session("abc", "FSE Lecture 1", teacher, 80,

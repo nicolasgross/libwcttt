@@ -109,7 +109,7 @@
         </room>
     </rooms>
     <courses>
-        <course id="fse" name="Foundations of Software Engineering" abbreviation="SWT-FSE-B" minNumberOfDays="3">
+        <course id="fse" name="Foundations of Software Engineering" abbreviation="SWT-FSE-B" courseLevel="Bachelor" minNumberOfDays="3">
             <chair>swt</chair>
             <lectures>
                 <lecture id="fse-l1" name="FSE Lecture 1" students="80" external="false" doubleSession="false">
@@ -140,7 +140,7 @@
                 </practical>
             </practicals>
         </course>
-        <course id="eiaps" name="Einführung in Algorithmen, Programmierung und Software" abbreviation="DSG-EiAPS-B" minNumberOfDays="2">
+        <course id="eiaps" name="Einführung in Algorithmen, Programmierung und Software" abbreviation="DSG-EiAPS-B" courseLevel="Bachelor" minNumberOfDays="2">
             <chair>dsg</chair>
             <lectures>
                 <lecture id="eiaps-l1" name="EiAPS Lecture 1" students="240" external="false" doubleSession="false">
@@ -187,7 +187,7 @@
                 </practical>
             </practicals>
         </course>
-        <course id="mtl" name="Modal and Temporal Logic" abbreviation="GdI-MTL" minNumberOfDays="2">
+        <course id="mtl" name="Modal and Temporal Logic" abbreviation="GdI-MTL" courseLevel="Master" minNumberOfDays="2">
             <chair>gdi</chair>
             <lectures>
                 <lecture id="mtl-l1" name="MTL Lecture 1" students="30" external="false" doubleSession="false">
@@ -210,7 +210,7 @@
                 </practical>
             </practicals>
         </course>
-        <course id="gik" name="Grundbausteine der Internet-Kommunikation" abbreviation="KTR-GIK-M" minNumberOfDays="2">
+        <course id="gik" name="Grundbausteine der Internet-Kommunikation" abbreviation="KTR-GIK-M" courseLevel="Master" minNumberOfDays="2">
             <chair>ktr</chair>
             <lectures>
                 <lecture id="gik-l1" name="GIK Lecture 1" students="20" external="false" doubleSession="false">
