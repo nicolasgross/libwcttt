@@ -388,6 +388,7 @@ public class Semester {
 		this.chairs.add(chair);
 	}
 
+	// timetables should be empty
 	public boolean removeChair(Chair chair) throws WctttModelException {
 		if (chair == null) {
 			throw new IllegalArgumentException("Parameter 'chair' must not be" +
@@ -438,6 +439,7 @@ public class Semester {
 		chair.addTeacher(teacher);
 	}
 
+	// timetables should be empty
 	public boolean removeTeacherFromChair(Teacher teacher, Chair chair) throws
 			WctttModelException {
 		if (teacher == null || chair == null) {
@@ -487,6 +489,7 @@ public class Semester {
 		this.rooms.add(room);
 	}
 
+	// timetables should be empty
 	public boolean removeRoom(Room room) {
 		if (room == null) {
 			throw new IllegalArgumentException("Parameter 'room' must not " +
@@ -522,6 +525,7 @@ public class Semester {
 		this.courses.add(course);
 	}
 
+	// timetables should be empty
 	public boolean removeCourse(Course course) throws WctttModelException {
 		if (course == null) {
 			throw new IllegalArgumentException("Parameter 'course' must not " +
@@ -574,6 +578,7 @@ public class Semester {
 		addCourseSession(lecture, course, true);
 	}
 
+	// timetables should be empty
 	public boolean removeCourseLecture(Session lecture, Course course) throws
 			WctttModelException {
 		if (lecture == null || course == null) {
