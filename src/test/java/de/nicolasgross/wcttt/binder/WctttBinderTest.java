@@ -42,11 +42,11 @@ class WctttBinderTest {
 		semesterWrite.setConstrWeightings(new ConstraintWeightings(1.0, 2,
 				3.4, 4.1, 5.8, 6.2, 7.9, 8.5));
 
-		Chair chair = new Chair("", "Lehrstuhl Softwaretechnik und " +
+		Chair chair = new Chair("abc", "Lehrstuhl Softwaretechnik und " +
 				"Programmiersprachen");
 		semesterWrite.addChair(chair);
 		semesterWrite.updateChairId(chair, "swt");
-		Teacher teacher = new Teacher("", "Prof. Dr. Gerald Lüttgen");
+		Teacher teacher = new Teacher("abc", "Prof. Dr. Gerald Lüttgen");
 		teacher.addUnfavorablePeriod(new Period(1, 3));
 		teacher.addUnavailablePeriod(new Period(2, 4));
 		semesterWrite.addTeacherToChair(teacher, chair);
@@ -60,11 +60,11 @@ class WctttBinderTest {
 		semesterWrite.updateRoomId(room1, "r1");
 		semesterWrite.addRoom(room2);
 
-		Course course = new Course("",
+		Course course = new Course("abc",
 				"Foundations of Software Engineering", "SWT-FSE-B", chair, 2);
 		semesterWrite.addCourse(course);
 		semesterWrite.updateCourseId(course, "fse");
-		Session lecture = new Session("", "FSE Lecture 1", teacher, 80,
+		Session lecture = new Session("abc", "FSE Lecture 1", teacher, 80,
 				false, false, new RoomFeatures(1, false, false, false), null);
 		semesterWrite.addCourseLecture(lecture, course);
 		semesterWrite.updateCourseSessionId(lecture, course, "FSE-L1");

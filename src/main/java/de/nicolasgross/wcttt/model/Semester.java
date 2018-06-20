@@ -351,13 +351,15 @@ public class Semester {
 		return false;
 	}
 
-	private void checkIfIdExists(String id) throws WctttModelException {
-		if (chairIdExists(id)) {
+	private void checkIfIdAvailable(String id) throws WctttModelException {
+		if ("".equals(id)) {
+			throw new WctttModelException("Id '" + id + "' is not allowed");
+		} else if (chairIdExists(id)) {
 			throw new WctttModelException("Id '" + id + "' is already " +
 					"assigned to a chair of the semester");
 		} else if (teacherIdExists(id)) {
-				throw new WctttModelException("Id '" + id + "' is already " +
-						"assigned to a teacher of the semester");
+			throw new WctttModelException("Id '" + id + "' is already " +
+					"assigned to a teacher of the semester");
 		} else if (roomIdExists(id)) {
 			throw new WctttModelException("Id '" + id + "' is already " +
 					"assigned to a room of the semester");
@@ -377,9 +379,9 @@ public class Semester {
 		if (chair == null) {
 			throw new WctttModelException("Parameter 'chair' must not be null");
 		}
-		checkIfIdExists(chair.getId());
+		checkIfIdAvailable(chair.getId());
 		for (Teacher teacher : chair.getTeachers()) {
-			checkIfIdExists(teacher.getId());
+			checkIfIdAvailable(teacher.getId());
 		}
 		this.chairs.add(chair);
 	}
@@ -397,7 +399,7 @@ public class Semester {
 			throw new WctttModelException("Chair " + chair.getId() + " is not" +
 					" assigned to the semester");
 		}
-		checkIfIdExists(id);
+		checkIfIdAvailable(id);
 		chair.setId(id);
 	}
 
@@ -410,7 +412,7 @@ public class Semester {
 			throw new WctttModelException("Chair " + chair.getId() + " is not" +
 					" assigned to the semester");
 		}
-		checkIfIdExists(teacher.getId());
+		checkIfIdAvailable(teacher.getId());
 		chair.addTeacher(teacher);
 	}
 
@@ -430,7 +432,7 @@ public class Semester {
 			throw new WctttModelException("Chair " + chair.getId() + " is not" +
 					" assigned to the semester");
 		}
-		checkIfIdExists(id);
+		checkIfIdAvailable(id);
 		chair.updateTeacherId(teacher, id);
 	}
 
@@ -438,7 +440,7 @@ public class Semester {
 		if (room == null) {
 			throw new WctttModelException("Parameter 'room' must not be null");
 		}
-		checkIfIdExists(room.getId());
+		checkIfIdAvailable(room.getId());
 		this.rooms.add(room);
 	}
 
@@ -454,7 +456,7 @@ public class Semester {
 			throw new WctttModelException("Room " + room.getId() + " is" +
 					" not assigned to the semester");
 		}
-		checkIfIdExists(id);
+		checkIfIdAvailable(id);
 		room.setId(id);
 	}
 
@@ -463,12 +465,12 @@ public class Semester {
 			throw new WctttModelException("Parameter 'course' must not be " +
 					"null");
 		}
-		checkIfIdExists(course.getId());
+		checkIfIdAvailable(course.getId());
 		for (Session lecture : course.getLectures()) {
-			checkIfIdExists(lecture.getId());
+			checkIfIdAvailable(lecture.getId());
 		}
 		for (Session practical : course.getPracticals()) {
-			checkIfIdExists(practical.getId());
+			checkIfIdAvailable(practical.getId());
 		}
 		this.courses.add(course);
 	}
@@ -486,7 +488,7 @@ public class Semester {
 			throw new WctttModelException("Course " + course.getId() + " is " +
 					"not assigned to the semester");
 		}
-		checkIfIdExists(id);
+		checkIfIdAvailable(id);
 		course.setId(id);
 	}
 
@@ -496,7 +498,7 @@ public class Semester {
 			throw new WctttModelException("Course " + course.getId() + " is " +
 					"not assigned to the semester");
 		}
-		checkIfIdExists(session.getId());
+		checkIfIdAvailable(session.getId());
 		if (lecture) {
 			course.addLecture(session);
 		} else {
@@ -542,7 +544,7 @@ public class Semester {
 			throw new WctttModelException("Session " + session.getId() + " is" +
 					" not assigned to the semester");
 		}
-		checkIfIdExists(id);
+		checkIfIdAvailable(id);
 		course.updateSessionId(session, id);
 	}
 
