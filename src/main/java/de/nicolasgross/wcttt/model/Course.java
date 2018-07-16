@@ -125,7 +125,7 @@ public class Course {
 		return lectures;
 	}
 
-	@XmlElementWrapper(required = true)
+	@XmlElementWrapper(required = false)
 	@XmlElement(name = "practical")
 	public List<Session> getPracticals() {
 		return practicals;

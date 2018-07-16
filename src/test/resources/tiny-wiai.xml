@@ -92,6 +92,14 @@
                 </teacher>
             </teachers>
         </chair>
+        <chair id="stat" name="Lehrstuhl für Statistik und Ökonometrie">
+            <teachers>
+                <teacher id="rässler" name="Prof. Dr. Gerald Lüttgen">
+                    <unfavorablePeriods/>
+                    <unavailablePeriods/>
+                </teacher>
+            </teachers>
+        </chair>
     </chairs>
     <rooms>
         <room id="r1" name="WE5/00.019" capacity="156">
@@ -109,6 +117,17 @@
         </room>
     </rooms>
     <courses>
+        <course id="stat1" name="Methoden der Statistik 1" abbreviation="Stat-B-01" courseLevel="Bachelor" minNumberOfDays="1">
+            <chair>stat</chair>
+            <lectures>
+                <lecture id="stat1-l1" name="Statistik Lecture" students="400" doubleSession="true" external="true">
+                    <teacher>rässler</teacher>
+                    <roomRequirements projectors="1" pcPool="false" docCam="false" teacherPc="false"/>
+                    <externalRoomName>Audimax</externalRoomName>
+                </lecture>
+            </lectures>
+            <practicals/>
+        </course>
         <course id="fse" name="Foundations of Software Engineering" abbreviation="SWT-FSE-B" courseLevel="Bachelor" minNumberOfDays="3">
             <chair>swt</chair>
             <lectures>

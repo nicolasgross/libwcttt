@@ -76,14 +76,14 @@
 
   <xs:complexType name="teacher">
     <xs:sequence>
-      <xs:element name="unfavorablePeriods">
+      <xs:element name="unfavorablePeriods" minOccurs="0">
         <xs:complexType>
           <xs:sequence>
             <xs:element name="unfavorable" type="period" minOccurs="0" maxOccurs="unbounded"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
-      <xs:element name="unavailablePeriods">
+      <xs:element name="unavailablePeriods" minOccurs="0">
         <xs:complexType>
           <xs:sequence>
             <xs:element name="unavailable" type="period" minOccurs="0" maxOccurs="unbounded"/>
@@ -166,7 +166,7 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
-      <xs:element name="practicals">
+      <xs:element name="practicals" minOccurs="0">
         <xs:complexType>
           <xs:sequence>
             <xs:element name="practical" type="session" minOccurs="0" maxOccurs="unbounded"/>

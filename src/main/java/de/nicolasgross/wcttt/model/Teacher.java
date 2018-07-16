@@ -53,13 +53,13 @@ public class Teacher {
 		this.name = name;
 	}
 
-	@XmlElementWrapper(required = true)
+	@XmlElementWrapper(required = false)
 	@XmlElement(name = "unfavorable")
 	public List<Period> getUnfavorablePeriods() {
 		return unfavorablePeriods;
 	}
 
-	@XmlElementWrapper(required = true)
+	@XmlElementWrapper(required = false)
 	@XmlElement(name = "unavailable")
 	public List<Period> getUnavailablePeriods() {
 		return unavailablePeriods;
