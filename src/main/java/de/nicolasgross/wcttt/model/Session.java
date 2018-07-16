@@ -7,47 +7,53 @@ import java.util.Optional;
 import static de.nicolasgross.wcttt.model.ValidationHelper.validateStudents;
 
 @XmlType(propOrder = {"id", "name", "teacher", "students",
-		"external", "doubleSession", "preAssignmentBinding",
-		"roomRequirements"})
+		"doubleSession", "preAssignmentBinding", "roomRequirements", "external",
+		"externalRoomName"})
 public class Session {
 
 	private String id;
 	private String name;
 	private Teacher teacher;
 	private int students;
-	private boolean external;
 	private boolean doubleSession;
 	private RoomFeatures roomRequirements;
 	private Period preAssignment;
+	private boolean external;
+	private String externalRoomName;
 
 	public Session() {
 		this.id = "";
 		this.name = "";
 		this.teacher = new Teacher();
 		this.students = 1;
-		this.external = false;
 		this.doubleSession = false;
 		this.roomRequirements = new RoomFeatures();
+		this.external = false;
+		this.externalRoomName = null;
 	}
 
 	public Session(String id, String name, Teacher teacher, int students,
-	               boolean external, boolean doubleSession,
-	               RoomFeatures roomRequirements, Period preAssignment) throws
-			WctttModelException {
+	               boolean doubleSession, RoomFeatures roomRequirements,
+	               Period preAssignment, boolean external,
+	               String externalRoomName) throws WctttModelException {
 		if (id == null || name == null || teacher == null ||
 				roomRequirements == null) {
 			throw new IllegalArgumentException("Parameters 'id', 'name', " +
 					"'teacher' and 'roomRequirements' must not be null");
+		} else if (external && externalRoomName == null) {
+			throw new IllegalArgumentException("Parameters 'externalRoomName'" +
+					"must not be null if 'external' is true");
 		}
 		validateStudents(students);
 		this.id = id;
 		this.name = name;
 		this.teacher = teacher;
 		this.students = students;
-		this.external = external;
 		this.doubleSession = doubleSession;
 		this.roomRequirements = roomRequirements;
 		this.preAssignment = preAssignment;
+		this.external = external;
+		this.externalRoomName = externalRoomName;
 	}
 
 	@XmlElement(required = false)
@@ -111,15 +117,6 @@ public class Session {
 	}
 
 	@XmlAttribute(required = true)
-	public boolean isExternal() {
-		return external;
-	}
-
-	public void setExternal(boolean external) {
-		this.external = external;
-	}
-
-	@XmlAttribute(required = true)
 	public boolean isDoubleSession() {
 		return doubleSession;
 	}
@@ -150,6 +147,24 @@ public class Session {
 		this.roomRequirements = roomRequirements;
 	}
 
+	@XmlAttribute(required = true)
+	public boolean isExternal() {
+		return external;
+	}
+
+	public void setExternal(boolean external) {
+		this.external = external;
+	}
+
+	@XmlElement(required = false)
+	public String getExternalRoomName() {
+		return externalRoomName;
+	}
+
+	public void setExternalRoomName(String externalRoomName) {
+		this.externalRoomName = externalRoomName;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (!(obj instanceof Session)) {
@@ -162,10 +177,11 @@ public class Session {
 		if (!this.id.equals(other.id) || !this.name.equals(other.name) ||
 				!this.teacher.equals(other.teacher) ||
 				this.students != other.students ||
-				this.external != other.external ||
 				this.doubleSession != other.doubleSession ||
 				!this.roomRequirements.equals(other.roomRequirements) ||
-				!Objects.equals(this.preAssignment, other.preAssignment)) {
+				!Objects.equals(this.preAssignment, other.preAssignment) ||
+				this.external != other.external ||
+				!Objects.equals(this.externalRoomName, other.externalRoomName)) {
 			return false;
 		}
 

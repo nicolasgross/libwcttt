@@ -45,7 +45,6 @@
     <xs:attribute name="name" type="xs:string" use="required"/>
     <xs:attribute name="daysPerWeek" type="xs:int" use="required"/>
     <xs:attribute name="timeSlotsPerDay" type="xs:int" use="required"/>
-    <xs:attribute name="minDailyLecturesPerCur" type="xs:int" use="required"/>
     <xs:attribute name="maxDailyLecturesPerCur" type="xs:int" use="required"/>
   </xs:complexType>
 
@@ -130,12 +129,13 @@
       <xs:element name="teacher" type="xs:IDREF"/>
       <xs:element name="preAssignmentBinding" type="period" minOccurs="0"/>
       <xs:element name="roomRequirements" type="roomFeatures"/>
+      <xs:element name="externalRoomName" type="xs:string" minOccurs="0"/>
     </xs:sequence>
     <xs:attribute name="id" type="xs:ID" use="required"/>
     <xs:attribute name="name" type="xs:string" use="required"/>
     <xs:attribute name="students" type="xs:int" use="required"/>
-    <xs:attribute name="external" type="xs:boolean" use="required"/>
     <xs:attribute name="doubleSession" type="xs:boolean" use="required"/>
+    <xs:attribute name="external" type="xs:boolean" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="roomFeatures">
@@ -177,8 +177,8 @@
     <xs:attribute name="id" type="xs:ID" use="required"/>
     <xs:attribute name="name" type="xs:string" use="required"/>
     <xs:attribute name="abbreviation" type="xs:string" use="required"/>
-    <xs:attribute name="minNumberOfDays" type="xs:int" use="required"/>
     <xs:attribute name="courseLevel" type="courseLevel" use="required"/>
+    <xs:attribute name="minNumberOfDays" type="xs:int" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="curriculum">

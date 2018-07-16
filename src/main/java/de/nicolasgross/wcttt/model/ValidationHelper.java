@@ -49,20 +49,11 @@ class ValidationHelper {
 		}
 	}
 
-	static void validateMinDailyLecturesPerCur(int minLectures) throws
+	static void validateMaxDailyLecturesPerCur(int maxLectures) throws
 			WctttModelException {
-		if (minLectures < MIN_DAILY_LECTURES_PER_CUR_MIN) {
-			throw new WctttModelException("Parameter " +
-					"'minDailyLecturesPerCur' must be >= "
-					+ MIN_DAILY_LECTURES_PER_CUR_MIN);
-		}
-	}
-
-	static void validateMaxDailyLecturesPerCur(int maxLectures, int
-			minLectures) throws WctttModelException {
-		if (maxLectures < minLectures) {
+		if (maxLectures < 0) {
 			throw new WctttModelException("Parameter 'maxDailyLecturesPerCur'" +
-					" must be >= 'minDailyLecturesPerCur'");
+					" must be >= 0");
 		}
 	}
 

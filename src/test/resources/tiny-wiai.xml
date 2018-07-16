@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<semester name="tiny-wiai" daysPerWeek="5" timeSlotsPerDay="6" minDailyLecturesPerCur="0" maxDailyLecturesPerCur="4">
+<semester name="tiny-wiai" daysPerWeek="5" timeSlotsPerDay="6" maxDailyLecturesPerCur="4">
     <constrWeightings s1="1.0" s2="2.0" s3="2.5" s4="1.5" s5="3.0" s6="2.0" s7="1.3" s8="2.8"/>
     <chairs>
         <chair id="swt" name="Lehrstuhl Softwaretechnik und Programmiersprachen">
@@ -112,29 +112,29 @@
         <course id="fse" name="Foundations of Software Engineering" abbreviation="SWT-FSE-B" courseLevel="Bachelor" minNumberOfDays="3">
             <chair>swt</chair>
             <lectures>
-                <lecture id="fse-l1" name="FSE Lecture 1" students="80" external="false" doubleSession="false">
+                <lecture id="fse-l1" name="FSE Lecture 1" students="80" doubleSession="false" external="false">
                     <teacher>lüttgen</teacher>
                     <roomRequirements projectors="1" pcPool="false" docCam="false" teacherPc="false"/>
                 </lecture>
-                <lecture id="fse-l2" name="FSE Lecture 2" students="80" external="false" doubleSession="false">
+                <lecture id="fse-l2" name="FSE Lecture 2" students="80" doubleSession="false" external="false">
                     <teacher>lüttgen</teacher>
                     <roomRequirements projectors="1" pcPool="false" docCam="false" teacherPc="false"/>
                 </lecture>
-                <lecture id="fse-l3" name="FSE Lecture 3" students="80" external="false" doubleSession="false">
+                <lecture id="fse-l3" name="FSE Lecture 3" students="80" doubleSession="false" external="false">
                     <teacher>lüttgen</teacher>
                     <roomRequirements projectors="1" pcPool="false" docCam="false" teacherPc="false"/>
                 </lecture>
             </lectures>
             <practicals>
-                <practical id="fse-p1" name="FSE Practical 1" students="30" external="false" doubleSession="false">
+                <practical id="fse-p1" name="FSE Practical 1" students="30" doubleSession="false" external="false">
                     <teacher>yip</teacher>
                     <roomRequirements projectors="1" pcPool="false" docCam="true" teacherPc="false"/>
                 </practical>
-                <practical id="fse-p2" name="FSE Practical 2" students="30" external="false" doubleSession="false">
+                <practical id="fse-p2" name="FSE Practical 2" students="30" doubleSession="false" external="false">
                     <teacher>gareis</teacher>
                     <roomRequirements projectors="1" pcPool="false" docCam="true" teacherPc="false"/>
                 </practical>
-                <practical id="fse-p3" name="FSE Practical 3" students="30" external="false" doubleSession="false">
+                <practical id="fse-p3" name="FSE Practical 3" students="30" doubleSession="false" external="false">
                     <teacher>yip</teacher>
                     <roomRequirements projectors="1" pcPool="false" docCam="true" teacherPc="false"/>
                 </practical>
@@ -143,45 +143,45 @@
         <course id="eiaps" name="Einführung in Algorithmen, Programmierung und Software" abbreviation="DSG-EiAPS-B" courseLevel="Bachelor" minNumberOfDays="2">
             <chair>dsg</chair>
             <lectures>
-                <lecture id="eiaps-l1" name="EiAPS Lecture 1" students="240" external="false" doubleSession="false">
+                <lecture id="eiaps-l1" name="EiAPS Lecture 1" students="240" doubleSession="false" external="false">
                     <teacher>wirtz</teacher>
                     <roomRequirements projectors="1" pcPool="false" docCam="false" teacherPc="false"/>
                 </lecture>
-                <lecture id="eiaps-l2" name="EiAPS Lecture 2" students="240" external="false" doubleSession="false">
+                <lecture id="eiaps-l2" name="EiAPS Lecture 2" students="240" doubleSession="false" external="false">
                     <teacher>wirtz</teacher>
                     <roomRequirements projectors="1" pcPool="false" docCam="false" teacherPc="false"/>
                 </lecture>
             </lectures>
             <practicals>
-                <practical id="eiaps-p1" name="EiAPS Practical 1" students="35" external="false" doubleSession="false">
+                <practical id="eiaps-p1" name="EiAPS Practical 1" students="35" doubleSession="false" external="false">
                     <teacher>dsg-hiwi1</teacher>
                     <roomRequirements projectors="1" pcPool="false" docCam="true" teacherPc="false"/>
                 </practical>
-                <practical id="eisp-p2" name="EiAPS Practical 2" students="35" external="false" doubleSession="false">
+                <practical id="eisp-p2" name="EiAPS Practical 2" students="35" doubleSession="false" external="false">
                     <teacher>dsg-hiwi2</teacher>
                     <roomRequirements projectors="1" pcPool="false" docCam="true" teacherPc="false"/>
                 </practical>
-                <practical id="eisp-p3" name="EiAPS Practical 3" students="35" external="false" doubleSession="false">
+                <practical id="eisp-p3" name="EiAPS Practical 3" students="35" doubleSession="false" external="false">
                     <teacher>dsg-hiwi3</teacher>
                     <roomRequirements projectors="1" pcPool="false" docCam="true" teacherPc="false"/>
                 </practical>
-                <practical id="eisp-p4" name="EiAPS Practical 4" students="35" external="false" doubleSession="false">
+                <practical id="eisp-p4" name="EiAPS Practical 4" students="35" doubleSession="false" external="false">
                     <teacher>dsg-hiwi4</teacher>
                     <roomRequirements projectors="1" pcPool="false" docCam="true" teacherPc="false"/>
                 </practical>
-                <practical id="eisp-p5" name="EiAPS Practical 5" students="35" external="false" doubleSession="false">
+                <practical id="eisp-p5" name="EiAPS Practical 5" students="35" doubleSession="false" external="false">
                     <teacher>dsg-hiwi1</teacher>
                     <roomRequirements projectors="1" pcPool="false" docCam="true" teacherPc="false"/>
                 </practical>
-                <practical id="eisp-p6" name="EiAPS Practical 6" students="35" external="false" doubleSession="false">
+                <practical id="eisp-p6" name="EiAPS Practical 6" students="35" doubleSession="false" external="false">
                     <teacher>dsg-hiwi2</teacher>
                     <roomRequirements projectors="1" pcPool="false" docCam="true" teacherPc="false"/>
                 </practical>
-                <practical id="eisp-p7" name="EiAPS Practical 7" students="35" external="false" doubleSession="false">
+                <practical id="eisp-p7" name="EiAPS Practical 7" students="35" doubleSession="false" external="false">
                     <teacher>dsg-hiwi3</teacher>
                     <roomRequirements projectors="1" pcPool="false" docCam="true" teacherPc="false"/>
                 </practical>
-                <practical id="eisp-p8" name="EiAPS Practical 8" students="35" external="false" doubleSession="false">
+                <practical id="eisp-p8" name="EiAPS Practical 8" students="35" doubleSession="false" external="false">
                     <teacher>dsg-hiwi4</teacher>
                     <roomRequirements projectors="1" pcPool="false" docCam="true" teacherPc="false"/>
                 </practical>
@@ -190,21 +190,21 @@
         <course id="mtl" name="Modal and Temporal Logic" abbreviation="GdI-MTL" courseLevel="Master" minNumberOfDays="2">
             <chair>gdi</chair>
             <lectures>
-                <lecture id="mtl-l1" name="MTL Lecture 1" students="30" external="false" doubleSession="false">
+                <lecture id="mtl-l1" name="MTL Lecture 1" students="30" doubleSession="false" external="false">
                     <teacher>mendler</teacher>
                     <roomRequirements projectors="1" pcPool="false" docCam="false" teacherPc="false"/>
                 </lecture>
-                <lecture id="mtl-l2" name="MTL Lecture 2" students="30" external="false" doubleSession="false">
+                <lecture id="mtl-l2" name="MTL Lecture 2" students="30" doubleSession="false" external="false">
                     <teacher>mendler</teacher>
                     <roomRequirements projectors="1" pcPool="false" docCam="false" teacherPc="false"/>
                 </lecture>
             </lectures>
             <practicals>
-                <practical id="mtl-p1" name="MTL Practical 1" students="20" external="false" doubleSession="false">
+                <practical id="mtl-p1" name="MTL Practical 1" students="20" doubleSession="false" external="false">
                     <teacher>guatto</teacher>
                     <roomRequirements projectors="1" pcPool="false" docCam="true" teacherPc="false"/>
                 </practical>
-                <practical id="mtl-p2" name="MTL Practical 2" students="20" external="false" doubleSession="false">
+                <practical id="mtl-p2" name="MTL Practical 2" students="20" doubleSession="false" external="false">
                     <teacher>guatto</teacher>
                     <roomRequirements projectors="1" pcPool="false" docCam="true" teacherPc="false"/>
                 </practical>
@@ -213,17 +213,17 @@
         <course id="gik" name="Grundbausteine der Internet-Kommunikation" abbreviation="KTR-GIK-M" courseLevel="Master" minNumberOfDays="2">
             <chair>ktr</chair>
             <lectures>
-                <lecture id="gik-l1" name="GIK Lecture 1" students="20" external="false" doubleSession="false">
+                <lecture id="gik-l1" name="GIK Lecture 1" students="20" doubleSession="false" external="false">
                     <teacher>krieger</teacher>
                     <roomRequirements projectors="1" pcPool="false" docCam="false" teacherPc="false"/>
                 </lecture>
-                <lecture id="gik-l2" name="GIK Lecture 2" students="20" external="false" doubleSession="false">
+                <lecture id="gik-l2" name="GIK Lecture 2" students="20" doubleSession="false" external="false">
                     <teacher>krieger</teacher>
                     <roomRequirements projectors="1" pcPool="false" docCam="false" teacherPc="false"/>
                 </lecture>
             </lectures>
             <practicals>
-                <practical id="gik-p1" name="GIK Practical 1" students="20" external="false" doubleSession="false">
+                <practical id="gik-p1" name="GIK Practical 1" students="20" doubleSession="false" external="false">
                     <teacher>großmann</teacher>
                     <roomRequirements projectors="1" pcPool="true" docCam="true" teacherPc="false"/>
                 </practical>

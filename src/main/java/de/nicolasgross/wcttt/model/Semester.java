@@ -11,14 +11,13 @@ import static de.nicolasgross.wcttt.model.ValidationHelper.*;
  */
 @XmlRootElement(name = "semester")
 @XmlType(propOrder = {"name", "daysPerWeek", "timeSlotsPerDay",
-		"minDailyLecturesPerCur", "maxDailyLecturesPerCur", "constrWeightings",
-		"chairs", "rooms", "courses", "curricula", "timetables"})
+		"maxDailyLecturesPerCur", "constrWeightings", "chairs", "rooms",
+		"courses", "curricula", "timetables"})
 public class Semester {
 
 	private String name;
 	private int daysPerWeek;
 	private int timeSlotsPerDay;
-	private int minDailyLecturesPerCur;
 	private int maxDailyLecturesPerCur;
 	private ConstraintWeightings constrWeightings;
 	private final List<Chair> chairs = new LinkedList<>();
@@ -29,15 +28,13 @@ public class Semester {
 
 	/**
 	 * Creates a new semester with an empty name, 1 days per week, 1 time
-	 * slots per day, 0 min daily lectures per curriculum , 1 max daily
-	 * lecture per curriculum and default constraint weightings (see
-	 * {@link ConstraintWeightings#ConstraintWeightings()}).
+	 * slots per day, 1 max daily lecture per curriculum and default constraint
+	 * weightings (see {@link ConstraintWeightings#ConstraintWeightings()}).
 	 */
 	public Semester() {
 		this.name = "";
 		this.daysPerWeek = 1;
 		this.timeSlotsPerDay = 1;
-		this.minDailyLecturesPerCur = 0;
 		this.maxDailyLecturesPerCur = 1;
 		this.constrWeightings = new ConstraintWeightings();
 	}
@@ -49,18 +46,15 @@ public class Semester {
 	 * @param daysPerWeek            the number of days in a week, must be > 0.
 	 * @param timeSlotsPerDay        the number of time slots in a day, must
 	 *                               be > 0.
-	 * @param minDailyLecturesPerCur the minimum number of daily lectures per
-	 *                               curriculum, must >= 0.
 	 * @param maxDailyLecturesPerCur the maximum number of daily lectures per
-	 *                               curriculum, must be >=
-	 *                               {@code minDailyLecturesPerCur}.
+	 *                               curriculum, must be >= 0.
 	 * @param constrWeightings       the soft constraint weightings for the
 	 *                               semester, must not be null.
 	 * @throws WctttModelException if parameters do not adhere to their
 	 *                             respective value ranges.
 	 */
 	public Semester(String name, int daysPerWeek, int timeSlotsPerDay,
-	                int minDailyLecturesPerCur, int maxDailyLecturesPerCur,
+	                int maxDailyLecturesPerCur,
 	                ConstraintWeightings constrWeightings) throws
 			WctttModelException {
 		if (name == null || constrWeightings == null) {
@@ -69,13 +63,10 @@ public class Semester {
 		}
 		validateDaysPerWeek(daysPerWeek);
 		validateTimeSlotsPerDay(timeSlotsPerDay);
-		validateMinDailyLecturesPerCur(minDailyLecturesPerCur);
-		validateMaxDailyLecturesPerCur(maxDailyLecturesPerCur,
-				minDailyLecturesPerCur);
+		validateMaxDailyLecturesPerCur(maxDailyLecturesPerCur);
 		this.name = name;
 		this.daysPerWeek = daysPerWeek;
 		this.timeSlotsPerDay = timeSlotsPerDay;
-		this.minDailyLecturesPerCur = minDailyLecturesPerCur;
 		this.maxDailyLecturesPerCur = maxDailyLecturesPerCur;
 		this.constrWeightings = constrWeightings;
 	}
@@ -149,31 +140,6 @@ public class Semester {
 	}
 
 	/**
-	 * Getter for the minimum number of daily lectures per curriculum of a
-	 * semester.
-	 *
-	 * @return the minimum number of daily lectures per curriculum.
-	 */
-	@XmlAttribute(required = true)
-	public int getMinDailyLecturesPerCur() {
-		return minDailyLecturesPerCur;
-	}
-
-	/**
-	 * Setter for the minimum number of daily lectures per curriculum of a
-	 * semester.
-	 *
-	 * @param minDailyLecturesPerCur the new minimum number of daily lectures
-	 *                               per curriculum, must be >= 0.
-	 * @throws WctttModelException if {@code minDailyLecturesPerCur} is < 0.
-	 */
-	public void setMinDailyLecturesPerCur(int minDailyLecturesPerCur) throws
-			WctttModelException {
-		validateMinDailyLecturesPerCur(minDailyLecturesPerCur);
-		this.minDailyLecturesPerCur = minDailyLecturesPerCur;
-	}
-
-	/**
 	 * Getter for the maximum number of daily lectures per curriculum of a
 	 * semester.
 	 *
@@ -189,15 +155,12 @@ public class Semester {
 	 * semester.
 	 *
 	 * @param maxDailyLecturesPerCur the new maximum number of daily lectures
-	 *                               per curriculum, must be >= {@code
-	 *                               minDailyLecturesPerCur}.
-	 * @throws WctttModelException if {@code maxDailyLecturesPerCur} is < {@code
-	 *                             minDailyLecturesPerCur}.
+	 *                               per curriculum.
+	 * @throws WctttModelException if {@code maxDailyLecturesPerCur} is < 0.
 	 */
 	public void setMaxDailyLecturesPerCur(int maxDailyLecturesPerCur) throws
 			WctttModelException {
-		validateMaxDailyLecturesPerCur(maxDailyLecturesPerCur,
-				minDailyLecturesPerCur);
+		validateMaxDailyLecturesPerCur(maxDailyLecturesPerCur);
 		this.maxDailyLecturesPerCur = maxDailyLecturesPerCur;
 	}
 
@@ -685,7 +648,6 @@ public class Semester {
 		if (!this.name.equals(other.name) ||
 				this.daysPerWeek != other.daysPerWeek ||
 				this.timeSlotsPerDay != other.timeSlotsPerDay ||
-				this.minDailyLecturesPerCur != other.minDailyLecturesPerCur ||
 				this.maxDailyLecturesPerCur != other.maxDailyLecturesPerCur ||
 				!this.constrWeightings.equals(other.constrWeightings)) {
 			return false;

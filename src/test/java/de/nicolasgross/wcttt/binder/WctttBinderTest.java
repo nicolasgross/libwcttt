@@ -37,7 +37,6 @@ class WctttBinderTest {
 		semesterWrite.setName("test-semester");
 		semesterWrite.setDaysPerWeek(5);
 		semesterWrite.setTimeSlotsPerDay(6);
-		semesterWrite.setMinDailyLecturesPerCur(0);
 		semesterWrite.setMaxDailyLecturesPerCur(4);
 		semesterWrite.setConstrWeightings(new ConstraintWeightings(1.0, 2,
 				3.4, 4.1, 5.8, 6.2, 7.9, 8.5));
@@ -66,11 +65,12 @@ class WctttBinderTest {
 		semesterWrite.addCourse(course);
 		semesterWrite.updateCourseId(course, "fse");
 		Session lecture = new Session("abc", "FSE Lecture 1", teacher, 80,
-				false, false, new RoomFeatures(1, false, false, false), null);
+				false, new RoomFeatures(1, false, false, false), null, false,
+				null);
 		semesterWrite.addCourseLecture(lecture, course);
 		semesterWrite.updateCourseSessionId(lecture, course, "FSE-L1");
 		Session practical = new Session("FSE-P1", "FSE Practical 1", teacher,
-				30, false, false, new RoomFeatures(1, false, false, true),
+				30, false, new RoomFeatures(1, false, false, true), null, false,
 				null);
 		semesterWrite.addCoursePractical(practical, course);
 
