@@ -1,6 +1,6 @@
-package de.nicolasgross.wcttt.binder;
+package de.nicolasgross.wcttt.lib.binder;
 
-import de.nicolasgross.wcttt.model.Semester;
+import de.nicolasgross.wcttt.lib.model.Semester;
 import org.xml.sax.SAXException;
 
 import javax.xml.XMLConstants;
@@ -32,7 +32,7 @@ public class WctttBinder {
 		try {
 			this.schema = sf.newSchema(SCHEMA_FILE);
 			this.context = JAXBContext.newInstance(
-					de.nicolasgross.wcttt.model.Semester.class);
+					Semester.class);
 		} catch (JAXBException e) {
 			// According to doc, thrown if there are problems with the mappings
 			// -> decision for RuntimeException because there must be a serious

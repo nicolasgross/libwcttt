@@ -1,5 +1,6 @@
-package de.nicolasgross.wcttt.binder;
+package de.nicolasgross.wcttt.lib.binder;
 
+import de.nicolasgross.wcttt.lib.model.*;
 import de.nicolasgross.wcttt.model.*;
 import org.junit.jupiter.api.Test;
 

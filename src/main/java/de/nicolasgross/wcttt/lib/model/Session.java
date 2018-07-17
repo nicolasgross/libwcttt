@@ -1,10 +1,8 @@
-package de.nicolasgross.wcttt.model;
+package de.nicolasgross.wcttt.lib.model;
 
 import javax.xml.bind.annotation.*;
 import java.util.Objects;
 import java.util.Optional;
-
-import static de.nicolasgross.wcttt.model.ValidationHelper.validateStudents;
 
 @XmlType(propOrder = {"id", "name", "teacher", "students",
 		"doubleSession", "preAssignmentBinding", "roomRequirements", "external",
@@ -44,7 +42,7 @@ public class Session {
 			throw new IllegalArgumentException("Parameters 'externalRoomName'" +
 					"must not be null if 'external' is true");
 		}
-		validateStudents(students);
+		ValidationHelper.validateStudents(students);
 		this.id = id;
 		this.name = name;
 		this.teacher = teacher;

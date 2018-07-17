@@ -1,10 +1,10 @@
-package de.nicolasgross.wcttt.model;
+package de.nicolasgross.wcttt.lib.model;
 
 import javax.xml.bind.annotation.*;
 import java.util.LinkedList;
 import java.util.List;
 
-import static de.nicolasgross.wcttt.model.ValidationHelper.validateMinNumOfDays;
+import static de.nicolasgross.wcttt.lib.model.ValidationHelper.validateMinNumOfDays;
 
 @XmlType(propOrder = {"id", "name", "abbreviation", "chair", "courseLevel",
 		"minNumberOfDays", "lectures", "practicals"})

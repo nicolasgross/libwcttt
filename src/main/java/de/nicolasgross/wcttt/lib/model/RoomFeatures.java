@@ -1,9 +1,7 @@
-package de.nicolasgross.wcttt.model;
+package de.nicolasgross.wcttt.lib.model;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
-
-import static de.nicolasgross.wcttt.model.ValidationHelper.validateProjectors;
 
 @XmlType(propOrder = {"projectors", "pcPool"})
 public class RoomFeatures implements Comparable<RoomFeatures> {
@@ -22,7 +20,7 @@ public class RoomFeatures implements Comparable<RoomFeatures> {
 
 	public RoomFeatures(int projectors, boolean pcPool, boolean teacherPc,
 	                    boolean docCam) throws WctttModelException {
-		validateProjectors(projectors);
+		ValidationHelper.validateProjectors(projectors);
 		this.projectors = projectors;
 		this.pcPool = pcPool;
 		this.teacherPc = teacherPc;
@@ -35,7 +33,7 @@ public class RoomFeatures implements Comparable<RoomFeatures> {
 	}
 
 	public void setProjectors(int projectors) throws WctttModelException {
-		validateProjectors(projectors);
+		ValidationHelper.validateProjectors(projectors);
 		this.projectors = projectors;
 	}
 

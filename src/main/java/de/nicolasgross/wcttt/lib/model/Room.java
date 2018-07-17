@@ -1,10 +1,10 @@
-package de.nicolasgross.wcttt.model;
+package de.nicolasgross.wcttt.lib.model;
 
 import javax.xml.bind.annotation.*;
 import java.util.Objects;
 import java.util.Optional;
 
-import static de.nicolasgross.wcttt.model.ValidationHelper.validateRoomCapacity;
+import static de.nicolasgross.wcttt.lib.model.ValidationHelper.validateRoomCapacity;
 
 /**
  * Represents a room.

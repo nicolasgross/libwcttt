@@ -1,4 +1,4 @@
-package de.nicolasgross.wcttt.model;
+package de.nicolasgross.wcttt.lib.model;
 
 public class WctttModelException extends Exception {
 

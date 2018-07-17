@@ -1,4 +1,4 @@
-package de.nicolasgross.wcttt.binder;
+package de.nicolasgross.wcttt.lib.binder;
 
 public class WctttBinderFatalException extends RuntimeException {
 

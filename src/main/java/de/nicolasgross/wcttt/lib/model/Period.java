@@ -1,12 +1,9 @@
-package de.nicolasgross.wcttt.model;
+package de.nicolasgross.wcttt.lib.model;
 
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
-
-import static de.nicolasgross.wcttt.model.ValidationHelper.validateDay;
-import static de.nicolasgross.wcttt.model.ValidationHelper.validateTimeSlot;
 
 @XmlSeeAlso(TimetablePeriod.class)
 @XmlType(propOrder = {"day", "timeSlot"})
@@ -21,8 +18,8 @@ public class Period {
 	}
 
 	public Period(int day, int timeSlot) throws WctttModelException {
-		validateDay(day);
-		validateTimeSlot(day);
+		ValidationHelper.validateDay(day);
+		ValidationHelper.validateTimeSlot(day);
 		this.day = day;
 		this.timeSlot = timeSlot;
 	}
@@ -33,7 +30,7 @@ public class Period {
 	}
 
 	public void setDay(int day) throws WctttModelException {
-		validateDay(day);
+		ValidationHelper.validateDay(day);
 		this.day = day;
 	}
 
@@ -43,7 +40,7 @@ public class Period {
 	}
 
 	public void setTimeSlot(int timeslot) throws WctttModelException {
-		validateTimeSlot(day);
+		ValidationHelper.validateTimeSlot(day);
 		this.timeSlot = timeslot;
 	}
 

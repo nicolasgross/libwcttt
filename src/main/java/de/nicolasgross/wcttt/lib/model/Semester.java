@@ -1,10 +1,8 @@
-package de.nicolasgross.wcttt.model;
+package de.nicolasgross.wcttt.lib.model;
 
 import javax.xml.bind.annotation.*;
 import java.util.LinkedList;
 import java.util.List;
-
-import static de.nicolasgross.wcttt.model.ValidationHelper.*;
 
 /**
  * Represents a semester.
@@ -61,9 +59,9 @@ public class Semester {
 			throw new IllegalArgumentException("Parameters 'name' and " +
 					"'constrWeightings' must not be null");
 		}
-		validateDaysPerWeek(daysPerWeek);
-		validateTimeSlotsPerDay(timeSlotsPerDay);
-		validateMaxDailyLecturesPerCur(maxDailyLecturesPerCur);
+		ValidationHelper.validateDaysPerWeek(daysPerWeek);
+		ValidationHelper.validateTimeSlotsPerDay(timeSlotsPerDay);
+		ValidationHelper.validateMaxDailyLecturesPerCur(maxDailyLecturesPerCur);
 		this.name = name;
 		this.daysPerWeek = daysPerWeek;
 		this.timeSlotsPerDay = timeSlotsPerDay;
@@ -112,7 +110,7 @@ public class Semester {
 	 * @throws WctttModelException if {@code daysPerWeek} is < 1.
 	 */
 	public void setDaysPerWeek(int daysPerWeek) throws WctttModelException {
-		validateDaysPerWeek(daysPerWeek);
+		ValidationHelper.validateDaysPerWeek(daysPerWeek);
 		this.daysPerWeek = daysPerWeek;
 	}
 
@@ -135,7 +133,7 @@ public class Semester {
 	 */
 	public void setTimeSlotsPerDay(int timeSlotsPerDay) throws
 			WctttModelException {
-		validateTimeSlotsPerDay(timeSlotsPerDay);
+		ValidationHelper.validateTimeSlotsPerDay(timeSlotsPerDay);
 		this.timeSlotsPerDay = timeSlotsPerDay;
 	}
 
@@ -160,7 +158,7 @@ public class Semester {
 	 */
 	public void setMaxDailyLecturesPerCur(int maxDailyLecturesPerCur) throws
 			WctttModelException {
-		validateMaxDailyLecturesPerCur(maxDailyLecturesPerCur);
+		ValidationHelper.validateMaxDailyLecturesPerCur(maxDailyLecturesPerCur);
 		this.maxDailyLecturesPerCur = maxDailyLecturesPerCur;
 	}
 

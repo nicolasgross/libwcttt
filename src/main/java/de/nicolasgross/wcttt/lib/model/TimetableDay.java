@@ -1,10 +1,10 @@
-package de.nicolasgross.wcttt.model;
+package de.nicolasgross.wcttt.lib.model;
 
 import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static de.nicolasgross.wcttt.model.ValidationHelper.validateDay;
+import static de.nicolasgross.wcttt.lib.model.ValidationHelper.validateDay;
 
 @XmlType(propOrder = {"day", "name","periods"})
 public class TimetableDay {

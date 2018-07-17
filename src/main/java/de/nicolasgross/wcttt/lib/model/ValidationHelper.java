@@ -1,4 +1,4 @@
-package de.nicolasgross.wcttt.model;
+package de.nicolasgross.wcttt.lib.model;
 
 class ValidationHelper {
 

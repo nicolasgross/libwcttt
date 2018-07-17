@@ -1,9 +1,7 @@
-package de.nicolasgross.wcttt.model;
+package de.nicolasgross.wcttt.lib.model;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
-
-import static de.nicolasgross.wcttt.model.ValidationHelper.validateConstraintWeighting;
 
 /**
  * Represents the soft constraint weightings.
@@ -34,14 +32,14 @@ public class ConstraintWeightings {
 	public ConstraintWeightings(double s1, double s2, double s3, double s4,
 	                            double s5, double s6, double s7, double s8)
 			throws WctttModelException {
-		validateConstraintWeighting(s1);
-		validateConstraintWeighting(s2);
-		validateConstraintWeighting(s3);
-		validateConstraintWeighting(s4);
-		validateConstraintWeighting(s5);
-		validateConstraintWeighting(s6);
-		validateConstraintWeighting(s7);
-		validateConstraintWeighting(s8);
+		ValidationHelper.validateConstraintWeighting(s1);
+		ValidationHelper.validateConstraintWeighting(s2);
+		ValidationHelper.validateConstraintWeighting(s3);
+		ValidationHelper.validateConstraintWeighting(s4);
+		ValidationHelper.validateConstraintWeighting(s5);
+		ValidationHelper.validateConstraintWeighting(s6);
+		ValidationHelper.validateConstraintWeighting(s7);
+		ValidationHelper.validateConstraintWeighting(s8);
 		this.s1 = s1;
 		this.s2 = s2;
 		this.s3 = s3;
@@ -58,7 +56,7 @@ public class ConstraintWeightings {
 	}
 
 	public void setS1(double s1) throws WctttModelException {
-		validateConstraintWeighting(s1);
+		ValidationHelper.validateConstraintWeighting(s1);
 		this.s1 = s1;
 	}
 
@@ -68,7 +66,7 @@ public class ConstraintWeightings {
 	}
 
 	public void setS2(double s2) throws WctttModelException {
-		validateConstraintWeighting(s2);
+		ValidationHelper.validateConstraintWeighting(s2);
 		this.s2 = s2;
 	}
 
@@ -78,7 +76,7 @@ public class ConstraintWeightings {
 	}
 
 	public void setS3(double s3) throws WctttModelException {
-		validateConstraintWeighting(s3);
+		ValidationHelper.validateConstraintWeighting(s3);
 		this.s3 = s3;
 	}
 
@@ -88,7 +86,7 @@ public class ConstraintWeightings {
 	}
 
 	public void setS4(double s4) throws WctttModelException {
-		validateConstraintWeighting(s4);
+		ValidationHelper.validateConstraintWeighting(s4);
 		this.s4 = s4;
 	}
 
@@ -98,7 +96,7 @@ public class ConstraintWeightings {
 	}
 
 	public void setS5(double s5) throws WctttModelException {
-		validateConstraintWeighting(s5);
+		ValidationHelper.validateConstraintWeighting(s5);
 		this.s5 = s5;
 	}
 
@@ -108,7 +106,7 @@ public class ConstraintWeightings {
 	}
 
 	public void setS6(double s6) throws WctttModelException {
-		validateConstraintWeighting(s6);
+		ValidationHelper.validateConstraintWeighting(s6);
 		this.s6 = s6;
 	}
 
@@ -118,7 +116,7 @@ public class ConstraintWeightings {
 	}
 
 	public void setS7(double s7) throws WctttModelException {
-		validateConstraintWeighting(s7);
+		ValidationHelper.validateConstraintWeighting(s7);
 		this.s7 = s7;
 	}
 
@@ -128,7 +126,7 @@ public class ConstraintWeightings {
 	}
 
 	public void setS8(double s8) throws WctttModelException {
-		validateConstraintWeighting(s8);
+		ValidationHelper.validateConstraintWeighting(s8);
 		this.s8 = s8;
 	}
 
