@@ -1,8 +1,10 @@
 package de.nicolasgross.wcttt.lib.model;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import javax.xml.bind.annotation.*;
 import java.util.LinkedList;
-import java.util.List;
 
 /**
  * Represents a semester.
@@ -18,11 +20,16 @@ public class Semester {
 	private int timeSlotsPerDay;
 	private int maxDailyLecturesPerCur;
 	private ConstraintWeightings constrWeightings;
-	private final List<Chair> chairs = new LinkedList<>();
-	private final List<Room> rooms = new LinkedList<>();
-	private final List<Course> courses = new LinkedList<>();
-	private final List<Curriculum> curricula = new LinkedList<>();
-	private final List<Timetable> timetables = new LinkedList<>();
+	private final ObservableList<Chair> chairs =
+			FXCollections.observableList(new LinkedList<>());
+	private final ObservableList<Room> rooms =
+			FXCollections.observableList(new LinkedList<>());
+	private final ObservableList<Course> courses =
+			FXCollections.observableList(new LinkedList<>());
+	private final ObservableList<Curriculum> curricula =
+			FXCollections.observableList(new LinkedList<>());
+	private final ObservableList<Timetable> timetables =
+			FXCollections.observableList(new LinkedList<>());
 
 	/**
 	 * Creates a new semester with an empty name, 1 days per week, 1 time
@@ -197,7 +204,7 @@ public class Semester {
 	 */
 	@XmlElementWrapper(required = true)
 	@XmlElement(name = "chair")
-	public List<Chair> getChairs() {
+	public ObservableList<Chair> getChairs() {
 		return chairs;
 	}
 
@@ -209,7 +216,7 @@ public class Semester {
 	 */
 	@XmlElementWrapper(required = true)
 	@XmlElement(name = "room")
-	public List<Room> getRooms() {
+	public ObservableList<Room> getRooms() {
 		return rooms;
 	}
 
@@ -221,7 +228,7 @@ public class Semester {
 	 */
 	@XmlElementWrapper(required = true)
 	@XmlElement(name = "course")
-	public List<Course> getCourses() {
+	public ObservableList<Course> getCourses() {
 		return courses;
 	}
 
@@ -233,7 +240,7 @@ public class Semester {
 	 */
 	@XmlElementWrapper(required = true)
 	@XmlElement(name = "curriculum")
-	public List<Curriculum> getCurricula() {
+	public ObservableList<Curriculum> getCurricula() {
 		return curricula;
 	}
 
@@ -245,7 +252,7 @@ public class Semester {
 	 */
 	@XmlElementWrapper(required = true)
 	@XmlElement(name = "timetable")
-	public List<Timetable> getTimetables() {
+	public ObservableList<Timetable> getTimetables() {
 		return timetables;
 	}
 
