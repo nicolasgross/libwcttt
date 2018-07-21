@@ -20,7 +20,7 @@ public class Session {
 	private String externalRoomName;
 
 	public Session() {
-		this.id = "";
+		this.id = "session";
 		this.name = "";
 		this.teacher = new Teacher();
 		this.students = 1;

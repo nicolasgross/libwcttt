@@ -1,15 +1,18 @@
 package de.nicolasgross.wcttt.lib.model;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import javax.xml.bind.annotation.*;
 import java.util.LinkedList;
-import java.util.List;
 
 @XmlType(propOrder = {"id", "name", "teachers"})
 public class Chair {
 
 	private String id;
 	private String name;
-	private final List<Teacher> teachers = new LinkedList<>();
+	private final ObservableList<Teacher> teachers =
+			FXCollections.observableList(new LinkedList<>());
 
 	public Chair() {
 		this.id = "chair";
@@ -60,7 +63,7 @@ public class Chair {
 	 */
 	@XmlElementWrapper(required = true)
 	@XmlElement(name = "teacher")
-	public List<Teacher> getTeachers() {
+	public ObservableList<Teacher> getTeachers() {
 		return teachers;
 	}
 

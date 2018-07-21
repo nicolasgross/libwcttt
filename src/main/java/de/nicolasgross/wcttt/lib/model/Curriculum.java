@@ -12,7 +12,7 @@ public class Curriculum {
 	private final List<Course> courses = new LinkedList<>();
 
 	public Curriculum() {
-		this.id = "";
+		this.id = "curriculum";
 		this.name = "";
 	}
 

@@ -1,6 +1,7 @@
 package de.nicolasgross.wcttt.lib.binder;
 
 import de.nicolasgross.wcttt.lib.model.Semester;
+import de.nicolasgross.wcttt.lib.model.SemesterImpl;
 import org.xml.sax.SAXException;
 
 import javax.xml.XMLConstants;
@@ -14,25 +15,24 @@ import java.io.File;
 
 public class WctttBinder {
 
-	private static final File SCHEMA_FILE =
-			new File("src/main/resources/schema.xsd");
+	private static final File SCHEMA_FILE = new File(WctttBinder.class.getResource("/schema.xsd").getFile());
 
 	private File xmlFile;
 	private Schema schema;
 	private JAXBContext context;
 
-	public WctttBinder(String path) throws WctttBinderException {
-		if (path == null) {
-			throw new IllegalArgumentException("Parameter path must not be " +
+	public WctttBinder(File file) throws WctttBinderException {
+		if (file == null) {
+			throw new IllegalArgumentException("Parameter 'file' must not be " +
 					"null");
 		}
-		this.xmlFile = new File(path);
+		this.xmlFile = file;
 		SchemaFactory sf = SchemaFactory.newInstance(
 					XMLConstants.W3C_XML_SCHEMA_NS_URI);
 		try {
 			this.schema = sf.newSchema(SCHEMA_FILE);
 			this.context = JAXBContext.newInstance(
-					Semester.class);
+					SemesterImpl.class);
 		} catch (JAXBException e) {
 			// According to doc, thrown if there are problems with the mappings
 			// -> decision for RuntimeException because there must be a serious

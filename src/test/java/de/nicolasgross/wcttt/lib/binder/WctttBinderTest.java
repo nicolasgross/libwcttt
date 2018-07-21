@@ -3,9 +3,9 @@ package de.nicolasgross.wcttt.lib.binder;
 import de.nicolasgross.wcttt.lib.model.*;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -16,24 +16,24 @@ class WctttBinderTest {
 	@Test
 	void emptySemesterWritesAndParses() throws WctttBinderException,
 			IOException {
-		String path = "libwcttt-test-empty-semester.xml";
-		WctttBinder binder = new WctttBinder(path);
+		File file = new File("libwcttt-test-empty-semester.xml");
+		WctttBinder binder = new WctttBinder(file);
 
-		Semester semesterWrite = new Semester();
+		Semester semesterWrite = new SemesterImpl();
 		binder.write(semesterWrite);
 
 		Semester semesterRead = binder.parse();
 		assertEquals(semesterWrite, semesterRead);
-		Files.delete(Paths.get(path));
+		Files.delete(file.toPath());
 	}
 
 	@Test
 	void fullComplexitySemesterWritesAndParses() throws WctttBinderException,
 			WctttModelException, IOException {
-		String path = "libwcttt-test-complex-semester.xml";
-		WctttBinder binder = new WctttBinder(path);
+		File file = new File("libwcttt-test-complex-semester.xml");
+		WctttBinder binder = new WctttBinder(file);
 
-		Semester semesterWrite = new Semester();
+		Semester semesterWrite = new SemesterImpl();
 		semesterWrite.setName("test-semester");
 		semesterWrite.setDaysPerWeek(5);
 		semesterWrite.setTimeSlotsPerDay(6);
@@ -97,23 +97,23 @@ class WctttBinderTest {
 		binder.write(semesterWrite);
 		Semester semesterRead = binder.parse();
 		assertEquals(semesterWrite, semesterRead);
-		Files.delete(Paths.get(path));
+		Files.delete(file.toPath());
 	}
 
 	@Test
 	void tinyWiaiOutputEqualsInput() throws WctttBinderException, IOException {
-		String inPath = "src/test/resources/tiny-wiai.xml";
-		WctttBinder binderRead = new WctttBinder(inPath);
+		File inputFile = new File("src/test/resources/tiny-wiai.xml");
+		WctttBinder binderRead = new WctttBinder(inputFile);
 		Semester tinyWiaiSem = binderRead.parse();
 
-		String outPath = "libwcttt-test-tiny-wiai-out.xml";
-		WctttBinder binderWrite = new WctttBinder(outPath);
+		File outputFile = new File("libwcttt-test-tiny-wiai-out.xml");
+		WctttBinder binderWrite = new WctttBinder(outputFile);
 		binderWrite.write(tinyWiaiSem);
 
-		byte[] input = Files.readAllBytes(Paths.get(inPath));
-		byte[] output = Files.readAllBytes(Paths.get(outPath));
+		byte[] input = Files.readAllBytes(inputFile.toPath());
+		byte[] output = Files.readAllBytes(outputFile.toPath());
 		assertTrue(Arrays.equals(input, output));
-		Files.delete(Paths.get(outPath));
+		Files.delete(outputFile.toPath());
 	}
 
 }

@@ -23,7 +23,7 @@ public class Room {
 	 * and default features (see {@link RoomFeatures#RoomFeatures()}).
 	 */
 	public Room() {
-		this.id = "";
+		this.id = "room";
 		this.name = "";
 		this.capacity = 1;
 		this.holder = null;

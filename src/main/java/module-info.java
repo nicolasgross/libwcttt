@@ -5,4 +5,6 @@ module de.nicolasgross.wcttt.lib {
 	exports de.nicolasgross.wcttt.lib.model;
 	exports de.nicolasgross.wcttt.lib.binder;
 	exports de.nicolasgross.wcttt.lib.checker;
+
+	opens de.nicolasgross.wcttt.lib.model to java.xml.bind;
 }
