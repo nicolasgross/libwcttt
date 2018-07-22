@@ -15,7 +15,8 @@ import java.io.File;
 
 public class WctttBinder {
 
-	private static final File SCHEMA_FILE = new File(WctttBinder.class.getResource("/schema.xsd").getFile());
+	private static final File SCHEMA_FILE =
+			new File(WctttBinder.class.getResource("/schema.xsd").getFile());
 
 	private File xmlFile;
 	private Schema schema;
