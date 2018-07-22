@@ -42,7 +42,7 @@ class WctttBinderTest {
 				3.4, 4.1, 5.8, 6.2, 7.9, 8.5));
 
 		Chair chair = new Chair("abc", "Lehrstuhl Softwaretechnik und " +
-				"Programmiersprachen");
+				"Programmiersprachen", "SWT");
 		semesterWrite.addChair(chair);
 		semesterWrite.updateChairId(chair, "swt");
 		Teacher teacher = new Teacher("abc", "Prof. Dr. Gerald Lüttgen");

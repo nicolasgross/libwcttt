@@ -37,7 +37,7 @@ public class SemesterImpl implements Semester {
 	 * weightings (see {@link ConstraintWeightings#ConstraintWeightings()}).
 	 */
 	public SemesterImpl() {
-		this.name = "";
+		this.name = "semester";
 		this.daysPerWeek = 1;
 		this.timeSlotsPerDay = 1;
 		this.maxDailyLecturesPerCur = 1;
@@ -650,6 +650,9 @@ public class SemesterImpl implements Semester {
 		return true;
 	}
 
-	// TODO toString
+	@Override
+	public String toString() {
+		return name;
+	}
 
 }

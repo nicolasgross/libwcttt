@@ -186,6 +186,9 @@ public class Session {
 		return true;
 	}
 
-	// TODO toString
+	@Override
+	public String toString() {
+		return name;
+	}
 
 }

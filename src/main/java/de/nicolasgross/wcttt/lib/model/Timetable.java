@@ -122,6 +122,9 @@ public class Timetable {
 		return true;
 	}
 
-	// TODO toString
+	@Override
+	public String toString() {
+		return name;
+	}
 
 }

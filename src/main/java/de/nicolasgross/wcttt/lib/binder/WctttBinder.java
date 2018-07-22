@@ -21,6 +21,7 @@ public class WctttBinder {
 	private Schema schema;
 	private JAXBContext context;
 
+
 	public WctttBinder(File file) throws WctttBinderException {
 		if (file == null) {
 			throw new IllegalArgumentException("Parameter 'file' must not be " +
@@ -44,6 +45,10 @@ public class WctttBinder {
 			throw new WctttBinderException("Error while parsing the schema " +
 					"file", e);
 		}
+	}
+
+	public File getXmlFile() {
+		return xmlFile;
 	}
 
 	public Semester parse() throws WctttBinderException {

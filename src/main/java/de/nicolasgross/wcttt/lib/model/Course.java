@@ -248,6 +248,9 @@ public class Course {
 		return true;
 	}
 
-	// TODO toString
+	@Override
+	public String toString() {
+		return abbreviation + " - " + name;
+	}
 
 }

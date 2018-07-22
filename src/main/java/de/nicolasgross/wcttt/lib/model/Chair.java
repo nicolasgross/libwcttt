@@ -6,26 +6,29 @@ import javafx.collections.ObservableList;
 import javax.xml.bind.annotation.*;
 import java.util.LinkedList;
 
-@XmlType(propOrder = {"id", "name", "teachers"})
+@XmlType(propOrder = {"id", "name", "abbreviation", "teachers"})
 public class Chair {
 
 	private String id;
 	private String name;
+	private String abbreviation;
 	private final ObservableList<Teacher> teachers =
 			FXCollections.observableList(new LinkedList<>());
 
 	public Chair() {
 		this.id = "chair";
 		this.name = "";
+		this.abbreviation = "";
 	}
 
-	public Chair(String id, String name) {
-		if (id == null || name == null) {
-			throw new IllegalArgumentException("Parameters 'id' and 'name' " +
-					"must not be null");
+	public Chair(String id, String name, String abbreviation) {
+		if (id == null || name == null || abbreviation == null) {
+			throw new IllegalArgumentException("Parameters 'id', 'name' and " +
+					"'abbreviation' must not be null");
 		}
 		this.id = id;
 		this.name = name;
+		this.abbreviation = abbreviation;
 	}
 
 	@XmlAttribute(required = true)
@@ -53,6 +56,19 @@ public class Chair {
 					"null");
 		}
 		this.name = name;
+	}
+
+	@XmlAttribute(required = true)
+	public String getAbbreviation() {
+		return abbreviation;
+	}
+
+	public void setAbbreviation(String abbreviation) {
+		if (abbreviation == null) {
+			throw new IllegalArgumentException("Parameter 'abbreviation' must" +
+					" not be null");
+		}
+		this.abbreviation = abbreviation;
 	}
 
 	/**
@@ -119,7 +135,8 @@ public class Chair {
 		}
 
 		Chair other = (Chair) obj;
-		if (!(this.id.equals(other.id) && this.name.equals(other.name))) {
+		if (!(this.id.equals(other.id) && this.name.equals(other.name) &&
+				this.abbreviation.equals(other.abbreviation))) {
 			return false;
 		}
 
@@ -134,6 +151,9 @@ public class Chair {
 		return true;
 	}
 
-	// TODO toString
+	@Override
+	public String toString() {
+		return abbreviation + " - " + name;
+	}
 
 }
