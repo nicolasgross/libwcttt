@@ -12,11 +12,12 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import java.io.File;
+import java.net.URL;
 
 public class WctttBinder {
 
-	private static final File SCHEMA_FILE =
-			new File(WctttBinder.class.getResource("/schema.xsd").getFile());
+	private static final URL SCHEMA_FILE =
+			WctttBinder.class.getResource("/schema.xsd");
 
 	private File xmlFile;
 	private Schema schema;
