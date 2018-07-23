@@ -17,7 +17,7 @@ import java.net.URL;
 public class WctttBinder {
 
 	private static final URL SCHEMA_FILE =
-			WctttBinder.class.getResource("/schema.xsd");
+			WctttBinder.class.getResource("/wcttt-schema.xsd");
 
 	private File xmlFile;
 	private Schema schema;
