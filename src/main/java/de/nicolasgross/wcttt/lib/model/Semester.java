@@ -29,8 +29,11 @@ public interface Semester {
 	/**
 	 * Setter for the number of days per week of a semester.
 	 *
-	 * @param daysPerWeek the new number of days per week, must be >= 1.
-	 * @throws WctttModelException if {@code daysPerWeek} is < 1.
+	 * @param daysPerWeek the new number of days per week, must be >=
+	 *                    {@value de.nicolasgross.wcttt.lib.model.ValidationHelper#DAYS_PER_WEEK_MIN}
+	 *                    and <= {@value de.nicolasgross.wcttt.lib.model.ValidationHelper#DAYS_PER_WEEK_MAX}.
+	 * @throws WctttModelException if {@code daysPerWeek} is outside the given
+	 *                             range.
 	 */
 	void setDaysPerWeek(int daysPerWeek) throws WctttModelException;
 
@@ -44,9 +47,11 @@ public interface Semester {
 	/**
 	 * Setter for the number of time slots per day of a semester.
 	 *
-	 * @param timeSlotsPerDay the new number of time slots per day, must be
-	 *                        >= 1.
-	 * @throws WctttModelException if {@code timeSlotsPerDay} is < 1.
+	 * @param timeSlotsPerDay the new number of time slots per day, must be >=
+	 *                        {@value de.nicolasgross.wcttt.lib.model.ValidationHelper#TIME_SLOTS_PER_DAY_MIN}
+	 *                        and <= {@value de.nicolasgross.wcttt.lib.model.ValidationHelper#TIME_SLOTS_PER_DAY_MAX}.
+	 * @throws WctttModelException if {@code timeSlotsPerDay} is outside the
+	 *                             given range.
 	 */
 	void setTimeSlotsPerDay(int timeSlotsPerDay) throws
 			WctttModelException;
@@ -64,8 +69,10 @@ public interface Semester {
 	 * semester.
 	 *
 	 * @param maxDailyLecturesPerCur the new maximum number of daily lectures
-	 *                               per curriculum.
-	 * @throws WctttModelException if {@code maxDailyLecturesPerCur} is < 0.
+	 *                               per curriculum, must be >=
+	 *                               {@value de.nicolasgross.wcttt.lib.model.ValidationHelper#MIN_DAILY_LECTURES_PER_CUR_MIN}.
+	 * @throws WctttModelException if {@code maxDailyLecturesPerCur} is outside
+	 *                             the given range.
 	 */
 	void setMaxDailyLecturesPerCur(int maxDailyLecturesPerCur) throws
 			WctttModelException;

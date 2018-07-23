@@ -11,49 +11,55 @@ class ValidationHelper {
 	 */
 
 	// Semester:
-	private static final int MIN_DAILY_LECTURES_PER_CUR_MIN = 0;
+	public static final int MIN_DAILY_LECTURES_PER_CUR_MIN = 1;
 	// + Period:
-	private static final int TIME_SLOTS_PER_DAY_MIN = 1;
+	public static final int TIME_SLOTS_PER_DAY_MIN = 1;
+	public static final int TIME_SLOTS_PER_DAY_MAX = 7;
 	// + TimetableDay:
-	private static final int DAYS_PER_WEEK_MIN = 1;
+	public static final int DAYS_PER_WEEK_MIN = 1;
+	public static final int DAYS_PER_WEEK_MAX = 7;
 
 	//Room:
-	private static final int ROOM_CAPACITY_MIN = 1;
-	private static final int PROJECTORS_MIN = 0;
+	public static final int ROOM_CAPACITY_MIN = 1;
+	public static final int PROJECTORS_MIN = 0;
 
 	// Course:
-	private static final int MIN_NUM_OF_DAYS_MIN = 0;
+	public static final int MIN_NUM_OF_DAYS_MIN = 0;
 
 	// Session:
-	private static final int STUDENTS_MIN = 1;
+	public static final int STUDENTS_MIN = 1;
 
 	//ConstraintWeightings:
-	private static final double CONSTRAINT_WEIGHTING_MIN = 0.0;
+	public static final double CONSTRAINT_WEIGHTING_MIN = 0.0;
 
 
 	// Semester:
 
 	static void validateDaysPerWeek(int daysPerWeek) throws
 			WctttModelException {
-		if (daysPerWeek < DAYS_PER_WEEK_MIN) {
+		if (daysPerWeek < DAYS_PER_WEEK_MIN ||
+				daysPerWeek > DAYS_PER_WEEK_MAX) {
 			throw new WctttModelException("Parameter 'daysPerWeek' must " +
-					"be >= " + DAYS_PER_WEEK_MIN);
+					"be >= " + DAYS_PER_WEEK_MIN + " and <= " +
+					DAYS_PER_WEEK_MAX);
 		}
 	}
 
 	static void validateTimeSlotsPerDay(int timeSlotsPerDay) throws
 			WctttModelException {
-		if (timeSlotsPerDay < TIME_SLOTS_PER_DAY_MIN) {
+		if (timeSlotsPerDay < TIME_SLOTS_PER_DAY_MIN ||
+				timeSlotsPerDay > TIME_SLOTS_PER_DAY_MAX) {
 			throw new WctttModelException("Parameter 'timeSlotsPerDay' " +
-					"must be >= " + TIME_SLOTS_PER_DAY_MIN);
+					"must be >= " + TIME_SLOTS_PER_DAY_MIN + " and <= " +
+					TIME_SLOTS_PER_DAY_MAX);
 		}
 	}
 
 	static void validateMaxDailyLecturesPerCur(int maxLectures) throws
 			WctttModelException {
-		if (maxLectures < 0) {
+		if (maxLectures < MIN_DAILY_LECTURES_PER_CUR_MIN) {
 			throw new WctttModelException("Parameter 'maxDailyLecturesPerCur'" +
-					" must be >= 0");
+					" must be >= " + MIN_DAILY_LECTURES_PER_CUR_MIN);
 		}
 	}
 
@@ -71,18 +77,20 @@ class ValidationHelper {
 	// Period:
 
 	static void validateTimeSlot(int timeSlot) throws WctttModelException {
-		if (timeSlot < TIME_SLOTS_PER_DAY_MIN) {
-			throw new WctttModelException("Parameter 'timeSlot' must be >= "
-					+ TIME_SLOTS_PER_DAY_MIN);
+		if (timeSlot < TIME_SLOTS_PER_DAY_MIN ||
+				timeSlot > TIME_SLOTS_PER_DAY_MAX) {
+			throw new WctttModelException("Parameter 'timeSlot' must be >= " +
+					TIME_SLOTS_PER_DAY_MIN + " and <= " +
+					TIME_SLOTS_PER_DAY_MAX);
 		}
 	}
 
 	// + TimetableDay:
 
 	static void validateDay(int day) throws WctttModelException {
-		if (day < DAYS_PER_WEEK_MIN) {
-			throw new WctttModelException("Parameter 'day' must be >= "
-					+ DAYS_PER_WEEK_MIN);
+		if (day < DAYS_PER_WEEK_MIN || day > DAYS_PER_WEEK_MAX) {
+			throw new WctttModelException("Parameter 'day' must be >= " +
+					DAYS_PER_WEEK_MIN + " and <= " + DAYS_PER_WEEK_MAX);
 		}
 	}
 

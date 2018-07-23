@@ -48,11 +48,15 @@ public class SemesterImpl implements Semester {
 	 * Creates a new semester.
 	 *
 	 * @param name                   the name of the semester, must not be null.
-	 * @param daysPerWeek            the number of days in a week, must be > 0.
-	 * @param timeSlotsPerDay        the number of time slots in a day, must
-	 *                               be > 0.
+	 * @param daysPerWeek            the number of days in a week, must be >=
+	 *                               {@value de.nicolasgross.wcttt.lib.model.ValidationHelper#DAYS_PER_WEEK_MIN}
+	 *                               and <= {@value de.nicolasgross.wcttt.lib.model.ValidationHelper#DAYS_PER_WEEK_MAX}.
+	 * @param timeSlotsPerDay        the number of time slots in a day, must be
+	 *                               >= {@value de.nicolasgross.wcttt.lib.model.ValidationHelper#TIME_SLOTS_PER_DAY_MIN}
+	 *                               and <= {@value de.nicolasgross.wcttt.lib.model.ValidationHelper#TIME_SLOTS_PER_DAY_MAX}.
 	 * @param maxDailyLecturesPerCur the maximum number of daily lectures per
-	 *                               curriculum, must be >= 0.
+	 *                               curriculum, must be >=
+	 *                               {@value de.nicolasgross.wcttt.lib.model.ValidationHelper#MIN_DAILY_LECTURES_PER_CUR_MIN}.
 	 * @param constrWeightings       the soft constraint weightings for the
 	 *                               semester, must not be null.
 	 * @throws WctttModelException if parameters do not adhere to their
