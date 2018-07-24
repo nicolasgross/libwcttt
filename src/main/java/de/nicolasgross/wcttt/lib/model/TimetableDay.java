@@ -1,8 +1,12 @@
 package de.nicolasgross.wcttt.lib.model;
 
-import javax.xml.bind.annotation.*;
-import java.util.ArrayList;
-import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlType;
 
 import static de.nicolasgross.wcttt.lib.model.ValidationHelper.validateDay;
 
@@ -10,7 +14,8 @@ import static de.nicolasgross.wcttt.lib.model.ValidationHelper.validateDay;
 public class TimetableDay {
 
 	private int day;
-	private final List<TimetablePeriod> periods = new ArrayList<>();
+	private final ObservableList<TimetablePeriod> periods =
+			FXCollections.observableArrayList();
 
 	public TimetableDay() {
 		this.day = 1;
@@ -37,7 +42,7 @@ public class TimetableDay {
 
 	@XmlElementWrapper(required = true)
 	@XmlElement(name = "timetablePeriod")
-	public List<TimetablePeriod> getPeriods() {
+	public ObservableList<TimetablePeriod> getPeriods() {
 		return periods;
 	}
 

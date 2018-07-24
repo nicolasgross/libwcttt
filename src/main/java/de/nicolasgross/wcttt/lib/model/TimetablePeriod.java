@@ -1,15 +1,17 @@
 package de.nicolasgross.wcttt.lib.model;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlType;
-import java.util.LinkedList;
-import java.util.List;
 
 @XmlType(propOrder = {"assignments"})
 public class TimetablePeriod extends Period {
 
-	private final List<TimetableAssignment> assignments = new LinkedList<>();
+	private final ObservableList<TimetableAssignment> assignments =
+			FXCollections.observableArrayList();
 
 	public TimetablePeriod() {
 		super();
@@ -21,7 +23,7 @@ public class TimetablePeriod extends Period {
 
 	@XmlElementWrapper(required = true)
 	@XmlElement(name = "timetableAssignment")
-	public List<TimetableAssignment> getAssignments() {
+	public ObservableList<TimetableAssignment> getAssignments() {
 		return assignments;
 	}
 

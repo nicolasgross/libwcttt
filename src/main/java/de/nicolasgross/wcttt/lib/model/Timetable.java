@@ -1,17 +1,22 @@
 package de.nicolasgross.wcttt.lib.model;
 
-import javax.xml.bind.annotation.*;
-import java.util.ArrayList;
-import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlType;
 
 @XmlType(propOrder = {"name", "violatedHardConstraints",
 		"softConstraintPenalty", "days"})
 public class Timetable {
 
 	private String name;
-	private int violatedHardConstraints = -1;
-	private double softConstraintPenalty = -1.0;
-	private final List<TimetableDay> days = new ArrayList<>();
+	private int violatedHardConstraints = 0;
+	private double softConstraintPenalty = 0.0;
+	private final ObservableList<TimetableDay> days =
+			FXCollections.observableArrayList();
 
 	public Timetable() {
 		this.name = "";
@@ -60,7 +65,7 @@ public class Timetable {
 
 	@XmlElementWrapper(required = true)
 	@XmlElement(name = "timetableDay")
-	public List<TimetableDay> getDays() {
+	public ObservableList<TimetableDay> getDays() {
 		return days;
 	}
 
