@@ -20,7 +20,7 @@ public class TimetablePeriod extends Period {
 	}
 
 	@XmlElementWrapper(required = true)
-	@XmlElement(name = "assignment")
+	@XmlElement(name = "timetableAssignment")
 	public List<TimetableAssignment> getAssignments() {
 		return assignments;
 	}

@@ -28,7 +28,7 @@ public class TimetableAssignment {
 		this.room = room;
 	}
 
-	@XmlElement(required = false)
+	@XmlElement(name = "room", required = false)
 	@XmlIDREF
 	private Room getRoomBinding() {
 		return room;

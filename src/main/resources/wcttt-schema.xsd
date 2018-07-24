@@ -109,7 +109,7 @@
           <xs:element name="assignments">
             <xs:complexType>
               <xs:sequence>
-                <xs:element name="assignment" type="timetableAssignment" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="timetableAssignment" type="timetableAssignment" minOccurs="0" maxOccurs="unbounded"/>
               </xs:sequence>
             </xs:complexType>
           </xs:element>
@@ -121,7 +121,7 @@
   <xs:complexType name="timetableAssignment">
     <xs:sequence>
       <xs:element name="session" type="xs:IDREF"/>
-      <xs:element name="roomBinding" type="xs:IDREF" minOccurs="0"/>
+      <xs:element name="room" type="xs:IDREF" minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>
 

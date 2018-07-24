@@ -276,10 +276,10 @@
                     <periods>
                         <timetablePeriod day="1" timeSlot="1">
                             <assignments>
-<assignment>
+<timetableAssignment>
     <session>fse-l1</session>
-    <roomBinding>r1</roomBinding>
-</assignment>
+    <room>r1</room>
+</timetableAssignment>
                             </assignments>
                         </timetablePeriod>
                         <timetablePeriod day="1" timeSlot="2">
