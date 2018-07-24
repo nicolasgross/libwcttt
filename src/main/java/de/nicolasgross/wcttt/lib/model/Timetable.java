@@ -5,12 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @XmlType(propOrder = {"name", "violatedHardConstraints",
-		"softConstraintsPenalty", "days"})
+		"softConstraintPenalty", "days"})
 public class Timetable {
 
 	private String name;
 	private int violatedHardConstraints = -1;
-	private double softConstraintsPenalty = -1.0;
+	private double softConstraintPenalty = -1.0;
 	private final List<TimetableDay> days = new ArrayList<>();
 
 	public Timetable() {
@@ -49,13 +49,13 @@ public class Timetable {
 	}
 
 	@XmlAttribute(required = true)
-	public double getSoftConstraintsPenalty() {
-		return softConstraintsPenalty;
+	public double getSoftConstraintPenalty() {
+		return softConstraintPenalty;
 	}
 
 	// JAXB only
-	private void setSoftConstraintsPenalty(double softConstraintsPenalty) {
-		this.softConstraintsPenalty = softConstraintsPenalty;
+	private void setSoftConstraintPenalty(double softConstraintPenalty) {
+		this.softConstraintPenalty = softConstraintPenalty;
 	}
 
 	@XmlElementWrapper(required = true)
@@ -106,8 +106,8 @@ public class Timetable {
 
 		Timetable other = (Timetable) obj;
 		if (!this.name.equals(other.name) ||
-				this.softConstraintsPenalty !=
-						other.softConstraintsPenalty) {
+				this.softConstraintPenalty !=
+						other.softConstraintPenalty) {
 			return false;
 		}
 

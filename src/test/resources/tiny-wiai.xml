@@ -263,5 +263,131 @@
             </courses>
         </curriculum>
     </curricula>
-    <timetables/>
+    <timetables>
+        <timetable name="test-timetable1" violatedHardConstraints="0" softConstraintPenalty="0.0">
+            <days/>
+        </timetable>
+        <timetable name="test-timetable2" violatedHardConstraints="0" softConstraintPenalty="10.0">
+            <days/>
+        </timetable>
+        <timetable name="test-timetable3" violatedHardConstraints="0" softConstraintPenalty="3.0">
+            <days>
+                <timetableDay day="1">
+                    <periods>
+                        <timetablePeriod day="1" timeSlot="1">
+                            <assignments>
+<assignment>
+    <session>fse-l1</session>
+    <roomBinding>r1</roomBinding>
+</assignment>
+                            </assignments>
+                        </timetablePeriod>
+                        <timetablePeriod day="1" timeSlot="2">
+                            <assignments/>
+                        </timetablePeriod>
+                        <timetablePeriod day="1" timeSlot="3">
+                            <assignments/>
+                        </timetablePeriod>
+                        <timetablePeriod day="1" timeSlot="4">
+                            <assignments/>
+                        </timetablePeriod>
+                        <timetablePeriod day="1" timeSlot="5">
+                            <assignments/>
+                        </timetablePeriod>
+                        <timetablePeriod day="1" timeSlot="6">
+                            <assignments/>
+                        </timetablePeriod>
+                    </periods>
+                </timetableDay>
+                <timetableDay day="2">
+                    <periods>
+                        <timetablePeriod day="2" timeSlot="1">
+                            <assignments/>
+                        </timetablePeriod>
+                        <timetablePeriod day="2" timeSlot="2">
+                            <assignments/>
+                        </timetablePeriod>
+                        <timetablePeriod day="2" timeSlot="3">
+                            <assignments/>
+                        </timetablePeriod>
+                        <timetablePeriod day="2" timeSlot="4">
+                            <assignments/>
+                        </timetablePeriod>
+                        <timetablePeriod day="2" timeSlot="5">
+                            <assignments/>
+                        </timetablePeriod>
+                        <timetablePeriod day="2" timeSlot="6">
+                            <assignments/>
+                        </timetablePeriod>
+                    </periods>
+                </timetableDay>
+                <timetableDay day="3">
+                    <periods>
+                        <timetablePeriod day="3" timeSlot="1">
+                            <assignments/>
+                        </timetablePeriod>
+                        <timetablePeriod day="3" timeSlot="2">
+                            <assignments/>
+                        </timetablePeriod>
+                        <timetablePeriod day="3" timeSlot="3">
+                            <assignments/>
+                        </timetablePeriod>
+                        <timetablePeriod day="3" timeSlot="4">
+                            <assignments/>
+                        </timetablePeriod>
+                        <timetablePeriod day="3" timeSlot="5">
+                            <assignments/>
+                        </timetablePeriod>
+                        <timetablePeriod day="3" timeSlot="6">
+                            <assignments/>
+                        </timetablePeriod>
+                    </periods>
+                </timetableDay>
+                <timetableDay day="4">
+                    <periods>
+                        <timetablePeriod day="4" timeSlot="1">
+                            <assignments/>
+                        </timetablePeriod>
+                        <timetablePeriod day="4" timeSlot="2">
+                            <assignments/>
+                        </timetablePeriod>
+                        <timetablePeriod day="4" timeSlot="3">
+                            <assignments/>
+                        </timetablePeriod>
+                        <timetablePeriod day="4" timeSlot="4">
+                            <assignments/>
+                        </timetablePeriod>
+                        <timetablePeriod day="4" timeSlot="5">
+                            <assignments/>
+                        </timetablePeriod>
+                        <timetablePeriod day="4" timeSlot="6">
+                            <assignments/>
+                        </timetablePeriod>
+                    </periods>
+                </timetableDay>
+                <timetableDay day="5">
+                    <periods>
+                        <timetablePeriod day="5" timeSlot="1">
+                            <assignments/>
+                        </timetablePeriod>
+                        <timetablePeriod day="5" timeSlot="2">
+                            <assignments/>
+                        </timetablePeriod>
+                        <timetablePeriod day="5" timeSlot="3">
+                            <assignments/>
+                        </timetablePeriod>
+                        <timetablePeriod day="5" timeSlot="4">
+                            <assignments/>
+                        </timetablePeriod>
+                        <timetablePeriod day="5" timeSlot="5">
+                            <assignments/>
+                        </timetablePeriod>
+                        <timetablePeriod day="5" timeSlot="6">
+                            <assignments/>
+                        </timetablePeriod>
+                    </periods>
+                </timetableDay>
+            </days>
+        </timetable>
+    </timetables>
 </semester>

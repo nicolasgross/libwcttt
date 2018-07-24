@@ -6,16 +6,14 @@ import java.util.List;
 
 import static de.nicolasgross.wcttt.lib.model.ValidationHelper.validateDay;
 
-@XmlType(propOrder = {"day", "name","periods"})
+@XmlType(propOrder = {"day", "periods"})
 public class TimetableDay {
 
 	private int day;
-	private String name;
 	private final List<TimetablePeriod> periods = new ArrayList<>();
 
 	public TimetableDay() {
 		this.day = 1;
-		this.name = "day";
 	}
 
 	public TimetableDay(int day, String name) throws WctttModelException {
@@ -25,7 +23,6 @@ public class TimetableDay {
 		}
 		validateDay(day);
 		this.day = day;
-		this.name = name;
 	}
 
 	@XmlAttribute(required = true)
@@ -36,19 +33,6 @@ public class TimetableDay {
 	public void setDay(int day) throws WctttModelException {
 		validateDay(day);
 		this.day = day;
-	}
-
-	@XmlAttribute(required = true)
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		if (name == null) {
-			throw new IllegalArgumentException("Parameter 'name' must not be" +
-					"null");
-		}
-		this.name = name;
 	}
 
 	@XmlElementWrapper(required = true)
@@ -94,7 +78,7 @@ public class TimetableDay {
 		}
 
 		TimetableDay other = (TimetableDay) obj;
-		if (this.day != other.day || !this.name.equals(other.name)) {
+		if (this.day != other.day) {
 			return false;
 		}
 
