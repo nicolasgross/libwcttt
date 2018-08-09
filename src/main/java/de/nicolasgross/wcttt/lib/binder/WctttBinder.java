@@ -1,7 +1,9 @@
 package de.nicolasgross.wcttt.lib.binder;
 
+import de.nicolasgross.wcttt.lib.model.Course;
 import de.nicolasgross.wcttt.lib.model.Semester;
 import de.nicolasgross.wcttt.lib.model.SemesterImpl;
+import de.nicolasgross.wcttt.lib.model.Session;
 import org.xml.sax.SAXException;
 
 import javax.xml.XMLConstants;
@@ -57,9 +59,22 @@ public class WctttBinder {
 		try {
 			Unmarshaller um = context.createUnmarshaller();
 			um.setSchema(schema);
-			return (Semester) um.unmarshal(xmlFile);
+			Semester semester = (Semester) um.unmarshal(xmlFile);
+			mapCoursesToSessions(semester);
+			return semester;
 		} catch (JAXBException e) {
 			throw new WctttBinderException("Error while parsing a XML file", e);
+		}
+	}
+
+	private void mapCoursesToSessions(Semester semester) {
+		for (Course course : semester.getCourses()) {
+			for (Session lecture : course.getLectures()) {
+				lecture.setCourse(course);
+			}
+			for (Session practical : course.getPracticals()) {
+				practical.setCourse(course);
+			}
 		}
 	}
 

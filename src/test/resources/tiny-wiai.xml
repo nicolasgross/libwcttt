@@ -94,7 +94,7 @@
         </chair>
         <chair id="stat" name="Lehrstuhl für Statistik und Ökonometrie" abbreviation="Stat">
             <teachers>
-                <teacher id="rässler" name="Prof. Dr. Gerald Lüttgen">
+                <teacher id="rässler" name="Prof. Dr. Susanne Rässler">
                     <unfavorablePeriods/>
                     <unavailablePeriods/>
                 </teacher>

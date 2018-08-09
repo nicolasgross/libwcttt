@@ -21,11 +21,7 @@ public class TimetableDay {
 		this.day = 1;
 	}
 
-	public TimetableDay(int day, String name) throws WctttModelException {
-		if (name == null) {
-			throw new IllegalArgumentException("Parameter 'name' must not be" +
-					"null");
-		}
+	public TimetableDay(int day) throws WctttModelException {
 		validateDay(day);
 		this.day = day;
 	}

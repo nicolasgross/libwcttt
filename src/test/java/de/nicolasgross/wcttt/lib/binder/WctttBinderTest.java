@@ -67,16 +67,16 @@ class WctttBinderTest {
 		semesterWrite.addCourse(course);
 		semesterWrite.updateCourseId(course, "fse");
 		InternalSession lecture1 = new InternalSession("abc", "FSE Lecture 1",
-				teacher, false, null, 80,
+				teacher, course, false, null, 80,
 				new RoomFeatures(1, false, false, false));
 		Period preAssignment = new Period(2, 3);
 		ExternalSession lecture2 = new ExternalSession("FSE-L2",
-				"FSE Lecture 2", teacher, false, preAssignment, room3);
+				"FSE Lecture 2", teacher, course, false, preAssignment, room3);
 		semesterWrite.addCourseLecture(lecture1, course);
 		semesterWrite.addCourseLecture(lecture2, course);
 		semesterWrite.updateCourseSessionId(lecture1, course, "FSE-L1");
 		InternalSession practical = new InternalSession("FSE-P1",
-				"FSE Practical 1", teacher, false, null, 30,
+				"FSE Practical 1", teacher, course, false, null, 30,
 				new RoomFeatures(1, false, false, true));
 		semesterWrite.addCoursePractical(practical, course);
 
@@ -86,7 +86,7 @@ class WctttBinderTest {
 		curriculum.addCourse(course);
 
 		Timetable timetable = new Timetable("test-timetable");
-		TimetableDay timetableDay = new TimetableDay(1, "Monday");
+		TimetableDay timetableDay = new TimetableDay(1);
 		TimetablePeriod timetablePeriod1 = new TimetablePeriod(1, 1);
 		TimetableAssignment timetableAssignment1 = new
 				TimetableAssignment(lecture1, room1);
@@ -119,6 +119,6 @@ class WctttBinderTest {
 		byte[] input = Files.readAllBytes(inputFile.toPath());
 		byte[] output = Files.readAllBytes(outputFile.toPath());
 		assertTrue(Arrays.equals(input, output));
-	//	Files.delete(outputFile.toPath());
+		Files.delete(outputFile.toPath());
 	}
 }

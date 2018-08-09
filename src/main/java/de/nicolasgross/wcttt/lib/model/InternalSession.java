@@ -18,10 +18,11 @@ public class InternalSession extends Session {
 	}
 
 	public InternalSession(String id, String name, Teacher teacher,
-	                       boolean doubleSession, Period preAssignment,
-	                       int students, RoomFeatures roomRequirements)
+	                       Course course, boolean doubleSession,
+	                       Period preAssignment, int students,
+	                       RoomFeatures roomRequirements)
 			throws WctttModelException {
-		super(id, name, teacher, doubleSession, preAssignment);
+		super(id, name, teacher, course, doubleSession, preAssignment);
 		setStudents(students);
 		setRoomRequirements(roomRequirements);
 	}

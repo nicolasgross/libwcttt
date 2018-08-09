@@ -17,9 +17,9 @@ public class ExternalSession extends Session {
 	}
 
 	public ExternalSession(String id, String name, Teacher teacher,
-	                       boolean doubleSession, Period preAssignment,
-	                       ExternalRoom room) {
-		super(id, name, teacher, doubleSession, preAssignment);
+	                       Course course, boolean doubleSession,
+	                       Period preAssignment, ExternalRoom room) {
+		super(id, name, teacher, course, doubleSession, preAssignment);
 		setRoom(room);
 	}
 

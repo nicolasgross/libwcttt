@@ -11,6 +11,7 @@ public abstract class Session {
 	private String id;
 	private String name;
 	private Teacher teacher;
+	private Course course;
 	private boolean doubleSession;
 	private Period preAssignment;
 
@@ -18,6 +19,7 @@ public abstract class Session {
 		setId("session");
 		setName("");
 		setTeacher(new Teacher());
+		setCourse(new Course());
 		setDoubleSession(false);
 		if (this instanceof InternalSession) {
 			setPreAssignment(null);
@@ -26,11 +28,12 @@ public abstract class Session {
 		}
 	}
 
-	public Session(String id, String name, Teacher teacher,
+	public Session(String id, String name, Teacher teacher, Course course,
 	                       boolean doubleSession, Period preAssignment) {
 		setId(id);
 		setName(name);
 		setTeacher(teacher);
+		setCourse(course);
 		setDoubleSession(doubleSession);
 		setPreAssignment(preAssignment);
 	}
@@ -83,6 +86,19 @@ public abstract class Session {
 					"be null");
 		}
 		this.teacher = teacher;
+	}
+
+	@XmlTransient
+	public Course getCourse() {
+		return course;
+	}
+
+	public void setCourse(Course course) {
+		if (course == null) {
+			throw new IllegalArgumentException("Parameter 'course' must not " +
+					"be null");
+		}
+		this.course = course;
 	}
 
 	@XmlAttribute(required = true)
