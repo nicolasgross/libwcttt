@@ -12,7 +12,7 @@ public class InternalSession extends Session {
 	private int students;
 	private RoomFeatures roomRequirements;
 
-	public InternalSession() { // TODO make package private
+	public InternalSession() {
 		super();
 		this.students = 1;
 		this.roomRequirements = new RoomFeatures();

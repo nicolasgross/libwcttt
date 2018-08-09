@@ -41,7 +41,7 @@ public abstract class Session {
 	}
 
 	@XmlElement(required = false)
-	protected Period getPreAssignmentStartBinding() {
+	private Period getPreAssignmentStartBinding() {
 		return preAssignmentStart;
 	}
 
@@ -50,7 +50,7 @@ public abstract class Session {
 	}
 
 	@XmlElement(required = false)
-	protected Period getPreAssignmentEndBinding() { // TODO private test
+	private Period getPreAssignmentEndBinding() {
 		return preAssignmentEnd;
 	}
 
