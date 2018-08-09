@@ -51,27 +51,34 @@ class WctttBinderTest {
 		semesterWrite.addTeacherToChair(teacher, chair);
 		semesterWrite.updateTeacherId(teacher, chair, "lüttgen");
 
-		Room room1 = new Room("r0", "WE5/00.019", 156, chair,
+		InternalRoom room1 = new InternalRoom("r0", "WE5/00.019", 156, chair,
 				new RoomFeatures(2, false, false, false));
-		Room room2 = new Room("r2", "WE5/00.021", 200, null,
+		InternalRoom room2 = new InternalRoom("r2", "WE5/00.021", 200, null,
 				new RoomFeatures(2, false, false, false));
-		semesterWrite.addRoom(room1);
+		ExternalRoom room3 = new ExternalRoom("r3", "Audimax");
+		semesterWrite.addInternalRoom(room1);
 		semesterWrite.updateRoomId(room1, "r1");
-		semesterWrite.addRoom(room2);
+		semesterWrite.addInternalRoom(room2);
+		semesterWrite.addExternalRoom(room3);
 
 		Course course = new Course("abc",
 				"Foundations of Software Engineering", "SWT-FSE-B", chair,
 				CourseLevel.Bachelor, 2);
 		semesterWrite.addCourse(course);
 		semesterWrite.updateCourseId(course, "fse");
-		Session lecture = new Session("abc", "FSE Lecture 1", teacher, 80,
-				false, new RoomFeatures(1, false, false, false), null, false,
-				null);
-		semesterWrite.addCourseLecture(lecture, course);
-		semesterWrite.updateCourseSessionId(lecture, course, "FSE-L1");
-		Session practical = new Session("FSE-P1", "FSE Practical 1", teacher,
-				30, false, new RoomFeatures(1, false, false, true), null, false,
-				null);
+		InternalSession lecture1 = new InternalSession("abc", "FSE Lecture 1",
+				teacher, false, null, null, 80,
+				new RoomFeatures(1, false, false, false));
+		Period start = new Period(2, 3);
+		Period end = new Period(2, 3);
+		ExternalSession lecture2 = new ExternalSession("FSE-L2",
+				"FSE Lecture 2", teacher, false, start, end, room3);
+		semesterWrite.addCourseLecture(lecture1, course);
+		semesterWrite.addCourseLecture(lecture2, course);
+		semesterWrite.updateCourseSessionId(lecture1, course, "FSE-L1");
+		InternalSession practical = new InternalSession("FSE-P1",
+				"FSE Practical 1", teacher, false, null, null, 30,
+				new RoomFeatures(1, false, false, true));
 		semesterWrite.addCoursePractical(practical, course);
 
 		Curriculum curriculum = new Curriculum("sosysc-mand",
@@ -83,7 +90,7 @@ class WctttBinderTest {
 		TimetableDay timetableDay = new TimetableDay(1, "Monday");
 		TimetablePeriod timetablePeriod1 = new TimetablePeriod(1, 1);
 		TimetableAssignment timetableAssignment1 = new
-				TimetableAssignment(lecture, room1);
+				TimetableAssignment(lecture1, room1);
 		timetablePeriod1.addAssignment(timetableAssignment1);
 		timetableDay.addPeriod(timetablePeriod1);
 		TimetablePeriod timetablePeriod2 = new TimetablePeriod(1, 4);
@@ -113,7 +120,6 @@ class WctttBinderTest {
 		byte[] input = Files.readAllBytes(inputFile.toPath());
 		byte[] output = Files.readAllBytes(outputFile.toPath());
 		assertTrue(Arrays.equals(input, output));
-		Files.delete(outputFile.toPath());
+	//	Files.delete(outputFile.toPath());
 	}
-
 }

@@ -11,8 +11,8 @@ import java.util.LinkedList;
  */
 @XmlRootElement(name = "semester")
 @XmlType(propOrder = {"name", "daysPerWeek", "timeSlotsPerDay",
-		"maxDailyLecturesPerCur", "constrWeightings", "chairs", "rooms",
-		"courses", "curricula", "timetables"})
+		"maxDailyLecturesPerCur", "constrWeightings", "chairs", "internalRooms",
+		"externalRooms", "courses", "curricula", "timetables"})
 public class SemesterImpl implements Semester {
 
 	private String name;
@@ -22,7 +22,9 @@ public class SemesterImpl implements Semester {
 	private ConstraintWeightings constrWeightings;
 	private final ObservableList<Chair> chairs =
 			FXCollections.observableList(new LinkedList<>());
-	private final ObservableList<Room> rooms =
+	private final ObservableList<InternalRoom> internalRooms =
+			FXCollections.observableList(new LinkedList<>());
+	private final ObservableList<ExternalRoom> externalRooms =
 			FXCollections.observableList(new LinkedList<>());
 	private final ObservableList<Course> courses =
 			FXCollections.observableList(new LinkedList<>());
@@ -32,8 +34,8 @@ public class SemesterImpl implements Semester {
 			FXCollections.observableList(new LinkedList<>());
 
 	/**
-	 * Creates a new semester with an empty name, 1 days per week, 1 time
-	 * slots per day, 1 max daily lecture per curriculum and default constraint
+	 * Creates a new semester with an empty name, 1 day per week, 1 time
+	 * slot per day, 1 max daily lecture per curriculum and default constraint
 	 * weightings (see {@link ConstraintWeightings#ConstraintWeightings()}).
 	 */
 	public SemesterImpl() {
@@ -160,9 +162,16 @@ public class SemesterImpl implements Semester {
 
 	@Override
 	@XmlElementWrapper(required = true)
-	@XmlElement(name = "room")
-	public ObservableList<Room> getRooms() {
-		return rooms;
+	@XmlElement(name = "internalRoom")
+	public ObservableList<InternalRoom> getInternalRooms() {
+		return internalRooms;
+	}
+
+	@Override
+	@XmlElementWrapper(required = true)
+	@XmlElement(name = "externalRoom")
+	public ObservableList<ExternalRoom> getExternalRooms() {
+		return externalRooms;
 	}
 
 	@Override
@@ -207,7 +216,12 @@ public class SemesterImpl implements Semester {
 	}
 
 	private boolean roomIdExists(String id) {
-		for (Room room : rooms) {
+		for (Room room : internalRooms) {
+			if (id.equals(room.getId())) {
+				return true;
+			}
+		}
+		for (Room room : externalRooms) {
 			if (id.equals(room.getId())) {
 				return true;
 			}
@@ -286,7 +300,6 @@ public class SemesterImpl implements Semester {
 		this.chairs.add(chair);
 	}
 
-	// timetables should be empty
 	@Override
 	public boolean removeChair(Chair chair) throws WctttModelException {
 		if (chair == null) {
@@ -302,7 +315,7 @@ public class SemesterImpl implements Semester {
 						"because it is responsible for course " + course);
 			}
 		}
-		for (Room room : rooms) {
+		for (InternalRoom room : internalRooms) {
 			if (room.getHolder().isPresent() &&
 					chair.equals(room.getHolder().get())) {
 				throw new WctttModelException("Chair cannot be removed " +
@@ -384,23 +397,42 @@ public class SemesterImpl implements Semester {
 	}
 
 	@Override
-	public void addRoom(Room room) throws WctttModelException {
+	public void addInternalRoom(InternalRoom room) throws WctttModelException {
 		if (room == null) {
 			throw new IllegalArgumentException("Parameter 'room' must not be " +
 					"null");
 		}
 		checkIfIdAvailable(room.getId());
-		this.rooms.add(room);
+		this.internalRooms.add(room);
+	}
+
+	@Override
+	public void addExternalRoom(ExternalRoom room) throws WctttModelException {
+		if (room == null) {
+			throw new IllegalArgumentException("Parameter 'room' must not be " +
+					"null");
+		}
+		checkIfIdAvailable(room.getId());
+		this.externalRooms.add(room);
 	}
 
 	// timetables should be empty
 	@Override
-	public boolean removeRoom(Room room) {
+	public boolean removeInternalRoom(InternalRoom room) {
 		if (room == null) {
 			throw new IllegalArgumentException("Parameter 'room' must not " +
 					"be null");
 		}
-		return this.rooms.remove(room);
+		return this.internalRooms.remove(room);
+	}
+
+	@Override
+	public boolean removeExternalRoom(ExternalRoom room) {
+		if (room == null) {
+			throw new IllegalArgumentException("Parameter 'room' must not " +
+					"be null");
+		}
+		return this.externalRooms.remove(room);
 	}
 
 	@Override
@@ -619,10 +651,18 @@ public class SemesterImpl implements Semester {
 			}
 		}
 
-		if (this.rooms.size() != other.rooms.size()) {
+		if (this.internalRooms.size() != other.internalRooms.size()) {
 			return false;
-		} else if (this.rooms != other.rooms) {
-			if (!(this.rooms.containsAll(other.rooms))) {
+		} else if (this.internalRooms != other.internalRooms) {
+			if (!(this.internalRooms.containsAll(other.internalRooms))) {
+				return false;
+			}
+		}
+
+		if (this.externalRooms.size() != other.externalRooms.size()) {
+			return false;
+		} else if (this.externalRooms != other.externalRooms) {
+			if (!(this.externalRooms.containsAll(other.externalRooms))) {
 				return false;
 			}
 		}

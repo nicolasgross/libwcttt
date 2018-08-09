@@ -101,12 +101,20 @@ public interface Semester {
 	ObservableList<Chair> getChairs();
 
 	/**
-	 * Getter for the rooms of a semester. Do not manipulate the returned
-	 * references.
+	 * Getter for the internal rooms of a semester. Do not manipulate the
+	 * returned references.
 	 *
 	 * @return the list of the rooms of the semester.
 	 */
-	ObservableList<Room> getRooms();
+	ObservableList<InternalRoom> getInternalRooms();
+
+	/**
+	 * Getter for the external rooms of a semester. Do not manipulate the
+	 * returned references.
+	 *
+	 * @return the list of the rooms of the semester.
+	 */
+	ObservableList<ExternalRoom> getExternalRooms();
 
 	/**
 	 * Getter for the courses of a semester. Do not manipulate the returned
@@ -150,10 +158,14 @@ public interface Semester {
 	void updateTeacherId(Teacher teacher, Chair chair, String id) throws
 					WctttModelException;
 
-	void addRoom(Room room) throws WctttModelException;
+	void addInternalRoom(InternalRoom room) throws WctttModelException;
+
+	void addExternalRoom(ExternalRoom room) throws WctttModelException;
 
 	// timetables should be empty
-	boolean removeRoom(Room room);
+	boolean removeInternalRoom(InternalRoom room);
+
+	boolean removeExternalRoom(ExternalRoom room);
 
 	void updateRoomId(Room room, String id) throws WctttModelException;
 

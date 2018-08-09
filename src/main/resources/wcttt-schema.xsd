@@ -13,10 +13,17 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
-      <xs:element name="rooms">
+      <xs:element name="internalRooms">
         <xs:complexType>
           <xs:sequence>
-            <xs:element name="room" type="room" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="internalRoom" type="internalRoom" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="externalRooms">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="externalRoom" type="externalRoom" minOccurs="0" maxOccurs="unbounded"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -121,22 +128,21 @@
   <xs:complexType name="timetableAssignment">
     <xs:sequence>
       <xs:element name="session" type="xs:IDREF"/>
-      <xs:element name="room" type="xs:IDREF" minOccurs="0"/>
+      <xs:element name="room" type="xs:IDREF"/>
     </xs:sequence>
   </xs:complexType>
 
-  <xs:complexType name="session">
+  <xs:complexType name="internalSession">
     <xs:sequence>
       <xs:element name="teacher" type="xs:IDREF"/>
-      <xs:element name="preAssignmentBinding" type="period" minOccurs="0"/>
+      <xs:element name="preAssignmentStartBinding" type="period" minOccurs="0"/>
+      <xs:element name="preAssignmentEndBinding" type="period" minOccurs="0"/>
       <xs:element name="roomRequirements" type="roomFeatures"/>
-      <xs:element name="externalRoomName" type="xs:string" minOccurs="0"/>
     </xs:sequence>
     <xs:attribute name="id" type="xs:ID" use="required"/>
     <xs:attribute name="name" type="xs:string" use="required"/>
-    <xs:attribute name="students" type="xs:int" use="required"/>
     <xs:attribute name="doubleSession" type="xs:boolean" use="required"/>
-    <xs:attribute name="external" type="xs:boolean" use="required"/>
+    <xs:attribute name="students" type="xs:int" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="roomFeatures">
@@ -147,7 +153,25 @@
     <xs:attribute name="teacherPc" type="xs:boolean" use="required"/>
   </xs:complexType>
 
-  <xs:complexType name="room">
+  <xs:complexType name="externalSession">
+    <xs:sequence>
+      <xs:element name="teacher" type="xs:IDREF"/>
+      <xs:element name="preAssignmentStartBinding" type="period" minOccurs="0"/>
+      <xs:element name="preAssignmentEndBinding" type="period" minOccurs="0"/>
+      <xs:element name="room" type="xs:IDREF"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:ID" use="required"/>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <xs:attribute name="doubleSession" type="xs:boolean" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="externalRoom">
+    <xs:sequence/>
+    <xs:attribute name="id" type="xs:ID" use="required"/>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="internalRoom">
     <xs:sequence>
       <xs:element name="features" type="roomFeatures"/>
       <xs:element name="holder" type="xs:IDREF" minOccurs="0"/>
@@ -163,14 +187,14 @@
       <xs:element name="lectures">
         <xs:complexType>
           <xs:sequence>
-            <xs:element name="lecture" type="session" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="lecture" type="xs:anyType" minOccurs="0" maxOccurs="unbounded"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="practicals" minOccurs="0">
         <xs:complexType>
           <xs:sequence>
-            <xs:element name="practical" type="session" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="practical" type="xs:anyType" minOccurs="0" maxOccurs="unbounded"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>

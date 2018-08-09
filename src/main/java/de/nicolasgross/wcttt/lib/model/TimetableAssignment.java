@@ -1,40 +1,23 @@
 package de.nicolasgross.wcttt.lib.model;
 
-import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlIDREF;
+import javax.xml.bind.annotation.XmlType;
 import java.util.Objects;
-import java.util.Optional;
 
-@XmlType(propOrder = {"session", "roomBinding"})
+@XmlType(propOrder = {"session", "room"})
 public class TimetableAssignment {
 
 	private Session session;
 	private Room room;
 
 	public TimetableAssignment() {
-		this.session = new Session();
-		this.room = new Room();
+		this.session = new InternalSession();
+		this.room = new InternalRoom();
 	}
 
-	public TimetableAssignment(Session session, Room room) throws
-			WctttModelException {
-		if (session == null) {
-			throw new IllegalArgumentException("Parameter 'session' must not " +
-					"be null");
-		} else if (room == null && !session.isExternal()) {
-			throw new WctttModelException("Parameter 'room' can only be null " +
-					"if 'session' is external");
-		}
-		this.session = session;
-		this.room = room;
-	}
-
-	@XmlElement(name = "room", required = false)
-	@XmlIDREF
-	private Room getRoomBinding() {
-		return room;
-	}
-
-	private void setRoomBinding(Room room) throws WctttModelException {
+	public TimetableAssignment(Session session, Room room) {
+		setSession(session);
 		setRoom(room);
 	}
 
@@ -52,14 +35,16 @@ public class TimetableAssignment {
 		this.session = session;
 	}
 
-	public Optional<Room> getRoom() {
-		return Optional.ofNullable(room);
+	@XmlElement(required = true)
+	@XmlIDREF
+	public Room getRoom() {
+		return room;
 	}
 
-	public void setRoom(Room room) throws WctttModelException {
-		if (room == null && !session.isExternal()) {
-			throw new WctttModelException("Parameter 'room' can only be null " +
-					"if 'session' is external");
+	public void setRoom(Room room) {
+		if (room == null) {
+			throw new IllegalArgumentException("Parameter 'room' must not be " +
+					"null");
 		}
 		this.room = room;
 	}
