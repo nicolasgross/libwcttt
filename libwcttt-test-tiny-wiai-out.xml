@@ -125,8 +125,7 @@
             <lectures>
                 <lecture xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="externalSession" id="stat1-l1" name="Statistik Lecture" doubleSession="true">
                     <teacher>rässler</teacher>
-                    <preAssignmentStartBinding day="2" timeSlot="3"/>
-                    <preAssignmentEndBinding day="2" timeSlot="4"/>
+                    <preAssignment day="2" timeSlot="3"/>
                     <room>audimax</room>
                 </lecture>
             </lectures>

@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlType;
 import java.util.Objects;
 
 @XmlType(propOrder = {"id", "name", "teacher", "doubleSession",
-		"preAssignmentStartBinding", "preAssignmentEndBinding", "room"})
+		"preAssignmentBinding", "room"})
 public class ExternalSession extends Session {
 
 	private ExternalRoom room;
@@ -17,10 +17,9 @@ public class ExternalSession extends Session {
 	}
 
 	public ExternalSession(String id, String name, Teacher teacher,
-	                       boolean doubleSession, Period preAssignmentStart,
-	                       Period preAssignmentEnd, ExternalRoom room) {
-		super(id, name, teacher, doubleSession, preAssignmentStart,
-				preAssignmentEnd);
+	                       boolean doubleSession, Period preAssignment,
+	                       ExternalRoom room) {
+		super(id, name, teacher, doubleSession, preAssignment);
 		setRoom(room);
 	}
 
@@ -39,21 +38,12 @@ public class ExternalSession extends Session {
 	}
 
 	@Override
-	public void setPreAssignmentStart(Period preAssignmentStart) {
-		if (preAssignmentStart == null) {
-			throw new IllegalArgumentException("Parameter " +
-					"'preAssignmentStart' must not be null");
-		}
-		super.setPreAssignmentStart(preAssignmentStart);
-	}
-
-	@Override
-	public void setPreAssignmentEnd(Period preAssignmentEnd) {
-		if (preAssignmentEnd == null) {
-			throw new IllegalArgumentException("Parameter 'preAssignmentEnd' " +
+	public void setPreAssignment(Period preAssignment) {
+		if (preAssignment == null) {
+			throw new IllegalArgumentException("Parameter 'preAssignment' " +
 					"must not be null");
 		}
-		super.setPreAssignmentEnd(preAssignmentEnd);
+		super.setPreAssignment(preAssignment);
 	}
 
 	@Override

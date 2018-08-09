@@ -12,8 +12,7 @@ public abstract class Session {
 	private String name;
 	private Teacher teacher;
 	private boolean doubleSession;
-	private Period preAssignmentStart;
-	private Period preAssignmentEnd;
+	private Period preAssignment;
 
 	public Session() {
 		setId("session");
@@ -21,41 +20,28 @@ public abstract class Session {
 		setTeacher(new Teacher());
 		setDoubleSession(false);
 		if (this instanceof InternalSession) {
-			setPreAssignmentStart(null);
-			setPreAssignmentEnd(null);
+			setPreAssignment(null);
 		} else {
-			setPreAssignmentStart(new Period());
-			setPreAssignmentStart(new Period());
+			setPreAssignment(new Period());
 		}
 	}
 
 	public Session(String id, String name, Teacher teacher,
-	                       boolean doubleSession, Period preAssignmentStart,
-	                       Period preAssignmentEnd) {
+	                       boolean doubleSession, Period preAssignment) {
 		setId(id);
 		setName(name);
 		setTeacher(teacher);
 		setDoubleSession(doubleSession);
-		setPreAssignmentStart(preAssignmentStart);
-		setPreAssignmentEnd(preAssignmentEnd);
+		setPreAssignment(preAssignment);
 	}
 
-	@XmlElement(required = false)
-	private Period getPreAssignmentStartBinding() {
-		return preAssignmentStart;
+	@XmlElement(name = "preAssignment", required = false)
+	private Period getPreAssignmentBinding() {
+		return preAssignment;
 	}
 
-	private void setPreAssignmentStartBinding(Period preAssignmentStart) {
-		setPreAssignmentStart(preAssignmentStart);
-	}
-
-	@XmlElement(required = false)
-	private Period getPreAssignmentEndBinding() {
-		return preAssignmentEnd;
-	}
-
-	private void setPreAssignmentEndBinding(Period preAssignmentEnd) {
-		setPreAssignmentEnd(preAssignmentEnd);
+	private void setPreAssignmentBinding(Period preAssignment) {
+		setPreAssignment(preAssignment);
 	}
 
 	@XmlAttribute(required = true)
@@ -108,20 +94,12 @@ public abstract class Session {
 		this.doubleSession = doubleSession;
 	}
 
-	public Optional<Period> getPreAssignmentStart() {
-		return Optional.ofNullable(preAssignmentStart);
+	public Optional<Period> getPreAssignment() {
+		return Optional.ofNullable(preAssignment);
 	}
 
-	public void setPreAssignmentStart(Period preAssignmentStart) {
-		this.preAssignmentStart = preAssignmentStart;
-	}
-
-	public Optional<Period> getPreAssignmentEnd() {
-		return Optional.ofNullable(preAssignmentEnd);
-	}
-
-	public void setPreAssignmentEnd(Period preAssignmentEnd) {
-		this.preAssignmentEnd = preAssignmentEnd;
+	public void setPreAssignment(Period preAssignment) {
+		this.preAssignment = preAssignment;
 	}
 
 	@Override
@@ -141,10 +119,7 @@ public abstract class Session {
 		if (!this.id.equals(other.id) || !this.name.equals(other.name) ||
 				!this.teacher.equals(other.teacher) ||
 				this.doubleSession != other.doubleSession ||
-				!Objects.equals(this.preAssignmentStart,
-						other.preAssignmentStart) ||
-				!Objects.equals(this.preAssignmentEnd,
-						other.preAssignmentEnd)) {
+				!Objects.equals(this.preAssignment, other.preAssignment)) {
 			return false;
 		}
 

@@ -5,8 +5,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlType(propOrder = {"id", "name", "teacher", "doubleSession",
-		"preAssignmentStartBinding", "preAssignmentEndBinding", "students",
-		"roomRequirements"})
+		"preAssignmentBinding", "students", "roomRequirements"})
 public class InternalSession extends Session {
 
 	private int students;
@@ -19,12 +18,10 @@ public class InternalSession extends Session {
 	}
 
 	public InternalSession(String id, String name, Teacher teacher,
-	                       boolean doubleSession, Period preAssignmentStart,
-	                       Period preAssignmentEnd, int students,
-	                       RoomFeatures roomRequirements)
+	                       boolean doubleSession, Period preAssignment,
+	                       int students, RoomFeatures roomRequirements)
 			throws WctttModelException {
-		super(id, name, teacher, doubleSession, preAssignmentStart,
-				preAssignmentEnd);
+		super(id, name, teacher, doubleSession, preAssignment);
 		setStudents(students);
 		setRoomRequirements(roomRequirements);
 	}

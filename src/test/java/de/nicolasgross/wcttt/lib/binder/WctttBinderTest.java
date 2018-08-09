@@ -67,17 +67,16 @@ class WctttBinderTest {
 		semesterWrite.addCourse(course);
 		semesterWrite.updateCourseId(course, "fse");
 		InternalSession lecture1 = new InternalSession("abc", "FSE Lecture 1",
-				teacher, false, null, null, 80,
+				teacher, false, null, 80,
 				new RoomFeatures(1, false, false, false));
-		Period start = new Period(2, 3);
-		Period end = new Period(2, 3);
+		Period preAssignment = new Period(2, 3);
 		ExternalSession lecture2 = new ExternalSession("FSE-L2",
-				"FSE Lecture 2", teacher, false, start, end, room3);
+				"FSE Lecture 2", teacher, false, preAssignment, room3);
 		semesterWrite.addCourseLecture(lecture1, course);
 		semesterWrite.addCourseLecture(lecture2, course);
 		semesterWrite.updateCourseSessionId(lecture1, course, "FSE-L1");
 		InternalSession practical = new InternalSession("FSE-P1",
-				"FSE Practical 1", teacher, false, null, null, 30,
+				"FSE Practical 1", teacher, false, null, 30,
 				new RoomFeatures(1, false, false, true));
 		semesterWrite.addCoursePractical(practical, course);
 
