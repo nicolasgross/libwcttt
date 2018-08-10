@@ -134,6 +134,7 @@ public abstract class Session {
 		Session other = (Session) obj;
 		if (!this.id.equals(other.id) || !this.name.equals(other.name) ||
 				!this.teacher.equals(other.teacher) ||
+				!this.course.equals(other.course) ||
 				this.doubleSession != other.doubleSession ||
 				!Objects.equals(this.preAssignment, other.preAssignment)) {
 			return false;
