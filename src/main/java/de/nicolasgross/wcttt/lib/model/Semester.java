@@ -142,7 +142,6 @@ public interface Semester {
 
 	void addChair(Chair chair) throws WctttModelException;
 
-	// timetables should be empty
 	boolean removeChair(Chair chair) throws WctttModelException;
 
 	void updateChairId(Chair chair, String id) throws
@@ -151,7 +150,6 @@ public interface Semester {
 	void addTeacherToChair(Teacher teacher, Chair chair) throws
 					WctttModelException;
 
-	// timetables should be empty
 	boolean removeTeacherFromChair(Teacher teacher, Chair chair) throws
 			WctttModelException;
 
@@ -162,16 +160,14 @@ public interface Semester {
 
 	void addExternalRoom(ExternalRoom room) throws WctttModelException;
 
-	// timetables should be empty
-	boolean removeInternalRoom(InternalRoom room);
+	boolean removeInternalRoom(InternalRoom room) throws WctttModelException;
 
-	boolean removeExternalRoom(ExternalRoom room);
+	boolean removeExternalRoom(ExternalRoom room) throws WctttModelException;
 
 	void updateRoomId(Room room, String id) throws WctttModelException;
 
 	void addCourse(Course course) throws WctttModelException;
 
-	// timetables should be empty
 	boolean removeCourse(Course course) throws WctttModelException;
 
 	void updateCourseId(Course course, String id) throws
@@ -180,14 +176,12 @@ public interface Semester {
 	void addCourseLecture(Session lecture, Course course) throws
 					WctttModelException;
 
-	// timetables should be empty
 	boolean removeCourseLecture(Session lecture, Course course) throws
 			WctttModelException;
 
 	void addCoursePractical(Session practical, Course course) throws
 					WctttModelException;
 
-	// timetables should be empty
 	boolean removeCoursePractical(Session practical, Course course)
 			throws WctttModelException;
 
@@ -197,15 +191,15 @@ public interface Semester {
 	void addCurriculum(Curriculum curriculum) throws
 							WctttModelException;
 
-	// timetables should be empty
-	boolean removeCurriculum(Curriculum curriculum);
+	boolean removeCurriculum(Curriculum curriculum) throws WctttModelException;
 
 	void updateCurriculumId(Curriculum curriculum, String id) throws
 			WctttModelException;
 
-	void addTimetable(Timetable timetable);
+	void addTimetable(Timetable timetable) throws WctttModelException;
 
 	boolean removeTimetable(Timetable timetable);
 
-	void removeAllTimetables();
+	void updateTimetableName(Timetable timetable, String name)
+			throws WctttModelException;
 }

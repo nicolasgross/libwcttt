@@ -97,6 +97,13 @@ public class SemesterImpl implements Semester {
 		this.name = name;
 	}
 
+	private void checkTimetablesEmpty(String name) throws WctttModelException {
+		if (!getTimetables().isEmpty()) {
+			throw new WctttModelException("Timetable list must be empty before " +
+					"editing the " + name);
+		}
+	}
+
 	@Override
 	@XmlAttribute(required = true)
 	public int getDaysPerWeek() {
@@ -105,6 +112,7 @@ public class SemesterImpl implements Semester {
 
 	@Override
 	public void setDaysPerWeek(int daysPerWeek) throws WctttModelException {
+		checkTimetablesEmpty("number of days per week");
 		ValidationHelper.validateDaysPerWeek(daysPerWeek);
 		this.daysPerWeek = daysPerWeek;
 	}
@@ -118,6 +126,7 @@ public class SemesterImpl implements Semester {
 	@Override
 	public void setTimeSlotsPerDay(int timeSlotsPerDay) throws
 			WctttModelException {
+		checkTimetablesEmpty("number of time slots per day");
 		ValidationHelper.validateTimeSlotsPerDay(timeSlotsPerDay);
 		this.timeSlotsPerDay = timeSlotsPerDay;
 	}
@@ -131,6 +140,7 @@ public class SemesterImpl implements Semester {
 	@Override
 	public void setMaxDailyLecturesPerCur(int maxDailyLecturesPerCur) throws
 			WctttModelException {
+		checkTimetablesEmpty("maximum number of daily lectures per curriculum");
 		ValidationHelper.validateMaxDailyLecturesPerCur(maxDailyLecturesPerCur);
 		this.maxDailyLecturesPerCur = maxDailyLecturesPerCur;
 	}
@@ -263,6 +273,15 @@ public class SemesterImpl implements Semester {
 		return false;
 	}
 
+	private boolean timetableNameExists(String name) {
+		for (Timetable timetable : timetables) {
+			if (name.equals(timetable.getName())) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	private void checkIfIdAvailable(String id) throws WctttModelException {
 		if ("".equals(id)) {
 			throw new WctttModelException("Id '" + id + "' is not allowed");
@@ -289,6 +308,7 @@ public class SemesterImpl implements Semester {
 
 	@Override
 	public void addChair(Chair chair) throws WctttModelException {
+		checkTimetablesEmpty("chairs");
 		if (chair == null) {
 			throw new IllegalArgumentException("Parameter 'chair' must not be" +
 					" null");
@@ -302,6 +322,7 @@ public class SemesterImpl implements Semester {
 
 	@Override
 	public boolean removeChair(Chair chair) throws WctttModelException {
+		checkTimetablesEmpty("chairs");
 		if (chair == null) {
 			throw new IllegalArgumentException("Parameter 'chair' must not be" +
 					" null");
@@ -342,6 +363,7 @@ public class SemesterImpl implements Semester {
 	@Override
 	public void addTeacherToChair(Teacher teacher, Chair chair) throws
 			WctttModelException {
+		checkTimetablesEmpty("chairs");
 		if (teacher == null || chair == null) {
 			throw new IllegalArgumentException("Parameter 'teacher' and " +
 					"'chair' must not be null");
@@ -353,10 +375,10 @@ public class SemesterImpl implements Semester {
 		chair.addTeacher(teacher);
 	}
 
-	// timetables should be empty
 	@Override
 	public boolean removeTeacherFromChair(Teacher teacher, Chair chair) throws
 			WctttModelException {
+		checkTimetablesEmpty("chairs");
 		if (teacher == null || chair == null) {
 			throw new IllegalArgumentException("Parameters 'teacher' and " +
 					"'chair' must not be null");
@@ -398,6 +420,7 @@ public class SemesterImpl implements Semester {
 
 	@Override
 	public void addInternalRoom(InternalRoom room) throws WctttModelException {
+		checkTimetablesEmpty("rooms");
 		if (room == null) {
 			throw new IllegalArgumentException("Parameter 'room' must not be " +
 					"null");
@@ -408,6 +431,7 @@ public class SemesterImpl implements Semester {
 
 	@Override
 	public void addExternalRoom(ExternalRoom room) throws WctttModelException {
+		checkTimetablesEmpty("rooms");
 		if (room == null) {
 			throw new IllegalArgumentException("Parameter 'room' must not be " +
 					"null");
@@ -416,9 +440,10 @@ public class SemesterImpl implements Semester {
 		this.externalRooms.add(room);
 	}
 
-	// timetables should be empty
 	@Override
-	public boolean removeInternalRoom(InternalRoom room) {
+	public boolean removeInternalRoom(InternalRoom room)
+			throws WctttModelException {
+		checkTimetablesEmpty("rooms");
 		if (room == null) {
 			throw new IllegalArgumentException("Parameter 'room' must not " +
 					"be null");
@@ -427,7 +452,9 @@ public class SemesterImpl implements Semester {
 	}
 
 	@Override
-	public boolean removeExternalRoom(ExternalRoom room) {
+	public boolean removeExternalRoom(ExternalRoom room)
+			throws WctttModelException {
+		checkTimetablesEmpty("rooms");
 		if (room == null) {
 			throw new IllegalArgumentException("Parameter 'room' must not " +
 					"be null");
@@ -450,6 +477,7 @@ public class SemesterImpl implements Semester {
 
 	@Override
 	public void addCourse(Course course) throws WctttModelException {
+		checkTimetablesEmpty("courses");
 		if (course == null) {
 			throw new IllegalArgumentException("Parameter 'course' must not " +
 					"be null");
@@ -464,9 +492,9 @@ public class SemesterImpl implements Semester {
 		this.courses.add(course);
 	}
 
-	// timetables should be empty
 	@Override
 	public boolean removeCourse(Course course) throws WctttModelException {
+		checkTimetablesEmpty("courses");
 		if (course == null) {
 			throw new IllegalArgumentException("Parameter 'course' must not " +
 					"be null");
@@ -498,6 +526,7 @@ public class SemesterImpl implements Semester {
 
 	private void addCourseSession(Session session, Course course,
 	                              boolean lecture) throws WctttModelException {
+		checkTimetablesEmpty("courses");
 		if (!courseIdExists(course.getId())) {
 			throw new WctttModelException("Course " + course.getId() + " is " +
 					"not assigned to the semester");
@@ -513,6 +542,7 @@ public class SemesterImpl implements Semester {
 	@Override
 	public void addCourseLecture(Session lecture, Course course) throws
 			WctttModelException {
+		checkTimetablesEmpty("courses");
 		if (course == null || lecture == null) {
 			throw new IllegalArgumentException("Parameter 'course' and " +
 					"'lecture' must not be null");
@@ -520,10 +550,10 @@ public class SemesterImpl implements Semester {
 		addCourseSession(lecture, course, true);
 	}
 
-	// timetables should be empty
 	@Override
 	public boolean removeCourseLecture(Session lecture, Course course) throws
 			WctttModelException {
+		checkTimetablesEmpty("courses");
 		if (lecture == null || course == null) {
 			throw new IllegalArgumentException("Parameters 'lecture' and " +
 					"'course' must not be null");
@@ -537,6 +567,7 @@ public class SemesterImpl implements Semester {
 	@Override
 	public void addCoursePractical(Session practical, Course course) throws
 			WctttModelException {
+		checkTimetablesEmpty("courses");
 		if (course == null || practical == null) {
 			throw new IllegalArgumentException("Parameter 'course' and " +
 					"'practical' must not be null");
@@ -544,10 +575,10 @@ public class SemesterImpl implements Semester {
 		addCourseSession(practical, course, false);
 	}
 
-	// timetables should be empty
 	@Override
 	public boolean removeCoursePractical(Session practical, Course course)
 			throws WctttModelException {
+		checkTimetablesEmpty("courses");
 		if (practical == null || course == null) {
 			throw new IllegalArgumentException("Parameters 'practical' and " +
 					"'course' must not be null");
@@ -578,6 +609,7 @@ public class SemesterImpl implements Semester {
 	@Override
 	public void addCurriculum(Curriculum curriculum) throws
 			WctttModelException {
+		checkTimetablesEmpty("curricula");
 		if (curriculum == null) {
 			throw new IllegalArgumentException("Parameter 'curriculum' must " +
 					"not be null");
@@ -586,9 +618,10 @@ public class SemesterImpl implements Semester {
 		this.curricula.add(curriculum);
 	}
 
-	// timetables should be empty
 	@Override
-	public boolean removeCurriculum(Curriculum curriculum) {
+	public boolean removeCurriculum(Curriculum curriculum)
+			throws WctttModelException {
+		checkTimetablesEmpty("curricula");
 		if (curriculum == null) {
 			throw new IllegalArgumentException("Parameter 'curriculum' must " +
 					"not be null");
@@ -611,7 +644,11 @@ public class SemesterImpl implements Semester {
 	}
 
 	@Override
-	public void addTimetable(Timetable timetable) {
+	public void addTimetable(Timetable timetable) throws WctttModelException {
+		if (timetableNameExists(timetable.getName())) {
+			throw new WctttModelException("Name '" + timetable.getName() +
+					"' is already assigned to a timetable of the semester");
+		}
 		timetable.calcConstraintViolations(this);
 		timetables.add(timetable);
 	}
@@ -622,8 +659,13 @@ public class SemesterImpl implements Semester {
 	}
 
 	@Override
-	public void removeAllTimetables() {
-		this.timetables.clear();
+	public void updateTimetableName(Timetable timetable, String name)
+			throws WctttModelException {
+		if (timetableNameExists(name)) {
+			throw new WctttModelException("Name '" + name + "' is already " +
+					"assigned to a timetable of the semester");
+		}
+		timetable.setName(name);
 	}
 
 	@Override

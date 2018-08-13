@@ -1,6 +1,6 @@
 package de.nicolasgross.wcttt.lib.model;
 
-class ValidationHelper {
+public class ValidationHelper {
 
 	/*
 		'Semester:'  -> Following constants/methods are used in class Semester.
