@@ -13,7 +13,7 @@ public class Curriculum {
 
 	public Curriculum() {
 		this.id = "curriculum";
-		this.name = "";
+		this.name = "curriculum";
 	}
 
 	public Curriculum(String id, String name) {

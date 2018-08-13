@@ -17,7 +17,7 @@ public class Chair {
 
 	public Chair() {
 		this.id = "chair";
-		this.name = "";
+		this.name = "chair";
 		this.abbreviation = "";
 	}
 

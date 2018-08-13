@@ -17,7 +17,7 @@ public abstract class Session {
 
 	public Session() {
 		setId("session");
-		setName("");
+		setName("session");
 		setTeacher(new Teacher());
 		setCourse(new Course());
 		setDoubleSession(false);

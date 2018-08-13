@@ -20,7 +20,7 @@ public abstract class Room {
 	 */
 	public Room() {
 		this.id = "room";
-		this.name = "";
+		this.name = "room";
 	}
 
 	/**

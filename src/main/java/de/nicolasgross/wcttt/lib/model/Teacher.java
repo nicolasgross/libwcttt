@@ -14,7 +14,7 @@ public class Teacher {
 
 	public Teacher() {
 		this.id = "teacher";
-		this.name = "";
+		this.name = "teacher";
 	}
 
 	public Teacher(String id, String name) {

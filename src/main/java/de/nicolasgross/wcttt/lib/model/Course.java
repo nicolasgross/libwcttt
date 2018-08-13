@@ -21,7 +21,7 @@ public class Course {
 
 	public Course() {
 		this.id = "course";
-		this.name = "";
+		this.name = "course";
 		this.abbreviation = "";
 		this.chair = new Chair();
 		this.courseLevel = CourseLevel.Bachelor;

@@ -19,7 +19,7 @@ public class Timetable {
 			FXCollections.observableArrayList();
 
 	public Timetable() {
-		this.name = "";
+		this.name = "timetable";
 	}
 
 	public Timetable(String name) {
