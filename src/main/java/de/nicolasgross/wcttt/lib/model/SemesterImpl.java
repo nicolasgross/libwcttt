@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 
 import javax.xml.bind.annotation.*;
 import java.util.LinkedList;
+import java.util.Objects;
 
 /**
  * Represents a semester.
@@ -474,6 +475,28 @@ public class SemesterImpl implements Semester {
 		checkIfIdAvailable(id);
 		room.setId(id);
 	}
+
+	@Override
+	public void updateInternalRoomData(InternalRoom room, String name,
+	                                   int capacity, Chair holder,
+	                                   RoomFeatures features)
+			throws WctttModelException {
+		if (capacity != room.getCapacity() ||
+				!Objects.equals(holder, room.getHolder()) ||
+				!Objects.equals(features, room.getFeatures())) {
+			checkTimetablesEmpty("rooms");
+		}
+		room.setName(name);
+		room.setCapacity(capacity);
+		room.setHolder(holder);
+		room.setFeatures(features);
+	}
+
+	@Override
+	public void updateExternalRoomData(ExternalRoom room, String name) {
+		room.setName(name);
+	}
+
 
 	@Override
 	public void addCourse(Course course) throws WctttModelException {

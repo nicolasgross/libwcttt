@@ -166,6 +166,12 @@ public interface Semester {
 
 	void updateRoomId(Room room, String id) throws WctttModelException;
 
+	void updateInternalRoomData(InternalRoom room, String name, int capacity,
+	                            Chair holder, RoomFeatures features)
+			throws WctttModelException;
+
+	void updateExternalRoomData(ExternalRoom room, String name);
+
 	void addCourse(Course course) throws WctttModelException;
 
 	boolean removeCourse(Course course) throws WctttModelException;
