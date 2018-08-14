@@ -150,7 +150,7 @@ public interface Semester {
 			WctttModelException;
 
 	void updateChairData(Chair chair, String name, String abbreviation,
-	                     ObservableList<Teacher> teachers);
+	                     List<Teacher> teachers) throws WctttModelException;
 
 	void addTeacherToChair(Teacher teacher, Chair chair) throws
 					WctttModelException;
@@ -161,9 +161,10 @@ public interface Semester {
 	void updateTeacherId(Teacher teacher, Chair chair, String id) throws
 					WctttModelException;
 
-	void updateTeacherData(Teacher teacher, Chair chair, String name,
+	void updateTeacherData(Teacher teacher, String name,
 	                       List<Period> unfavorablePeriods,
-	                       List<Period> unavailablePeriods);
+	                       List<Period> unavailablePeriods)
+			throws WctttModelException;
 
 	void addInternalRoom(InternalRoom room) throws WctttModelException;
 
@@ -179,7 +180,8 @@ public interface Semester {
 	                            Chair holder, RoomFeatures features)
 			throws WctttModelException;
 
-	void updateExternalRoomData(ExternalRoom room, String name);
+	void updateExternalRoomData(ExternalRoom room, String name)
+			throws WctttModelException;
 
 	void addCourse(Course course) throws WctttModelException;
 
@@ -191,7 +193,7 @@ public interface Semester {
 	void updateCourseData(Course course, String name, String abbreviation,
 	                      Chair chair, CourseLevel courseLevel,
 	                      int minNumberOfDays, List<Session> lectures,
-	                      List<Session> practicals);
+	                      List<Session> practicals) throws WctttModelException;
 
 	void addCourseLecture(Session lecture, Course course) throws
 					WctttModelException;
@@ -208,13 +210,16 @@ public interface Semester {
 	void updateCourseSessionId(Session session, Course course, String id)
 					throws WctttModelException;
 
-	void updateCourseIntSessionData(Session session, Course course, String name,
-	                                Teacher teacher, boolean doubleSession,
-	                                Period preAssignment, int students,
-	                                RoomFeatures roomRequirements);
-	void updateCourseExtSessionData(Session session, Course course, String name,
-	                                Teacher teacher, boolean doubleSession,
-	                                Period preAssignment, Room room);
+	void updateInternalSessionData(InternalSession session, String name,
+	                               Teacher teacher, boolean doubleSession,
+	                               Period preAssignment, int students,
+	                               RoomFeatures roomRequirements)
+			throws WctttModelException;
+
+	void updateExternalSessionData(ExternalSession session, String name,
+	                               Teacher teacher, boolean doubleSession,
+	                               Period preAssignment, ExternalRoom room)
+			throws WctttModelException;
 
 	void addCurriculum(Curriculum curriculum) throws
 							WctttModelException;
@@ -225,7 +230,7 @@ public interface Semester {
 			WctttModelException;
 
 	void updateCurriculumData(Curriculum curriculum, String name,
-	                          List<Course> courses);
+	                          List<Course> courses) throws WctttModelException;
 
 	void addTimetable(Timetable timetable) throws WctttModelException;
 
