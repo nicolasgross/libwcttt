@@ -3,7 +3,7 @@ package de.nicolasgross.wcttt.lib.model;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
-@XmlType(propOrder = {"projectors", "pcPool"})
+@XmlType(propOrder = {"projectors", "pcPool", "teacherPc", "docCam"})
 public class RoomFeatures implements Comparable<RoomFeatures> {
 
 	private int projectors;
@@ -47,7 +47,11 @@ public class RoomFeatures implements Comparable<RoomFeatures> {
 	}
 
 	@XmlAttribute(required = true)
-	public boolean getTeacherPc() {
+	private boolean getTeacherPc() {
+		return hasTeacherPc();
+	}
+
+	public boolean hasTeacherPc() {
 		return teacherPc;
 	}
 
@@ -56,7 +60,11 @@ public class RoomFeatures implements Comparable<RoomFeatures> {
 	}
 
 	@XmlAttribute(required = true)
-	public boolean getDocCam() {
+	private boolean getDocCam() {
+		return hasDocCam();
+	}
+
+	public boolean hasDocCam() {
 		return docCam;
 	}
 

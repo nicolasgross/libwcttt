@@ -148,8 +148,8 @@
     <xs:sequence/>
     <xs:attribute name="projectors" type="xs:int" use="required"/>
     <xs:attribute name="pcPool" type="xs:boolean" use="required"/>
-    <xs:attribute name="docCam" type="xs:boolean" use="required"/>
     <xs:attribute name="teacherPc" type="xs:boolean" use="required"/>
+    <xs:attribute name="docCam" type="xs:boolean" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="externalSession">

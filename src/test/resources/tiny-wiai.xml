@@ -103,16 +103,16 @@
     </chairs>
     <internalRooms>
         <internalRoom id="r1" name="WE5/00.019" capacity="156">
-            <features projectors="2" pcPool="false" docCam="false" teacherPc="false"/>
+            <features projectors="2" pcPool="false" teacherPc="false" docCam="false"/>
         </internalRoom>
         <internalRoom id="r2" name="WE5/00.022" capacity="241">
-            <features projectors="2" pcPool="false" docCam="false" teacherPc="false"/>
+            <features projectors="2" pcPool="false" teacherPc="false" docCam="false"/>
         </internalRoom>
         <internalRoom id="r3" name="WE5/01.003" capacity="35">
-            <features projectors="2" pcPool="true" docCam="false" teacherPc="false"/>
+            <features projectors="2" pcPool="true" teacherPc="false" docCam="false"/>
         </internalRoom>
         <internalRoom id="r4" name="WE5/03.087" capacity="12">
-            <features projectors="1" pcPool="true" docCam="false" teacherPc="false"/>
+            <features projectors="1" pcPool="true" teacherPc="false" docCam="false"/>
             <holder>swt</holder>
         </internalRoom>
     </internalRooms>
@@ -136,29 +136,29 @@
             <lectures>
                 <lecture xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="internalSession" id="fse-l1" name="FSE Lecture 1" doubleSession="false" students="80">
                     <teacher>lüttgen</teacher>
-                    <roomRequirements projectors="1" pcPool="false" docCam="false" teacherPc="false"/>
+                    <roomRequirements projectors="1" pcPool="false" teacherPc="false" docCam="false"/>
                 </lecture>
                 <lecture xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="internalSession" id="fse-l2" name="FSE Lecture 2" doubleSession="false" students="80">
                     <teacher>lüttgen</teacher>
-                    <roomRequirements projectors="1" pcPool="false" docCam="false" teacherPc="false"/>
+                    <roomRequirements projectors="1" pcPool="false" teacherPc="false" docCam="false"/>
                 </lecture>
                 <lecture xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="internalSession" id="fse-l3" name="FSE Lecture 3" doubleSession="false" students="80">
                     <teacher>lüttgen</teacher>
-                    <roomRequirements projectors="1" pcPool="false" docCam="false" teacherPc="false"/>
+                    <roomRequirements projectors="1" pcPool="false" teacherPc="false" docCam="false"/>
                 </lecture>
             </lectures>
             <practicals>
                 <practical xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="internalSession" id="fse-p1" name="FSE Practical 1" doubleSession="false" students="30">
                     <teacher>yip</teacher>
-                    <roomRequirements projectors="1" pcPool="false" docCam="true" teacherPc="false"/>
+                    <roomRequirements projectors="1" pcPool="false" teacherPc="false" docCam="false"/>
                 </practical>
                 <practical xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="internalSession" id="fse-p2" name="FSE Practical 2" doubleSession="false" students="30">
                     <teacher>gareis</teacher>
-                    <roomRequirements projectors="1" pcPool="false" docCam="true" teacherPc="false"/>
+                    <roomRequirements projectors="1" pcPool="false" teacherPc="false" docCam="false"/>
                 </practical>
                 <practical xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="internalSession" id="fse-p3" name="FSE Practical 3" doubleSession="false" students="30">
                     <teacher>yip</teacher>
-                    <roomRequirements projectors="1" pcPool="false" docCam="true" teacherPc="false"/>
+                    <roomRequirements projectors="1" pcPool="false" teacherPc="false" docCam="false"/>
                 </practical>
             </practicals>
         </course>
@@ -167,45 +167,45 @@
             <lectures>
                 <lecture xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="internalSession" id="eiaps-l1" name="EiAPS Lecture 1" doubleSession="false" students="240">
                     <teacher>wirtz</teacher>
-                    <roomRequirements projectors="1" pcPool="false" docCam="false" teacherPc="false"/>
+                    <roomRequirements projectors="1" pcPool="false" teacherPc="false" docCam="false"/>
                 </lecture>
                 <lecture xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="internalSession" id="eiaps-l2" name="EiAPS Lecture 2" doubleSession="false" students="240">
                     <teacher>wirtz</teacher>
-                    <roomRequirements projectors="1" pcPool="false" docCam="false" teacherPc="false"/>
+                    <roomRequirements projectors="1" pcPool="false" teacherPc="false" docCam="false"/>
                 </lecture>
             </lectures>
             <practicals>
                 <practical xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="internalSession" id="eiaps-p1" name="EiAPS Practical 1" doubleSession="false" students="35">
                     <teacher>dsg-hiwi1</teacher>
-                    <roomRequirements projectors="1" pcPool="false" docCam="true" teacherPc="false"/>
+                    <roomRequirements projectors="1" pcPool="false" teacherPc="false" docCam="false"/>
                 </practical>
                 <practical xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="internalSession" id="eisp-p2" name="EiAPS Practical 2" doubleSession="false" students="35">
                     <teacher>dsg-hiwi2</teacher>
-                    <roomRequirements projectors="1" pcPool="false" docCam="true" teacherPc="false"/>
+                    <roomRequirements projectors="1" pcPool="false" teacherPc="false" docCam="false"/>
                 </practical>
                 <practical xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="internalSession" id="eisp-p3" name="EiAPS Practical 3" doubleSession="false" students="35">
                     <teacher>dsg-hiwi3</teacher>
-                    <roomRequirements projectors="1" pcPool="false" docCam="true" teacherPc="false"/>
+                    <roomRequirements projectors="1" pcPool="false" teacherPc="false" docCam="false"/>
                 </practical>
                 <practical xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="internalSession" id="eisp-p4" name="EiAPS Practical 4" doubleSession="false" students="35">
                     <teacher>dsg-hiwi4</teacher>
-                    <roomRequirements projectors="1" pcPool="false" docCam="true" teacherPc="false"/>
+                    <roomRequirements projectors="1" pcPool="false" teacherPc="false" docCam="false"/>
                 </practical>
                 <practical xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="internalSession" id="eisp-p5" name="EiAPS Practical 5" doubleSession="false" students="35">
                     <teacher>dsg-hiwi1</teacher>
-                    <roomRequirements projectors="1" pcPool="false" docCam="true" teacherPc="false"/>
+                    <roomRequirements projectors="1" pcPool="false" teacherPc="false" docCam="false"/>
                 </practical>
                 <practical xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="internalSession" id="eisp-p6" name="EiAPS Practical 6" doubleSession="false" students="35">
                     <teacher>dsg-hiwi2</teacher>
-                    <roomRequirements projectors="1" pcPool="false" docCam="true" teacherPc="false"/>
+                    <roomRequirements projectors="1" pcPool="false" teacherPc="false" docCam="false"/>
                 </practical>
                 <practical xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="internalSession" id="eisp-p7" name="EiAPS Practical 7" doubleSession="false" students="35">
                     <teacher>dsg-hiwi3</teacher>
-                    <roomRequirements projectors="1" pcPool="false" docCam="true" teacherPc="false"/>
+                    <roomRequirements projectors="1" pcPool="false" teacherPc="false" docCam="false"/>
                 </practical>
                 <practical xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="internalSession" id="eisp-p8" name="EiAPS Practical 8" doubleSession="false" students="35">
                     <teacher>dsg-hiwi4</teacher>
-                    <roomRequirements projectors="1" pcPool="false" docCam="true" teacherPc="false"/>
+                    <roomRequirements projectors="1" pcPool="false" teacherPc="false" docCam="false"/>
                 </practical>
             </practicals>
         </course>
@@ -214,21 +214,21 @@
             <lectures>
                 <lecture xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="internalSession" id="mtl-l1" name="MTL Lecture 1" doubleSession="false" students="30">
                     <teacher>mendler</teacher>
-                    <roomRequirements projectors="1" pcPool="false" docCam="false" teacherPc="false"/>
+                    <roomRequirements projectors="1" pcPool="false" teacherPc="false" docCam="false"/>
                 </lecture>
                 <lecture xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="internalSession" id="mtl-l2" name="MTL Lecture 2" doubleSession="false" students="30">
                     <teacher>mendler</teacher>
-                    <roomRequirements projectors="1" pcPool="false" docCam="false" teacherPc="false"/>
+                    <roomRequirements projectors="1" pcPool="false" teacherPc="false" docCam="false"/>
                 </lecture>
             </lectures>
             <practicals>
                 <practical xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="internalSession" id="mtl-p1" name="MTL Practical 1" doubleSession="false" students="20">
                     <teacher>guatto</teacher>
-                    <roomRequirements projectors="1" pcPool="false" docCam="true" teacherPc="false"/>
+                    <roomRequirements projectors="1" pcPool="false" teacherPc="false" docCam="false"/>
                 </practical>
                 <practical xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="internalSession" id="mtl-p2" name="MTL Practical 2" doubleSession="false" students="20">
                     <teacher>guatto</teacher>
-                    <roomRequirements projectors="1" pcPool="false" docCam="true" teacherPc="false"/>
+                    <roomRequirements projectors="1" pcPool="false" teacherPc="false" docCam="false"/>
                 </practical>
             </practicals>
         </course>
@@ -237,17 +237,17 @@
             <lectures>
                 <lecture xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="internalSession" id="gik-l1" name="GIK Lecture 1" doubleSession="false" students="20">
                     <teacher>krieger</teacher>
-                    <roomRequirements projectors="1" pcPool="false" docCam="false" teacherPc="false"/>
+                    <roomRequirements projectors="1" pcPool="false" teacherPc="false" docCam="false"/>
                 </lecture>
                 <lecture xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="internalSession" id="gik-l2" name="GIK Lecture 2" doubleSession="false" students="20">
                     <teacher>krieger</teacher>
-                    <roomRequirements projectors="1" pcPool="false" docCam="false" teacherPc="false"/>
+                    <roomRequirements projectors="1" pcPool="false" teacherPc="false" docCam="false"/>
                 </lecture>
             </lectures>
             <practicals>
                 <practical xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="internalSession" id="gik-p1" name="GIK Practical 1" doubleSession="false" students="20">
                     <teacher>großmann</teacher>
-                    <roomRequirements projectors="1" pcPool="true" docCam="true" teacherPc="false"/>
+                    <roomRequirements projectors="1" pcPool="true" teacherPc="false" docCam="false"/>
                 </practical>
             </practicals>
         </course>
