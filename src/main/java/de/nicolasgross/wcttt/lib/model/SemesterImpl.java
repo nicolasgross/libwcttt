@@ -566,6 +566,13 @@ public class SemesterImpl implements Semester {
 					"be null");
 		}
 		checkTimetablesEmpty("courses");
+		if (chairs.isEmpty()) {
+			throw new WctttModelException("You have to add at least one chair" +
+					" before adding a course");
+		} else if (!chairIdExists(course.getChair().getId())) {
+			throw new WctttModelException("Chair " + course.getChair().getId() +
+					" is not assigned to the semester");
+		}
 		checkIfIdAvailable(course.getId());
 		for (Session lecture : course.getLectures()) {
 			checkIfIdAvailable(lecture.getId());
@@ -611,8 +618,7 @@ public class SemesterImpl implements Semester {
 	@Override
 	public void updateCourseData(Course course, String name, String abbreviation,
 	                             Chair chair, CourseLevel courseLevel,
-	                             int minNumberOfDays, List<Session> lectures,
-	                             List<Session> practicals)
+	                             int minNumberOfDays)
 			throws WctttModelException {
 		if (course == null) {
 			throw new IllegalArgumentException("Parameter 'course' must not " +
@@ -623,9 +629,7 @@ public class SemesterImpl implements Semester {
 		}
 		if (!Objects.equals(chair, course.getChair()) ||
 				courseLevel != course.getCourseLevel() ||
-				minNumberOfDays != course.getMinNumberOfDays() ||
-				!Objects.equals(lectures, course.getLectures()) ||
-				!Objects.equals(practicals, course.getPracticals())) {
+				minNumberOfDays != course.getMinNumberOfDays()) {
 			checkTimetablesEmpty("courses");
 		}
 		course.setName(name);
@@ -633,18 +637,28 @@ public class SemesterImpl implements Semester {
 		course.setChair(chair);
 		course.setCourseLevel(courseLevel);
 		course.setMinNumberOfDays(minNumberOfDays);
-		course.getLectures().clear();
-		course.getLectures().addAll(lectures);
-		course.getPracticals().clear();
-		course.getPracticals().addAll(practicals);
+	}
+
+	private boolean teacherListIsEmpty() {
+		for (Chair chair : chairs) {
+			if (!chair.getTeachers().isEmpty()) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	private void addCourseSession(Session session, Course course,
 	                              boolean lecture) throws WctttModelException {
+		assert session != null;
+		assert course != null;
 		checkTimetablesEmpty("courses");
 		if (!courseIdExists(course.getId())) {
 			throw new WctttModelException("Course " + course.getId() + " is " +
 					"not assigned to the semester");
+		} else if (teacherListIsEmpty()) {
+			throw new WctttModelException("You have to add at least one " +
+					"teacher before adding a session");
 		}
 		checkIfIdAvailable(session.getId());
 		if (lecture) {

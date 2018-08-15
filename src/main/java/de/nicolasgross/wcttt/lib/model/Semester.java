@@ -192,8 +192,7 @@ public interface Semester {
 
 	void updateCourseData(Course course, String name, String abbreviation,
 	                      Chair chair, CourseLevel courseLevel,
-	                      int minNumberOfDays, List<Session> lectures,
-	                      List<Session> practicals) throws WctttModelException;
+	                      int minNumberOfDays) throws WctttModelException;
 
 	void addCourseLecture(Session lecture, Course course) throws
 					WctttModelException;

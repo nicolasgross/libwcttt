@@ -9,6 +9,12 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(propOrder = {"day", "timeSlot"})
 public class Period {
 
+	public static final String[] WEEK_DAY_NAMES = {"Monday", "Tuesday",
+			"Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+	public static final String[] TIME_SLOT_NAMES = {"8:15 - 9:45",
+			"10:15 - 11:45", "12:15 - 13:45", "14:15 - 15:45", "16:15 - 17:45",
+			"18:15 - 19:45", "20:15 - 21:45"};
+
 	private int day;
 	private int timeSlot;
 
@@ -60,6 +66,8 @@ public class Period {
 		return true;
 	}
 
-	// TODO toString
-
+	@Override
+	public String toString() {
+		return WEEK_DAY_NAMES[day - 1] + ", " + TIME_SLOT_NAMES[timeSlot - 1];
+	}
 }
