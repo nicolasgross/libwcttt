@@ -666,6 +666,7 @@ public class SemesterImpl implements Semester {
 		} else {
 			course.addPractical(session);
 		}
+		session.setCourse(course);
 	}
 
 	@Override
@@ -679,18 +680,19 @@ public class SemesterImpl implements Semester {
 	}
 
 	@Override
-	public boolean removeCourseLecture(Session lecture, Course course) throws
+	public boolean removeCourseLecture(Session lecture) throws
 			WctttModelException {
-		if (lecture == null || course == null) {
-			throw new IllegalArgumentException("Parameters 'lecture' and " +
-					"'course' must not be null");
+		if (lecture == null) {
+			throw new IllegalArgumentException("Parameter 'lecture' course' " +
+					"must not be null");
 		}
 		checkTimetablesEmpty("courses");
-		if (!courseIdExists(course.getId())) {
-			throw new WctttModelException("Course " + course.getId() + " is" +
-					" not assigned to the semester");
+		if (!courseIdExists(lecture.getCourse().getId())) {
+			throw new WctttModelException("Course " +
+					lecture.getCourse().getId() + " is not assigned to the " +
+					"semester");
 		}
-		return course.removeLecture(lecture);
+		return lecture.getCourse().removeLecture(lecture);
 	}
 
 	@Override
@@ -704,18 +706,19 @@ public class SemesterImpl implements Semester {
 	}
 
 	@Override
-	public boolean removeCoursePractical(Session practical, Course course)
+	public boolean removeCoursePractical(Session practical)
 			throws WctttModelException {
-		if (practical == null || course == null) {
-			throw new IllegalArgumentException("Parameters 'practical' and " +
-					"'course' must not be null");
+		if (practical == null) {
+			throw new IllegalArgumentException("Parameter 'practical' must " +
+					"not be null");
 		}
 		checkTimetablesEmpty("courses");
-		if (!courseIdExists(course.getId())) {
-			throw new WctttModelException("Course " + course.getId() + " is" +
-					" not assigned to the semester");
+		if (!courseIdExists(practical.getCourse().getId())) {
+			throw new WctttModelException("Course " +
+					practical.getCourse().getId() + " is not assigned to the " +
+					"semester");
 		}
-		return course.removePractical(practical);
+		return practical.getCourse().removePractical(practical);
 	}
 
 	@Override

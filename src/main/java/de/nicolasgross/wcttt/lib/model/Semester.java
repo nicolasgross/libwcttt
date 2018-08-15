@@ -197,14 +197,12 @@ public interface Semester {
 	void addCourseLecture(Session lecture, Course course) throws
 					WctttModelException;
 
-	boolean removeCourseLecture(Session lecture, Course course) throws
-			WctttModelException;
+	boolean removeCourseLecture(Session lecture) throws WctttModelException;
 
 	void addCoursePractical(Session practical, Course course) throws
 					WctttModelException;
 
-	boolean removeCoursePractical(Session practical, Course course)
-			throws WctttModelException;
+	boolean removeCoursePractical(Session practical) throws WctttModelException;
 
 	void updateCourseSessionId(Session session, Course course, String id)
 					throws WctttModelException;
