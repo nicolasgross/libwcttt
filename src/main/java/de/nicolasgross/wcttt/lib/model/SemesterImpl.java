@@ -364,8 +364,7 @@ public class SemesterImpl implements Semester {
 	}
 
 	@Override
-	public void updateChairData(Chair chair, String name, String abbreviation,
-	                            List<Teacher> teachers)
+	public void updateChairData(Chair chair, String name, String abbreviation)
 			throws WctttModelException {
 		if (chair == null) {
 			throw new IllegalArgumentException("Parameter 'chair' must not " +
@@ -375,13 +374,8 @@ public class SemesterImpl implements Semester {
 					" not assigned to the semester");
 		}
 		checkTimetablesEmpty("chairs");
-		if (!Objects.equals(teachers, chair.getTeachers())) {
-			checkTimetablesEmpty("chairs");
-		}
 		chair.setName(name);
 		chair.setAbbreviation(abbreviation);
-		chair.getTeachers().clear();
-		chair.getTeachers().addAll(teachers);
 	}
 
 	@Override

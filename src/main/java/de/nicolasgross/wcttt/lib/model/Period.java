@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlType;
 
 @XmlSeeAlso(TimetablePeriod.class)
 @XmlType(propOrder = {"day", "timeSlot"})
-public class Period {
+public class Period implements Comparable<Period> {
 
 	public static final String[] WEEK_DAY_NAMES = {"Monday", "Tuesday",
 			"Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
@@ -69,5 +69,16 @@ public class Period {
 	@Override
 	public String toString() {
 		return WEEK_DAY_NAMES[day - 1] + ", " + TIME_SLOT_NAMES[timeSlot - 1];
+	}
+
+	@Override
+	public int compareTo(Period o) {
+		if (this.day > o.day) {
+			return 1;
+		} else if (this.day < o.day) {
+			return -1;
+		} else {
+			return Integer.compare(this.timeSlot, o.timeSlot);
+		}
 	}
 }

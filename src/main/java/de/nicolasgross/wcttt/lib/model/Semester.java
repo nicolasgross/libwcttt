@@ -149,8 +149,8 @@ public interface Semester {
 	void updateChairId(Chair chair, String id) throws
 			WctttModelException;
 
-	void updateChairData(Chair chair, String name, String abbreviation,
-	                     List<Teacher> teachers) throws WctttModelException;
+	void updateChairData(Chair chair, String name, String abbreviation)
+			throws WctttModelException;
 
 	void addTeacherToChair(Teacher teacher, Chair chair) throws
 					WctttModelException;
