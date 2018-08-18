@@ -337,14 +337,14 @@ public class SemesterImpl implements Semester {
 		for (Course course : courses) {
 			if (chair.equals(course.getChair())) {
 				throw new WctttModelException("Chair cannot be removed " +
-						"because it is responsible for course " + course);
+						"because it is responsible for course '" + course + "'");
 			}
 		}
 		for (InternalRoom room : internalRooms) {
 			if (room.getHolder().isPresent() &&
 					chair.equals(room.getHolder().get())) {
 				throw new WctttModelException("Chair cannot be removed " +
-						"because it is the holder of room " + room);
+						"because it is the holder of room '" + room + "'");
 			}
 		}
 		return chairs.remove(chair);
@@ -357,8 +357,8 @@ public class SemesterImpl implements Semester {
 			throw new IllegalArgumentException("Parameters 'chair' and 'id' " +
 					"must not be null");
 		} else if (!chairIdExists(chair.getId())) {
-			throw new WctttModelException("Chair " + chair.getId() + " is not" +
-					" assigned to the semester");
+			throw new WctttModelException("Chair '" + chair + "' is not " +
+					"assigned to the semester");
 		}
 		checkIfIdAvailable(id);
 		chair.setId(id);
@@ -371,8 +371,8 @@ public class SemesterImpl implements Semester {
 			throw new IllegalArgumentException("Parameter 'chair' must not " +
 					"be null");
 		} else if (!chairIdExists(chair.getId())) {
-			throw new WctttModelException("Chair " + chair.getId() + " is" +
-					" not assigned to the semester");
+			throw new WctttModelException("Chair '" + chair + "' is not " +
+					"assigned to the semester");
 		}
 		checkTimetablesEmpty("chairs");
 		chair.setName(name);
@@ -388,7 +388,7 @@ public class SemesterImpl implements Semester {
 		}
 		checkTimetablesEmpty("chairs");
 		if (!chairIdExists(chair.getId())) {
-			throw new WctttModelException("Chair " + chair.getId() + " is not" +
+			throw new WctttModelException("Chair '" + chair + "' is not" +
 					" assigned to the semester");
 		}
 		checkIfIdAvailable(teacher.getId());
@@ -429,10 +429,10 @@ public class SemesterImpl implements Semester {
 			throw new IllegalArgumentException("Parameter 'teacher', 'chair' " +
 					"and 'id' must not be null");
 		} else if (!teacherIdExists(teacher.getId())) {
-			throw new WctttModelException("Teacher " + teacher.getId() + " is" +
-					" not assigned to the semester");
+			throw new WctttModelException("Teacher '" + teacher + "' is not " +
+					"assigned to the semester");
 		} else if (!chairIdExists(chair.getId())) {
-			throw new WctttModelException("Chair " + chair.getId() + " is not" +
+			throw new WctttModelException("Chair '" + chair + "' is not" +
 					" assigned to the semester");
 		}
 		checkIfIdAvailable(id);
@@ -449,8 +449,8 @@ public class SemesterImpl implements Semester {
 			throw new IllegalArgumentException("Parameter 'teacher' must not " +
 					"be null");
 		} else if (!teacherIdExists(teacher.getId())) {
-			throw new WctttModelException("Teacher " + teacher.getId() + " is" +
-					" not assigned to the semester");
+			throw new WctttModelException("Teacher '" + teacher + "' is not " +
+					"assigned to the semester");
 		}
 		if (!Objects.equals(unfavorablePeriods, teacher.getUnfavorablePeriods()) ||
 				!Objects.equals(unavailablePeriods, teacher.getUnavailablePeriods())) {
@@ -585,8 +585,8 @@ public class SemesterImpl implements Semester {
 			throw new IllegalArgumentException("Parameter 'room' and 'id' " +
 					"must not be null");
 		} else if (!roomIdExists(room.getId())) {
-			throw new WctttModelException("Room " + room.getId() + " is" +
-					" not assigned to the semester");
+			throw new WctttModelException("Room '" + room + "' is not " +
+					"assigned to the semester");
 		}
 		checkIfIdAvailable(id);
 		room.setId(id);
@@ -601,8 +601,8 @@ public class SemesterImpl implements Semester {
 			throw new IllegalArgumentException("Parameter 'room' must not be " +
 					"null");
 		} else if (!roomIdExists(room.getId())) {
-			throw new WctttModelException("Room " + room.getId() + " is" +
-					" not assigned to the semester");
+			throw new WctttModelException("Room '" + room + "' is not " +
+					"assigned to the semester");
 		}
 		if (capacity != room.getCapacity() ||
 				!Objects.equals(holder, room.getHolder().orElse(null)) ||
@@ -622,8 +622,8 @@ public class SemesterImpl implements Semester {
 			throw new IllegalArgumentException("Parameter 'room' must not be " +
 					"null");
 		} else if (!roomIdExists(room.getId())) {
-			throw new WctttModelException("Room " + room.getId() + " is" +
-					" not assigned to the semester");
+			throw new WctttModelException("Room '" + room + "' is not " +
+					"assigned to the semester");
 		}
 		room.setName(name);
 	}
@@ -639,8 +639,8 @@ public class SemesterImpl implements Semester {
 			throw new WctttModelException("You have to add at least one chair" +
 					" before adding a course");
 		} else if (!chairIdExists(course.getChair().getId())) {
-			throw new WctttModelException("Chair " + course.getChair().getId() +
-					" is not assigned to the semester");
+			throw new WctttModelException("Chair '" + course.getChair() +
+					"' is not assigned to the semester");
 		}
 		checkIfIdAvailable(course.getId());
 		for (Session lecture : course.getLectures()) {
@@ -663,7 +663,8 @@ public class SemesterImpl implements Semester {
 			for (Course otherCourse : curriculum.getCourses()) {
 				if (course.equals(otherCourse)) {
 					throw new WctttModelException("Course cannot be removed " +
-							"because it is part of curriculum " + curriculum);
+							"because it is part of curriculum '" + curriculum +
+							"'");
 				}
 			}
 		}
@@ -677,7 +678,7 @@ public class SemesterImpl implements Semester {
 			throw new IllegalArgumentException("Parameters 'course' and 'id' " +
 					"must not be null");
 		} else if (!courseIdExists(course.getId())) {
-			throw new WctttModelException("Course " + course.getId() + " is " +
+			throw new WctttModelException("Course '" + course + "' is " +
 					"not assigned to the semester");
 		}
 		checkIfIdAvailable(id);
@@ -693,8 +694,8 @@ public class SemesterImpl implements Semester {
 			throw new IllegalArgumentException("Parameter 'course' must not " +
 					"be null");
 		} else if (!courseIdExists(course.getId())) {
-			throw new WctttModelException("Course " + course.getId() + " is" +
-					" not assigned to the semester");
+			throw new WctttModelException("Course '" + course + "' is not " +
+					"assigned to the semester");
 		}
 		if (!Objects.equals(chair, course.getChair()) ||
 				courseLevel != course.getCourseLevel() ||
@@ -723,8 +724,8 @@ public class SemesterImpl implements Semester {
 		assert course != null;
 		checkTimetablesEmpty("courses");
 		if (!courseIdExists(course.getId())) {
-			throw new WctttModelException("Course " + course.getId() + " is " +
-					"not assigned to the semester");
+			throw new WctttModelException("Course '" + course + "' is not " +
+					"assigned to the semester");
 		} else if (teacherListIsEmpty()) {
 			throw new WctttModelException("You have to add at least one " +
 					"teacher before adding a session");
@@ -757,9 +758,8 @@ public class SemesterImpl implements Semester {
 		}
 		checkTimetablesEmpty("courses");
 		if (!courseIdExists(lecture.getCourse().getId())) {
-			throw new WctttModelException("Course " +
-					lecture.getCourse().getId() + " is not assigned to the " +
-					"semester");
+			throw new WctttModelException("Course '" + lecture.getCourse() +
+					"' is not assigned to the semester");
 		}
 		return lecture.getCourse().removeLecture(lecture);
 	}
@@ -783,9 +783,8 @@ public class SemesterImpl implements Semester {
 		}
 		checkTimetablesEmpty("courses");
 		if (!courseIdExists(practical.getCourse().getId())) {
-			throw new WctttModelException("Course " +
-					practical.getCourse().getId() + " is not assigned to the " +
-					"semester");
+			throw new WctttModelException("Course '" + practical.getCourse() +
+					"' is not assigned to the semester");
 		}
 		return practical.getCourse().removePractical(practical);
 	}
@@ -797,11 +796,11 @@ public class SemesterImpl implements Semester {
 			throw new IllegalArgumentException("Parameter 'session', 'course'" +
 					" and 'id' must not be null");
 		} else if (!courseIdExists(course.getId())) {
-			throw new WctttModelException("Course " + course.getId() + " is" +
-					" not assigned to the semester");
+			throw new WctttModelException("Course '" + course + "' is not " +
+					"assigned to the semester");
 		} else if (!sessionIdExists(session.getId())) {
-			throw new WctttModelException("Session " + session.getId() + " is" +
-					" not assigned to the semester");
+			throw new WctttModelException("Session '" + session + "' is not " +
+					"assigned to the semester");
 		}
 		checkIfIdAvailable(id);
 		course.updateSessionId(session, id);
@@ -856,19 +855,19 @@ public class SemesterImpl implements Semester {
 			throw new IllegalArgumentException("Parameter 'session' must not " +
 					"be null");
 		} else if (!sessionIdExists(session.getId())) {
-			throw new WctttModelException("Session " + session.getId() + " is" +
-					" not assigned to the semester");
+			throw new WctttModelException("Session '" + session + "' is not " +
+					"assigned to the semester");
 		} else if (preAssignment != null &&
 					session.getTeacher().getUnavailablePeriods().contains(preAssignment)) {
-			throw new WctttModelException("Pre-assignment of session " +
-					session.getId() + " is within the unavailable periods of " +
+			throw new WctttModelException("Pre-assignment of session '" +
+					session + "' is within the unavailable periods of " +
 					"the corresponding teacher");
 		}
 		if (preAssignment != null && doubleSession) {
 			if (preAssignment.getTimeSlot() == getTimeSlotsPerDay()) {
-				throw new WctttModelException("Session " + session.getId() +
-						" is a double session and cannot be assigned to the " +
-						"last time slot");
+				throw new WctttModelException("Session '" + session + "' is a" +
+						" double session and cannot be assigned to the last " +
+						"time slot");
 			}
 			Period secondPeriod;
 			try {
@@ -882,7 +881,7 @@ public class SemesterImpl implements Semester {
 			if (session.getTeacher().getUnavailablePeriods().
 					contains(secondPeriod)) {
 				throw new WctttModelException("Pre-assignment of double " +
-						"session " + session.getId() + " is within the " +
+						"session '" + session + "' is within the " +
 						"unavailable periods of the corresponding teacher");
 			}
 		}
@@ -918,8 +917,8 @@ public class SemesterImpl implements Semester {
 			throw new IllegalArgumentException("Parameters 'curriculum' and " +
 					"'id' must not be null");
 		} else if (!curriculumIdExists(curriculum.getId())) {
-			throw new WctttModelException("Curriculum " + curriculum.getId() +
-					" is not assigned to the semester");
+			throw new WctttModelException("Curriculum '" + curriculum +
+					"' is not assigned to the semester");
 		}
 		checkIfIdAvailable(id);
 		curriculum.setId(id);
@@ -933,8 +932,8 @@ public class SemesterImpl implements Semester {
 			throw new IllegalArgumentException("Parameter 'curriculum' must " +
 					"not be null");
 		} else if (!curriculumIdExists(curriculum.getId())) {
-			throw new WctttModelException("Curriculum " + curriculum.getId() +
-					" is not assigned to the semester");
+			throw new WctttModelException("Curriculum '" + curriculum +
+					"' is not assigned to the semester");
 		}
 		if (!Objects.equals(courses, curriculum.getCourses())) {
 			checkTimetablesEmpty("curricula");
@@ -950,7 +949,7 @@ public class SemesterImpl implements Semester {
 			throw new IllegalArgumentException("Parameter 'timetable' must " +
 					"not be null");
 		} else if (timetableNameExists(timetable.getName())) {
-			throw new WctttModelException("Name '" + timetable.getName() +
+			throw new WctttModelException("Name '" + timetable +
 					"' is already assigned to a timetable of the semester");
 		}
 		timetable.calcConstraintViolations(this);
