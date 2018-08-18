@@ -93,7 +93,4 @@ public class TimetableDay {
 
 		return true;
 	}
-
-	// TODO toString
-
 }

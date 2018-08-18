@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.*;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * Represents a semester.
@@ -406,14 +407,15 @@ public class SemesterImpl implements Semester {
 			for (Session lecture : course.getLectures()) {
 				if (teacher.equals(lecture.getTeacher())) {
 					throw new WctttModelException("Teacher cannot be removed " +
-							"because he/she is assigned to lecture " + lecture);
+							"because he/she is assigned to lecture '" +
+							lecture + "'");
 				}
 			}
 			for (Session practical : course.getPracticals()) {
 				if (teacher.equals(practical.getTeacher())) {
 					throw new WctttModelException("Teacher cannot be removed " +
-							"because he/she is assigned to practical " +
-							practical);
+							"because he/she is assigned to practical '" +
+							practical + "'");
 				}
 			}
 		}
@@ -436,6 +438,7 @@ public class SemesterImpl implements Semester {
 		checkIfIdAvailable(id);
 		chair.updateTeacherId(teacher, id);
 	}
+	// TODO no ids in exceptions!!!
 
 	@Override
 	public void updateTeacherData(Teacher teacher, String name,
@@ -453,11 +456,62 @@ public class SemesterImpl implements Semester {
 				!Objects.equals(unavailablePeriods, teacher.getUnavailablePeriods())) {
 			checkTimetablesEmpty("chairs");
 		}
+		for (Course course : courses) {
+			for (Session lecture : course.getLectures()) {
+				if (lecture.getTeacher().equals(teacher) &&
+						!teacherCanFulfillPreAssignment(unavailablePeriods,
+								lecture.getPreAssignment(), lecture.isDoubleSession())) {
+					throw new WctttModelException("Unavailable time periods " +
+							"of teacher '" + teacher + "' are conflicting " +
+							"with the pre-assignment of lecture '" + lecture +
+							"'");
+				}
+			}
+			for (Session practical : course.getPracticals()) {
+				if (practical.getTeacher().equals(teacher) &&
+						!teacherCanFulfillPreAssignment(unavailablePeriods,
+								practical.getPreAssignment(), practical.isDoubleSession())) {
+					throw new WctttModelException("Unavailable time periods " +
+							"of teacher '" + teacher + "' are conflicting " +
+							"with the pre-assignment of practical '" +
+							practical + "'");
+				}
+			}
+		}
 		teacher.setName(name);
 		teacher.getUnfavorablePeriods().clear();
 		teacher.getUnfavorablePeriods().addAll(unfavorablePeriods);
 		teacher.getUnavailablePeriods().clear();
 		teacher.getUnavailablePeriods().addAll(unavailablePeriods);
+	}
+
+	private boolean teacherCanFulfillPreAssignment(List<Period> newUnavailable,
+	                                               Optional<Period> preAssignment,
+	                                               boolean doubleSession) {
+		if (preAssignment.isPresent()) {
+			Period period = preAssignment.get();
+			Period secondPeriod = null;
+			boolean checkDoubleSession = doubleSession &&
+					period.getTimeSlot() < timeSlotsPerDay;
+			if (checkDoubleSession) {
+				try {
+					secondPeriod = new Period(period.getDay(),
+							period.getTimeSlot() + 1);
+				} catch (WctttModelException e) {
+					throw new WctttModelFatalException("Implementation error," +
+							" double session in the last time slot should " +
+							"have been detected before", e);
+				}
+			}
+			for (Period unavailable : newUnavailable) {
+				if (unavailable.equals(period)) {
+					return false;
+				} else if (checkDoubleSession && unavailable.equals(secondPeriod)) {
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 
 	@Override
@@ -501,7 +555,28 @@ public class SemesterImpl implements Semester {
 					"be null");
 		}
 		checkTimetablesEmpty("rooms");
+		checkIfRoomIsUsedForSession(room);
 		return this.externalRooms.remove(room);
+	}
+
+	private void checkIfRoomIsUsedForSession(ExternalRoom room)
+			throws WctttModelException {
+		for (Course course : courses) {
+			for (Session lecture : course.getLectures()) {
+				if (lecture instanceof ExternalSession &&
+						room.equals(((ExternalSession) lecture).getRoom())) {
+					throw new WctttModelException("Room '" + room + "' is " +
+							"still used for lecture '" + lecture + "'");
+				}
+			}
+			for (Session practical : course.getPracticals()) {
+				if (practical instanceof ExternalSession &&
+						room.equals(((ExternalSession) practical).getRoom())) {
+					throw new WctttModelException("Room '" + room + "' is " +
+							"still used for practical '" + practical + "'");
+				}
+			}
+		}
 	}
 
 	@Override
@@ -738,13 +813,7 @@ public class SemesterImpl implements Semester {
 	                                      Period preAssignment, int students,
 	                                      RoomFeatures roomRequirements)
 			throws WctttModelException {
-		if (session == null) {
-			throw new IllegalArgumentException("Parameter 'session' must not " +
-					"be null");
-		} else if (!sessionIdExists(session.getId())) {
-			throw new WctttModelException("Session " + session.getId() + " is" +
-					" not assigned to the semester");
-		}
+		validateUpdateSessionDataParameters(session, doubleSession, preAssignment);
 		if (!Objects.equals(teacher, session.getTeacher()) ||
 				doubleSession != session.isDoubleSession() ||
 				!Objects.equals(preAssignment, session.getPreAssignment().orElse(null)) ||
@@ -765,13 +834,7 @@ public class SemesterImpl implements Semester {
 	                                      Teacher teacher, boolean doubleSession,
 	                                      Period preAssignment, ExternalRoom room)
 			throws WctttModelException {
-		if (session == null) {
-			throw new IllegalArgumentException("Parameter 'session' must not " +
-					"be null");
-		} else if (!sessionIdExists(session.getId())) {
-			throw new WctttModelException("Session " + session.getId() + " is" +
-					" not assigned to the semester");
-		}
+		validateUpdateSessionDataParameters(session, doubleSession, preAssignment);
 		if (!Objects.equals(teacher, session.getTeacher()) ||
 				doubleSession != session.isDoubleSession() ||
 				!Objects.equals(preAssignment, session.getPreAssignment().orElse(null)) ||
@@ -783,6 +846,46 @@ public class SemesterImpl implements Semester {
 		session.setDoubleSession(doubleSession);
 		session.setPreAssignment(preAssignment);
 		session.setRoom(room);
+	}
+
+	private void validateUpdateSessionDataParameters(Session session,
+	                                                 boolean doubleSession,
+	                                                 Period preAssignment)
+			throws WctttModelException {
+		if (session == null) {
+			throw new IllegalArgumentException("Parameter 'session' must not " +
+					"be null");
+		} else if (!sessionIdExists(session.getId())) {
+			throw new WctttModelException("Session " + session.getId() + " is" +
+					" not assigned to the semester");
+		} else if (preAssignment != null &&
+					session.getTeacher().getUnavailablePeriods().contains(preAssignment)) {
+			throw new WctttModelException("Pre-assignment of session " +
+					session.getId() + " is within the unavailable periods of " +
+					"the corresponding teacher");
+		}
+		if (preAssignment != null && doubleSession) {
+			if (preAssignment.getTimeSlot() == getTimeSlotsPerDay()) {
+				throw new WctttModelException("Session " + session.getId() +
+						" is a double session and cannot be assigned to the " +
+						"last time slot");
+			}
+			Period secondPeriod;
+			try {
+				secondPeriod = new Period(preAssignment.getDay(),
+						preAssignment.getTimeSlot() + 1);
+			} catch (WctttModelException e) {
+				throw new WctttModelFatalException("Implementation error," +
+						" double session in the last time slot should " +
+						"have been detected before", e);
+			}
+			if (session.getTeacher().getUnavailablePeriods().
+					contains(secondPeriod)) {
+				throw new WctttModelException("Pre-assignment of double " +
+						"session " + session.getId() + " is within the " +
+						"unavailable periods of the corresponding teacher");
+			}
+		}
 	}
 
 	@Override
@@ -876,7 +979,6 @@ public class SemesterImpl implements Semester {
 		timetable.setName(name);
 	}
 
-	@Override
 	public boolean equals(Object obj) {
 		if (!(obj instanceof SemesterImpl)) {
 			return false;

@@ -65,7 +65,4 @@ public class TimetableAssignment {
 
 		return true;
 	}
-
-	// TODO toString
-
 }

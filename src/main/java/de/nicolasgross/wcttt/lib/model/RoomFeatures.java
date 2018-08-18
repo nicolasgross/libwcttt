@@ -104,7 +104,4 @@ public class RoomFeatures implements Comparable<RoomFeatures> {
 
 		return true;
 	}
-
-	// TODO toString
-
 }
