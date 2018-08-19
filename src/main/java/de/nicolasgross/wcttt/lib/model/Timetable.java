@@ -8,12 +8,10 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlType;
 
-@XmlType(propOrder = {"name", "violatedHardConstraints",
-		"softConstraintPenalty", "days"})
+@XmlType(propOrder = {"name", "softConstraintPenalty", "days"})
 public class Timetable {
 
 	private String name;
-	private int violatedHardConstraints = 0;
 	private double softConstraintPenalty = 0.0;
 	private final ObservableList<TimetableDay> days =
 			FXCollections.observableArrayList();
@@ -36,7 +34,6 @@ public class Timetable {
 					"not be null");
 		}
 		this.name = timetable.name;
-		this.violatedHardConstraints = timetable.violatedHardConstraints;
 		this.softConstraintPenalty = timetable.softConstraintPenalty;
 		for (TimetableDay day : timetable.days) {
 			try {
@@ -61,16 +58,6 @@ public class Timetable {
 	}
 
 	@XmlAttribute(required = true)
-	public int getViolatedHardConstraints() {
-		return violatedHardConstraints;
-	}
-
-	// JAXB only
-	private void setViolatedHardConstraints(int violatedHardConstraints) {
-		this.violatedHardConstraints = violatedHardConstraints;
-	}
-
-	@XmlAttribute(required = true)
 	public String getName() {
 		return name;
 	}
@@ -88,8 +75,7 @@ public class Timetable {
 		return softConstraintPenalty;
 	}
 
-	// JAXB only
-	private void setSoftConstraintPenalty(double softConstraintPenalty) {
+	public void setSoftConstraintPenalty(double softConstraintPenalty) {
 		this.softConstraintPenalty = softConstraintPenalty;
 	}
 
@@ -125,10 +111,6 @@ public class Timetable {
 					"be null");
 		}
 		return days.remove(day);
-	}
-
-	public void calcConstraintViolations(Semester semester) {
-		// TODO after checker package
 	}
 
 	@Override

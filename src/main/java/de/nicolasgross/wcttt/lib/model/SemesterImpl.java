@@ -1,5 +1,6 @@
 package de.nicolasgross.wcttt.lib.model;
 
+import de.nicolasgross.wcttt.lib.util.ConstraintViolationsCalculator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -71,18 +72,11 @@ public class SemesterImpl implements Semester {
 	                    int maxDailyLecturesPerCur,
 	                    ConstraintWeightings constrWeightings) throws
 			WctttModelException {
-		if (name == null || constrWeightings == null) {
-			throw new IllegalArgumentException("Parameters 'name' and " +
-					"'constrWeightings' must not be null");
-		}
-		ValidationHelper.validateDaysPerWeek(daysPerWeek);
-		ValidationHelper.validateTimeSlotsPerDay(timeSlotsPerDay);
-		ValidationHelper.validateMaxDailyLecturesPerCur(maxDailyLecturesPerCur);
-		this.name = name;
-		this.daysPerWeek = daysPerWeek;
-		this.timeSlotsPerDay = timeSlotsPerDay;
-		this.maxDailyLecturesPerCur = maxDailyLecturesPerCur;
-		this.constrWeightings = constrWeightings;
+		setName(name);
+		setDaysPerWeek(daysPerWeek);
+		setTimeSlotsPerDay(timeSlotsPerDay);
+		setMaxDailyLecturesPerCur(maxDailyLecturesPerCur);
+		setConstrWeightings(constrWeightings);
 	}
 
 	@Override
@@ -161,8 +155,13 @@ public class SemesterImpl implements Semester {
 					"must not be null");
 		}
 		this.constrWeightings = constrWeightings;
-		for (Timetable timetable : timetables) {
-			timetable.calcConstraintViolations(this);
+		if (!timetables.isEmpty()) {
+			ConstraintViolationsCalculator constrCalc =
+					new ConstraintViolationsCalculator(this);
+			for (Timetable timetable : timetables) {
+				timetable.setSoftConstraintPenalty(
+						constrCalc.calcTimetablePenalty(timetable));
+			}
 		}
 	}
 
@@ -951,7 +950,10 @@ public class SemesterImpl implements Semester {
 			throw new WctttModelException("Name '" + timetable +
 					"' is already assigned to a timetable of the semester");
 		}
-		timetable.calcConstraintViolations(this);
+		ConstraintViolationsCalculator constrCalc =
+				new ConstraintViolationsCalculator(this);
+		timetable.setSoftConstraintPenalty(
+				constrCalc.calcTimetablePenalty(timetable));
 		timetables.add(timetable);
 	}
 

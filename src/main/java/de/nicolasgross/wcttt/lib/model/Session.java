@@ -118,6 +118,10 @@ public abstract class Session {
 		this.preAssignment = preAssignment;
 	}
 
+	public boolean isLecture() {
+		return course.getLectures().contains(this);
+	}
+
 	@Override
 	public String toString() {
 		return name;

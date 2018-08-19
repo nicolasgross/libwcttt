@@ -267,7 +267,7 @@
         </curriculum>
     </curricula>
     <timetables>
-        <timetable name="test-timetable-1" violatedHardConstraints="0" softConstraintPenalty="0.0">
+        <timetable name="test-timetable-1" softConstraintPenalty="0.0">
             <days>
                 <timetableDay day="1">
                     <periods>
@@ -391,7 +391,7 @@
                 </timetableDay>
             </days>
         </timetable>
-        <timetable name="test-timetable-2" violatedHardConstraints="0" softConstraintPenalty="10.0">
+        <timetable name="test-timetable-2" softConstraintPenalty="10.0">
             <days>
                 <timetableDay day="1">
                     <periods>
@@ -515,7 +515,7 @@
                 </timetableDay>
             </days>
         </timetable>
-        <timetable name="test-timetable-3" violatedHardConstraints="0" softConstraintPenalty="3.0">
+        <timetable name="test-timetable-3" softConstraintPenalty="3.0">
             <days>
                 <timetableDay day="1">
                     <periods>

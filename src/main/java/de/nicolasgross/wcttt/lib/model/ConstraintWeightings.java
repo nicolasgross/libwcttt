@@ -130,6 +130,29 @@ public class ConstraintWeightings {
 		this.s8 = s8;
 	}
 
+	public double getWeighting(ConstraintType type) {
+		switch (type) {
+			case s1:
+				return getS1();
+			case s2:
+				return getS2();
+			case s3:
+				return getS3();
+			case s4:
+				return getS4();
+			case s5:
+				return getS5();
+			case s6:
+				return getS6();
+			case s7:
+				return getS7();
+			case s8:
+				return getS8();
+			default:
+				return -1.0;
+		}
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (!(obj instanceof ConstraintWeightings)) {

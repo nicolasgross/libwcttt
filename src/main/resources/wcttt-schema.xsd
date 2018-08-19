@@ -229,7 +229,6 @@
       </xs:element>
     </xs:sequence>
     <xs:attribute name="name" type="xs:string" use="required"/>
-    <xs:attribute name="violatedHardConstraints" type="xs:int" use="required"/>
     <xs:attribute name="softConstraintPenalty" type="xs:double" use="required"/>
   </xs:complexType>
 
