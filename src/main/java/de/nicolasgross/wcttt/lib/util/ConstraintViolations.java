@@ -6,27 +6,14 @@ import java.util.List;
 
 public class ConstraintViolations {
 
-	private List<ConstraintType> violations;
-	private boolean hardConstraintViolated = false;
-	private boolean softConstraintViolated = false;
+	private List<ConstraintType> softViolations;
+	private List<ConstraintType> hardViolations;
 
-	public List<ConstraintType> getViolations() {
-		return violations;
+	public List<ConstraintType> getSoftViolations() {
+		return softViolations;
 	}
 
-	public boolean isHardConstraintViolated() {
-		return hardConstraintViolated;
-	}
-
-	public void setHardConstraintViolated(boolean hardConstraintViolated) {
-		this.hardConstraintViolated = hardConstraintViolated;
-	}
-
-	public boolean isSoftConstraintViolated() {
-		return softConstraintViolated;
-	}
-
-	public void setSoftConstraintViolated(boolean softConstraintViolated) {
-		this.softConstraintViolated = softConstraintViolated;
+	public List<ConstraintType> getHardViolations() {
+		return hardViolations;
 	}
 }

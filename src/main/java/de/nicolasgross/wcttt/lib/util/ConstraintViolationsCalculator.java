@@ -26,7 +26,7 @@ public class ConstraintViolationsCalculator {
 				for (TimetableAssignment assignment : period.getAssignments()) {
 					ConstraintViolations conflict = calcAssignmentViolations(
 							period, assignment, timetable);
-					for (ConstraintType type : conflict.getViolations()) {
+					for (ConstraintType type : conflict.getSoftViolations()) {
 						double weighting = semester.getConstrWeightings().
 								getWeighting(type);
 						if (weighting != -1.0) {
@@ -44,40 +44,43 @@ public class ConstraintViolationsCalculator {
 	                                                     Timetable timetable) {
 		ConstraintViolations violations = new ConstraintViolations();
 
-		violations.getViolations().addAll(Collections.nCopies(
+		violations.getHardViolations().addAll(Collections.nCopies(
 				h1ViolationCount(period, assignment), ConstraintType.h1));
 
-		violations.getViolations().addAll(Collections.nCopies(
+		violations.getHardViolations().addAll(Collections.nCopies(
 				h2ViolationCount(period, assignment), ConstraintType.h2));
 
-		violations.getViolations().addAll(Collections.nCopies(
+		violations.getHardViolations().addAll(Collections.nCopies(
 				h3ViolationCount(period, assignment), ConstraintType.h3));
 
-		violations.getViolations().addAll(Collections.nCopies(
+		violations.getHardViolations().addAll(Collections.nCopies(
 				h4ViolationCount(period, assignment), ConstraintType.h4));
 
-		violations.getViolations().addAll(Collections.nCopies(
+		violations.getHardViolations().addAll(Collections.nCopies(
 				h5ViolationCount(period, assignment), ConstraintType.h5));
 
-		violations.getViolations().addAll(Collections.nCopies(
+		violations.getHardViolations().addAll(Collections.nCopies(
 				h6ViolationCount(period, assignment), ConstraintType.h6));
 
-		violations.getViolations().addAll(Collections.nCopies(
+		violations.getHardViolations().addAll(Collections.nCopies(
 				h7ViolationCount(period, assignment), ConstraintType.h7));
 
-		violations.getViolations().addAll(Collections.nCopies(
+		violations.getHardViolations().addAll(Collections.nCopies(
 				h8ViolationCount(period, assignment), ConstraintType.h8));
 
-		violations.getViolations().addAll(Collections.nCopies(
-				h9ViolationCount(period, assignment), ConstraintType.h9));
+		violations.getHardViolations().addAll(Collections.nCopies(
+				h9ViolationCount(assignment), ConstraintType.h9));
 
-		violations.getViolations().addAll(Collections.nCopies(
-				h10ViolationCount(period, assignment), ConstraintType.h10));
+		violations.getHardViolations().addAll(Collections.nCopies(
+				h10ViolationCount(assignment), ConstraintType.h10));
 
-		int numberOfHardConstraintViolation = violations.getViolations().size();
-		if (numberOfHardConstraintViolation > 0) {
-			violations.setHardConstraintViolated(true);
-		}
+
+		violations.getSoftViolations().addAll(Collections.nCopies(
+				s1ViolationCount(assignment), ConstraintType.s1));
+
+		violations.getSoftViolations().addAll(Collections.nCopies(
+				s2ViolationCount(period, assignment, timetable),
+				ConstraintType.s2));
 
 		// TODO
 
@@ -211,8 +214,7 @@ public class ConstraintViolationsCalculator {
 		}
 	}
 
-	private int h9ViolationCount(TimetablePeriod period,
-	                             TimetableAssignment assignment) {
+	private int h9ViolationCount(TimetableAssignment assignment) {
 		if (assignment.getRoom() instanceof InternalRoom &&
 				((InternalRoom) assignment.getRoom()).getHolder().isPresent() &&
 				!((InternalRoom) assignment.getRoom()).getHolder().equals(
@@ -223,14 +225,63 @@ public class ConstraintViolationsCalculator {
 		}
 	}
 
-	private int h10ViolationCount(TimetablePeriod period,
-	                              TimetableAssignment assignment) {
+	private int h10ViolationCount(TimetableAssignment assignment) {
 		if (assignment.getRoom() instanceof InternalRoom &&
 				assignment.getSession() instanceof InternalSession &&
 				((InternalRoom) assignment.getRoom()).getFeatures().compareTo(
 						((InternalSession) assignment.getSession()).
 								getRoomRequirements()) < 0) {
 			return 1;
+		} else {
+			return 0;
+		}
+	}
+
+	private int s1ViolationCount(TimetableAssignment assignment) {
+		if (assignment.getRoom() instanceof InternalRoom &&
+				assignment.getSession() instanceof InternalSession) {
+			int actualRoomCapacity =
+					((InternalRoom) assignment.getRoom()).getCapacity();
+			int requiredRoomCapacity =
+					((InternalSession) assignment.getSession()).getStudents();
+			if (actualRoomCapacity > requiredRoomCapacity) {
+				return actualRoomCapacity - requiredRoomCapacity;
+			} else {
+				return requiredRoomCapacity - actualRoomCapacity;
+			}
+		} else {
+			return 0;
+		}
+	}
+
+	private int s2ViolationCount(TimetablePeriod period,
+	                             TimetableAssignment assignment,
+	                             Timetable timetable) {
+		if (!assignment.getSession().isLecture()) {
+			return 0;
+		}
+		int earliestDay = period.getDay();
+		int lastDay = period.getDay();
+		for (TimetableDay day : timetable.getDays()) {
+			for (TimetablePeriod otherPeriod : day.getPeriods()) {
+				for (TimetableAssignment otherAssignment :
+						otherPeriod.getAssignments()) {
+					if (otherAssignment.getSession().getCourse().equals(
+							assignment.getSession().getCourse()) &&
+							otherAssignment.getSession().isLecture()) {
+						if (otherPeriod.getDay() < earliestDay) {
+							earliestDay = otherPeriod.getDay();
+						} else if (otherPeriod.getDay() > lastDay) {
+							lastDay = otherPeriod.getDay();
+						}
+					}
+				}
+			}
+		}
+		int difference = assignment.getSession().getCourse().
+				getMinNumberOfDays() - ((lastDay - earliestDay) + 1);
+		if (difference > 0) {
+			return difference;
 		} else {
 			return 0;
 		}
