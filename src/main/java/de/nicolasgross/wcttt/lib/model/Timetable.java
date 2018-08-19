@@ -30,6 +30,36 @@ public class Timetable {
 		this.name = name;
 	}
 
+	public Timetable(Timetable timetable) {
+		if (timetable == null) {
+			throw new IllegalArgumentException("Parameter 'timetable' must " +
+					"not be null");
+		}
+		this.name = timetable.name;
+		this.violatedHardConstraints = timetable.violatedHardConstraints;
+		this.softConstraintPenalty = timetable.softConstraintPenalty;
+		for (TimetableDay day : timetable.days) {
+			try {
+				TimetableDay newDay = new TimetableDay(day.getDay());
+				for (TimetablePeriod period : day.getPeriods()) {
+					TimetablePeriod newPeriod = new TimetablePeriod(
+							period.getDay(), period.getTimeSlot());
+					for (TimetableAssignment assignment : period.getAssignments()) {
+						TimetableAssignment newAssignment =
+								new TimetableAssignment(assignment.getSession(),
+										assignment.getRoom());
+						newPeriod.addAssignment(newAssignment);
+					}
+					newDay.addPeriod(newPeriod);
+				}
+				this.addDay(newDay);
+			} catch (WctttModelException e) {
+				throw new WctttModelFatalException("Implementation error, " +
+						"there is a problem with cloning a timetable", e);
+			}
+		}
+	}
+
 	@XmlAttribute(required = true)
 	public int getViolatedHardConstraints() {
 		return violatedHardConstraints;

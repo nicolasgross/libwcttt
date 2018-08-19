@@ -438,7 +438,6 @@ public class SemesterImpl implements Semester {
 		checkIfIdAvailable(id);
 		chair.updateTeacherId(teacher, id);
 	}
-	// TODO no ids in exceptions!!!
 
 	@Override
 	public void updateTeacherData(Teacher teacher, String name,
