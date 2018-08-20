@@ -7,16 +7,9 @@ import java.util.*;
 public class ConstraintViolationsCalculator {
 
 	private Semester semester;
-	private Map<Course, Map<Course, Conflict>> courseCourseConflicts;
-	private Map<Course, Map<InternalRoom, Conflict>> courseRoomConflicts;
-	private Map<Teacher, Map<Period, Conflict>> teacherPeriodConflicts;
 
 	public ConstraintViolationsCalculator(Semester semester) {
 		this.semester = semester;
-		ConflictMatrixCalculator confCalc = new ConflictMatrixCalculator(semester);
-		this.courseCourseConflicts = confCalc.calcCourseCourseConflicts();
-		this.courseRoomConflicts = confCalc.calcCourseRoomConflicts();
-		this.teacherPeriodConflicts = confCalc.calcTeacherPeriodConflicts();
 	}
 
 	public List<ConstraintType> calcAssignmentHardViolations(
