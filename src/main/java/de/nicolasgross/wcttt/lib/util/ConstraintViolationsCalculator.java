@@ -343,8 +343,8 @@ public class ConstraintViolationsCalculator {
 				if (period.getTimeSlot() >
 						ValidationHelper.TIME_SLOTS_PER_DAY_MIN) {
 					TimetablePeriod before = timetable.getDays().get(
-							period.getDay()).getPeriods().get(
-							period.getTimeSlot() - 1);
+							period.getDay() - 1).getPeriods().get(
+							period.getTimeSlot() - 2);
 					for (TimetableAssignment assBefore : before.getAssignments()) {
 						if (assBefore.getSession().isLecture() &&
 								curriculum.getCourses().contains(
@@ -357,8 +357,8 @@ public class ConstraintViolationsCalculator {
 				if (!foundAdjacent &&
 						period.getTimeSlot() < semester.getTimeSlotsPerDay()) {
 					TimetablePeriod after = timetable.getDays().get(
-							period.getDay()).getPeriods().get(
-							period.getTimeSlot() + 1);
+							period.getDay() - 1).getPeriods().get(
+							period.getTimeSlot());
 					for (TimetableAssignment assAfter : after.getAssignments()) {
 						if (assAfter.getSession().isLecture() &&
 								curriculum.getCourses().contains(
