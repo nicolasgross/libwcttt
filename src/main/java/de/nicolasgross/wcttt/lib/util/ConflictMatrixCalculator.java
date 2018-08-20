@@ -12,17 +12,17 @@ public class ConflictMatrixCalculator {
 		this.semester = semester;
 	}
 
-	public Map<Course, Map<Course, ConstraintViolations>> calcCourseCourseConflicts() {
+	public Map<Course, Map<Course, Conflict>> calcCourseCourseConflicts() {
 		// TODO
 		return null;
 	}
 
-	public Map<Course, Map<InternalRoom, ConstraintViolations>> calcCourseRoomConflicts() {
+	public Map<Course, Map<InternalRoom, Conflict>> calcCourseRoomConflicts() {
 		// TODO
 		return null;
 	}
 
-	public Map<Teacher, Map<Period, ConstraintViolations>> calcTeacherPeriodConflicts() {
+	public Map<Teacher, Map<Period, Conflict>> calcTeacherPeriodConflicts() {
 		// TODO
 		return null;
 	}

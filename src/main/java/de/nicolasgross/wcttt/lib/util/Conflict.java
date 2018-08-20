@@ -4,7 +4,7 @@ import de.nicolasgross.wcttt.lib.model.ConstraintType;
 
 import java.util.List;
 
-public class ConstraintViolations {
+public class Conflict {
 
 	private List<ConstraintType> softViolations;
 	private List<ConstraintType> hardViolations;

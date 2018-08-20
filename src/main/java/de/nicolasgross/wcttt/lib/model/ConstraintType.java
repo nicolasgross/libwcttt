@@ -89,28 +89,21 @@ public enum ConstraintType {
 	s4,
 
 	/**
-	 * Courses should use the rooms belonging to the their respective chair as
-	 * much as possible. A penalty is given if a lecture/practical does not use
-	 * an available room of the respective chair.
-	 */
-	s5,
-
-	/**
 	 * Lectures/practicals should not take place in the periods that were marked
 	 * as unfavorable by the teacher. A penalty is given for every
 	 * lecture/practical assigned to such a period.
 	 */
-	s6,
+	s5,
 
 	/**
 	 * A teacher should not exceed two adjacent lectures/practicals. A penalty
 	 * is given for all lectures/practicals involved in such a constellation.
 	 */
-	s7,
+	s6,
 
 	/**
 	 * A curriculum should not exceed the maximum number of daily lectures. A
 	 * penalty is given for every lecture that deviates from this number.
 	 */
-	s8
+	s7
 }

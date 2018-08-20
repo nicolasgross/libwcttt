@@ -64,7 +64,6 @@
     <xs:attribute name="s5" type="xs:double" use="required"/>
     <xs:attribute name="s6" type="xs:double" use="required"/>
     <xs:attribute name="s7" type="xs:double" use="required"/>
-    <xs:attribute name="s8" type="xs:double" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="chair">

@@ -39,7 +39,7 @@ class WctttBinderTest {
 		semesterWrite.setTimeSlotsPerDay(6);
 		semesterWrite.setMaxDailyLecturesPerCur(4);
 		semesterWrite.setConstrWeightings(new ConstraintWeightings(1.0, 2,
-				3.4, 4.1, 5.8, 6.2, 7.9, 8.5));
+				3.4, 4.1, 5.8, 6.2, 7.9));
 
 		Chair chair = new Chair("abc", "Lehrstuhl Softwaretechnik und " +
 				"Programmiersprachen", "SWT");

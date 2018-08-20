@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlType;
 /**
  * Represents the soft constraint weightings.
  */
-@XmlType(propOrder = {"s1", "s2", "s3", "s4", "s5", "s6", "s7", "s8"})
+@XmlType(propOrder = {"s1", "s2", "s3", "s4", "s5", "s6", "s7"})
 public class ConstraintWeightings {
 
 	private double s1;
@@ -16,7 +16,6 @@ public class ConstraintWeightings {
 	private double s5;
 	private double s6;
 	private double s7;
-	private double s8;
 
 	public ConstraintWeightings() {
 		this.s1 = 1.0;
@@ -26,11 +25,10 @@ public class ConstraintWeightings {
 		this.s5 = 1.0;
 		this.s6 = 1.0;
 		this.s7 = 1.0;
-		this.s8 = 1.0;
 	}
 
 	public ConstraintWeightings(double s1, double s2, double s3, double s4,
-	                            double s5, double s6, double s7, double s8)
+	                            double s5, double s6, double s7)
 			throws WctttModelException {
 		ValidationHelper.validateConstraintWeighting(s1);
 		ValidationHelper.validateConstraintWeighting(s2);
@@ -39,7 +37,6 @@ public class ConstraintWeightings {
 		ValidationHelper.validateConstraintWeighting(s5);
 		ValidationHelper.validateConstraintWeighting(s6);
 		ValidationHelper.validateConstraintWeighting(s7);
-		ValidationHelper.validateConstraintWeighting(s8);
 		this.s1 = s1;
 		this.s2 = s2;
 		this.s3 = s3;
@@ -47,7 +44,6 @@ public class ConstraintWeightings {
 		this.s5 = s5;
 		this.s6 = s6;
 		this.s7 = s7;
-		this.s8 = s8;
 	}
 
 	@XmlAttribute(required = true)
@@ -120,16 +116,6 @@ public class ConstraintWeightings {
 		this.s7 = s7;
 	}
 
-	@XmlAttribute(required = true)
-	public double getS8() {
-		return s8;
-	}
-
-	public void setS8(double s8) throws WctttModelException {
-		ValidationHelper.validateConstraintWeighting(s8);
-		this.s8 = s8;
-	}
-
 	public double getWeighting(ConstraintType type) {
 		switch (type) {
 			case s1:
@@ -146,8 +132,6 @@ public class ConstraintWeightings {
 				return getS6();
 			case s7:
 				return getS7();
-			case s8:
-				return getS8();
 			default:
 				return -1.0;
 		}
@@ -164,7 +148,7 @@ public class ConstraintWeightings {
 		if (!(this.s1 == other.s1 && this.s2 == other.s2 &&
 				this.s3 == other.s3 && this.s4 == other.s4 &&
 				this.s5 == other.s5 && this.s6 == other.s6 &&
-				this.s7 == other.s7 && this.s8 == other.s8)) {
+				this.s7 == other.s7)) {
 			return false;
 		}
 		return true;
