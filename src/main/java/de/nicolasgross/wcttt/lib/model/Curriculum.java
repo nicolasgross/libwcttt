@@ -3,6 +3,7 @@ package de.nicolasgross.wcttt.lib.model;
 import javax.xml.bind.annotation.*;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 @XmlType(propOrder = {"id", "name", "courses"})
 public class Curriculum {
@@ -103,27 +104,18 @@ public class Curriculum {
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (!(obj instanceof Curriculum)) {
-			return false;
-		} else if (obj == this) {
-			return true;
-		}
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Curriculum that = (Curriculum) o;
+		return Objects.equals(id, that.id) &&
+				Objects.equals(name, that.name) &&
+				Objects.equals(courses, that.courses);
+	}
 
-		Curriculum other = (Curriculum) obj;
-		if (!this.id.equals(other.id) || !this.name.equals(other.name)) {
-			return false;
-		}
-
-		if (this.courses.size() != other.courses.size()) {
-			return false;
-		} else if (this.courses != other.courses) {
-			if (!(this.courses.containsAll(other.courses))) {
-				return false;
-			}
-		}
-
-		return true;
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, name, courses);
 	}
 
 	@Override

@@ -979,71 +979,29 @@ public class SemesterImpl implements Semester {
 		timetable.setName(name);
 	}
 
-	public boolean equals(Object obj) {
-		if (!(obj instanceof SemesterImpl)) {
-			return false;
-		} else if (obj == this) {
-			return true;
-		}
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		SemesterImpl semester = (SemesterImpl) o;
+		return daysPerWeek == semester.daysPerWeek &&
+				timeSlotsPerDay == semester.timeSlotsPerDay &&
+				maxDailyLecturesPerCur == semester.maxDailyLecturesPerCur &&
+				Objects.equals(name, semester.name) &&
+				Objects.equals(constrWeightings, semester.constrWeightings) &&
+				Objects.equals(chairs, semester.chairs) &&
+				Objects.equals(internalRooms, semester.internalRooms) &&
+				Objects.equals(externalRooms, semester.externalRooms) &&
+				Objects.equals(courses, semester.courses) &&
+				Objects.equals(curricula, semester.curricula) &&
+				Objects.equals(timetables, semester.timetables);
+	}
 
-		SemesterImpl other = (SemesterImpl) obj;
-		if (!this.name.equals(other.name) ||
-				this.daysPerWeek != other.daysPerWeek ||
-				this.timeSlotsPerDay != other.timeSlotsPerDay ||
-				this.maxDailyLecturesPerCur != other.maxDailyLecturesPerCur ||
-				!this.constrWeightings.equals(other.constrWeightings)) {
-			return false;
-		}
-
-		if (this.chairs.size() != other.chairs.size()) {
-			return false;
-		} else if (this.chairs != other.chairs) {
-			if (!(this.chairs.containsAll(other.chairs))) {
-				return false;
-			}
-		}
-
-		if (this.internalRooms.size() != other.internalRooms.size()) {
-			return false;
-		} else if (this.internalRooms != other.internalRooms) {
-			if (!(this.internalRooms.containsAll(other.internalRooms))) {
-				return false;
-			}
-		}
-
-		if (this.externalRooms.size() != other.externalRooms.size()) {
-			return false;
-		} else if (this.externalRooms != other.externalRooms) {
-			if (!(this.externalRooms.containsAll(other.externalRooms))) {
-				return false;
-			}
-		}
-
-		if (this.courses.size() != other.courses.size()) {
-			return false;
-		} else if (this.courses != other.courses) {
-			if (!(this.courses.containsAll(other.courses))) {
-				return false;
-			}
-		}
-
-		if (this.curricula.size() != other.curricula.size()) {
-			return false;
-		} else if (this.curricula != other.curricula) {
-			if (!(this.curricula.containsAll(other.curricula))) {
-				return false;
-			}
-		}
-
-		if (this.timetables.size() != other.timetables.size()) {
-			return false;
-		} else if (this.timetables != other.timetables) {
-			if (!(this.timetables.containsAll(other.timetables))) {
-				return false;
-			}
-		}
-
-		return true;
+	@Override
+	public int hashCode() {
+		return Objects.hash(name, daysPerWeek, timeSlotsPerDay,
+				maxDailyLecturesPerCur, constrWeightings, chairs, internalRooms,
+				externalRooms, courses, curricula, timetables);
 	}
 
 	@Override

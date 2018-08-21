@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlType;
+import java.util.Objects;
 
 @XmlType(propOrder = {"name", "softConstraintPenalty", "days"})
 public class Timetable {
@@ -114,29 +115,19 @@ public class Timetable {
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (!(obj instanceof Timetable)) {
-			return false;
-		} else if (obj == this) {
-			return true;
-		}
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Timetable timetable = (Timetable) o;
+		return Double.compare(
+				timetable.softConstraintPenalty, softConstraintPenalty) == 0 &&
+				Objects.equals(name, timetable.name) &&
+				Objects.equals(days, timetable.days);
+	}
 
-		Timetable other = (Timetable) obj;
-		if (!this.name.equals(other.name) ||
-				this.softConstraintPenalty !=
-						other.softConstraintPenalty) {
-			return false;
-		}
-
-		if (this.days.size() != other.days.size()) {
-			return false;
-		} else if (this.days != other.days) {
-			if (!(this.days.containsAll(other.days))) {
-				return false;
-			}
-		}
-
-		return true;
+	@Override
+	public int hashCode() {
+		return Objects.hash(name, softConstraintPenalty, days);
 	}
 
 	@Override

@@ -3,6 +3,7 @@ package de.nicolasgross.wcttt.lib.model;
 import javax.xml.bind.annotation.*;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 import static de.nicolasgross.wcttt.lib.model.ValidationHelper.validateMinNumOfDays;
 
@@ -215,37 +216,24 @@ public class Course {
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (!(obj instanceof Course)) {
-			return false;
-		} else if (obj == this) {
-			return true;
-		}
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Course course = (Course) o;
+		return minNumberOfDays == course.minNumberOfDays &&
+				Objects.equals(id, course.id) &&
+				Objects.equals(name, course.name) &&
+				Objects.equals(abbreviation, course.abbreviation) &&
+				Objects.equals(chair, course.chair) &&
+				courseLevel == course.courseLevel &&
+				Objects.equals(lectures, course.lectures) &&
+				Objects.equals(practicals, course.practicals);
+	}
 
-		Course other = (Course) obj;
-		if (!this.id.equals(other.id) || !this.name.equals(other.name) ||
-				!this.chair.equals(other.chair) ||
-				this.minNumberOfDays != other.minNumberOfDays) {
-			return false;
-		}
-
-		if (this.lectures.size() != other.lectures.size()) {
-			return false;
-		} else if (this.lectures != other.lectures) {
-			if (!(this.lectures.containsAll(other.lectures))) {
-				return false;
-			}
-		}
-
-		if (this.practicals.size() != other.practicals.size()) {
-			return false;
-		} else if (this.practicals != other.practicals) {
-			if (!(this.practicals.containsAll(other.practicals))) {
-				return false;
-			}
-		}
-
-		return true;
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, name, abbreviation, chair, courseLevel,
+				minNumberOfDays, lectures, practicals);
 	}
 
 	@Override

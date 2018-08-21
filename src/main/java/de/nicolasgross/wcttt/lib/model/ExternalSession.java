@@ -47,20 +47,16 @@ public class ExternalSession extends Session {
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (!(obj instanceof ExternalSession)) {
-			return false;
-		} else if (obj == this) {
-			return true;
-		} else if (!super.equals(obj)) {
-			return false;
-		}
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		if (!super.equals(o)) return false;
+		ExternalSession session = (ExternalSession) o;
+		return Objects.equals(room, session.room);
+	}
 
-		ExternalSession other = (ExternalSession) obj;
-		if (!Objects.equals(this.room, other.room)) {
-			return false;
-		}
-
-		return true;
+	@Override
+	public int hashCode() {
+		return Objects.hash(room);
 	}
 }

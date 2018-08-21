@@ -3,6 +3,7 @@ package de.nicolasgross.wcttt.lib.model;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.util.Objects;
 
 @XmlType(propOrder = {"id", "name", "teacher", "doubleSession",
 		"preAssignmentBinding", "students", "roomRequirements"})
@@ -51,21 +52,17 @@ public class InternalSession extends Session {
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (!(obj instanceof InternalSession)) {
-			return false;
-		} else if (obj == this) {
-			return true;
-		} else if (!super.equals(obj)) {
-			return false;
-		}
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		if (!super.equals(o)) return false;
+		InternalSession that = (InternalSession) o;
+		return students == that.students &&
+				Objects.equals(roomRequirements, that.roomRequirements);
+	}
 
-		InternalSession other = (InternalSession) obj;
-		if (this.students != other.students ||
-				!this.roomRequirements.equals(other.roomRequirements)) {
-			return false;
-		}
-
-		return true;
+	@Override
+	public int hashCode() {
+		return Objects.hash(students, roomRequirements);
 	}
 }

@@ -2,6 +2,7 @@ package de.nicolasgross.wcttt.lib.model;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
+import java.util.Objects;
 
 @XmlType(propOrder = {"projectors", "pcPool", "teacherPc", "docCam"})
 public class RoomFeatures implements Comparable<RoomFeatures> {
@@ -87,21 +88,18 @@ public class RoomFeatures implements Comparable<RoomFeatures> {
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (!(obj instanceof RoomFeatures)) {
-			return false;
-		} else if (obj == this) {
-			return true;
-		}
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		RoomFeatures that = (RoomFeatures) o;
+		return projectors == that.projectors &&
+				pcPool == that.pcPool &&
+				teacherPc == that.teacherPc &&
+				docCam == that.docCam;
+	}
 
-		RoomFeatures other = (RoomFeatures) obj;
-		if (this.projectors != other.projectors ||
-				this.pcPool != other.pcPool ||
-				this.teacherPc != other.teacherPc ||
-				this.docCam != other.docCam) {
-			return false;
-		}
-
-		return true;
+	@Override
+	public int hashCode() {
+		return Objects.hash(projectors, pcPool, teacherPc, docCam);
 	}
 }

@@ -60,7 +60,7 @@ public class ConflictMatrixCalculator {
 			// Check for conflicts based on the same course:
 			if (session.getCourse().equals(otherSession.getCourse())) {
 				if (session.isLecture() || otherSession.isLecture()) {
-					conflict.setCourseConflict(true);
+					conflict.setSessionConflict(true);
 				}
 			}
 			// Check for conflicts based on the same teacher:

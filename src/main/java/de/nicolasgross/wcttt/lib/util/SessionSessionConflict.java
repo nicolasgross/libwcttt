@@ -8,19 +8,19 @@ import java.util.List;
 public class SessionSessionConflict {
 
 	private List<Curriculum> curricula = new LinkedList<>();
-	boolean courseConflict = false;
+	boolean sessionConflict = false;
 	boolean teacherConflict = false;
 
 	public List<Curriculum> getCurricula() {
 		return curricula;
 	}
 
-	public boolean isCourseConflict() {
-		return courseConflict;
+	public boolean isSessionConflict() {
+		return sessionConflict;
 	}
 
-	public void setCourseConflict(boolean courseConflict) {
-		this.courseConflict = courseConflict;
+	public void setSessionConflict(boolean sessionConflict) {
+		this.sessionConflict = sessionConflict;
 	}
 
 	public boolean isTeacherConflict() {

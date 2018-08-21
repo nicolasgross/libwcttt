@@ -4,6 +4,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlTransient;
+import java.util.Objects;
 
 /**
  * Represents a room.
@@ -84,15 +85,17 @@ public abstract class Room {
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (!(obj instanceof Room)) {
-			return false;
-		} else if (obj == this) {
-			return true;
-		}
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Room room = (Room) o;
+		return Objects.equals(id, room.id) &&
+				Objects.equals(name, room.name);
+	}
 
-		Room other = (Room) obj;
-		return this.id.equals(other.id) && this.name.equals(other.name);
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, name);
 	}
 
 	@Override

@@ -135,22 +135,18 @@ public class InternalRoom extends Room {
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (!(obj instanceof InternalRoom)) {
-			return false;
-		} else if (obj == this) {
-			return true;
-		} else if (!super.equals(obj)) {
-			return false;
-		}
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		if (!super.equals(o)) return false;
+		InternalRoom that = (InternalRoom) o;
+		return capacity == that.capacity &&
+				Objects.equals(features, that.features) &&
+				Objects.equals(holder, that.holder);
+	}
 
-		InternalRoom other = (InternalRoom) obj;
-		if (this.capacity != other.capacity ||
-				!this.features.equals(other.features) ||
-				!Objects.equals(this.holder, other.holder)) {
-			return false;
-		}
-
-		return true;
+	@Override
+	public int hashCode() {
+		return Objects.hash(capacity, features, holder);
 	}
 }

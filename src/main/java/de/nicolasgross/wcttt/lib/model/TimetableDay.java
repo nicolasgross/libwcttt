@@ -8,6 +8,8 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlType;
 
+import java.util.Objects;
+
 import static de.nicolasgross.wcttt.lib.model.ValidationHelper.validateDay;
 
 @XmlType(propOrder = {"day", "periods"})
@@ -44,7 +46,8 @@ public class TimetableDay {
 
 	private boolean periodExists(TimetablePeriod period) {
 		for (TimetablePeriod existingPeriod : periods) {
-			if (((Period) period).equals(existingPeriod)) {
+			if (period.getDay() == existingPeriod.getDay() &&
+					period.getTimeSlot() == existingPeriod.getTimeSlot()) {
 				return true;
 			}
 		}
@@ -71,26 +74,16 @@ public class TimetableDay {
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (!(obj instanceof TimetableDay)) {
-			return false;
-		} else if (obj == this) {
-			return true;
-		}
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		TimetableDay that = (TimetableDay) o;
+		return day == that.day &&
+				Objects.equals(periods, that.periods);
+	}
 
-		TimetableDay other = (TimetableDay) obj;
-		if (this.day != other.day) {
-			return false;
-		}
-
-		if (this.periods.size() != other.periods.size()) {
-			return false;
-		} else if (this.periods != other.periods) {
-			if (!(this.periods.containsAll(other.periods))) {
-				return false;
-			}
-		}
-
-		return true;
+	@Override
+	public int hashCode() {
+		return Objects.hash(day, periods);
 	}
 }

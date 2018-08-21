@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlType;
+import java.util.Objects;
 
 @XmlType(propOrder = {"assignments"})
 public class TimetablePeriod extends Period {
@@ -57,28 +58,16 @@ public class TimetablePeriod extends Period {
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (!(obj instanceof TimetablePeriod)) {
-			return false;
-		} else if (obj == this) {
-			return true;
-		}
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		if (!super.equals(o)) return false;
+		TimetablePeriod that = (TimetablePeriod) o;
+		return Objects.equals(assignments, that.assignments);
+	}
 
-		TimetablePeriod other = (TimetablePeriod) obj;
-
-		if (this.getDay() != other.getDay() ||
-				this.getTimeSlot() != other.getTimeSlot()) {
-			return false;
-		}
-
-		if (this.assignments.size() != other.assignments.size()) {
-			return false;
-		} else if (this.assignments != other.assignments) {
-			if (!(this.assignments.containsAll(other.assignments))) {
-				return false;
-			}
-		}
-
-		return true;
+	@Override
+	public int hashCode() {
+		return Objects.hash(super.hashCode(), assignments);
 	}
 }

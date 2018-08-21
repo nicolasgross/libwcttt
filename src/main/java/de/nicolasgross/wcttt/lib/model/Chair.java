@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 
 import javax.xml.bind.annotation.*;
 import java.util.LinkedList;
+import java.util.Objects;
 
 @XmlType(propOrder = {"id", "name", "abbreviation", "teachers"})
 public class Chair {
@@ -127,28 +128,19 @@ public class Chair {
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (!(obj instanceof Chair)) {
-			return false;
-		} else if (obj == this) {
-			return true;
-		}
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Chair chair = (Chair) o;
+		return Objects.equals(id, chair.id) &&
+				Objects.equals(name, chair.name) &&
+				Objects.equals(abbreviation, chair.abbreviation) &&
+				Objects.equals(teachers, chair.teachers);
+	}
 
-		Chair other = (Chair) obj;
-		if (!(this.id.equals(other.id) && this.name.equals(other.name) &&
-				this.abbreviation.equals(other.abbreviation))) {
-			return false;
-		}
-
-		if (this.teachers.size() != other.teachers.size()) {
-			return false;
-		} else if (this.teachers != other.teachers) {
-			if (!(this.teachers.containsAll(other.teachers))) {
-				return false;
-			}
-		}
-
-		return true;
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, name, abbreviation, teachers);
 	}
 
 	@Override

@@ -12,15 +12,4 @@ public class ExternalRoom extends Room {
 	public ExternalRoom(String id, String name) {
 		super(id, name);
 	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (!(obj instanceof ExternalRoom)) {
-			return false;
-		} else if (obj == this) {
-			return true;
-		} else {
-			return super.equals(obj);
-		}
-	}
 }

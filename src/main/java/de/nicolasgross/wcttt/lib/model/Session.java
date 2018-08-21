@@ -128,21 +128,20 @@ public abstract class Session {
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (!(obj instanceof Session)) {
-			return false;
-		} else if (obj == this) {
-			return true;
-		}
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Session session = (Session) o;
+		return doubleSession == session.doubleSession &&
+				Objects.equals(id, session.id) &&
+				Objects.equals(name, session.name) &&
+				Objects.equals(teacher, session.teacher) &&
+				Objects.equals(preAssignment, session.preAssignment);
+	}
 
-		Session other = (Session) obj;
-		if (!this.id.equals(other.id) || !this.name.equals(other.name) ||
-				!this.teacher.equals(other.teacher) ||
-				this.doubleSession != other.doubleSession ||
-				!Objects.equals(this.preAssignment, other.preAssignment)) {
-			return false;
-		}
-
-		return true;
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, name, teacher, course, doubleSession,
+				preAssignment);
 	}
 }

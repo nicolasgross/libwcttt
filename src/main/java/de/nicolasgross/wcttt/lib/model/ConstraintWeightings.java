@@ -2,6 +2,7 @@ package de.nicolasgross.wcttt.lib.model;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
+import java.util.Objects;
 
 /**
  * Represents the soft constraint weightings.
@@ -138,19 +139,21 @@ public class ConstraintWeightings {
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (!(obj instanceof ConstraintWeightings)) {
-			return false;
-		} else if (obj == this) {
-			return true;
-		}
-		ConstraintWeightings other = (ConstraintWeightings) obj;
-		if (!(this.s1 == other.s1 && this.s2 == other.s2 &&
-				this.s3 == other.s3 && this.s4 == other.s4 &&
-				this.s5 == other.s5 && this.s6 == other.s6 &&
-				this.s7 == other.s7)) {
-			return false;
-		}
-		return true;
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		ConstraintWeightings that = (ConstraintWeightings) o;
+		return Double.compare(that.s1, s1) == 0 &&
+				Double.compare(that.s2, s2) == 0 &&
+				Double.compare(that.s3, s3) == 0 &&
+				Double.compare(that.s4, s4) == 0 &&
+				Double.compare(that.s5, s5) == 0 &&
+				Double.compare(that.s6, s6) == 0 &&
+				Double.compare(that.s7, s7) == 0;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(s1, s2, s3, s4, s5, s6, s7);
 	}
 }

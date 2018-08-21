@@ -41,6 +41,20 @@ public class TimetableAssignment {
 		return room;
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		TimetableAssignment that = (TimetableAssignment) o;
+		return Objects.equals(session, that.session) &&
+				Objects.equals(room, that.room);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(session, room);
+	}
+
 	public void setRoom(Room room) {
 		if (room == null) {
 			throw new IllegalArgumentException("Parameter 'room' must not be " +
@@ -49,20 +63,4 @@ public class TimetableAssignment {
 		this.room = room;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (!(obj instanceof TimetableAssignment)) {
-			return false;
-		} else if (obj == this) {
-			return true;
-		}
-
-		TimetableAssignment other = (TimetableAssignment) obj;
-		if (!this.session.equals(other.session) ||
-				!Objects.equals(this.room, other.room)) {
-			return false;
-		}
-
-		return true;
-	}
 }
