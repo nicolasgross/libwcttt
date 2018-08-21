@@ -16,20 +16,24 @@ public class ConstraintViolationsCalculator {
 			TimetablePeriod period, TimetableAssignment assignment) {
 		List<ConstraintType> hardViolations = new LinkedList<>();
 
-		hardViolations.addAll(Collections.nCopies(
-				h1ViolationCount(period, assignment), ConstraintType.h1));
+		if (!assignment.getSession().isLecture()) {
+			hardViolations.addAll(Collections.nCopies(
+					h1ViolationCount(period, assignment), ConstraintType.h1));
+		} else {
+			hardViolations.addAll(Collections.nCopies(
+					h2ViolationCount(period, assignment), ConstraintType.h2));
 
-		hardViolations.addAll(Collections.nCopies(
-				h2ViolationCount(period, assignment), ConstraintType.h2));
-
+		}
 		hardViolations.addAll(Collections.nCopies(
 				h3ViolationCount(period, assignment), ConstraintType.h3));
 
-		hardViolations.addAll(Collections.nCopies(
-				h4ViolationCount(period, assignment), ConstraintType.h4));
-
-		hardViolations.addAll(Collections.nCopies(
-				h5ViolationCount(period, assignment), ConstraintType.h5));
+		if (assignment.getSession().isLecture()) {
+			hardViolations.addAll(Collections.nCopies(
+					h4ViolationCount(period, assignment), ConstraintType.h4));
+		} else {
+			hardViolations.addAll(Collections.nCopies(
+					h5ViolationCount(period, assignment), ConstraintType.h5));
+		}
 
 		hardViolations.addAll(Collections.nCopies(
 				h6ViolationCount(period, assignment), ConstraintType.h6));
@@ -136,9 +140,6 @@ public class ConstraintViolationsCalculator {
 
 	private int h1ViolationCount(TimetablePeriod period,
 	                             TimetableAssignment assignment) {
-		if (!assignment.getSession().isLecture()) {
-			return 0;
-		}
 		int counter = 0;
 		for (TimetableAssignment otherAssignment : period.getAssignments()) {
 			if (!otherAssignment.equals(assignment) &&
@@ -152,10 +153,7 @@ public class ConstraintViolationsCalculator {
 
 	private int h2ViolationCount(TimetablePeriod period,
 	                             TimetableAssignment assignment) {
-
-		if (assignment.getSession().isLecture()) {
-			return 0;
-		} else if (assignment.getSession().getCourse().getPracticals().size() == 1) {
+		if (assignment.getSession().getCourse().getPracticals().size() == 1) {
 			// If the course has only one practical, it is treated like a lecture
 			return h1ViolationCount(period, assignment);
 		}
@@ -185,9 +183,6 @@ public class ConstraintViolationsCalculator {
 
 	private int h4ViolationCount(TimetablePeriod period,
 	                             TimetableAssignment assignment) {
-		if (!assignment.getSession().isLecture()) {
-			return 0;
-		}
 		int counter = 0;
 		for (Curriculum curriculum : semester.getCurricula()) {
 			if (curriculum.getCourses().contains(
@@ -206,26 +201,36 @@ public class ConstraintViolationsCalculator {
 
 	private int h5ViolationCount(TimetablePeriod period,
 	                             TimetableAssignment assignment) {
-		if (assignment.getSession().isLecture()) {
-			return 0;
-		}
 		int numberOfCoursePracticals =
 				assignment.getSession().getCourse().getPracticals().size();
-		if (numberOfCoursePracticals == 1) {
-			return h4ViolationCount(period, assignment);
-		}
+		int numberOfCoursePracticalsInPeriod = 0;
 		for (TimetableAssignment otherAssignment : period.getAssignments()) {
 			if (otherAssignment.getSession().getCourse().equals(
 					assignment.getSession().getCourse()) &&
 					!assignment.getSession().isLecture()) {
-				numberOfCoursePracticals--;
+				numberOfCoursePracticalsInPeriod++;
 			}
 		}
-		if (numberOfCoursePracticals == 0) {
-			return assignment.getSession().getCourse().getPracticals().size();
-		} else {
-			return 0;
+		if (numberOfCoursePracticals == 1 ||
+				numberOfCoursePracticals == numberOfCoursePracticalsInPeriod) {
+			return h4ViolationCount(period, assignment);
 		}
+
+		int counter = 0;
+		for (Curriculum curriculum : semester.getCurricula()) {
+			if (curriculum.getCourses().contains(
+					assignment.getSession().getCourse())) {
+				for (TimetableAssignment otherAssignment : period.getAssignments()) {
+					if (!otherAssignment.equals(assignment) &&
+							curriculum.getCourses().contains(
+									otherAssignment.getSession().getCourse()) &&
+							otherAssignment.getSession().isLecture()) {
+						counter++;
+					}
+				}
+			}
+		}
+		return counter;
 	}
 
 	private int h6ViolationCount(TimetablePeriod period,
