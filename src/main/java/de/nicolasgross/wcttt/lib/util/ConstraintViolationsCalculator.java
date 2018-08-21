@@ -255,11 +255,27 @@ public class ConstraintViolationsCalculator {
 
 	private int h8ViolationCount(TimetablePeriod period,
 	                             TimetableAssignment assignment) {
-		if (assignment.getSession().getPreAssignment().isPresent() &&
-				!assignment.getSession().getPreAssignment().equals(period)) {
-			return 1;
-		} else {
+		if (!assignment.getSession().getPreAssignment().isPresent()) {
 			return 0;
+		}
+
+		Period preAssignment = assignment.getSession().getPreAssignment().get();
+		Period secondPeriod;
+		try {
+			secondPeriod = new Period(period.getDay(),
+					period.getTimeSlot() + 1);
+		} catch (WctttModelException e) {
+			throw new WctttUtilFatalException("Implementation error, " +
+					"period created with illegal parameters", e);
+		}
+		if (preAssignment.getDay() == period.getDay() &&
+				(preAssignment.getTimeSlot() == period.getTimeSlot() ||
+				(assignment.getSession().isDoubleSession() &&
+						(preAssignment.getTimeSlot() + 1) ==
+								period.getTimeSlot()))) {
+			return 0;
+		} else {
+			return 1;
 		}
 	}
 
