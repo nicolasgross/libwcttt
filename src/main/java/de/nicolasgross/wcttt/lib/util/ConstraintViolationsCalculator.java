@@ -243,12 +243,14 @@ public class ConstraintViolationsCalculator {
 
 	private int h7ViolationCount(TimetablePeriod period,
 	                             TimetableAssignment assignment) {
-		if (assignment.getSession().getTeacher().getUnavailablePeriods().
-				contains(period)) {
-			return 1;
-		} else {
-			return 0;
+		for (Period unavailable :
+				assignment.getSession().getTeacher().getUnavailablePeriods()) {
+			if (unavailable.getDay() == period.getDay() &&
+					unavailable.getTimeSlot() == period.getTimeSlot()) {
+				return 1;
+			}
 		}
+		return 0;
 	}
 
 	private int h8ViolationCount(TimetablePeriod period,
@@ -398,12 +400,14 @@ public class ConstraintViolationsCalculator {
 
 	private int s5ViolationCount(TimetablePeriod period,
 	                             TimetableAssignment assignment) {
-		if (assignment.getSession().getTeacher().getUnfavorablePeriods().
-				contains(period)) {
-			return 1;
-		} else {
-			return 0;
+		for (Period unfavorable :
+				assignment.getSession().getTeacher().getUnfavorablePeriods()) {
+			if (unfavorable.getDay() == period.getDay() &&
+					unfavorable.getTimeSlot() == period.getTimeSlot()) {
+				return 1;
+			}
 		}
+		return 0;
 	}
 
 	private int s6ViolationCount(Timetable timetable) {
