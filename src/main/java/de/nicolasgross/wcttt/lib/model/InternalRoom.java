@@ -1,17 +1,17 @@
 package de.nicolasgross.wcttt.lib.model;
 
-import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
 import java.util.Objects;
-import java.util.Optional;
 
 import static de.nicolasgross.wcttt.lib.model.ValidationHelper.validateRoomCapacity;
 
-@XmlType(propOrder = {"id", "name", "capacity", "features", "holderBinding"})
+@XmlType(propOrder = {"id", "name", "capacity", "features"})
 public class InternalRoom extends Room {
 
 	private int capacity;
 	private RoomFeatures features;
-	private Chair holder;
 
 	/**
 	 * Creates a new room with an empty id and name, capacity of 1, no holder
@@ -20,7 +20,6 @@ public class InternalRoom extends Room {
 	public InternalRoom() {
 		super();
 		this.capacity = 1;
-		this.holder = null;
 		this.features = new RoomFeatures();
 	}
 
@@ -30,42 +29,16 @@ public class InternalRoom extends Room {
 	 * @param id       the id of the room, must not be null.
 	 * @param name     the name of the room, must not be null.
 	 * @param capacity the capacity of the room, must be > 0.
-	 * @param holder   the holder of the room, null is allowed and indicates
-	 *                    that the room has no holder.
 	 * @param features the features of the room, must not be null.
 	 * @throws WctttModelException if parameters do not adhere to their
 	 * respective value ranges.
 	 */
-	public InternalRoom(String id, String name, int capacity, Chair holder,
+	public InternalRoom(String id, String name, int capacity,
 	                    RoomFeatures features) throws WctttModelException {
 		super(id, name);
 		validateRoomCapacity(capacity);
 		this.capacity = capacity;
-		this.holder = holder;
 		this.features = features;
-	}
-
-	/**
-	 * Getter for the holder of a room. Only used for JAXB bindings, such
-	 * that another getter can return Optional.
-	 *
-	 * @return the holder, null if the room has no holder.
-	 */
-	@XmlElement(name = "holder", required = false)
-	@XmlIDREF
-	private Chair getHolderBinding() {
-		return holder;
-	}
-
-	/**
-	 * Setter for the holder of a room. Only used for JAXB bindings, such
-	 * that another getter can return Optional.
-	 *
-	 * @param holder the new holder of the room, null is allowed and
-	 *                  indicates that the room has no holder.
-	 */
-	private void setHolderBinding(Chair holder) {
-		setHolder(holder);
 	}
 
 	/**
@@ -87,27 +60,6 @@ public class InternalRoom extends Room {
 	public void setCapacity(int capacity) throws WctttModelException {
 		validateRoomCapacity(capacity);
 		this.capacity = capacity;
-	}
-
-	/**
-	 * Getter for the holder of a room. Do not manipulate the returned
-	 * reference.
-	 *
-	 * @return an Optional which contains the holder of the room or is empty
-	 * if there is no holder.
-	 */
-	public Optional<Chair> getHolder() {
-		return Optional.ofNullable(holder);
-	}
-
-	/**
-	 * Setter for the holder of a room.
-	 *
-	 * @param holder the new holder of the room, can be null if there is no
-	 *               holder.
-	 */
-	public void setHolder(Chair holder) {
-		this.holder = holder;
 	}
 
 	/**
@@ -141,12 +93,11 @@ public class InternalRoom extends Room {
 		if (!super.equals(o)) return false;
 		InternalRoom that = (InternalRoom) o;
 		return capacity == that.capacity &&
-				Objects.equals(features, that.features) &&
-				Objects.equals(holder, that.holder);
+				Objects.equals(features, that.features);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(capacity, features, holder);
+		return Objects.hash(capacity, features);
 	}
 }

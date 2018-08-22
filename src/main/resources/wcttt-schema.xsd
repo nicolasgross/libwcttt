@@ -171,7 +171,6 @@
   <xs:complexType name="internalRoom">
     <xs:sequence>
       <xs:element name="features" type="roomFeatures"/>
-      <xs:element name="holder" type="xs:IDREF" minOccurs="0"/>
     </xs:sequence>
     <xs:attribute name="id" type="xs:ID" use="required"/>
     <xs:attribute name="name" type="xs:string" use="required"/>

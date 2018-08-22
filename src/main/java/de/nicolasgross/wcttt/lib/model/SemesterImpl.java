@@ -339,13 +339,6 @@ public class SemesterImpl implements Semester {
 						"because it is responsible for course '" + course + "'");
 			}
 		}
-		for (InternalRoom room : internalRooms) {
-			if (room.getHolder().isPresent() &&
-					chair.equals(room.getHolder().get())) {
-				throw new WctttModelException("Chair cannot be removed " +
-						"because it is the holder of room '" + room + "'");
-			}
-		}
 		return chairs.remove(chair);
 	}
 
@@ -592,8 +585,7 @@ public class SemesterImpl implements Semester {
 
 	@Override
 	public void updateInternalRoomData(InternalRoom room, String name,
-	                                   int capacity, Chair holder,
-	                                   RoomFeatures features)
+	                                   int capacity, RoomFeatures features)
 			throws WctttModelException {
 		if (room == null) {
 			throw new IllegalArgumentException("Parameter 'room' must not be " +
@@ -603,13 +595,11 @@ public class SemesterImpl implements Semester {
 					"assigned to the semester");
 		}
 		if (capacity != room.getCapacity() ||
-				!Objects.equals(holder, room.getHolder().orElse(null)) ||
 				!Objects.equals(features, room.getFeatures())) {
 			checkTimetablesEmpty("rooms");
 		}
 		room.setName(name);
 		room.setCapacity(capacity);
-		room.setHolder(holder);
 		room.setFeatures(features);
 	}
 

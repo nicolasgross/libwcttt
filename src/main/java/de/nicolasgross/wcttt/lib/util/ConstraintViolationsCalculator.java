@@ -47,9 +47,6 @@ public class ConstraintViolationsCalculator {
 		hardViolations.addAll(Collections.nCopies(
 				h9ViolationCount(assignment), ConstraintType.h9));
 
-		hardViolations.addAll(Collections.nCopies(
-				h10ViolationCount(assignment), ConstraintType.h10));
-
 		return hardViolations;
 	}
 
@@ -285,17 +282,6 @@ public class ConstraintViolationsCalculator {
 	}
 
 	private int h9ViolationCount(TimetableAssignment assignment) {
-		if (assignment.getRoom() instanceof InternalRoom &&
-				((InternalRoom) assignment.getRoom()).getHolder().isPresent() &&
-				!((InternalRoom) assignment.getRoom()).getHolder().equals(
-						assignment.getSession().getCourse().getChair())) {
-			return 1;
-		} else {
-			return 0;
-		}
-	}
-
-	private int h10ViolationCount(TimetableAssignment assignment) {
 		if (assignment.getRoom() instanceof InternalRoom &&
 				assignment.getSession() instanceof InternalSession &&
 				((InternalRoom) assignment.getRoom()).getFeatures().compareTo(

@@ -51,16 +51,10 @@ public enum ConstraintType {
 	h8,
 
 	/**
-	 * A room shall be accessible by the chair responsible for the respective
-	 * lecture/practical.
-	 */
-	h9,
-
-	/**
 	 * The features of a room shall fulfill the requirements of the respective
 	 * lecture/practical.
 	 */
-	h10,
+	h9,
 
 	/**
 	 * There should be an appropriate number of seats in the room. A penalty

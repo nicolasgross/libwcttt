@@ -177,8 +177,7 @@ public interface Semester {
 	void updateRoomId(Room room, String id) throws WctttModelException;
 
 	void updateInternalRoomData(InternalRoom room, String name, int capacity,
-	                            Chair holder, RoomFeatures features)
-			throws WctttModelException;
+	                           RoomFeatures features) throws WctttModelException;
 
 	void updateExternalRoomData(ExternalRoom room, String name)
 			throws WctttModelException;

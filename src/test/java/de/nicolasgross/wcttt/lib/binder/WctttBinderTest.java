@@ -51,9 +51,9 @@ class WctttBinderTest {
 		semesterWrite.addTeacherToChair(teacher, chair);
 		semesterWrite.updateTeacherId(teacher, chair, "lüttgen");
 
-		InternalRoom room1 = new InternalRoom("r0", "WE5/00.019", 156, chair,
+		InternalRoom room1 = new InternalRoom("r0", "WE5/00.019", 156,
 				new RoomFeatures(2, false, false, false));
-		InternalRoom room2 = new InternalRoom("r2", "WE5/00.021", 200, null,
+		InternalRoom room2 = new InternalRoom("r2", "WE5/00.021", 200,
 				new RoomFeatures(2, false, false, false));
 		ExternalRoom room3 = new ExternalRoom("r3", "Audimax");
 		semesterWrite.addInternalRoom(room1);
