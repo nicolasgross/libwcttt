@@ -20,8 +20,8 @@ public class Period implements Comparable<Period> {
 	private int timeSlot;
 
 	public Period() {
-		this.day = 1;
-		this.timeSlot = 1;
+		this.day = ValidationHelper.PERIOD_DAY_MIN;
+		this.timeSlot = ValidationHelper.PERIOD_TIME_SLOT_MIN;
 	}
 
 	public Period(int day, int timeSlot) throws WctttModelException {

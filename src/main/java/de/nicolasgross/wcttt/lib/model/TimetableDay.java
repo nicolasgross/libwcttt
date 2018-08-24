@@ -20,7 +20,7 @@ public class TimetableDay {
 			FXCollections.observableArrayList();
 
 	public TimetableDay() {
-		this.day = 1;
+		this.day = ValidationHelper.PERIOD_DAY_MIN;
 	}
 
 	public TimetableDay(int day) throws WctttModelException {

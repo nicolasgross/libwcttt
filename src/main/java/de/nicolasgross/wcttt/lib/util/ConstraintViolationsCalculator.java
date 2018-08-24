@@ -312,8 +312,8 @@ public class ConstraintViolationsCalculator {
 	}
 
 	private int s2ViolationCount(Course course, Timetable timetable) {
-		int earliestDay = ValidationHelper.DAYS_PER_WEEK_MIN;
-		int lastDay = ValidationHelper.DAYS_PER_WEEK_MIN;
+		int earliestDay = ValidationHelper.PERIOD_DAY_MIN;
+		int lastDay = ValidationHelper.DAYS_PER_WEEK_MAX;
 		for (TimetableDay day : timetable.getDays()) {
 			for (TimetablePeriod period : day.getPeriods()) {
 				for (TimetableAssignment assignment : period.getAssignments()) {
@@ -351,7 +351,7 @@ public class ConstraintViolationsCalculator {
 					assignment.getSession().getCourse())) {
 				boolean foundAdjacent = false;
 				if (period.getTimeSlot() >
-						ValidationHelper.TIME_SLOTS_PER_DAY_MIN) {
+						ValidationHelper.PERIOD_TIME_SLOT_MIN) {
 					TimetablePeriod before = timetable.getDays().get(
 							period.getDay() - 1).getPeriods().get(
 							period.getTimeSlot() - 2);

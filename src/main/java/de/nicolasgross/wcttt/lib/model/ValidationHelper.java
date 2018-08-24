@@ -12,12 +12,16 @@ public class ValidationHelper {
 
 	// Semester:
 	public static final int MIN_DAILY_LECTURES_PER_CUR_MIN = 1;
-	// + Period:
 	public static final int TIME_SLOTS_PER_DAY_MIN = 2;
-	public static final int TIME_SLOTS_PER_DAY_MAX = 7;
-	// + TimetableDay:
 	public static final int DAYS_PER_WEEK_MIN = 1;
+	// + Period:
+	// + TimetableDay:
+	public static final int TIME_SLOTS_PER_DAY_MAX = 7;
 	public static final int DAYS_PER_WEEK_MAX = 7;
+
+	// Period:
+	public static final int PERIOD_TIME_SLOT_MIN = 1;
+	public static final int PERIOD_DAY_MIN = 1;
 
 	//Room:
 	public static final int ROOM_CAPACITY_MIN = 1;
@@ -77,10 +81,10 @@ public class ValidationHelper {
 	// Period:
 
 	static void validateTimeSlot(int timeSlot) throws WctttModelException {
-		if (timeSlot < TIME_SLOTS_PER_DAY_MIN ||
+		if (timeSlot < PERIOD_TIME_SLOT_MIN ||
 				timeSlot > TIME_SLOTS_PER_DAY_MAX) {
 			throw new WctttModelException("Parameter 'timeSlot' must be >= " +
-					TIME_SLOTS_PER_DAY_MIN + " and <= " +
+					PERIOD_TIME_SLOT_MIN + " and <= " +
 					TIME_SLOTS_PER_DAY_MAX);
 		}
 	}
@@ -88,9 +92,9 @@ public class ValidationHelper {
 	// + TimetableDay:
 
 	static void validateDay(int day) throws WctttModelException {
-		if (day < DAYS_PER_WEEK_MIN || day > DAYS_PER_WEEK_MAX) {
+		if (day < PERIOD_DAY_MIN || day > DAYS_PER_WEEK_MAX) {
 			throw new WctttModelException("Parameter 'day' must be >= " +
-					DAYS_PER_WEEK_MIN + " and <= " + DAYS_PER_WEEK_MAX);
+					PERIOD_DAY_MIN + " and <= " + DAYS_PER_WEEK_MAX);
 		}
 	}
 

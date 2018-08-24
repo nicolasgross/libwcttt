@@ -63,4 +63,8 @@ public class TimetableAssignment {
 		this.room = room;
 	}
 
+	@Override
+	public String toString() {
+		return session + " to " + room;
+	}
 }

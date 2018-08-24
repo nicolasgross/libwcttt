@@ -44,7 +44,7 @@ public class TimetablePeriod extends Period {
 					"not be null");
 		} else if (assignmentExists(assignment)) {
 			throw new WctttModelException("Assignment '" + assignment + "' is" +
-					"already included in this period");
+					" already included in this period");
 		}
 		assignments.add(assignment);
 	}
