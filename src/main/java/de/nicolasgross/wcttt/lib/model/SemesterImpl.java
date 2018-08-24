@@ -44,9 +44,10 @@ public class SemesterImpl implements Semester {
 	 */
 	public SemesterImpl() {
 		this.name = "semester";
-		this.daysPerWeek = 1;
-		this.timeSlotsPerDay = 1;
-		this.maxDailyLecturesPerCur = 1;
+		this.daysPerWeek = ValidationHelper.DAYS_PER_WEEK_MIN;
+		this.timeSlotsPerDay = ValidationHelper.TIME_SLOTS_PER_DAY_MIN;
+		this.maxDailyLecturesPerCur =
+				ValidationHelper.MIN_DAILY_LECTURES_PER_CUR_MIN;
 		this.constrWeightings = new ConstraintWeightings();
 	}
 

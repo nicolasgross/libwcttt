@@ -14,7 +14,7 @@ public class InternalSession extends Session {
 
 	public InternalSession() {
 		super();
-		this.students = 1;
+		this.students = ValidationHelper.STUDENTS_MIN;
 		this.roomRequirements = new RoomFeatures();
 	}
 

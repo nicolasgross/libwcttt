@@ -19,7 +19,7 @@ public class InternalRoom extends Room {
 	 */
 	public InternalRoom() {
 		super();
-		this.capacity = 1;
+		this.capacity = ValidationHelper.ROOM_CAPACITY_MIN;
 		this.features = new RoomFeatures();
 	}
 

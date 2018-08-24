@@ -13,7 +13,7 @@ public class ValidationHelper {
 	// Semester:
 	public static final int MIN_DAILY_LECTURES_PER_CUR_MIN = 1;
 	// + Period:
-	public static final int TIME_SLOTS_PER_DAY_MIN = 1;
+	public static final int TIME_SLOTS_PER_DAY_MIN = 2;
 	public static final int TIME_SLOTS_PER_DAY_MAX = 7;
 	// + TimetableDay:
 	public static final int DAYS_PER_WEEK_MIN = 1;
@@ -24,7 +24,7 @@ public class ValidationHelper {
 	public static final int PROJECTORS_MIN = 0;
 
 	// Course:
-	public static final int MIN_NUM_OF_DAYS_MIN = 0;
+	public static final int MIN_NUM_OF_DAYS_MIN = 1;
 
 	// Session:
 	public static final int STUDENTS_MIN = 1;

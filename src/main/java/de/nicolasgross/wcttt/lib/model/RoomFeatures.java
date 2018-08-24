@@ -13,7 +13,7 @@ public class RoomFeatures implements Comparable<RoomFeatures> {
 	private boolean docCam;
 
 	public RoomFeatures() {
-		this.projectors = 0;
+		this.projectors = ValidationHelper.PROJECTORS_MIN;
 		this.pcPool = false;
 		this.teacherPc = false;
 		this.docCam = false;

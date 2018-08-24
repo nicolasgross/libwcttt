@@ -26,7 +26,7 @@ public class Course {
 		this.abbreviation = "";
 		this.chair = new Chair();
 		this.courseLevel = CourseLevel.Bachelor;
-		this.minNumberOfDays = 1;
+		this.minNumberOfDays = ValidationHelper.MIN_NUM_OF_DAYS_MIN;
 	}
 
 	public Course(String id, String name, String abbreviation, Chair chair,

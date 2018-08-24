@@ -12,6 +12,7 @@ public class ConstraintViolationsCalculator {
 		this.semester = semester;
 	}
 
+	// before assignment
 	public List<ConstraintType> calcAssignmentHardViolations(
 			TimetablePeriod period, TimetableAssignment assignment) {
 		List<ConstraintType> hardViolations = new LinkedList<>();
