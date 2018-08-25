@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlType;
+import java.util.Comparator;
 import java.util.Objects;
 
 @XmlType(propOrder = {"name", "softConstraintPenalty", "days"})
@@ -103,7 +104,8 @@ public class Timetable {
 			throw new WctttModelException("Day '" + day + "' is already " +
 					"included in the timetable");
 		}
-		days.add(day.getDay() - 1, day);
+		days.add(day);
+		days.sort(Comparator.comparingInt(TimetableDay::getDay));
 	}
 
 	public boolean removeDay(Timetable day) {

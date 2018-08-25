@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlType;
-
+import java.util.Comparator;
 import java.util.Objects;
 
 import static de.nicolasgross.wcttt.lib.model.ValidationHelper.validateDay;
@@ -62,7 +62,8 @@ public class TimetableDay {
 			throw new WctttModelException("Period '" + period + "' is already" +
 					" included in the day");
 		}
-		periods.add(period.getTimeSlot() - 1, period);
+		periods.add(period);
+		periods.sort(Comparator.comparingInt(Period::getTimeSlot));
 	}
 
 	public boolean removePeriod(TimetablePeriod period) {
