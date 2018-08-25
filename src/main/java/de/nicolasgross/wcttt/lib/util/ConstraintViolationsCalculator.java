@@ -14,7 +14,8 @@ public class ConstraintViolationsCalculator {
 
 	// before assignment
 	public List<ConstraintType> calcAssignmentHardViolations(
-			TimetablePeriod period, TimetableAssignment assignment) {
+			Timetable timetable, TimetablePeriod period,
+			TimetableAssignment assignment) {
 		List<ConstraintType> hardViolations = new LinkedList<>();
 
 		if (!assignment.getSession().isLecture()) {
@@ -23,8 +24,8 @@ public class ConstraintViolationsCalculator {
 		} else {
 			hardViolations.addAll(Collections.nCopies(
 					h2ViolationCount(period, assignment), ConstraintType.h2));
-
 		}
+
 		hardViolations.addAll(Collections.nCopies(
 				h3ViolationCount(period, assignment), ConstraintType.h3));
 
@@ -42,11 +43,17 @@ public class ConstraintViolationsCalculator {
 		hardViolations.addAll(Collections.nCopies(
 				h7ViolationCount(period, assignment), ConstraintType.h7));
 
-		hardViolations.addAll(Collections.nCopies(
-				h8ViolationCount(period, assignment), ConstraintType.h8));
+		if (assignment.getSession().isLecture()) {
+			hardViolations.addAll(Collections.nCopies(
+					h8ViolationCount(timetable, period, assignment),
+					ConstraintType.h8));
+		}
 
 		hardViolations.addAll(Collections.nCopies(
-				h9ViolationCount(assignment), ConstraintType.h9));
+				h9ViolationCount(period, assignment), ConstraintType.h9));
+
+		hardViolations.addAll(Collections.nCopies(
+				h10ViolationCount(assignment), ConstraintType.h10));
 
 		return hardViolations;
 	}
@@ -256,7 +263,22 @@ public class ConstraintViolationsCalculator {
 		return 0;
 	}
 
-	private int h8ViolationCount(TimetablePeriod period,
+	private int h8ViolationCount(Timetable timetable, TimetablePeriod period,
+	                             TimetableAssignment assignment) {
+		TimetableDay day = timetable.getDays().get(period.getDay() - 1);
+		for (TimetablePeriod otherPeriod : day.getPeriods()) {
+			for (TimetableAssignment otherAssgmt : otherPeriod.getAssignments()) {
+				if (otherAssgmt.getSession().getCourse().equals(
+						assignment.getSession().getCourse()) &&
+						otherAssgmt.getSession().isLecture()) {
+					return 1;
+				}
+			}
+		}
+		return 0;
+	}
+
+	private int h9ViolationCount(TimetablePeriod period,
 	                             TimetableAssignment assignment) {
 		if (!assignment.getSession().getPreAssignment().isPresent()) {
 			return 0;
@@ -282,7 +304,7 @@ public class ConstraintViolationsCalculator {
 		}
 	}
 
-	private int h9ViolationCount(TimetableAssignment assignment) {
+	private int h10ViolationCount(TimetableAssignment assignment) {
 		if (assignment.getRoom() instanceof InternalRoom &&
 				assignment.getSession() instanceof InternalSession &&
 				((InternalRoom) assignment.getRoom()).getFeatures().compareTo(

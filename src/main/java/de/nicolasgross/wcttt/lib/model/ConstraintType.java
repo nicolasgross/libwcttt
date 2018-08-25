@@ -45,16 +45,21 @@ public enum ConstraintType {
 	h7,
 
 	/**
+	 * No more than one lecture of a course shall take place in the same day.
+	 */
+	h8,
+
+	/**
 	 * A lecture/practical with a preassigned period shall be scheduled to the
 	 * respective period.
 	 */
-	h8,
+	h9,
 
 	/**
 	 * The features of a room shall fulfill the requirements of the respective
 	 * lecture/practical.
 	 */
-	h9,
+	h10,
 
 	/**
 	 * There should be an appropriate number of seats in the room. A penalty
