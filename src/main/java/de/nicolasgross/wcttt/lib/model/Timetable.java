@@ -103,7 +103,7 @@ public class Timetable {
 			throw new WctttModelException("Day '" + day + "' is already " +
 					"included in the timetable");
 		}
-		days.add(day);
+		days.add(day.getDay() - 1, day);
 	}
 
 	public boolean removeDay(Timetable day) {

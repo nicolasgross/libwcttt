@@ -270,7 +270,9 @@ public class ConstraintViolationsCalculator {
 			for (TimetableAssignment otherAssgmt : otherPeriod.getAssignments()) {
 				if (otherAssgmt.getSession().getCourse().equals(
 						assignment.getSession().getCourse()) &&
-						otherAssgmt.getSession().isLecture()) {
+						otherAssgmt.getSession().isLecture() &&
+						!(otherAssgmt.getSession().equals(assignment.getSession())
+								&& otherAssgmt.getSession().isDoubleSession())) {
 					return 1;
 				}
 			}

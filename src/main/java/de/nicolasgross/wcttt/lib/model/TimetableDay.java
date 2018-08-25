@@ -62,7 +62,7 @@ public class TimetableDay {
 			throw new WctttModelException("Period '" + period + "' is already" +
 					" included in the day");
 		}
-		periods.add(period);
+		periods.add(period.getTimeSlot() - 1, period);
 	}
 
 	public boolean removePeriod(TimetablePeriod period) {
