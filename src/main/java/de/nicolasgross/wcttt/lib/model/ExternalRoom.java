@@ -27,6 +27,10 @@ package de.nicolasgross.wcttt.lib.model;
 
 import javax.xml.bind.annotation.XmlType;
 
+/**
+ * Represents an external room, which is a room that belongs to a different
+ * faculty and is only used for external sessions.
+ */
 @XmlType(propOrder = {"id", "name"})
 public class ExternalRoom extends Room {
 

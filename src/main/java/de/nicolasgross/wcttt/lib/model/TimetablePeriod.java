@@ -33,6 +33,13 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlType;
 import java.util.Objects;
 
+/**
+ * Represents a period of a timetable.
+ *
+ * Instead of manipulating returned references directly, please use the add/
+ * remove methods provided by this class to edit the assignment data. These
+ * methods ensure the consistency of the timetable period.
+ */
 @XmlType(propOrder = {"assignments"})
 public class TimetablePeriod extends Period {
 

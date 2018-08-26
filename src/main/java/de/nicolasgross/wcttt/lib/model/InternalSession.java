@@ -30,6 +30,10 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 import java.util.Objects;
 
+/**
+ * Represents a session that belongs to the faculty for which the timetable
+ * should be generated.
+ */
 @XmlType(propOrder = {"id", "name", "teacher", "doubleSession",
 		"preAssignmentBinding", "students", "roomRequirements"})
 public class InternalSession extends Session {

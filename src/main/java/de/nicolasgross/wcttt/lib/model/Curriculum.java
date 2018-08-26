@@ -30,6 +30,13 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Represents a curriculum.
+ *
+ * Instead of manipulating returned references directly, please use the add/
+ * remove/update methods provided by this class to edit the course data. These
+ * methods ensure the consistency of the curriculum.
+ */
 @XmlType(propOrder = {"id", "name", "courses"})
 public class Curriculum {
 

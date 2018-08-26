@@ -30,6 +30,10 @@ import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlType;
 import java.util.Objects;
 
+/**
+ * Represents a session that belongs to a different faculty. Every external
+ * session must have a pre-assignment and and external room.
+ */
 @XmlType(propOrder = {"id", "name", "teacher", "doubleSession",
 		"preAssignmentBinding", "room"})
 public class ExternalSession extends Session {

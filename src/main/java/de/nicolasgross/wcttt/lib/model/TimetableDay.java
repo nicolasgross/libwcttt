@@ -37,6 +37,13 @@ import java.util.Objects;
 
 import static de.nicolasgross.wcttt.lib.model.ValidationHelper.validateDay;
 
+/**
+ * Represents a day of a timetable.
+ *
+ * Instead of manipulating returned references directly, please use the add/
+ * remove methods provided by this class to edit the period data. These methods
+ * ensure the consistency of the timetable day.
+ */
 @XmlType(propOrder = {"day", "periods"})
 public class TimetableDay {
 

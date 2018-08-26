@@ -30,6 +30,13 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Represents a teacher.
+ *
+ * Instead of manipulating returned references directly, please use the add/
+ * remove methods provided by this class to edit the period data. These methods
+ * ensure the consistency of the teacher.
+ */
 @XmlType(propOrder = {"id", "name", "unfavorablePeriods", "unavailablePeriods"})
 public class Teacher {
 

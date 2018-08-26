@@ -32,6 +32,13 @@ import java.util.Objects;
 
 import static de.nicolasgross.wcttt.lib.model.ValidationHelper.validateMinNumOfDays;
 
+/**
+ * Represents a course.
+ *
+ * Instead of manipulating returned references directly, please use the add/
+ * remove/update methods provided by this class to edit the session data. These
+ * methods ensure the consistency of the course.
+ */
 @XmlType(propOrder = {"id", "name", "abbreviation", "chair", "courseLevel",
 		"minNumberOfDays", "lectures", "practicals"})
 public class Course {

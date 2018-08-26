@@ -32,6 +32,13 @@ import javax.xml.bind.annotation.*;
 import java.util.LinkedList;
 import java.util.Objects;
 
+/**
+ * Represents a chair.
+ *
+ * Instead of manipulating returned references directly, please use the add/
+ * remove/update methods provided by this class to edit the teacher data. These
+ * methods ensure the consistency of the chair.
+ */
 @XmlType(propOrder = {"id", "name", "abbreviation", "teachers"})
 public class Chair {
 
@@ -97,12 +104,6 @@ public class Chair {
 		this.abbreviation = abbreviation;
 	}
 
-	/**
-	 * Getter for the teachers of a chair. Do not manipulate the returned
-	 * references.
-	 *
-	 * @return the list of the teachers of the chair.
-	 */
 	@XmlElementWrapper(required = true)
 	@XmlElement(name = "teacher")
 	public ObservableList<Teacher> getTeachers() {

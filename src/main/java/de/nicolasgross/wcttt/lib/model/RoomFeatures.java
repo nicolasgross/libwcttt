@@ -29,6 +29,9 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 import java.util.Objects;
 
+/**
+ * Represents the set of features of an internal room.
+ */
 @XmlType(propOrder = {"projectors", "pcPool", "teacherPc", "docCam"})
 public class RoomFeatures implements Comparable<RoomFeatures> {
 

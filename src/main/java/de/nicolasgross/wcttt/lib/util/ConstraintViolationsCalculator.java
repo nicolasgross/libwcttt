@@ -37,7 +37,17 @@ public class ConstraintViolationsCalculator {
 		this.semester = semester;
 	}
 
-	// before assignment
+	/**
+	 * This method checks for a timetable assignment whether it would violate
+	 * any hard constraints if it would be added to the timetable. Thus, the
+	 * method is used BEFORE the assignment is added to the timetable.
+	 *
+	 * @param timetable the timetable that should be checked.
+	 * @param period the period to which the assignment should be assigned.
+	 * @param assignment the new assignment that should be checked.
+	 * @return a list containing every hard constraint as many times as it would
+	 * have been violated by the assignment.
+	 */
 	public List<ConstraintType> calcAssignmentHardViolations(
 			Timetable timetable, TimetablePeriod period,
 			TimetableAssignment assignment) {

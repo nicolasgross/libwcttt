@@ -35,6 +35,13 @@ import javax.xml.bind.annotation.XmlType;
 import java.util.Comparator;
 import java.util.Objects;
 
+/**
+ * Represents a timetable.
+ *
+ * Instead of manipulating returned references directly, please use the add/
+ * remove methods provided by this class to edit the day data. These methods
+ * ensure the consistency of the timetable.
+ */
 @XmlType(propOrder = {"name", "softConstraintPenalty", "days"})
 public class Timetable {
 
