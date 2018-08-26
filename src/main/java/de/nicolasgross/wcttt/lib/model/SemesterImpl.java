@@ -825,7 +825,7 @@ public class SemesterImpl implements Semester {
 	                                      Period preAssignment, int students,
 	                                      RoomFeatures roomRequirements)
 			throws WctttModelException {
-		validateUpdateSessionDataParameters(session, doubleSession, preAssignment);
+		validateUpdateSessionDataParameters(session, teacher, doubleSession, preAssignment);
 		if (!Objects.equals(teacher, session.getTeacher()) ||
 				doubleSession != session.isDoubleSession() ||
 				!Objects.equals(preAssignment, session.getPreAssignment().orElse(null)) ||
@@ -846,7 +846,8 @@ public class SemesterImpl implements Semester {
 	                                      Teacher teacher, boolean doubleSession,
 	                                      Period preAssignment, ExternalRoom room)
 			throws WctttModelException {
-		validateUpdateSessionDataParameters(session, doubleSession, preAssignment);
+		validateUpdateSessionDataParameters(session, teacher, doubleSession,
+				preAssignment);
 		if (!Objects.equals(teacher, session.getTeacher()) ||
 				doubleSession != session.isDoubleSession() ||
 				!Objects.equals(preAssignment, session.getPreAssignment().orElse(null)) ||
@@ -861,6 +862,7 @@ public class SemesterImpl implements Semester {
 	}
 
 	private void validateUpdateSessionDataParameters(Session session,
+	                                                 Teacher teacher,
 	                                                 boolean doubleSession,
 	                                                 Period preAssignment)
 			throws WctttModelException {
@@ -869,6 +871,9 @@ public class SemesterImpl implements Semester {
 					"be null");
 		} else if (!sessionIdExists(session.getId())) {
 			throw new WctttModelException("Session '" + session + "' is not " +
+					"assigned to the semester");
+		} else if (!teacherIdExists(teacher.getId())) {
+			throw new WctttModelException("Teacher '" + teacher + "' is not " +
 					"assigned to the semester");
 		} else if (preAssignment != null &&
 					session.getTeacher().getUnavailablePeriods().contains(preAssignment)) {
@@ -909,7 +914,20 @@ public class SemesterImpl implements Semester {
 		}
 		checkTimetablesEmpty("curricula");
 		checkIfIdAvailable(curriculum.getId());
+		checkIfCoursesAssignedToSemester(curriculum, curriculum.getCourses());
 		this.curricula.add(curriculum);
+	}
+
+	private void checkIfCoursesAssignedToSemester(Curriculum curriculum,
+	                                              List<Course> currCourses)
+			throws WctttModelException {
+		for (Course course : currCourses) {
+			if (!courses.contains(course)) {
+				throw new WctttModelException("Course '" + course + "' of " +
+						"curriculum '" + curriculum + "' is not assigned to " +
+						"the semester");
+			}
+		}
 	}
 
 	@Override
@@ -951,9 +969,12 @@ public class SemesterImpl implements Semester {
 		if (!Objects.equals(courses, curriculum.getCourses())) {
 			checkTimetablesEmpty("curricula");
 		}
+		checkIfCoursesAssignedToSemester(curriculum, courses);
 		curriculum.setName(name);
 		curriculum.getCourses().clear();
-		curriculum.getCourses().addAll(courses);
+		for (Course course : courses) {
+			curriculum.addCourse(course);
+		}
 	}
 
 	@Override

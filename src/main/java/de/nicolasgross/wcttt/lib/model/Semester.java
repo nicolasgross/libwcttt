@@ -455,7 +455,10 @@ public interface Semester {
 	 * @param preAssignment the new pre-assignment, can be {@code null}.
 	 * @param students the new number of students.
 	 * @param roomRequirements the new room requirements.
-	 * @throws WctttModelException if
+	 * @throws WctttModelException if referenced entities are not assigned to
+	 * the semester, the timetable list should be empty but is not,
+	 * pre-assignment and double session data are conflicting or pre-assignment
+	 * is conflicting with teacher's unavailable periods.
 	 */
 	void updateInternalSessionData(InternalSession session, String name,
 	                               Teacher teacher, boolean doubleSession,
@@ -463,14 +466,44 @@ public interface Semester {
 	                               RoomFeatures roomRequirements)
 			throws WctttModelException;
 
+	/**
+	 * Updates the data of an external session. The list of timetables must be
+	 * empty if other data are changed besides the name.
+	 *
+	 * @param session the external session that should be updated.
+	 * @param name the new name.
+	 * @param teacher the new teacher.
+	 * @param doubleSession the new double session indicator.
+	 * @param preAssignment the new pre-assignment.
+	 * @param room the new external room.
+	 * @throws WctttModelException if referenced entities are not assigned to
+	 * the semester, the timetable list should be empty but is not,
+	 * pre-assignment and double session data are conflicting or pre-assignment
+	 * is conflicting with teacher's unavailable periods.
+	 */
 	void updateExternalSessionData(ExternalSession session, String name,
 	                               Teacher teacher, boolean doubleSession,
 	                               Period preAssignment, ExternalRoom room)
 			throws WctttModelException;
 
-	void addCurriculum(Curriculum curriculum) throws
-							WctttModelException;
+	/**
+	 * Adds a curriculum to the semester. The list of timetables must be empty.
+	 *
+	 * @param curriculum the new curriculum.
+	 * @throws WctttModelException if the timetable list is not empty, the id of
+	 * the curriculum is already used or a course of the curriculum is not
+	 * assigned to the semester.
+	 */
+	void addCurriculum(Curriculum curriculum) throws WctttModelException;
 
+	/**
+	 * Removes a curriculum from the semester. The list of timetables must be
+	 * empty.
+	 *
+	 * @param curriculum the new curriculum that should be removed.
+	 * @return {@code true} if the curriculum existed, otherwise {@code false}.
+	 * @throws WctttModelException if the timetable list is not empty.
+	 */
 	boolean removeCurriculum(Curriculum curriculum) throws WctttModelException;
 
 	/**
@@ -484,11 +517,33 @@ public interface Semester {
 	void updateCurriculumId(Curriculum curriculum, String id) throws
 			WctttModelException;
 
+	/**
+	 * Updates the data of a curriculum. The list of timetables must be empty if
+	 * other data are changed besides the name.
+	 *
+	 * @param curriculum the curriculum that should be updated.
+	 * @param name the new name.
+	 * @param courses the new courses.
+	 * @throws WctttModelException if the curriculum is not assigned to the
+	 * semester or a course of the curriculum is not assigned to the semester.
+	 */
 	void updateCurriculumData(Curriculum curriculum, String name,
 	                          List<Course> courses) throws WctttModelException;
 
+	/**
+	 * Adds a timetable to the semester.
+	 *
+	 * @param timetable the new timetable.
+	 * @throws WctttModelException if the name of the timetable is already used.
+	 */
 	void addTimetable(Timetable timetable) throws WctttModelException;
 
+	/**
+	 * Removes a timetable from the semester.
+	 *
+	 * @param timetable the timetable that should be removed.
+	 * @return {@code true} if the timetable existed, otherwise {@code false}.
+	 */
 	boolean removeTimetable(Timetable timetable);
 
 	/**
