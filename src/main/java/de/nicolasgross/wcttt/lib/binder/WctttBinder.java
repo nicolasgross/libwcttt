@@ -41,6 +41,9 @@ import javax.xml.validation.SchemaFactory;
 import java.io.File;
 import java.net.URL;
 
+/**
+ * Provides functionality to parse/write a semester from/to a XML file.
+ */
 public class WctttBinder {
 
 	private static final URL SCHEMA_FILE =

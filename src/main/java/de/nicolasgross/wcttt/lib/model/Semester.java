@@ -29,11 +29,17 @@ import javafx.collections.ObservableList;
 
 import java.util.List;
 
+/**
+ * Represents the data of one semester.
+ *
+ * Instead of manipulating returned references directly, please use the add/
+ * remove/update methods provided by this interface to edit the data of the
+ * semester. These methods ensure the consistency of the semester.
+ */
 public interface Semester {
 
 	/**
-	 * Getter for the name of a semester. Do not manipulate the returned
-	 * reference.
+	 * Getter for the name of a semester.
 	 *
 	 * @return the name of the semester.
 	 */
@@ -167,70 +173,290 @@ public interface Semester {
 	 */
 	ObservableList<Timetable> getTimetables();
 
+	/**
+	 * Adds a chair to the semester. The list of timetables must be empty.
+	 *
+	 * @param chair the new chair.
+	 * @throws WctttModelException if the timetable list is not empty or the ids
+	 * used in the chair are already used in the semester.
+	 */
 	void addChair(Chair chair) throws WctttModelException;
 
+	/**
+	 * Removes a chair from the semester. The list of timetables must be empty.
+	 *
+	 * @param chair the chair that should be removed.
+	 * @return {@code true} if the chair existed, otherwise {@code false}.
+	 * @throws WctttModelException if the timetable list is not empty, the chair
+	 * still has teachers or the chair is still referenced by a course.
+	 */
 	boolean removeChair(Chair chair) throws WctttModelException;
 
+	/**
+	 * Updates the id of a chair.
+	 *
+	 * @param chair the chair whose id should be updated.
+	 * @param id the new id.
+	 * @throws WctttModelException if the chair is not assigned to the semester
+	 * or the id is already used.
+	 */
 	void updateChairId(Chair chair, String id) throws
 			WctttModelException;
 
+	/**
+	 * Updates the data of a chair.
+	 *
+	 * @param chair the chair that should be updated.
+	 * @param name the new name.
+	 * @param abbreviation the new abbreviation.
+	 * @throws WctttModelException if the chair is not assigned to the semester.
+	 */
 	void updateChairData(Chair chair, String name, String abbreviation)
 			throws WctttModelException;
 
+	/**
+	 * Adds a teacher to a chair. The list of timetables must be empty.
+	 *
+	 * @param teacher the new teacher.
+	 * @param chair the chair to which the teacher should be added.
+	 * @throws WctttModelException if the chair is not assigned to the semester
+	 * or the id of the teacher is already used.
+	 */
 	void addTeacherToChair(Teacher teacher, Chair chair) throws
 					WctttModelException;
 
+	/**
+	 * Removes a teacher from a chair. The list of timetables must be empty.
+	 *
+	 * @param teacher the teacher that should be removed.
+	 * @param chair the chair from which the teacher should be removed.
+	 * @return {@code true} if the teacher existed, otherwise {@code false}.
+	 * @throws WctttModelException if the timetable list is not empty or the
+	 * teacher is still referenced in a course.
+	 */
 	boolean removeTeacherFromChair(Teacher teacher, Chair chair) throws
 			WctttModelException;
 
+	/**
+	 * Updates the id of a teacher.
+	 *
+	 * @param teacher the teacher whose id should be updated.
+	 * @param id the new id.
+	 * @throws WctttModelException if the teacher is not assigned to the
+	 * semester or the id is already used.
+	 */
 	void updateTeacherId(Teacher teacher, Chair chair, String id) throws
 					WctttModelException;
 
+	/**
+	 * Updates the data of a teacher. The list of timetables must be empty if
+	 * other data are changed besides the name.
+	 *
+	 * @param teacher the teacher whose data should be updated.
+	 * @param name the new name.
+	 * @param unfavorablePeriods the new unfavorable periods.
+	 * @param unavailablePeriods the new unavailable periods.
+	 * @throws WctttModelException if the teacher is not assigned to the
+	 * semester, the timetable list should be empty but is not, the unavailable
+	 * periods are conflicting with pre-assignments involving the teacher or a
+	 * period appears in unfavorable as well as unavailable periods.
+	 */
 	void updateTeacherData(Teacher teacher, String name,
 	                       List<Period> unfavorablePeriods,
 	                       List<Period> unavailablePeriods)
 			throws WctttModelException;
 
+	/**
+	 * Adds an internal room to the semester. The list of timetables must be
+	 * empty.
+	 *
+	 * @param room the new internal room.
+	 * @throws WctttModelException if the timetable list is not empty or the id
+	 * of the room is already in use.
+	 */
 	void addInternalRoom(InternalRoom room) throws WctttModelException;
 
+	/**
+	 * Adds an external room to the semester. The list of timetables must be
+	 * empty.
+	 *
+	 * @param room the new external room.
+	 * @throws WctttModelException if the timetable list is not empty or the id
+	 * of the room is already in use.
+	 */
 	void addExternalRoom(ExternalRoom room) throws WctttModelException;
 
+	/**
+	 * Removes an internal room. The list of timetables must be empty.
+	 *
+	 * @param room the internal room that should be removed.
+	 * @return {@code true} if the room existed, otherwise {@code false}.
+	 * @throws WctttModelException if the timetable list is not empty.
+	 */
 	boolean removeInternalRoom(InternalRoom room) throws WctttModelException;
 
+	/**
+	 * Removes an external room. The list of timetables must be empty.
+	 *
+	 * @param room the external room that should be removed.
+	 * @return {@code true} if the room existed, otherwise {@code false}.
+	 * @throws WctttModelException if the timetable list is not empty.
+	 */
 	boolean removeExternalRoom(ExternalRoom room) throws WctttModelException;
 
+	/**
+	 * Updates the id of a room.
+	 *
+	 * @param room the room whose id should be updated.
+	 * @param id the new id.
+	 * @throws WctttModelException if the room is not assigned to the semester
+	 * or the id is already used.
+	 */
 	void updateRoomId(Room room, String id) throws WctttModelException;
 
+	/**
+	 * Updates the data of an internal room. The list of timetables must be
+	 * empty if other data are changed besides the name.
+	 *
+	 * @param room the internal room that should be updated.
+	 * @param name the new name.
+	 * @param capacity the new capacity.
+	 * @param features the new room features.
+	 * @throws WctttModelException if the room is not assigned to the semester,
+	 * the timetable list should be empty but is not or the capacity was <
+	 * {@value de.nicolasgross.wcttt.lib.model.ValidationHelper#ROOM_CAPACITY_MIN}.
+	 */
 	void updateInternalRoomData(InternalRoom room, String name, int capacity,
 	                           RoomFeatures features) throws WctttModelException;
 
+	/**
+	 * Updates the data of an external room.
+	 *
+	 * @param room the external room that should be updated.
+	 * @param name the new name.
+	 * @throws WctttModelException if the room is not assigned to the semester.
+	 */
 	void updateExternalRoomData(ExternalRoom room, String name)
 			throws WctttModelException;
 
+	/**
+	 * Adds a course to the semester. The list of timetables must be empty.
+	 *
+	 * @param course the new course.
+	 * @throws WctttModelException if the timetable list is not empty, there are
+	 * no chairs added to the semester, the chair is nor assigned to the
+	 * semester or if an id in the course is already used.
+	 */
 	void addCourse(Course course) throws WctttModelException;
 
+	/**
+	 * Removes a course from the semester. The list of timetables must be empty.
+	 *
+	 * @param course the course that should be removed from the semester.
+	 * @return {@code true} if the course existed, otherwise {@code false}.
+	 * @throws WctttModelException if the timetable list is not empty or the
+	 * course is still assigned to a curriculum.
+	 */
 	boolean removeCourse(Course course) throws WctttModelException;
 
+	/**
+	 * Updates the id of a course.
+	 *
+	 * @param course the course whose id should be updated.
+	 * @param id the new id.
+	 * @throws WctttModelException if the course is not assigned to the semester
+	 * or the id is already used.
+	 */
 	void updateCourseId(Course course, String id) throws
 			WctttModelException;
 
+	/**
+	 * Updates the data of a course. The list of timetables must be empty if
+	 * other data are changed besides the name or the abbreviation.
+	 *
+	 * @param course the course whose data should be updated.
+	 * @param name the new name.
+	 * @param abbreviation the new abbreviation.
+	 * @param chair the new chair.
+	 * @param courseLevel the new course level.
+	 * @param minNumberOfDays the new minimum number of days the lectures of the
+	 *                           course must at least be spread over.
+	 * @throws WctttModelException the course is not assigned to the semester,
+	 * the timetable list should be empty but is not or 'minNumberOfDays' is <
+	 * {@value de.nicolasgross.wcttt.lib.model.ValidationHelper#MIN_NUM_OF_DAYS_MIN}.
+	 */
 	void updateCourseData(Course course, String name, String abbreviation,
 	                      Chair chair, CourseLevel courseLevel,
 	                      int minNumberOfDays) throws WctttModelException;
 
+	/**
+	 * Adds a lecture to a course. The list of timetables must be empty.
+	 *
+	 * @param lecture the new lecture.
+	 * @param course the course to which the lecture should be added.
+	 * @throws WctttModelException if the course is not assigned to the semester,
+	 * there are no teachers added to the semester or the id of the lecture is
+	 * already in use.
+	 */
 	void addCourseLecture(Session lecture, Course course) throws
 					WctttModelException;
 
+	/**
+	 * Removes a lecture from a course. The list of timetables must be empty.
+	 *
+	 * @param lecture the lecture that should be removed.
+	 * @return {@code true} if the lecture existed, otherwise {@code false}.
+	 * @throws WctttModelException if the course of the lecture is not assigned
+	 * to the semester or the timetable list is not empty,
+	 */
 	boolean removeCourseLecture(Session lecture) throws WctttModelException;
 
+	/**
+	 * Adds a practical to a course. The list of timetables must be empty.
+	 *
+	 * @param practical the new practical.
+	 * @param course the course to which the practical should be added.
+	 * @throws WctttModelException if the course is not assigned to the semester,
+	 * there are no teachers added to the semester or the id of the practical is
+	 * already in use.
+	 */
 	void addCoursePractical(Session practical, Course course) throws
 					WctttModelException;
 
+	/**
+	 * Removes a practical from a course. The list of timetables must be empty.
+	 *
+	 * @param practical the practical that should be removed.
+	 * @return {@code true} if the practical existed, otherwise {@code false}.
+	 * @throws WctttModelException if the course of the practical is not
+	 * assigned to the semester or the timetable list is not empty,
+	 */
 	boolean removeCoursePractical(Session practical) throws WctttModelException;
 
+	/**
+	 * Updates the id of a session.
+	 *
+	 * @param session the session whose id should be updated.
+	 * @param id the new id.
+	 * @throws WctttModelException if the session is not assigned to the
+	 * semester or the id is already used.
+	 */
 	void updateCourseSessionId(Session session, Course course, String id)
 					throws WctttModelException;
 
+	/**
+	 * Updates the data of an internal session. The list of timetables must be
+	 * empty if other data are changed besides the name.
+	 *
+	 * @param session the internal session that should be updated.
+	 * @param name the new name.
+	 * @param teacher the new teacher.
+	 * @param doubleSession the new double session indicator.
+	 * @param preAssignment the new pre-assignment, can be {@code null}.
+	 * @param students the new number of students.
+	 * @param roomRequirements the new room requirements.
+	 * @throws WctttModelException if
+	 */
 	void updateInternalSessionData(InternalSession session, String name,
 	                               Teacher teacher, boolean doubleSession,
 	                               Period preAssignment, int students,
@@ -247,6 +473,14 @@ public interface Semester {
 
 	boolean removeCurriculum(Curriculum curriculum) throws WctttModelException;
 
+	/**
+	 * Updates the id of a curriculum.
+	 *
+	 * @param curriculum the curriculum whose id should be updated.
+	 * @param id the new id.
+	 * @throws WctttModelException if the curriculum is not assigned to the
+	 * semester or the id is already used.
+	 */
 	void updateCurriculumId(Curriculum curriculum, String id) throws
 			WctttModelException;
 
@@ -257,6 +491,14 @@ public interface Semester {
 
 	boolean removeTimetable(Timetable timetable);
 
+	/**
+	 * Updates the name of a timetable.
+	 *
+	 * @param timetable the timetable whose name should be updated.
+	 * @param name the new name.
+	 * @throws WctttModelException if the timetable is not assigned to the
+	 * semester or the name is already used.
+	 */
 	void updateTimetableName(Timetable timetable, String name)
 			throws WctttModelException;
 }

@@ -392,7 +392,6 @@ public class SemesterImpl implements Semester {
 			throw new WctttModelException("Chair '" + chair + "' is not " +
 					"assigned to the semester");
 		}
-		checkTimetablesEmpty("chairs");
 		chair.setName(name);
 		chair.setAbbreviation(abbreviation);
 	}
@@ -770,11 +769,11 @@ public class SemesterImpl implements Semester {
 			throw new IllegalArgumentException("Parameter 'lecture' course' " +
 					"must not be null");
 		}
-		checkTimetablesEmpty("courses");
 		if (!courseIdExists(lecture.getCourse().getId())) {
 			throw new WctttModelException("Course '" + lecture.getCourse() +
 					"' is not assigned to the semester");
 		}
+		checkTimetablesEmpty("courses");
 		return lecture.getCourse().removeLecture(lecture);
 	}
 
@@ -795,11 +794,11 @@ public class SemesterImpl implements Semester {
 			throw new IllegalArgumentException("Parameter 'practical' must " +
 					"not be null");
 		}
-		checkTimetablesEmpty("courses");
 		if (!courseIdExists(practical.getCourse().getId())) {
 			throw new WctttModelException("Course '" + practical.getCourse() +
 					"' is not assigned to the semester");
 		}
+		checkTimetablesEmpty("courses");
 		return practical.getCourse().removePractical(practical);
 	}
 
