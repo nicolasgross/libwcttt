@@ -21,9 +21,8 @@ their violations.
 ## Build
 
 1. `cd <path-to-project-root>`
-2. `mvn clean`
-3. `mvn package` 
-4. (Optional, installs libwcttt in the local maven repository which is required
+2. `mvn package` 
+3. (Optional, installs libwcttt in the local maven repository which is required
 to build WCT³ Core and WCT³ GUI)  
 `mvn install`
 
