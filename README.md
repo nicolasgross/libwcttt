@@ -29,4 +29,4 @@ to build WCT³ Core and WCT³ GUI)
 
 ## License
 
-This software is released under the terms of GPL3.0.
+This software is released under the terms of the GPLv3.
