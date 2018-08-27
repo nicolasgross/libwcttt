@@ -20,12 +20,44 @@ functionality to calculate conflicts and their violations.
 
 ## Build
 
-1. `cd <path-to-project-root>`
-2. `mvn package` 
+1. `cd [PATH_TO_PROJECT_ROOT]`
+2. `mvn clean package` 
 3. Optional, installs libwcttt in the local maven repository which is required
 to build WCT³ Core and WCT³ GUI.  
 `mvn install`
 
+
+## Use
+
+After the library was installed to the local maven repository, it can be used in
+a maven project by adding the following dependencies:
+
+```xml
+<dependencies>
+        ...
+        <dependency>
+            <groupId>de.nicolasgross.wcttt</groupId>
+            <artifactId>libwcttt</artifactId>
+            <version>[VERSION]</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>2.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jaxb</groupId>
+            <artifactId>jaxb-runtime</artifactId>
+            <version>2.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.activation</groupId>
+            <artifactId>activation</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+        ...
+     </dependencies>
+```
 
 ## License
 
