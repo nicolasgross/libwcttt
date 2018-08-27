@@ -30,7 +30,7 @@ to build WCT³ Core and WCT³ GUI.
 ## Usage
 
 After the library was installed to the local maven repository, it can be used in
-a maven project by adding the following dependencies:
+a maven project by adding the following dependency:
 
 ```xml
 <dependencies>
