@@ -1,10 +1,12 @@
-module de.nicolasgross.wcttt.lib {
+module wcttt.lib {
 	requires java.xml.bind;
 	requires javafx.base;
 
-	exports de.nicolasgross.wcttt.lib.model;
-	exports de.nicolasgross.wcttt.lib.binder;
-	exports de.nicolasgross.wcttt.lib.util;
+	exports wcttt.lib.model;
+	exports wcttt.lib.binder;
+	exports wcttt.lib.util;
+	exports wcttt.lib.algorithms;
+	exports wcttt.lib.algorithms.tabu_based_memetic_approach;
 
-	opens de.nicolasgross.wcttt.lib.model to java.xml.bind;
+	opens wcttt.lib.model to java.xml.bind;
 }
