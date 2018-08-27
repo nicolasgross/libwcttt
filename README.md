@@ -34,29 +34,29 @@ a maven project by adding the following dependencies:
 
 ```xml
 <dependencies>
-        ...
-        <dependency>
-            <groupId>de.nicolasgross.wcttt</groupId>
-            <artifactId>libwcttt</artifactId>
-            <version>[VERSION]</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.xml.bind</groupId>
-            <artifactId>jaxb-api</artifactId>
-            <version>2.3.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.glassfish.jaxb</groupId>
-            <artifactId>jaxb-runtime</artifactId>
-            <version>2.3.0</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.activation</groupId>
-            <artifactId>activation</artifactId>
-            <version>1.1.1</version>
-        </dependency>
-        ...
-     </dependencies>
+    ...
+    <dependency>
+        <groupId>de.nicolasgross.wcttt</groupId>
+        <artifactId>libwcttt</artifactId>
+        <version>[VERSION]</version>
+    </dependency>
+    <dependency>
+        <groupId>javax.xml.bind</groupId>
+        <artifactId>jaxb-api</artifactId>
+        <version>2.3.0</version>
+    </dependency>
+    <dependency>
+        <groupId>org.glassfish.jaxb</groupId>
+        <artifactId>jaxb-runtime</artifactId>
+        <version>2.3.0</version>
+    </dependency>
+    <dependency>
+        <groupId>javax.activation</groupId>
+        <artifactId>activation</artifactId>
+        <version>1.1.1</version>
+    </dependency>
+    ...
+</dependencies>
 ```
 
 ## License
