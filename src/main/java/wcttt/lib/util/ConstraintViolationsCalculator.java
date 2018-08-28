@@ -228,9 +228,8 @@ public class ConstraintViolationsCalculator {
 			if (curriculum.getCourses().contains(
 					assignment.getSession().getCourse())) {
 				for (TimetableAssignment otherAssignment : period.getAssignments()) {
-					if (!otherAssignment.equals(assignment) &&
-							curriculum.getCourses().contains(
-									otherAssignment.getSession().getCourse())) {
+					if (curriculum.getCourses().contains(
+							otherAssignment.getSession().getCourse())) {
 						counter++;
 					}
 				}
@@ -261,10 +260,11 @@ public class ConstraintViolationsCalculator {
 			if (curriculum.getCourses().contains(
 					assignment.getSession().getCourse())) {
 				for (TimetableAssignment otherAssignment : period.getAssignments()) {
-					if (!otherAssignment.equals(assignment) &&
-							curriculum.getCourses().contains(
-									otherAssignment.getSession().getCourse()) &&
-							otherAssignment.getSession().isLecture()) {
+					if (curriculum.getCourses().contains(
+							otherAssignment.getSession().getCourse()) &&
+							(otherAssignment.getSession().isLecture() ||
+									otherAssignment.getSession().getCourse().
+											getPracticals().size() == 1)) {
 						counter++;
 					}
 				}

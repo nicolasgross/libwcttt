@@ -112,7 +112,7 @@ class Util {
 	 * @param assignmentMap the mapping of sessions to their respective
 	 *                         assignment, or null if unassigned, can be
 	 *                         {@code null}.
-	 * @return {@code true} if an assigment was found, otherwise {@code false}.
+	 * @return {@code true} if an assignment was found, otherwise {@code false}.
 	 * @throws WctttAlgorithmException if no suitable room was found.
 	 */
 	static boolean assignSessionRandomly(InternalSession session, Timetable timetable,
