@@ -47,7 +47,8 @@ public class ExternalSession extends Session {
 
 	public ExternalSession(String id, String name, Teacher teacher,
 	                       Course course, boolean doubleSession,
-	                       Period preAssignment, ExternalRoom room) {
+	                       Period preAssignment, ExternalRoom room)
+			throws WctttModelException {
 		super(id, name, teacher, course, doubleSession, preAssignment);
 		setRoom(room);
 	}
@@ -67,10 +68,11 @@ public class ExternalSession extends Session {
 	}
 
 	@Override
-	public void setPreAssignment(Period preAssignment) {
+	public void setPreAssignment(Period preAssignment)
+			throws WctttModelException {
 		if (preAssignment == null) {
-			throw new IllegalArgumentException("Parameter 'preAssignment' " +
-					"must not be null");
+			throw new WctttModelException("Every external session must have a" +
+					" pre-assignment");
 		}
 		super.setPreAssignment(preAssignment);
 	}

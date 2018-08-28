@@ -47,14 +47,15 @@ public abstract class Session {
 		setCourse(new Course());
 		setDoubleSession(false);
 		if (this instanceof InternalSession) {
-			setPreAssignment(null);
+			preAssignment = null;
 		} else {
-			setPreAssignment(new Period());
+			preAssignment = new Period();
 		}
 	}
 
 	public Session(String id, String name, Teacher teacher, Course course,
-	                       boolean doubleSession, Period preAssignment) {
+	                       boolean doubleSession, Period preAssignment)
+			throws WctttModelException {
 		setId(id);
 		setName(name);
 		setTeacher(teacher);
@@ -68,7 +69,8 @@ public abstract class Session {
 		return preAssignment;
 	}
 
-	private void setPreAssignmentBinding(Period preAssignment) {
+	private void setPreAssignmentBinding(Period preAssignment)
+			throws WctttModelException {
 		setPreAssignment(preAssignment);
 	}
 
@@ -139,7 +141,7 @@ public abstract class Session {
 		return Optional.ofNullable(preAssignment);
 	}
 
-	public void setPreAssignment(Period preAssignment) {
+	public void setPreAssignment(Period preAssignment) throws WctttModelException {
 		this.preAssignment = preAssignment;
 	}
 
