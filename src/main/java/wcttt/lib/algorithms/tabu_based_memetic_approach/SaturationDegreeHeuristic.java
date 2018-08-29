@@ -122,7 +122,7 @@ class SaturationDegreeHeuristic {
 						periodUsages, unassignedPeriods, assignmentMap);
 			}
 
-			if (couldFindAssignment) {
+			if (couldFindAssignment && !isCancelled.get()) {
 				generatedTimetables.add(timetable);
 			} else {
 				// If the heuristic failed at finding a feasible solution, the
