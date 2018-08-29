@@ -502,7 +502,7 @@ public class TabuBasedMemeticApproach extends AbstractAlgorithm {
 		if (new Random().nextDouble() > 0.5) {
 			// Remove new:
 			childPeriod.removeAssignment(newAssgmt);
-			if (isDoubleSession) {
+			if (isDoubleSession) { // TODO duplicate??
 				childSecondPeriod.removeAssignment(newSecondAssgmt);
 			}
 		} else {
@@ -515,9 +515,12 @@ public class TabuBasedMemeticApproach extends AbstractAlgorithm {
 				for (TimetablePeriod period : day.getPeriods()) {
 					for (TimetableAssignment assgmt : period.getAssignments()) {
 						if (assgmt.getSession().equals(newAssgmt.getSession()) &&
-								(!assgmt.equals(newAssgmt) || (period.getDay() !=
-										childPeriod.getDay() || period.getTimeSlot() !=
-										childPeriod.getTimeSlot()))) {
+								(period.getDay() != childPeriod.getDay() ||
+								period.getTimeSlot() != childPeriod.getTimeSlot()) &&
+								(!isDoubleSession || (period.getDay() !=
+										childSecondPeriod.getDay() ||
+										period.getTimeSlot() !=
+												childSecondPeriod.getTimeSlot()))) {
 							removePeriods.add(period);
 							removeAssgmts.add(assgmt);
 							removed++;

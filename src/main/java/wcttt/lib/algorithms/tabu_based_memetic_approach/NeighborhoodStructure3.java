@@ -70,6 +70,7 @@ public class NeighborhoodStructure3 implements NeighborhoodStructure {
 			// Add periods again:
 			dayA.addPeriod(randomPeriods[1]);
 			dayB.addPeriod(randomPeriods[0]);
+
 		} catch (WctttModelException e) {
 			throw new WctttAlgorithmFatalException("Implementation error", e);
 		}
