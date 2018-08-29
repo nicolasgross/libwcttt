@@ -301,6 +301,9 @@ class SaturationDegreeHeuristic {
 				}
 			}
 		}
+		if (session.isDoubleSession()) {
+			counter *= 2;
+		}
 		if (session instanceof InternalSession) {
 			Map<InternalRoom, SessionRoomConflict> roomConflicts =
 					sessionRoomConflicts.get(session);
