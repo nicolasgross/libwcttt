@@ -501,8 +501,13 @@ public class TabuBasedMemeticApproach extends AbstractAlgorithm {
 		boolean isDoubleSession = newAssgmt.getSession().isDoubleSession();
 		if (new Random().nextDouble() > 0.5) {
 			// Remove new:
+			// Because removeAssignment() uses List.remove() and the method uses
+			// equals() to find the element, we have to make the new and old
+			// assignments distinguishable. Therefore, we change the room.
+			newAssgmt.setRoom(new InternalRoom());
 			childPeriod.removeAssignment(newAssgmt);
-			if (isDoubleSession) { // TODO duplicate??
+			if (isDoubleSession) {
+				newSecondAssgmt.setRoom(new InternalRoom());
 				childSecondPeriod.removeAssignment(newSecondAssgmt);
 			}
 		} else {
@@ -514,14 +519,10 @@ public class TabuBasedMemeticApproach extends AbstractAlgorithm {
 			for (TimetableDay day : timetable.getDays()) {
 				for (TimetablePeriod period : day.getPeriods()) {
 					for (TimetableAssignment assgmt : period.getAssignments()) {
-						if (assgmt.getSession().equals(newAssgmt.getSession()) &&
-								(period.getDay() != childPeriod.getDay() ||
-								period.getTimeSlot() != childPeriod.getTimeSlot()) &&
-								(!isDoubleSession || (period.getDay() !=
-										childSecondPeriod.getDay() ||
-										period.getTimeSlot() !=
-												childSecondPeriod.getTimeSlot()))) {
+						if (assgmt != newAssgmt && assgmt != newSecondAssgmt &&
+								assgmt.getSession().equals(newAssgmt.getSession())) {
 							removePeriods.add(period);
+							assgmt.setRoom(new InternalRoom());
 							removeAssgmts.add(assgmt);
 							removed++;
 							if ((!isDoubleSession && removed == 1) ||
