@@ -4,7 +4,6 @@ module wcttt.lib {
 
 	exports wcttt.lib.model;
 	exports wcttt.lib.binder;
-	exports wcttt.lib.util;
 	exports wcttt.lib.algorithms;
 	exports wcttt.lib.algorithms.tabu_based_memetic_approach;
 
