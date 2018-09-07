@@ -12,13 +12,14 @@ to store the data as XML files, the implementations of the algorithms as well as
 functionality to calculate conflicts and their violations. 
 
 
-## Dependencies
+## Build
+
+### Requirements
 
 - Oracle JDK 10
 - maven
 
-
-## Build
+### Steps
 
 1. `cd [PATH_TO_PROJECT_ROOT]`
 2. `mvn clean package` 
