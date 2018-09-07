@@ -5,7 +5,7 @@ timetabling process at the WIAI faculty of the University of Bamberg. It was
 developed by [Nicolas Gross](https://github.com/nicolasgross) as part of his 
 bachelor thesis at the Software Technologies Research Group (SWT).
 
-This library bundles functionality that is required in both other modules -
+This library bundles functionality that is required in both other modules,
 WCT³-CLI and WCT³-GUI. Moreover, it provides a solid foundation for future work
 on the topic. The library comprises the data model, a binder (parser + emitter)
 to store the data as XML files, the implementations of the algorithms as well as
