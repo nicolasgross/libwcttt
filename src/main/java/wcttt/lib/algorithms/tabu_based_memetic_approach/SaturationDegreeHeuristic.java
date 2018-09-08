@@ -90,7 +90,7 @@ class SaturationDegreeHeuristic {
 			semester.getInternalRooms().forEach(
 					room -> unassignedPeriods.put(room, new LinkedList<>(periods)));
 
-			Map<Session, TimetableAssignment> assignmentMap = new HashMap<>();
+			Map<Session, TimetablePeriod> assignmentMap = new HashMap<>();
 			Stream.concat(internalSessions.stream(), externalSessions.stream()).
 					forEach(session -> assignmentMap.put(session, null));
 
@@ -104,8 +104,8 @@ class SaturationDegreeHeuristic {
 			while (couldFindAssignment && !unassignedSessions.isEmpty() &&
 					!isCancelled.get()) {
 				InternalSession nextSession;
-				List<InternalSession> maxSatDegrees =
-						maxSaturationDegrees(unassignedSessions, assignmentMap);
+				List<InternalSession> maxSatDegrees = maxSaturationDegrees(
+						unassignedSessions, assignmentMap, timetable);
 
 				// Choose the session with the highest saturation degree, if
 				// there are multiple, choose the one with the highest degree
@@ -177,7 +177,7 @@ class SaturationDegreeHeuristic {
 			List<InternalSession> unassignedSessions, Timetable timetable,
 			Map<Period, Integer> periodUsages,
 			Map<InternalRoom, List<Period>> unassignedPeriods,
-			Map<Session, TimetableAssignment> assignmentMap)
+			Map<Session, TimetablePeriod> assignmentMap)
 			throws WctttAlgorithmException {
 		for (ExternalSession session : externalSessions) {
 			// Pre-assignment must be present because it is an external
@@ -225,34 +225,44 @@ class SaturationDegreeHeuristic {
 	 * (== conflicted) sessions.
 	 *
 	 * @param unassignedSessions the list of unassigned sessions.
-	 * @param assignmentMap the mapping of sessions to their respective
-	 *                         assignment, or null if unassigned.
+	 * @param assignmentMap the mapping of sessions to their respectively
+	 *                         assigned period, or null if unassigned.
+	 * @param timetable the current timetable.
 	 * @return the list of unassigned sessions with the highest saturation degree.
 	 */
 	private List<InternalSession> maxSaturationDegrees(
 			List<InternalSession> unassignedSessions,
-			Map<Session, TimetableAssignment> assignmentMap) {
+			Map<Session, TimetablePeriod> assignmentMap, Timetable timetable) {
 		List<InternalSession> maxSatDegrees = new LinkedList<>();
-
 		Map<InternalSession, Integer> saturationDegrees = new HashMap<>();
 		int max = 0;
 		for (InternalSession session : unassignedSessions) {
-			int counter = 0;
+			Set<TimetablePeriod> distinctColors = new HashSet<>();
 			for (Map.Entry<Session, SessionSessionConflict> entry :
 					sessionSessionConflicts.get(session).entrySet()) {
-				if (!entry.getKey().equals(session) &&
-						(!entry.getValue().getCurricula().isEmpty() ||
-								entry.getValue().isSessionConflict() ||
-								entry.getValue().isTeacherConflict())) {
-					if (assignmentMap.get(entry.getKey()) != null) {
-						counter++;
+				Session otherSession = entry.getKey();
+				SessionSessionConflict conflict = entry.getValue();
+				if (!otherSession.equals(session) &&
+						(!conflict.getCurricula().isEmpty() ||
+								conflict.isSessionConflict() ||
+								conflict.isTeacherConflict())) {
+					TimetablePeriod assignedPeriod =
+							assignmentMap.get(otherSession);
+					if (assignedPeriod != null) {
+						distinctColors.add(assignedPeriod);
+						if (otherSession.isDoubleSession()) {
+							// also add second period of double session
+							distinctColors.add(timetable.
+									getDays().get(assignedPeriod.getDay() - 1).
+									getPeriods().get(assignedPeriod.getTimeSlot()));
+						}
 					}
 				}
 			}
-			if (counter > max) {
-				max = counter;
+			if (distinctColors.size() > max) {
+				max = distinctColors.size();
 			}
-			saturationDegrees.put(session, counter);
+			saturationDegrees.put(session, distinctColors.size());
 		}
 
 		for (Map.Entry<InternalSession, Integer> entry : saturationDegrees.entrySet()) {

@@ -109,8 +109,8 @@ class Util {
 	 * @param unassignedPeriods the mapping of internal rooms to the respective
 	 *                          periods where the room is still free, can be
 	 *                          {@code null}.
-	 * @param assignmentMap the mapping of sessions to their respective
-	 *                         assignment, or null if unassigned, can be
+	 * @param assignmentMap the mapping of sessions to their respectively
+	 *                         assigned periods, or null if unassigned, can be
 	 *                         {@code null}.
 	 * @return {@code true} if an assignment was found, otherwise {@code false}.
 	 * @throws WctttAlgorithmException if no suitable room was found.
@@ -120,7 +120,7 @@ class Util {
 	                                     List<InternalSession> unassignedSessions,
 	                                     Map<Period, Integer> periodUsages,
 	                                     Map<InternalRoom, List<Period>> unassignedPeriods,
-	                                     Map<Session, TimetableAssignment> assignmentMap)
+	                                     Map<Session, TimetablePeriod> assignmentMap)
 			throws WctttAlgorithmException {
 		List<InternalRoom> suitableRooms = findSuitableRooms(session, semester);
 		Collections.shuffle(suitableRooms);
@@ -205,8 +205,8 @@ class Util {
 	 * @param unassignedPeriods the mapping of internal rooms to the respective
 	 *                          periods where the room is still free, can be
 	 *                          {@code null}.
-	 * @param assignmentMap the mapping of sessions to their respective
-	 *                         assignment, or null if unassigned, can be
+	 * @param assignmentMap the mapping of sessions to their respectively
+	 *                         assigned periods, or null if unassigned, can be
 	 *                         {@code null}.
 	 * @throws WctttAlgorithmException if the assignment violates any hard
 	 * constraints.
@@ -215,25 +215,25 @@ class Util {
 	                          Timetable timetable, Semester semester,
 	                          Map<Period, Integer> periodUsages,
 	                          Map<InternalRoom, List<Period>> unassignedPeriods,
-	                          Map<Session, TimetableAssignment> assignmentMap)
+	                          Map<Session, TimetablePeriod> assignmentMap)
 			throws WctttAlgorithmException {
 		ConstraintViolationsCalculator constraintCalc =
 				new ConstraintViolationsCalculator(semester);
-		TimetableAssignment firstPeriod = new TimetableAssignment();
-		firstPeriod.setSession(session);
-		firstPeriod.setRoom(room);
-		TimetableAssignment secondPeriod = null;
+		TimetableAssignment firstAssgmt = new TimetableAssignment();
+		firstAssgmt.setSession(session);
+		firstAssgmt.setRoom(room);
+		TimetableAssignment secondAssgmt = null;
 		if (session.isDoubleSession()) {
-			secondPeriod = new TimetableAssignment();
-			secondPeriod.setSession(session);
-			secondPeriod.setRoom(room);
+			secondAssgmt = new TimetableAssignment();
+			secondAssgmt.setSession(session);
+			secondAssgmt.setRoom(room);
 		}
 		try {
-			TimetablePeriod firstTimetablePeriod = timetable.getDays().get(
+			TimetablePeriod firstPeriod = timetable.getDays().get(
 					period.getDay() - 1).getPeriods().get(period.getTimeSlot() - 1);
 			List<ConstraintType> hardConstraintViolations = constraintCalc.
 					calcAssignmentHardViolations(timetable,
-							firstTimetablePeriod, firstPeriod);
+							firstPeriod, firstAssgmt);
 			if (!hardConstraintViolations.isEmpty()) {
 				throw new WctttAlgorithmException("Assignment of session '" +
 						session + "' to period '" + period + "' and room '" +
@@ -241,17 +241,17 @@ class Util {
 						hardConstraintViolations);
 			}
 			if (session.isDoubleSession()) {
-				TimetablePeriod secondTimetablePeriod = timetable.getDays().get(
+				TimetablePeriod secondPeriod = timetable.getDays().get(
 						period.getDay() - 1).getPeriods().get(period.getTimeSlot());
 				hardConstraintViolations = constraintCalc.calcAssignmentHardViolations(
-						timetable, secondTimetablePeriod, secondPeriod);
+						timetable, secondPeriod, secondAssgmt);
 				if (!hardConstraintViolations.isEmpty()) {
 					throw new WctttAlgorithmException("Assignment of session '" +
 							session + "' to period '" + period + "' and " +
 							"room '" + room + "' violates the following hard " +
 							"constraints: " + hardConstraintViolations);
 				}
-				secondTimetablePeriod.addAssignment(secondPeriod);
+				secondPeriod.addAssignment(secondAssgmt);
 				Period periodTwo =
 						new Period(period.getDay(), period.getTimeSlot() + 1);
 				if (periodUsages != null) {
@@ -264,7 +264,7 @@ class Util {
 			if (assignmentMap != null) {
 				assignmentMap.put(session, firstPeriod);
 			}
-			firstTimetablePeriod.addAssignment(firstPeriod);
+			firstPeriod.addAssignment(firstAssgmt);
 			if (periodUsages != null) {
 				periodUsages.put(period, periodUsages.get(period) + 1);
 			}
