@@ -307,8 +307,8 @@ public class TabuBasedMemeticApproach extends AbstractAlgorithm {
 		Period randPeriodA = selectRandomPeriod();
 		Period randPeriodB = selectRandomPeriod();
 
-		copyAssignmentsFromTo(offspring[0], parents[1], randPeriodB, randPeriodA);
-		copyAssignmentsFromTo(offspring[1], parents[0], randPeriodA, randPeriodB);
+		copyAssignmentsFromTo(parents[0], offspring[1], randPeriodA, randPeriodB);
+		copyAssignmentsFromTo(parents[1], offspring[0], randPeriodB, randPeriodA);
 
 		return offspring;
 	}
@@ -329,12 +329,12 @@ public class TabuBasedMemeticApproach extends AbstractAlgorithm {
 	 * period, if the respective rooms are unassigned and no hard constraints
 	 * are violated. Duplicates are removed.
 	 *
-	 * @param child the timetable to which assignments are added.
 	 * @param parent the timetable from which assignments are copied.
+	 * @param child the timetable to which assignments are added.
 	 * @param fromParent the period from which assignments are copied.
 	 * @param toChild the period to which assignments are added.
 	 */
-	private void copyAssignmentsFromTo(Timetable child, Timetable parent,
+	private void copyAssignmentsFromTo(Timetable parent, Timetable child,
 	                                   Period fromParent, Period toChild) {
 		TimetablePeriod childPeriod = child.getDays().get(toChild.getDay() - 1).
 				getPeriods().get(toChild.getTimeSlot() - 1);
