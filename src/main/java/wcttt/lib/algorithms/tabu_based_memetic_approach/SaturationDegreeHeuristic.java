@@ -189,8 +189,6 @@ class SaturationDegreeHeuristic {
 		List<InternalSession> removeList = new LinkedList<>();
 		for (InternalSession session : unassignedSessions) {
 			if (session.getPreAssignment().isPresent()) {
-				TimetableAssignment assignment = new TimetableAssignment();
-				assignment.setSession(session);
 				Period period = session.getPreAssignment().get();
 				InternalRoom randomRoom = selectRandomSuitableRoom(session,
 						period, unassignedPeriods);
