@@ -346,7 +346,7 @@ public class TabuBasedMemeticApproach extends AbstractAlgorithm {
 				continue;
 			}
 
-			// If it is a double session, find second:
+			// If it is a double session, find second period:
 			TimetablePeriod childSecondPeriod = null;
 			if (parentAssgmt.getSession().isDoubleSession()) {
 				childSecondPeriod = findChildSecondPeriod(child, parent,
