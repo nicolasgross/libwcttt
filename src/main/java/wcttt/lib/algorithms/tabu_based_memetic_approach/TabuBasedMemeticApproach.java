@@ -340,73 +340,19 @@ public class TabuBasedMemeticApproach extends AbstractAlgorithm {
 				getPeriods().get(toChild.getTimeSlot() - 1);
 		TimetablePeriod parentPeriod = parent.getDays().get(fromParent.getDay() - 1).
 				getPeriods().get(fromParent.getTimeSlot() - 1);
-		TimetablePeriod childSecondPeriod = null;
-
-		TimetableAssignment parentSecondAssgmt = null;
 		for (TimetableAssignment parentAssgmt : parentPeriod.getAssignments()) {
 			// Pre-assigned sessions cannot be scheduled in another period:
 			if (parentAssgmt.getSession().getPreAssignment().isPresent()) {
 				continue;
 			}
 
+			// If it is a double session, find second:
+			TimetablePeriod childSecondPeriod = null;
 			if (parentAssgmt.getSession().isDoubleSession()) {
-				boolean isFirstSession = true;
-				TimetablePeriod parentSecondPeriod = null;
-				if (parentPeriod.getTimeSlot() ==
-						ValidationHelper.PERIOD_TIME_SLOT_MIN &&
-						childPeriod.getTimeSlot() ==
-								getSemester().getTimeSlotsPerDay()) {
-						// Copying not possible
-						continue;
-				} else if (parentPeriod.getTimeSlot() ==
-					getSemester().getTimeSlotsPerDay() &&
-					childPeriod.getTimeSlot() ==
-							ValidationHelper.PERIOD_TIME_SLOT_MIN) {
-					// Copying not possible
+				childSecondPeriod = findChildSecondPeriod(child, parent,
+					childPeriod, parentPeriod, parentAssgmt);
+				if (childSecondPeriod == null) {
 					continue;
-				}
-
-				// Check whether this is the first or the second session:
-				// Check period after:
-				if (fromParent.getTimeSlot() < getSemester().getTimeSlotsPerDay()) {
-					parentSecondPeriod = parent.getDays().get(fromParent.
-							getDay() - 1).getPeriods().get(fromParent.
-							getTimeSlot());
-					parentSecondAssgmt = findAssignmentInPeriod(
-							parentAssgmt.getSession(), parentSecondPeriod);
-					if (parentSecondAssgmt != null) {
-						// Check if the child period is the last period in case
-						// the second sessions comes after this one.
-						if (childPeriod.getTimeSlot() ==
-								getSemester().getTimeSlotsPerDay()) {
-							continue;
-						}
-					}
-				}
-				if (parentSecondAssgmt == null && fromParent.getTimeSlot() >
-						ValidationHelper.PERIOD_TIME_SLOT_MIN) {
-					// If not found, check period before:
-					// Check if the child period is the first period in case
-					// the second sessions comes before this one.
-					if (childPeriod.getTimeSlot() ==
-							ValidationHelper.PERIOD_TIME_SLOT_MIN) {
-						continue;
-					}
-					parentSecondPeriod = parent.getDays().get(fromParent.
-							getDay() - 1).getPeriods().get(fromParent.
-							getTimeSlot() - 2);
-					parentSecondAssgmt = findAssignmentInPeriod(
-							parentAssgmt.getSession(), parentSecondPeriod);
-					isFirstSession = false;
-				}
-				childSecondPeriod = child.getDays().get(childPeriod.getDay() - 1).
-						getPeriods().get(isFirstSession ?
-						childPeriod.getTimeSlot() : childPeriod.getTimeSlot() - 2);
-
-				if (parentSecondAssgmt == null) {
-					throw new WctttAlgorithmFatalException("Implementation " +
-							"error, failed to find second session of double " +
-							"session");
 				}
 			}
 
@@ -466,6 +412,70 @@ public class TabuBasedMemeticApproach extends AbstractAlgorithm {
 						newAssgmt, newSecondAssgmt);
 			}
 		}
+	}
+
+	private TimetablePeriod findChildSecondPeriod(
+		Timetable child, Timetable parent, TimetablePeriod childPeriod,
+		TimetablePeriod parentPeriod, TimetableAssignment parentAssgmt) {
+		TimetablePeriod parentSecondPeriod = null;
+		TimetableAssignment parentSecondAssgmt = null;
+		boolean isFirstSession = true;
+		if (parentPeriod.getTimeSlot() ==
+			ValidationHelper.PERIOD_TIME_SLOT_MIN &&
+			childPeriod.getTimeSlot() ==
+				getSemester().getTimeSlotsPerDay()) {
+			// Copying not possible
+			return null;
+		} else if (parentPeriod.getTimeSlot() ==
+			getSemester().getTimeSlotsPerDay() &&
+			childPeriod.getTimeSlot() ==
+				ValidationHelper.PERIOD_TIME_SLOT_MIN) {
+			// Copying not possible
+			return null;
+		}
+
+		// Check whether this is the first or the second session:
+		// Check period after:
+		if (parentPeriod.getTimeSlot() < getSemester().getTimeSlotsPerDay()) {
+			parentSecondPeriod = parent.getDays().get(parentPeriod.
+				getDay() - 1).getPeriods().get(parentPeriod.
+				getTimeSlot());
+			parentSecondAssgmt = findAssignmentInPeriod(
+				parentAssgmt.getSession(), parentSecondPeriod);
+			if (parentSecondAssgmt != null) {
+				// Check if the child period is the last period in case
+				// the second sessions comes after this one.
+				if (childPeriod.getTimeSlot() ==
+					getSemester().getTimeSlotsPerDay()) {
+					return null;
+				}
+			}
+		}
+		if (parentSecondAssgmt == null && parentPeriod.getTimeSlot() >
+			ValidationHelper.PERIOD_TIME_SLOT_MIN) {
+			// If not found, check period before:
+			// Check if the child period is the first period in case
+			// the second sessions comes before this one.
+			if (childPeriod.getTimeSlot() ==
+				ValidationHelper.PERIOD_TIME_SLOT_MIN) {
+				return null;
+			}
+			parentSecondPeriod = parent.getDays().get(parentPeriod.
+				getDay() - 1).getPeriods().get(parentPeriod.
+				getTimeSlot() - 2);
+			parentSecondAssgmt = findAssignmentInPeriod(
+				parentAssgmt.getSession(), parentSecondPeriod);
+			isFirstSession = false;
+		}
+		if (parentSecondAssgmt == null) {
+			throw new WctttAlgorithmFatalException("Implementation " +
+				"error, failed to find second session of double " +
+				"session");
+		}
+
+		return child.getDays().get(childPeriod.getDay() - 1).
+			getPeriods().get(isFirstSession ?
+			childPeriod.getTimeSlot() : childPeriod.getTimeSlot() - 2);
 	}
 
 	private TimetableAssignment findAssignmentInPeriod(Session session,
