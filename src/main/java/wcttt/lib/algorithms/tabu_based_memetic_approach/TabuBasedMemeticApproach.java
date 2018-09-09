@@ -325,7 +325,7 @@ public class TabuBasedMemeticApproach extends AbstractAlgorithm {
 	}
 
 	/**
-	 * Copies all assignment from one timetable period to another timetable
+	 * Copies all assignments from one timetable period to another timetable
 	 * period, if the respective rooms are unassigned and no hard constraints
 	 * are violated. Duplicates are removed.
 	 *
@@ -352,6 +352,7 @@ public class TabuBasedMemeticApproach extends AbstractAlgorithm {
 				childSecondPeriod = findChildSecondPeriod(child, parent,
 					childPeriod, parentPeriod, parentAssgmt);
 				if (childSecondPeriod == null) {
+					// Copying not possible
 					continue;
 				}
 			}
