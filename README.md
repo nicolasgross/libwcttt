@@ -12,6 +12,13 @@ to store the data as XML files, the implementations of the algorithms as well as
 functionality to calculate conflicts and their violations. 
 
 
+## Notice
+
+Because of an unresolved issue in the JAXB framework, warning messages are
+printed to stdout if a XML file is parsed/written. The corresponding issue on 
+GitHub can be found [here](https://github.com/javaee/jaxb-v2/issues/1197).
+
+
 ## Build
 
 ### Requirements
