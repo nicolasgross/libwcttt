@@ -28,19 +28,26 @@ package wcttt.lib.algorithms;
 public class ParameterDefinition {
 
 	private final String name;
+	private final String defaultValue;
 	private final ParameterType type;
 
-	public ParameterDefinition(String name, ParameterType type) {
+	public ParameterDefinition(String name, String defaultValue,
+	                           ParameterType type) {
 		if (name == null) {
 			throw new IllegalArgumentException("Parameter 'name' must not be " +
 					"null");
 		}
 		this.name = name;
+		this.defaultValue = defaultValue;
 		this.type = type;
 	}
 
 	public String getName() {
 		return name;
+	}
+
+	public String getDefaultValue() {
+		return defaultValue;
 	}
 
 	public ParameterType getType() {

@@ -42,10 +42,10 @@ public class TabuBasedMemeticApproach extends AbstractAlgorithm {
 
 	private static final String NAME = "Tabu-based memetic approach";
 	private static final List<ParameterDefinition> PARAMETERS = Arrays.asList(
-			new ParameterDefinition("Population size", ParameterType.INT),
-			new ParameterDefinition("Crossover rate", ParameterType.DOUBLE),
-			new ParameterDefinition("Mutation rate", ParameterType.DOUBLE),
-			new ParameterDefinition("Tabu list size", ParameterType.INT));
+			new ParameterDefinition("Population size", "50", ParameterType.INT),
+			new ParameterDefinition("Crossover rate", "0.8",ParameterType.DOUBLE),
+			new ParameterDefinition("Mutation rate", "0.04",ParameterType.DOUBLE),
+			new ParameterDefinition("Tabu list size", "3", ParameterType.INT));
 	private static final int POPULATION_SIZE_MIN = 2;
 	private static final double CROSSOVER_RATE_MIN = 0.0;
 	private static final double CROSSOVER_RATE_MAX = 1.0;
