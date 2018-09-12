@@ -69,7 +69,8 @@ public interface Algorithm {
 	Timetable generate() throws WctttAlgorithmException;
 
 	/**
-	 * Cancels the algorithm.
+	 * Cancels the algorithm. The best solution found so far should be returned
+	 * by {@link Algorithm#generate()}.
 	 */
 	void cancel();
 }
