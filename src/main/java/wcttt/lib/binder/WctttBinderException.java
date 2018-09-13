@@ -25,6 +25,9 @@
 
 package wcttt.lib.binder;
 
+/**
+ * Thrown if a error occurs in the binder that is relevant for the user.
+ */
 public class WctttBinderException extends Exception {
 
 	public WctttBinderException() {

@@ -29,6 +29,9 @@ import wcttt.lib.algorithms.WctttAlgorithmException;
 import wcttt.lib.model.Semester;
 import wcttt.lib.model.Timetable;
 
+/**
+ * Defines the functionality of a neighborhood structure.
+ */
 public interface NeighborhoodStructure {
 
 	void apply(Timetable timetable, Semester semester)

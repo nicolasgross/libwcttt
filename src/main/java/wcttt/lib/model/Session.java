@@ -29,6 +29,9 @@ import javax.xml.bind.annotation.*;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Represents a session.
+ */
 @XmlSeeAlso({InternalSession.class, ExternalSession.class})
 @XmlTransient
 public abstract class Session {

@@ -25,6 +25,10 @@
 
 package wcttt.lib.algorithms;
 
+/**
+ * Represents the definition of a parameter, consisting of the name, a default
+ * value and the data type.
+ */
 public class ParameterDefinition {
 
 	private final String name;

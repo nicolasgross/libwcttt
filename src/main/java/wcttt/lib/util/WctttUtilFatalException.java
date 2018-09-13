@@ -25,6 +25,10 @@
 
 package wcttt.lib.util;
 
+/**
+ * Thrown if an error occurs in the data model that is caused by a faulty
+ * implementation.
+ */
 public class WctttUtilFatalException extends RuntimeException {
 
 	public WctttUtilFatalException() {

@@ -25,6 +25,10 @@
 
 package wcttt.lib.binder;
 
+/**
+ * Thrown if an error occurs in the binder that is caused by a faulty
+ * implementation.
+ */
 public class WctttBinderFatalException extends RuntimeException {
 
 	public WctttBinderFatalException() {

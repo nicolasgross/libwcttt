@@ -25,6 +25,9 @@
 
 package wcttt.lib.model;
 
+/**
+ * Bundles functionality to validate semester data.
+ */
 public class ValidationHelper {
 
 	/*

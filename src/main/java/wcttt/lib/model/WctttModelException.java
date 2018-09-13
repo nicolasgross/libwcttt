@@ -25,6 +25,9 @@
 
 package wcttt.lib.model;
 
+/**
+ * Thrown if a error occurs in the data model that is relevant for the user.
+ */
 public class WctttModelException extends Exception {
 
 	public WctttModelException() {

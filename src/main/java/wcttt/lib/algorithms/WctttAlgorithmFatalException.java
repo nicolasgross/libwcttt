@@ -25,6 +25,10 @@
 
 package wcttt.lib.algorithms;
 
+/**
+ * Thrown if an error occurs in the algorithm that is caused by a faulty
+ * implementation.
+ */
 public class WctttAlgorithmFatalException extends RuntimeException {
 
 	public WctttAlgorithmFatalException() {

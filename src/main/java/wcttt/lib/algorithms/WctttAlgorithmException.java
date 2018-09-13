@@ -25,6 +25,9 @@
 
 package wcttt.lib.algorithms;
 
+/**
+ * Thrown if a error occurs in the algorithm that is relevant for the user.
+ */
 public class WctttAlgorithmException extends Exception {
 
 	public WctttAlgorithmException() {

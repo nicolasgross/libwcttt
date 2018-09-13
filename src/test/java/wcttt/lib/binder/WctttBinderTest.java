@@ -36,6 +36,9 @@ import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * Comprises unit tests to ensure that parsing and writing the XML files works.
+ */
 class WctttBinderTest {
 
 	@Test

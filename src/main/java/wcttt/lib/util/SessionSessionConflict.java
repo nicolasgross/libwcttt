@@ -30,6 +30,9 @@ import wcttt.lib.model.Curriculum;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Represents the conflict information between a session and a session.
+ */
 public class SessionSessionConflict {
 
 	private List<Curriculum> curricula = new LinkedList<>();

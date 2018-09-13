@@ -25,6 +25,11 @@
 
 package wcttt.lib.algorithms;
 
+/**
+ * Represents the value for a parameter.
+ *
+ * @param <T> the type of the parameter.
+ */
 public class ParameterValue<T> {
 
 	private final ParameterDefinition definition;

@@ -25,6 +25,9 @@
 
 package wcttt.lib.model;
 
+/**
+ * Represents a constraint.
+ */
 public enum ConstraintType {
 	/**
 	 * All lectures of a course shall be scheduled, and they shall be assigned

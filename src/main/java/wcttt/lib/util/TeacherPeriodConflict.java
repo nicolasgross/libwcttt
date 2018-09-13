@@ -25,6 +25,9 @@
 
 package wcttt.lib.util;
 
+/**
+ * Represents the conflict information between a teacher and a period.
+ */
 public class TeacherPeriodConflict {
 
 	private boolean isUnfavorable = false;

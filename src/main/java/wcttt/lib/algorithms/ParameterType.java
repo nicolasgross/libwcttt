@@ -25,6 +25,9 @@
 
 package wcttt.lib.algorithms;
 
+/**
+ * Represents the type of parameter.
+ */
 public enum ParameterType {
 	INT, DOUBLE
 }

@@ -30,6 +30,9 @@ import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlType;
 import java.util.Objects;
 
+/**
+ * Represents the assignment of a session to a room in the timetable.
+ */
 @XmlType(propOrder = {"session", "room"})
 public class TimetableAssignment {
 

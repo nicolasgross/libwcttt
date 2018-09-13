@@ -30,6 +30,9 @@ import wcttt.lib.model.*;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Calculator for the conflict matrices of a semester.
+ */
 public class ConflictMatrixCalculator {
 
 	private Semester semester;

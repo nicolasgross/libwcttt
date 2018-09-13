@@ -30,6 +30,9 @@ import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
 import java.util.Objects;
 
+/**
+ * Represents a period (day + time slot).
+ */
 @XmlSeeAlso(TimetablePeriod.class)
 @XmlType(propOrder = {"day", "timeSlot"})
 public class Period implements Comparable<Period> {

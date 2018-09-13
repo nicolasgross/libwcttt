@@ -29,6 +29,10 @@ import wcttt.lib.model.*;
 
 import java.util.*;
 
+/**
+ * Provides functionality to calculate the number violated soft and hard
+ * constraints for a timetable.
+ */
 public class ConstraintViolationsCalculator {
 
 	private Semester semester;

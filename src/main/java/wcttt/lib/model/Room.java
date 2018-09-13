@@ -31,6 +31,9 @@ import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlTransient;
 import java.util.Objects;
 
+/**
+ * Represents a room.
+ */
 @XmlSeeAlso({InternalRoom.class, ExternalRoom.class})
 @XmlTransient
 public abstract class Room {

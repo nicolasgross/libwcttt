@@ -25,6 +25,9 @@
 
 package wcttt.lib.util;
 
+/**
+ * Represents the conflict information between a session and room.
+ */
 public class SessionRoomConflict {
 
 	private int capacityDeviation = 0;
