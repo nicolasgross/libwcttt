@@ -23,7 +23,7 @@ GitHub can be found [here](https://github.com/javaee/jaxb-v2/issues/1197).
 
 ### Requirements
 
-- Oracle JDK 10
+- Oracle JDK, version 10 or higher
 - maven
 
 ### Steps
