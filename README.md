@@ -23,13 +23,13 @@ GitHub can be found [here](https://github.com/javaee/jaxb-v2/issues/1197).
 
 ### Requirements
 
-- Oracle JDK, version 10 or higher
+- Oracle JDK or OpenJDK, version 11 or higher
 - maven
 
 ### Steps
 
-1. `cd [PATH_TO_PROJECT_ROOT]`
-2. `mvn clean package` 
+1. `cd PATH_TO_PROJECT_ROOT`
+2. `mvn clean package`
 3. Optional, installs libwcttt in the local maven repository which is required
 to build WCT³-CLI and WCT³-GUI.  
 `mvn install`
@@ -46,7 +46,7 @@ a maven project by adding the following dependency:
     <dependency>
         <groupId>de.nicolasgross.wcttt</groupId>
         <artifactId>libwcttt</artifactId>
-        <version>[VERSION]</version>
+        <version>1.0</version>
     </dependency>
     ...
 </dependencies>
